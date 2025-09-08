@@ -1,0 +1,35 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-08-24 12:12:23.347782",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "preparation_printer"
+ ],
+ "fields": [
+  {
+   "fieldname": "preparation_printer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Preparation Printer",
+   "options": "Preparation Printer",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-08-24 12:16:45.411924",
+ "modified_by": "Administrator",
+ "module": "Pos",
+ "name": "Production Area Preparation Printer",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

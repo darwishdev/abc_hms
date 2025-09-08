@@ -1,0 +1,120 @@
+[
+ {
+  "display_name": null,
+  "docstatus": 0,
+  "doctype": "Cashier Device",
+  "enabled": 0,
+  "modified": "2025-08-23 17:00:22.830077",
+  "name": "M - Cashier - 1",
+  "production_areas": [
+   {
+    "parent": "M - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Hard Bar"
+   },
+   {
+    "parent": "M - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Food"
+   },
+   {
+    "parent": "M - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "M - Bar"
+   },
+   {
+    "parent": "M - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Shisha"
+   },
+   {
+    "parent": "M - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "M - Bar"
+   },
+   {
+    "parent": "M - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Hard Bar"
+   },
+   {
+    "parent": "M - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Shisha"
+   },
+   {
+    "parent": "M - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Food"
+   }
+  ],
+  "restaurant": "Main Restaurant"
+ },
+ {
+  "display_name": null,
+  "docstatus": 0,
+  "doctype": "Cashier Device",
+  "enabled": 0,
+  "modified": "2025-08-24 12:38:42.826732",
+  "name": "B - Cashier - 1",
+  "production_areas": [
+   {
+    "parent": "B - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Shisha"
+   },
+   {
+    "parent": "B - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Food"
+   },
+   {
+    "parent": "B - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Hard Bar"
+   },
+   {
+    "parent": "B - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Soft Bar"
+   },
+   {
+    "parent": "B - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Food"
+   },
+   {
+    "parent": "B - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Shisha"
+   },
+   {
+    "parent": "B - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Soft Bar"
+   },
+   {
+    "parent": "B - Cashier - 1",
+    "parentfield": "production_areas",
+    "parenttype": "Cashier Device",
+    "production_area": "B - Hard Bar"
+   }
+  ],
+  "restaurant": "Beach Restaurant"
+ }
+]

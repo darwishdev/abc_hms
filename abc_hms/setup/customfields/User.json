@@ -1,0 +1,18 @@
+[
+  {
+    "fieldname": "cashier_code",
+    "label": "Cashier Code",
+    "fieldtype": "Int",
+    "length": 6,
+    "reqd": 0,
+    "read_only_onload": 0
+  },
+
+  {
+    "fieldname": "cashier_password",
+    "label": "Cashier Password",
+    "fieldtype": "Data",
+    "reqd": 0,
+    "read_only_onload": 0
+  }
+]

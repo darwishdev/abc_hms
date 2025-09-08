@@ -1,0 +1,95 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2025-08-07 21:46:58.588552",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "pos_profile",
+  "session_status",
+  "naming_series",
+  "column_break_gwgd",
+  "opening_entry",
+  "closing_entry",
+  "created_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "pos_profile",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "POS Profile",
+   "options": "POS Profile",
+   "reqd": 1
+  },
+  {
+   "default": "Open",
+   "fieldname": "session_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Open\nClosed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_gwgd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opening_entry",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Opening Entry",
+   "options": "POS Opening Entry",
+   "reqd": 1
+  },
+  {
+   "fieldname": "closing_entry",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Closing Entry",
+   "options": "POS Closing Entry"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Link",
+   "label": "Created By",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "default": "POS-S-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "POS-S-"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-08-29 13:19:23.333878",
+ "modified_by": "Administrator",
+ "module": "Pos",
+ "name": "POS Session",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

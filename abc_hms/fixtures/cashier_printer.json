@@ -1,0 +1,18 @@
+[
+ {
+  "casheir_device": "M - Cashier - 1",
+  "docstatus": 0,
+  "doctype": "Cashier Printer",
+  "fallback_printer": "B - Cashier Printer",
+  "modified": "2025-08-23 17:12:10.176263",
+  "name": "M - Cashier Printer"
+ },
+ {
+  "casheir_device": "B - Cashier - 1",
+  "docstatus": 0,
+  "doctype": "Cashier Printer",
+  "fallback_printer": "M - Cashier Printer",
+  "modified": "2025-08-23 17:11:59.763966",
+  "name": "B - Cashier Printer"
+ }
+]

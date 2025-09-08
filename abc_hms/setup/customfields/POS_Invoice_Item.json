@@ -1,0 +1,31 @@
+[
+  {
+    "fieldname": "print_class",
+    "label": "Print Class",
+    "fieldtype": "Link",
+    "insert_after": "name",
+    "options": "Print Class",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "reqd": 0
+  },
+  {
+    "fieldname": "guest_number",
+    "label": "Guest Number",
+    "fieldtype": "Int",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "reqd": 0
+  },
+
+  {
+    "fieldname": "folio_window",
+    "label": "Folio Window",
+    "fieldtype": "Link",
+    "options": "Folio Window",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "reqd": 0,
+    "read_only_onload": 0
+  }
+]

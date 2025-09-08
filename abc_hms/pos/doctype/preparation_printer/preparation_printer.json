@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "prompt",
+ "creation": "2025-08-23 16:42:31.651084",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "subnet",
+  "ip_adress",
+  "port_number",
+  "print_class",
+  "fallback_printer",
+  "section_break_patm",
+  "print_classes"
+ ],
+ "fields": [
+  {
+   "fieldname": "subnet",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Subnet",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ip_adress",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "IP Adress",
+   "reqd": 1
+  },
+  {
+   "default": "9100",
+   "fieldname": "port_number",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Port Number",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "fallback_printer",
+   "fieldtype": "Link",
+   "label": "Fallback Printer",
+   "options": "Preparation Printer"
+  },
+  {
+   "fieldname": "print_class",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Print Class",
+   "options": "Print Class"
+  },
+  {
+   "fieldname": "section_break_patm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "print_classes",
+   "fieldtype": "Table",
+   "label": "Print Classes",
+   "options": "Preparation Printer Print Class"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-08-23 17:06:53.371425",
+ "modified_by": "Administrator",
+ "module": "Pos",
+ "name": "Preparation Printer",
+ "naming_rule": "Set by user",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
