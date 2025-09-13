@@ -1,5 +1,75 @@
 DELIMITER $$
+-- describe inventory;
+DROP procedure upsert_inventory_status $$
+CREATE PROCEDURE `upsert_inventory_status` (
+  IN p_room VARCHAR(50),
+  IN p_date_from DATE,
+  IN p_date_to DATE,
+  IN p_physical_status INT,
+  IN p_room_status INT,
+  IN p_hk_status INT,
+  IN p_service_status INT ,
+  IN p_ooo_status INT ,
+  IN p_ooo_reason TEXT
+) BEGIN
+INSERT INTO
+  inventory (
+    room,
+    for_date,
+    physical_status,
+    room_status,
+    hk_status,
+    service_status,
+    ooo_status,
+    ooo_reason
+  )
+SELECT
+  p_room AS room,
+  d.for_date,
+  p_physical_status,
+  p_room_status,
+  p_hk_status,
+  p_service_status,
+  p_ooo_status,
+  p_ooo_reason
+FROM
+  dim_date d
+WHERE
+  d.for_date BETWEEN p_date_from AND p_date_to  ON DUPLICATE KEY
+UPDATE
+  physical_status = COALESCE(
+    VALUES
+      (physical_status),
+      physical_status
+  ),
+  hk_status = COALESCE(
+    VALUES
+      (hk_status),
+      hk_status
+  ),
+  room_status = COALESCE(
+    VALUES
+      (room_status),
+      room_status
+  ),
+  service_status = COALESCE(
+    VALUES
+      (service_status),
+      service_status
+  ),
+  ooo_status = COALESCE(
+    VALUES
+      (ooo_status),
+      ooo_status
+  ),
+  ooo_reason = COALESCE(
+    VALUES
+      (ooo_reason),
+      ooo_reason
+  )
+  ;
 
+END$$
 DROP PROCEDURE IF EXISTS seed_room_type_inventory $$
 CREATE PROCEDURE seed_room_type_inventory(
   IN p_start       DATE,          -- inclusive

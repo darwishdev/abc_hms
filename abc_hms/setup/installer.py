@@ -5,7 +5,7 @@ import frappe
 from pathlib import Path
 from utils.customfield_utils import install_custom_fields
 from utils.role_utils import seed_app_roles
-from utils.sql_utils import run_sql
+from utils.sql_utils import run_sql_dir
 
 SQL_DIR_PROPERTY = Path(frappe.get_app_path("abc_hms", "property",  "sql"))
 SQL_DIR_POS = Path(frappe.get_app_path("abc_hms", "pos",  "sql"))
@@ -56,15 +56,26 @@ ROLES_CONFIG = {
             "Mode of Payment": {"read": 1},
         },
     },
+    "House Keeping": {
+        "desk_access": True,
+        "perms": {
+            "Room": {"read": 1, "write": 1},                 # update room status (clean/dirty/inspected)
+            "Hotel Reservation": {"read": 1},                # see which rooms are occupied
+            "Room Type": {"read": 1},                        # see room types
+            "Room Category": {"read": 1},                    # see room categories
+            "House Keeping Section": {"read": 1, "write": 1, "create": 1}, # manage housekeeping sections if you use that
+            "Property": {"read": 1},                         # read-only property info
+        },
+    },
 }
 def after_install():
     return {"ok" : True}
 # Optional: run this on every migrate so changes apply during development
 def after_migrate():
     install_custom_fields(CUSTOMFIELDS_PATH)
-    run_sql(SQL_DIR_PROPERTY)
-    run_sql(SQL_DIR_POS)
-    run_sql(SQL_DIR_CASHIER)
+    run_sql_dir(SQL_DIR_PROPERTY)
+    run_sql_dir(SQL_DIR_POS)
+    run_sql_dir(SQL_DIR_CASHIER)
     seed_app_roles(ROLES_CONFIG, domain="conchahotel.com")
     return {"ok" : True}
 

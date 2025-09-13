@@ -7,10 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "room_type",
-  "column_break_jdmv",
-  "valid_from",
   "column_break_kzpw",
-  "valid_to"
+  "base_price"
  ],
  "fields": [
   {
@@ -22,29 +20,22 @@
    "reqd": 1
   },
   {
-   "fieldname": "valid_from",
-   "fieldtype": "Date",
-   "label": "Valid From"
-  },
-  {
-   "fieldname": "valid_to",
-   "fieldtype": "Date",
-   "label": "Valid To"
-  },
-  {
-   "fieldname": "column_break_jdmv",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "column_break_kzpw",
    "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "base_price",
+   "fieldtype": "Currency",
+   "label": "Base Price",
+   "non_negative": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-08-25 15:39:04.311356",
+ "modified": "2025-09-11 06:32:31.776605",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Rate Code Room Type",

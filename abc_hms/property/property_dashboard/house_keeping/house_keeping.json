@@ -1,0 +1,37 @@
+{
+ "cards": [
+  {
+   "card": "Property Count"
+  },
+  {
+   "card": "Room Category Count-1"
+  },
+  {
+   "card": "Room Type Count"
+  },
+  {
+   "card": "Room Count"
+  }
+ ],
+ "charts": [
+  {
+   "width": "Half"
+  },
+  {
+   "chart": "Rooms By Type",
+   "width": "Half"
+  }
+ ],
+ "creation": "2025-09-10 02:26:31.403276",
+ "dashboard_name": "House Keeping",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 1,
+ "is_standard": 1,
+ "modified": "2025-09-10 03:33:00.549615",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "House Keeping",
+ "owner": "Administrator"
+}

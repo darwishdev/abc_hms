@@ -7,8 +7,8 @@ from ..repo.auth_repo import AuthRepo
 from frappe.utils.password import get_decrypted_password
 
 class AuthUsecase:
-    def __init__(self, repo: AuthRepo) -> None:
-        self.repo = repo
+    def __init__(self) -> None:
+        self.repo = AuthRepo()
 
     def generate_keys(self , user: str):
         user_details = get_doc_typed("User", user, User)

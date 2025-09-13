@@ -1,26 +1,33 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
-    "allow_import": 1,
-
  "autoname": "prompt",
  "creation": "2025-08-19 19:41:34.492310",
+ "default_view": "List",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "address_line",
+  "display_name",
+  "column_break_faup",
   "star_rating",
-  "instant_approve",
-  "iframe_url",
-  "property_image",
   "column_break_rjhq",
-  "checkin_time_from",
-  "checkin_time_to",
-  "checkout_time_from",
-  "checkout_time_to",
-  "location_url",
+  "address_line",
   "section_break_lbla",
-  "property_description"
+  "property_description",
+  "column_break_wpff",
+  "property_amenities",
+  "section_break_ybhg",
+  "checkin_time_from",
+  "checkout_time_from",
+  "instant_approve",
+  "column_break_wozk",
+  "checkin_time_to",
+  "checkout_time_to",
+  "section_break_wicz",
+  "location_url",
+  "column_break_tgnf",
+  "iframe_url"
  ],
  "fields": [
   {
@@ -39,7 +46,9 @@
   {
    "fieldname": "star_rating",
    "fieldtype": "Int",
-   "label": "Star Rating"
+   "label": "Star Rating",
+   "length": 1,
+   "reqd": 1
   },
   {
    "fieldname": "iframe_url",
@@ -52,19 +61,9 @@
    "label": "Location URL"
   },
   {
-   "fieldname": "property_image",
-   "fieldtype": "Attach Image",
-   "label": "Property Image"
-  },
-  {
    "fieldname": "property_description",
    "fieldtype": "Text Editor",
    "label": "Property Description"
-  },
-{
-   "fieldname": "amenities_section",
-   "fieldtype": "Section Break",
-   "label": "Amenities"
   },
   {
    "fieldname": "property_amenities",
@@ -99,12 +98,41 @@
   {
    "fieldname": "section_break_lbla",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "display_name",
+   "fieldtype": "Data",
+   "label": "Display Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_faup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_wpff",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ybhg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_wozk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_wicz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_tgnf",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
- "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-19 20:13:51.525654",
+ "modified": "2025-09-09 23:15:08.533886",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Property",
@@ -126,7 +154,10 @@
  ],
  "quick_entry": 1,
  "row_format": "Dynamic",
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+ "search_fields": "display_name,address_line",
+ "show_title_field_in_link": 1,
+ "sort_field": "name",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "display_name"
 }

@@ -7,10 +7,15 @@ required_apps = ["frappe/erpnext" , "frappe/hrms"]
 app_license = "mit"
 after_install = "abc_hms.setup.installer.after_install"
 after_migrate = "abc_hms.setup.installer.after_migrate"
+before_request = []
 
 
+boot_session = "abc_hms.boot.get_business_date"
+app_include_css = [
+    "/assets/abc_hms/css/index.css"
+]
 app_include_js = [
-    "/assets/abc_hms/js/nav-01.js"
+    "/assets/abc_hms/js/nav-04.js"
 ]
 fixtures = [
     {"doctype": "Customer"},

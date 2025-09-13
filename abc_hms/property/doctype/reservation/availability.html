@@ -1,0 +1,293 @@
+<style>
+    .room-list {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 0.5rem 0;
+        list-style: none;
+        margin: 0;
+    }
+    .room-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 1rem;
+        min-width: 140px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        background: color-mix(in srgb, var(--bg-color) 70%, transparent);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    .room-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .room-card[aria-pressed="true"] {
+        border-color: var(--primary);
+        background: color-mix(in srgb, var(--primary) 20%, var(--bg-color));
+    }
+    .room-card .room-type {
+        font-weight: 600;
+        font-size: var(--text-base);
+        margin-bottom: 0.3rem;
+    }
+    .room-card .count {
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
+
+    /* Rate grid */
+
+    .rate-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.2rem;
+        margin-top: 1.5rem;
+        padding: 0;
+        list-style: none;
+    }
+    .rate-card {
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--border-radius-lg);
+        padding: 1rem 1.2rem;
+        background: color-mix(in srgb, var(--bg-color) 75%, transparent);
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(10px);
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+    .rate-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Header row with compact info */
+    .rate-card header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.8rem;
+    }
+    .rate-card header .rate-code {
+        font-size: var(--text-md);
+        font-weight: 600;
+    }
+    .rate-card header .info {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+    }
+    .rate-card .currency-badge {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.6rem;
+        border-radius: var(--border-radius-sm);
+        background: color-mix(in srgb, var(--primary) 25%, transparent);
+        backdrop-filter: blur(8px);
+        color: var(--primary);
+        white-space: nowrap;
+    }
+
+    /* Price block */
+    .rate-card .price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 0.6rem;
+    }
+
+    /* Total line anchored to bottom */
+    .rate-card .total {
+        margin-top: auto;
+        padding-top: 0.6rem;
+        border-top: 1px solid var(--border-color);
+        font-weight: 600;
+    }
+    /* Rate list: horizontal scroll */
+    .rate-wrapper {
+        position: relative;
+    }
+    .rate-grid {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding: 0.5rem 0;
+        list-style: none;
+        margin: 0;
+    }
+    .rate-card {
+        flex: 0 0 260px; /* fixed width */
+        border-radius: var(--border-radius-lg);
+        padding: 1rem 1.2rem;
+        background: color-mix(in srgb, var(--bg-color) 75%, transparent);
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(10px);
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+    .rate-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Scroll buttons */
+    .scroll-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: color-mix(in srgb, var(--bg-color) 85%, transparent);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius-md);
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+        z-index: 2;
+    }
+    .scroll-btn.left {
+        left: -0.5rem;
+    }
+    .scroll-btn.right {
+        right: -0.5rem;
+    }
+</style>
+<section aria-labelledby="rooms-title">
+    <h3 id="rooms-title">rooms</h3>
+    <ul class="room-list" id="room-list" role="listbox">
+        {% for room in availability %}
+        <li>
+            <button
+                class="room-card"
+                data-room="{{ room.room_type }}"
+                aria-pressed="false"
+                onclick="filterRates('{{ room.room_type }}', this)"
+                role="option"
+            >
+                <span class="room-type">{{ room.room_type }}</span>
+                <span class="count">{{ room.available }}</span>
+            </button>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section aria-labelledby="rates-title">
+    <h3 id="rates-title">rates</h3>
+    <div class="rate-wrapper">
+        <button class="scroll-btn left" onclick="scrollRates(-1)">‹</button>
+        <ul class="rate-grid" id="rate-list">
+            {% for rate in rates %}
+            <li
+                class="rate-card"
+                data-room="{{ rate.room_type }}"
+                data-rate-code="{{ rate.rate_code }}"
+                data-currency="{{ rate.currency }}"
+                data-exchange-rate="{{ rate.exchange_rate }}"
+                data-base-rate="{{ rate.base_rate }}"
+                data-total-stay="{{ rate.total_stay }}"
+                data-base-rate-default="{{ rate.base_rate_default_currency }}"
+                data-total-stay-default="{{ rate.total_stay_default_currency }}"
+                onclick="onRateClick(this)"
+            >
+                <header>
+                    <span class="rate-code">{{ rate.rate_code }}</span>
+                    <span class="info">
+                        <span class="currency-badge">{{ rate.currency }}</span>
+                        {% if rate.exchange_rate > 1 %} ×{{ rate.exchange_rate }} {% endif %} {% if
+                        rate.currency != "egp" %} ({{
+                        frappe.utils.fmt_money(rate.base_rate_default_currency, currency="egp") }})
+                        {% endif %}
+                    </span>
+                </header>
+                <div class="price">
+                    {{ frappe.utils.fmt_money(rate.base_rate, currency=rate.currency) }}
+                </div>
+                <div class="total">
+                    {{ frappe.utils.fmt_money(rate.total_stay, currency=rate.currency) }} {% if
+                    rate.currency != "egp" %} · {{
+                    frappe.utils.fmt_money(rate.total_stay_default_currency, currency="egp") }} {%
+                    endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <button class="scroll-btn right" onclick="scrollRates(1)">›</button>
+    </div>
+</section>
+
+<script>
+    let activeRoom = null;
+
+    function filterRates(roomType, btn) {
+        const roomCards = document.querySelectorAll(".room-card");
+        const rateCards = document.querySelectorAll(".rate-card");
+
+        if (activeRoom === roomType) {
+            activeRoom = null;
+            btn.setAttribute("aria-pressed", "false");
+        } else {
+            activeRoom = roomType;
+            roomCards.forEach((card) => {
+                card.setAttribute(
+                    "aria-pressed",
+                    card.dataset.room === roomType ? "true" : "false",
+                );
+            });
+        }
+
+        rateCards.forEach((card) => {
+            card.style.display = !activeRoom || card.dataset.room === activeRoom ? "" : "none";
+        });
+    }
+
+    function scrollRates(direction) {
+        const list = document.getElementById("rate-list");
+        const { offsetWidth } = list.querySelector(".rate-card") || { offsetWidth: 260 };
+        list.scrollBy({ left: direction * offsetWidth, behavior: "smooth" });
+    }
+</script>
+<script>
+    function onRateClick(el) {
+        const $wrapper = $(el).closest('[data-fieldname="availability_html"]');
+        const frm = $wrapper.data("frm");
+        if (!frm) {
+            console.error("frm not found");
+            return;
+        }
+        frm.selected_rate = el.dataset;
+        const {
+            room: room_type,
+            rateCode: rate_code,
+            currency,
+            exchangeRate,
+            baseRate: base_rate,
+            totalStay: total_stay,
+            baseRateDefault: base_rate_default_currency,
+            totalStayDefault: total_stay_default_currency,
+        } = el.dataset;
+
+        frm.set_value({
+            room_type,
+            rate_code,
+            currency,
+            exchange_rate: parseFloat(exchangeRate),
+            base_rate: parseFloat(base_rate),
+            total_stay: parseFloat(total_stay),
+            base_rate_default_currency: parseFloat(base_rate_default_currency),
+            total_stay_default_currency: parseFloat(total_stay_default_currency),
+            fixed_rate: false,
+        });
+
+        frappe.show_alert({
+            message: `Applied ${rate_code} (${currency}) for ${room_type}`,
+            indicator: "green",
+        });
+    }
+</script>

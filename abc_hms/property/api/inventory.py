@@ -1,4 +1,3 @@
-# your_app/api/availability.py
 import frappe
 from frappe.utils import getdate
 from frappe.utils.data import cint

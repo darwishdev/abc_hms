@@ -1,5 +1,13 @@
 {
- "actions": [],
+ "actions": [
+  {
+   "action": "inventory_rates_list",
+   "action_type": "Server Action",
+   "label": "Get Availability"
+  }
+ ],
+ "allow_events_in_timeline": 1,
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "naming_series:",
  "creation": "2025-08-22 12:00:00",
@@ -17,11 +25,12 @@
   "company_profile",
   "travel_agent",
   "section_break_psys",
-  "check_in_date",
+  "arrival",
   "column_break_boyn",
-  "number_of_nights",
+  "property",
+  "nights",
   "column_break_idoq",
-  "check_out_date",
+  "departure",
   "column_break_wtjt",
   "number_of_rooms",
   "room_information_section",
@@ -31,35 +40,30 @@
   "column_break_acto",
   "room_type_assigned",
   "section_break_seoo",
-  "base_rate_per_night",
+  "base_rate",
   "column_break_mibr",
-  "total_base_amount",
-  "column_break_hbfy",
-  "total_amount",
+  "total_stay",
   "section_break_cwwz",
   "availability_html",
   "section_break_vvyp",
   "room",
-  "assigned_rooms",
   "section_break_ypxh",
-  "payment_status",
-  "reservation_date",
+  "confirmation_no",
   "amended_from",
-  "check_in_completed",
-  "created_by_user",
-  "check_out_completed",
   "naming_series",
   "reservation_status",
-  "property",
-  "confirmation_no"
+  "column_break_nfvw",
+  "check_out_completed",
+  "check_in_completed"
  ],
  "fields": [
   {
+   "default": "RES-.MM.-.#####",
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Naming Series",
-   "options": "RES-.YYYY.-.MM.-.#####",
+   "options": "RES-.MM.-.#####",
    "reqd": 1
   },
   {
@@ -112,32 +116,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "check_in_date",
-   "fieldtype": "Date",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Check In Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "number_of_nights",
-   "fieldtype": "Int",
-   "label": "Number Of Nights",
-   "reqd": 1
-  },
-  {
-   "fieldname": "check_out_date",
-   "fieldtype": "Date",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Check Out Date",
-   "reqd": 1
-  },
-  {
    "default": "1",
    "description": "Currently locked to 1 room per reservation",
    "fieldname": "number_of_rooms",
@@ -151,41 +129,6 @@
    "fieldtype": "HTML",
    "label": "Availability",
    "read_only": 1
-  },
-  {
-   "allow_on_submit": 1,
-   "description": "Maximum one room assignment allowed",
-   "fieldname": "assigned_rooms",
-   "fieldtype": "Table",
-   "hidden": 1,
-   "in_filter": 1,
-   "label": "Assigned Rooms",
-   "options": "Reservation Room Assignment"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "base_rate_per_night",
-   "fieldtype": "Currency",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Rate",
-   "non_negative": 1
-  },
-  {
-   "fieldname": "total_amount",
-   "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Total Amount",
-   "read_only": 1
-  },
-  {
-   "default": "Pending",
-   "fieldname": "payment_status",
-   "fieldtype": "Select",
-   "label": "Payment Status",
-   "options": "Pending\nPartial\nPaid\nRefunded\nPartial Refund"
   },
   {
    "allow_on_submit": 1,
@@ -206,20 +149,6 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "Check Out Completed"
-  },
-  {
-   "default": "Today",
-   "fieldname": "reservation_date",
-   "fieldtype": "Date",
-   "label": "Reservation Date",
-   "read_only": 1
-  },
-  {
-   "fieldname": "created_by_user",
-   "fieldtype": "Link",
-   "label": "Created By",
-   "options": "User",
-   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -328,24 +257,8 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_hbfy",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "column_break_mibr",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "total_base_amount",
-   "fieldtype": "Currency",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Total Stay",
-   "non_negative": 1,
-   "read_only": 1,
-   "reqd": 1
   },
   {
    "allow_on_submit": 1,
@@ -383,14 +296,69 @@
    "fieldname": "confirmation_no",
    "fieldtype": "Data",
    "label": "Confirmation NO"
+  },
+  {
+   "fieldname": "arrival",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Arrival",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nights",
+   "fieldtype": "Int",
+   "label": "Nights",
+   "reqd": 1
+  },
+  {
+   "fieldname": "departure",
+   "fieldtype": "Date",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Departure",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "base_rate",
+   "fieldtype": "Currency",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Base Rate",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_stay",
+   "fieldtype": "Currency",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Total Stay",
+   "non_negative": 1,
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_nfvw",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-09-08 04:53:23.718971",
+ "modified": "2025-09-12 04:57:48.787243",
  "modified_by": "Administrator",
- "module": "property",
+ "module": "Property",
  "name": "Hotel Reservation",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
@@ -405,6 +373,7 @@
    "read": 1,
    "report": 1,
    "role": "Hotel Manager",
+   "select": 1,
    "share": 1,
    "submit": 1,
    "write": 1
@@ -417,13 +386,23 @@
    "read": 1,
    "report": 1,
    "role": "Front Desk Agent",
+   "select": 1,
    "share": 1,
    "submit": 1,
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
    "read": 1,
-   "role": "Guest"
+   "report": 1,
+   "role": "Administrator",
+   "select": 1,
+   "share": 1,
+   "write": 1
   }
  ],
  "row_format": "Dynamic",

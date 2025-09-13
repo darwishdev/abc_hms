@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
  "creation": "2025-08-23 05:17:59.087305",
@@ -18,7 +19,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-23 05:18:22.474944",
+ "modified": "2025-09-11 03:52:18.878938",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Rate Category",

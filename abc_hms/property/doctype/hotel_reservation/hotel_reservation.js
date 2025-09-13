@@ -65,6 +65,7 @@ frappe.ui.form.on("Hotel Reservation", {
     },
     refresh(frm) {
         // Optional: hide the HTML placeholder until needed
+        //// Require the bundle and mount the Vue app
         hide_availability(frm);
         console.log("frm status", frm.doc, frm.doc, frm.docroom);
         const isSubmitted = frm.doc.docstatus === 1;

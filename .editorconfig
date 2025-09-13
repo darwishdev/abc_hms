@@ -1,6 +1,7 @@
 # Root editor config file
 root = true
 
+vim.g.python3_host_prog = '/home/darwishdev/code/erpnext/frappe/bin/python'
 # Common settings
 [*]
 end_of_line = lf
@@ -10,7 +11,7 @@ charset = utf-8
 
 # python, js indentation settings
 [{*.py,*.js,*.vue,*.css,*.scss,*.html}]
-indent_style = tab
+indent_style = space
 indent_size = 4
 max_line_length = 99
 

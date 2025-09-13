@@ -1,0 +1,35 @@
+{
+ "content": null,
+ "creation": "2025-09-10 03:45:29.466439",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-09-10 03:45:29.466439",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "hk-room",
+ "owner": "Administrator",
+ "page_name": "hk-room",
+ "roles": [
+  {
+   "role": "Administrator"
+  },
+  {
+   "role": "Property Manager"
+  },
+  {
+   "role": "Front Desk"
+  },
+  {
+   "role": "Front Desk Agent"
+  },
+  {
+   "role": "House Keeping"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "House Keeping Rooms Control"
+}

@@ -8,11 +8,7 @@
  "field_order": [
   "basic_info_section",
   "property",
-  "business_date",
-  "selling_horizon_section",
-  "period_start_date",
-  "column_break_gayq",
-  "period_end_date"
+  "business_date"
  ],
  "fields": [
   {
@@ -29,20 +25,6 @@
    "unique": 1
   },
   {
-   "fieldname": "period_start_date",
-   "fieldtype": "Int",
-   "label": "Period Start Date",
-   "length": 8,
-   "reqd": 1
-  },
-  {
-   "fieldname": "period_end_date",
-   "fieldtype": "Int",
-   "label": "Period End Date",
-   "length": 8,
-   "reqd": 1
-  },
-  {
    "fieldname": "business_date",
    "fieldtype": "Date",
    "in_filter": 1,
@@ -55,23 +37,14 @@
    "fieldname": "basic_info_section",
    "fieldtype": "Section Break",
    "label": "Basic Settings"
-  },
-  {
-   "fieldname": "selling_horizon_section",
-   "fieldtype": "Section Break",
-   "label": "Selling Horizon"
-  },
-  {
-   "fieldname": "column_break_gayq",
-   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-08 04:50:10.188121",
+ "modified": "2025-09-11 02:52:04.493940",
  "modified_by": "Administrator",
- "module": "property",
+ "module": "Property",
  "name": "Property Setting",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
