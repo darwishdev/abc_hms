@@ -315,69 +315,6 @@
   "valid_to": "2025-12-31"
  },
  {
-  "abbriviation": "RACK-EGP",
-  "cacnelation_policy": "Non-refundable",
-  "color": null,
-  "complementry": 0,
-  "currency": "EGP",
-  "day_use": 0,
-  "days_before_check_in": 0,
-  "docstatus": 0,
-  "doctype": "Rate Code",
-  "flexible_to_ammend": 0,
-  "house_use": 0,
-  "modified": "2025-09-15 06:06:13.880473",
-  "name": "RackEG",
-  "pay_in_advance": 0,
-  "rate_category": "RACK",
-  "room_types": [
-   {
-    "base_price": 15000.0,
-    "parent": "RackEG",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
-   },
-   {
-    "base_price": 14000.0,
-    "parent": "RackEG",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
-   },
-   {
-    "base_price": 12000.0,
-    "parent": "RackEG",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
-   },
-   {
-    "base_price": 11000.0,
-    "parent": "RackEG",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
-   },
-   {
-    "base_price": 12000.0,
-    "parent": "RackEG",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "RackEG",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "PM"
-   }
-  ],
-  "valid_from": "2025-09-01",
-  "valid_to": null
- },
- {
   "abbriviation": "CORP-EGP",
   "cacnelation_policy": "Free Cancellation",
   "color": null,
@@ -439,5 +376,68 @@
   ],
   "valid_from": "2025-08-01",
   "valid_to": "2025-12-31"
+ },
+ {
+  "abbriviation": "RACK-EGP",
+  "cacnelation_policy": "Non-refundable",
+  "color": null,
+  "complementry": 0,
+  "currency": "EGP",
+  "day_use": 0,
+  "days_before_check_in": 0,
+  "docstatus": 0,
+  "doctype": "Rate Code",
+  "flexible_to_ammend": 0,
+  "house_use": 0,
+  "modified": "2025-09-15 06:06:13.880473",
+  "name": "RackEG",
+  "pay_in_advance": 0,
+  "rate_category": "RACK",
+  "room_types": [
+   {
+    "base_price": 15000.0,
+    "parent": "RackEG",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "PRE-KNG"
+   },
+   {
+    "base_price": 14000.0,
+    "parent": "RackEG",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "SUP-KNG"
+   },
+   {
+    "base_price": 12000.0,
+    "parent": "RackEG",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "SUP-TWN"
+   },
+   {
+    "base_price": 11000.0,
+    "parent": "RackEG",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "DLX-KNG"
+   },
+   {
+    "base_price": 12000.0,
+    "parent": "RackEG",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "DLX-TWN"
+   },
+   {
+    "base_price": 0.0,
+    "parent": "RackEG",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "PM"
+   }
+  ],
+  "valid_from": "2025-09-01",
+  "valid_to": null
  }
 ]

@@ -204,6 +204,7 @@ window.ignore_availability_action = function () {
         callback: function (r) {
             frappe.show_alert({ message: "Availability ignored", indicator: "green" });
             cur_frm.reload_doc();
+            frappe.msgprint.hide();
         },
     });
     console.log("ignoress");

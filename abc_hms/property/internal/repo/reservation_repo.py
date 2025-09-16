@@ -45,7 +45,6 @@ class ReservationRepo:
             ignore_availability = 0,
             allow_sharing = 0
     ):
-        frappe.throw(f"errro is {str(doc["room_type"])}")
         def query_logic(cur):
             cur.execute(
                 """
