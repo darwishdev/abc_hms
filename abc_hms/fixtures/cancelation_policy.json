@@ -1,1 +1,38 @@
-[]
+[
+ {
+  "cancelation_fee": 100.0,
+  "days_before_cancel": 0,
+  "docstatus": 0,
+  "doctype": "Cancelation Policy",
+  "is_percent": 1,
+  "modified": "2025-09-15 04:40:49.505334",
+  "name": "Non-refundable"
+ },
+ {
+  "cancelation_fee": 100.0,
+  "days_before_cancel": 1,
+  "docstatus": 0,
+  "doctype": "Cancelation Policy",
+  "is_percent": 1,
+  "modified": "2025-09-15 04:40:49.534779",
+  "name": "Full Stay Fee"
+ },
+ {
+  "cancelation_fee": 100.0,
+  "days_before_cancel": 2,
+  "docstatus": 0,
+  "doctype": "Cancelation Policy",
+  "is_percent": 1,
+  "modified": "2025-09-15 04:40:49.549575",
+  "name": "First Night Fee"
+ },
+ {
+  "cancelation_fee": 0.0,
+  "days_before_cancel": 7,
+  "docstatus": 0,
+  "doctype": "Cancelation Policy",
+  "is_percent": 0,
+  "modified": "2025-09-15 04:40:49.565313",
+  "name": "Free Cancellation"
+ }
+]

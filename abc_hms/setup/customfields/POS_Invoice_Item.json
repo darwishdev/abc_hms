@@ -17,7 +17,6 @@
     "in_standard_filter": 1,
     "reqd": 0
   },
-
   {
     "fieldname": "folio_window",
     "label": "Folio Window",

@@ -16,4 +16,4 @@ class AppContainer:
 
 
 # global singleton container for APIs
-container = AppContainer()
+app_container = AppContainer()

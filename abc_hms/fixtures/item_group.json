@@ -1,0 +1,44 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Item Group",
+  "image": null,
+  "is_group": 1,
+  "item_group_defaults": [],
+  "item_group_name": "All Item Groups",
+  "modified": "2025-09-15 03:07:56.717776",
+  "name": "All Item Groups",
+  "old_parent": "",
+  "parent_item_group": "",
+  "print_class": null,
+  "taxes": []
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Item Group",
+  "image": null,
+  "is_group": 0,
+  "item_group_defaults": [],
+  "item_group_name": "Rooms",
+  "modified": "2025-09-15 03:44:43.203791",
+  "name": "Rooms",
+  "old_parent": "All Item Groups",
+  "parent_item_group": "All Item Groups",
+  "print_class": null,
+  "taxes": []
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Item Group",
+  "image": null,
+  "is_group": 0,
+  "item_group_defaults": [],
+  "item_group_name": "F&B",
+  "modified": "2025-09-15 03:45:01.435296",
+  "name": "F&B",
+  "old_parent": "All Item Groups",
+  "parent_item_group": "All Item Groups",
+  "print_class": null,
+  "taxes": []
+ }
+]

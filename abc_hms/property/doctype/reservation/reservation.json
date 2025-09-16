@@ -127,6 +127,7 @@
    "label": "Dates"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "arrival",
    "fieldtype": "Date",
    "in_filter": 1,
@@ -141,6 +142,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "nights",
    "fieldtype": "Int",
    "label": "Nights",
@@ -151,6 +153,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "departure",
    "fieldtype": "Date",
    "in_filter": 1,
@@ -179,6 +182,7 @@
    "label": "Room Information"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "rate_code",
    "fieldtype": "Link",
    "in_filter": 1,
@@ -194,6 +198,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "description": "Room type used for pricing and rate calculations",
    "fieldname": "room_type",
    "fieldtype": "Link",
@@ -375,9 +380,15 @@
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_calendar_and_gantt": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2025-09-12 04:35:21.469981",
+ "links": [
+  {
+   "link_doctype": "Folio",
+   "link_fieldname": "reservation"
+  }
+ ],
+ "modified": "2025-09-15 08:06:55.246462",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Reservation",

@@ -40,10 +40,9 @@
     "in_standard_filter": 1
   },
   {
-    "fieldname": "pos_session",
-    "label": "POS Session",
-    "fieldtype": "Link",
-    "options": "POS Session",
+    "fieldname": "for_date",
+    "label": "For Date",
+    "fieldtype": "Int",
     "insert_after": "table_number",
     "in_list_view": 0,
     "in_standard_filter": 1

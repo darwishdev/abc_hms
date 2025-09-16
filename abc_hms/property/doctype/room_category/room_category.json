@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
  "creation": "2025-08-19 19:45:39.014343",
@@ -21,7 +22,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-25 16:22:14.640662",
+ "modified": "2025-09-15 04:39:05.951464",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Room Category",

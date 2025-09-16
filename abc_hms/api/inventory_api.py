@@ -3,16 +3,16 @@ from typing import List
 import ast
 import frappe
 from pydantic import InstanceOf
-from abc_hms.container import container
+from abc_hms.container import app_container
 
 @frappe.whitelist(methods=["GET"])
 def inventory_lookup_list(lookup_types: list[str] | str | None = None):
     if not lookup_types:
-        return container.inventory_usecase.inventory_lookup_list()
+        return app_container.inventory_usecase.inventory_lookup_list()
     if isinstance(lookup_types, str):
         try:
             parsed_types = [t.strip() for t in lookup_types.split(",") if t.strip()]
-            return container.inventory_usecase.inventory_lookup_list(parsed_types)
+            return app_container.inventory_usecase.inventory_lookup_list(parsed_types)
         except Exception:
             frappe.throw("Invalid lookup_type format. Expected JSON array string, e.g. [\"room status\", \"hk status\"].")
 
@@ -33,7 +33,7 @@ def inventory_upsert(
             print(f"Error parsing updated_statues string: {e}")
             return # Or raise an exception, depending on your error handling policy
     payload['user'] = frappe.session.user
-    return container.inventory_usecase.inventory_upsert(payload)
+    return app_container.inventory_usecase.inventory_upsert(payload)
 
 
 @frappe.whitelist(methods=["GET"])
@@ -63,4 +63,4 @@ def room_status_list(
         "guest_service_status": guest_service_status,
         "date_range": date_range,
     }
-    return container.inventory_usecase.room_status_list(payload)
+    return app_container.inventory_usecase.room_status_list(payload)

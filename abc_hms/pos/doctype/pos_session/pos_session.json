@@ -1,17 +1,16 @@
 {
  "actions": [],
- "autoname": "naming_series:",
+ "autoname": "prompt",
  "creation": "2025-08-07 21:46:58.588552",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "pos_profile",
   "session_status",
-  "naming_series",
   "column_break_gwgd",
+  "for_date",
   "opening_entry",
-  "closing_entry",
-  "created_by"
+  "amended_from"
  ],
  "fields": [
   {
@@ -44,35 +43,39 @@
    "reqd": 1
   },
   {
-   "fieldname": "closing_entry",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Closing Entry",
-   "options": "POS Closing Entry"
-  },
-  {
-   "fieldname": "created_by",
-   "fieldtype": "Link",
-   "label": "Created By",
-   "options": "User",
+   "fieldname": "for_date",
+   "fieldtype": "Int",
+   "label": "For Date",
+   "length": 8,
+   "non_negative": 1,
    "reqd": 1
   },
   {
-   "default": "POS-S-",
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "label": "Naming Series",
-   "options": "POS-S-"
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "POS Session",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2025-08-29 13:19:23.333878",
+ "is_calendar_and_gantt": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Sales Invoice Payment",
+   "link_fieldname": "pos_session"
+  }
+ ],
+ "modified": "2025-09-15 01:54:30.020036",
  "modified_by": "Administrator",
  "module": "Pos",
  "name": "POS Session",
- "naming_rule": "By \"Naming Series\" field",
+ "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [
   {
@@ -84,12 +87,54 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Hotel Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Front Desk",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Front Desk Agent",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
  "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

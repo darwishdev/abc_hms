@@ -1,260 +1,260 @@
-
-DROP VIEW IF EXISTS v_room;
-CREATE OR REPLACE VIEW v_room AS
-SELECT
-r.name,
-r.display_name,
-r.hk_section,
-r.room_type,
-rt.display_name room_type_name,
-rt.minimum_guests_number,
-rt.maximum_guests_number,
-rt.pay_master,
-rt.bathrooms_count,
-rt.room_type_description,
-p.name property,
-p.display_name property_name,
-rc.name room_category
-FROM tabProperty p
-JOIN `tabRoom Category` rc on p.name = rc.property_name
-JOIN `tabRoom Type` rt on rc.name = rt.room_category
-JOIN `tabRoom` r on rt.name = r.room_type
 --
--- DROP view IF EXISTS room_type_inventory;
--- CREATE view room_type_inventory as
--- select
--- inv.name ,
--- inv.for_date ,
--- inv.room_type ,
--- inv.occupied_count ,
+-- DROP VIEW IF EXISTS v_room;
+-- CREATE OR REPLACE VIEW v_room AS
+-- SELECT
+-- r.name,
+-- r.display_name,
+-- r.hk_section,
+-- r.room_type,
+-- rt.display_name room_type_name,
+-- rt.minimum_guests_number,
+-- rt.maximum_guests_number,
 -- rt.pay_master,
--- inv.out_of_order_count ,
--- COUNT(r.name) total_count,
--- (COUNT(r.name) - (inv.out_of_order_count + inv.occupied_count)) total_available_units
--- from `tabRoom Type Inventory` inv
---  join `tabRoom Type` rt on rt.name = inv.room_type
---  join `tabRoom` r on rt.name = r.room_type
---  group by
--- inv.name ,
--- inv.for_date ,
--- inv.room_type ,
--- inv.occupied_count ,
--- inv.out_of_order_count ;
---
---
--- drop view if exists rate_code ;
--- create view rate_code as
--- select rc.name,
---     rc.pay_in_advance ,
---     rc.flexible_to_ammend ,
---     rc.cacnelation_policy ,
---     cp.days_before_cancel ,
---     cp.is_percent ,
---     cp.cancelation_fee
--- from `tabRate Code` rc
--- join `tabCancelation Policy` cp on rc.cacnelation_policy =cp.name ;
---
---
--- drop view if exists room_type_inventory_rates ;
--- Create view room_type_inventory_rates as
--- select
--- rc.pay_in_advance,
--- rc.flexible_to_ammend,
--- rc.days_before_cancel,
--- rc.is_percent is_cancelation_percent,
--- rc.cancelation_fee,
--- inv.name,
--- inv.pay_master,
--- inv.for_date,
--- inv.room_type,
--- inv.occupied_count,
--- inv.out_of_order_count,
--- irc.rate_code,
--- irc.rate_price,
--- total_count,
--- total_available_units
--- from room_type_inventory inv
---  join `tabRoom Type Inventory Rate Code` irc on inv.name = irc.parent
---  join rate_code rc on irc.rate_code = rc.name;
---
---
--- CREATE OR REPLACE VIEW v_hotel_snapshot AS
--- WITH base_rooms AS (
---     SELECT COUNT(*) AS total_rooms
---     FROM `tabRoom`
---     WHERE is_pay_master = 0
--- ),
--- inv AS (
---     SELECT
---         for_date AS business_date,
---         SUM(occupied_count) AS rooms_occupied,
---         SUM(out_of_order_count) AS rooms_ooo
---     FROM `tabRoom Type Inventory`
---     GROUP BY for_date
--- ),
--- inhouse AS (
---     SELECT
---         DATE_FORMAT(check_in_date, '%Y%m%d') AS start_date,
---         DATE_FORMAT(check_out_date, '%Y%m%d') AS end_date,
---         COUNT(*) AS reservations_inhouse,
---         SUM(number_of_rooms) AS rooms_inhouse,
---         SUM(number_of_adults) AS adults_inhouse,
---         SUM(number_of_children) AS children_inhouse,
---         SUM(number_of_infants) AS infants_inhouse,
---         SUM(number_of_adults + number_of_children + number_of_infants) AS persons_inhouse,
---         SUM(base_rate_per_night) AS room_revenue,
---         AVG(base_rate_per_night) AS adr
---     FROM `tabHotel Reservation`
---     WHERE check_in_completed = 1
---       AND docstatus = 1
---     GROUP BY check_in_date, check_out_date
--- ),
--- arrivals AS (
---     SELECT
---         DATE_FORMAT(check_in_date, '%Y%m%d') AS business_date,
---         COUNT(*) AS arrival_rooms,
---         SUM(number_of_adults + number_of_children + number_of_infants) AS arrival_persons
---     FROM `tabHotel Reservation`
---     WHERE check_in_completed = 0
---     GROUP BY check_in_date
--- ),
--- departures AS (
---     SELECT
---         DATE_FORMAT(check_out_date, '%Y%m%d') AS business_date,
---         COUNT(*) AS departure_rooms,
---         SUM(number_of_adults + number_of_children + number_of_infants) AS departure_persons
---     FROM `tabHotel Reservation`
---     WHERE check_out_completed = 0
---     GROUP BY check_out_date
--- )
--- SELECT
---     i.business_date,
---     r.total_rooms,
---     i.rooms_occupied,
---     i.rooms_ooo,
---     (r.total_rooms - i.rooms_ooo) AS total_rooms_minus_ooo,
---     (r.total_rooms - i.rooms_ooo - i.rooms_occupied) AS available_rooms,
---     ih.rooms_inhouse,
---     ih.adults_inhouse,
---     ih.children_inhouse,
---     ih.infants_inhouse,
---     ih.persons_inhouse,
---     ih.room_revenue,
---     ih.adr,
---     a.arrival_rooms,
---     a.arrival_persons,
---     d.departure_rooms,
---     d.departure_persons,
---     ROUND((i.rooms_occupied / NULLIF((r.total_rooms - i.rooms_ooo),0)) * 100, 2) AS occ_percent
--- FROM base_rooms r
--- LEFT JOIN inv i ON 1=1
--- LEFT JOIN inhouse ih ON i.business_date BETWEEN ih.start_date AND ih.end_date
--- LEFT JOIN arrivals a ON i.business_date = a.business_date
--- LEFT JOIN departures d ON i.business_date = d.business_date;
---
---
---
---
--- CREATE OR REPLACE VIEW v_hotel_revenue_activity AS
--- WITH res AS (
---     SELECT
---         name,
---         rate_code,
---         number_of_rooms,
---         number_of_nights,
---         number_of_adults,
---         number_of_children,
---         number_of_infants,
---         (number_of_adults + number_of_children + number_of_infants) AS persons,
---         base_rate_per_night,
---         total_amount,
---         DATE_FORMAT(reservation_date, '%Y%m%d') AS reservation_date_fmt,
---         DATE_FORMAT(check_in_date, '%Y%m%d') AS check_in_fmt,
---         DATE_FORMAT(check_out_date, '%Y%m%d') AS check_out_fmt,
---         check_in_completed,
---         check_out_completed,
---         docstatus,
---         modified,
---         customer
---     FROM `tabHotel Reservation`
---     WHERE docstatus IN (0,1,2)
--- )
--- SELECT
---     reservation_date_fmt AS business_date,
---     COUNT(CASE WHEN docstatus = 1 THEN 1 END) AS reservations_made_today,
---     COUNT(CASE WHEN docstatus = 2 AND DATE_FORMAT(modified, '%Y%m%d') = reservation_date_fmt THEN 1 END) AS reservations_cancelled_today,
---     SUM(number_of_rooms * number_of_nights) AS room_nights_reserved_today,
---     SUM(number_of_rooms * number_of_nights) AS todays_demand,
---     AVG(base_rate_per_night) AS adr,
---     AVG(CASE WHEN rate_code <> 'COMP' THEN base_rate_per_night END) AS adr_minus_comp,
---     AVG(CASE WHEN rate_code <> 'HUSE' THEN base_rate_per_night END) AS adr_minus_house,
---     AVG(CASE WHEN rate_code NOT IN ('COMP','HUSE') THEN base_rate_per_night END) AS adr_minus_comp_and_house,
---     SUM(total_amount) / NULLIF(SUM(persons),0) AS avg_person_rate,
---     SUM(total_amount) AS room_revenue,
---     0 AS fnb_revenue,
---     0 AS other_revenue,
---     SUM(total_amount) AS total_revenue,
---     SUM(CASE WHEN rate_code IN ('Corporate-EGP','TAR-EGP') THEN total_amount ELSE 0 END) AS block_revenue,
---     SUM(CASE WHEN rate_code IN ('BAR-EGP','RackEG') THEN total_amount ELSE 0 END) AS individual_revenue,
---     SUM(CASE WHEN rate_code = 'COMP' THEN total_amount ELSE 0 END) AS comp_revenue,
---     SUM(CASE WHEN rate_code = 'HUSE' THEN total_amount ELSE 0 END) AS house_revenue,
---     SUM(total_amount) / NULLIF(SUM(persons),0) AS total_revenue_per_person,
---     SUM(base_rate_per_night * number_of_rooms * number_of_nights) AS maximum_revenue,
---     SUM(base_rate_per_night * number_of_rooms * number_of_nights) AS maximum_revenue_for_occupied,
---     (SUM(total_amount) / NULLIF(SUM(base_rate_per_night * number_of_rooms * number_of_nights),0)) * 100 AS max_revenue_pct,
---     (SUM(total_amount) / NULLIF(SUM(base_rate_per_night * number_of_rooms * number_of_nights),0)) * 100 AS max_revenue_pct_for_occupied
--- FROM res
--- WHERE reservation_date_fmt IS NOT NULL
--- GROUP BY reservation_date_fmt;
---
---
+-- rt.bathrooms_count,
+-- rt.room_type_description,
+-- p.name property,
+-- p.display_name property_name,
+-- rc.name room_category
+-- FROM tabProperty p
+-- JOIN `tabRoom Category` rc on p.name = rc.property_name
+-- JOIN `tabRoom Type` rt on rc.name = rt.room_category
+-- JOIN `tabRoom` r on rt.name = r.room_type
 -- --
---
--- CREATE OR REPLACE VIEW v_hotel_forecast AS
--- WITH base_rooms AS (
---     SELECT COUNT(*) AS total_rooms
---     FROM `tabRoom`
---     WHERE is_pay_master = 0
--- ),
--- arrivals AS (
---     SELECT
---         check_in_date AS business_date,
---         COUNT(*) AS arrival_rooms,
---         SUM(number_of_adults + number_of_children + number_of_infants) AS arrival_persons
---     FROM `tabHotel Reservation`
---     WHERE docstatus = 1
---     GROUP BY check_in_date
--- ),
--- departures AS (
---     SELECT
---         check_out_date AS business_date,
---         COUNT(*) AS departure_rooms,
---         SUM(number_of_adults + number_of_children + number_of_infants) AS departure_persons
---     FROM `tabHotel Reservation`
---     WHERE docstatus = 1
---     GROUP BY check_out_date
--- ),
--- occupied AS (
---     SELECT
---         d.for_date AS business_date,
---         COUNT(h.name) AS occupied_rooms,
---         SUM(CASE WHEN (h.number_of_adults + h.number_of_children + h.number_of_infants) > 1 THEN 1 ELSE 0 END) AS multiple_occ_rooms
---     FROM dim_date d
---     LEFT JOIN `tabHotel Reservation` h
---         ON d.for_date BETWEEN h.check_in_date AND h.check_out_date
---        AND h.docstatus = 1
---     GROUP BY d.for_date
--- )
--- SELECT
---     o.business_date,
---     a.arrival_rooms,
---     a.arrival_persons,
---     d.departure_rooms,
---     d.departure_persons,
---     ROUND((o.occupied_rooms / NULLIF(b.total_rooms,0)) * 100, 2) AS occ_percent,
---     ROUND((o.multiple_occ_rooms / NULLIF(o.occupied_rooms,0)) * 100, 2) AS percent_multiple_occupancy
--- FROM occupied o
--- CROSS JOIN base_rooms b
--- LEFT JOIN arrivals a ON o.business_date = a.business_date
--- LEFT JOIN departures d ON o.business_date = d.business_date;
---
+-- -- DROP view IF EXISTS room_type_inventory;
+-- -- CREATE view room_type_inventory as
+-- -- select
+-- -- inv.name ,
+-- -- inv.for_date ,
+-- -- inv.room_type ,
+-- -- inv.occupied_count ,
+-- -- rt.pay_master,
+-- -- inv.out_of_order_count ,
+-- -- COUNT(r.name) total_count,
+-- -- (COUNT(r.name) - (inv.out_of_order_count + inv.occupied_count)) total_available_units
+-- -- from `tabRoom Type Inventory` inv
+-- --  join `tabRoom Type` rt on rt.name = inv.room_type
+-- --  join `tabRoom` r on rt.name = r.room_type
+-- --  group by
+-- -- inv.name ,
+-- -- inv.for_date ,
+-- -- inv.room_type ,
+-- -- inv.occupied_count ,
+-- -- inv.out_of_order_count ;
+-- --
+-- --
+-- -- drop view if exists rate_code ;
+-- -- create view rate_code as
+-- -- select rc.name,
+-- --     rc.pay_in_advance ,
+-- --     rc.flexible_to_ammend ,
+-- --     rc.cacnelation_policy ,
+-- --     cp.days_before_cancel ,
+-- --     cp.is_percent ,
+-- --     cp.cancelation_fee
+-- -- from `tabRate Code` rc
+-- -- join `tabCancelation Policy` cp on rc.cacnelation_policy =cp.name ;
+-- --
+-- --
+-- -- drop view if exists room_type_inventory_rates ;
+-- -- Create view room_type_inventory_rates as
+-- -- select
+-- -- rc.pay_in_advance,
+-- -- rc.flexible_to_ammend,
+-- -- rc.days_before_cancel,
+-- -- rc.is_percent is_cancelation_percent,
+-- -- rc.cancelation_fee,
+-- -- inv.name,
+-- -- inv.pay_master,
+-- -- inv.for_date,
+-- -- inv.room_type,
+-- -- inv.occupied_count,
+-- -- inv.out_of_order_count,
+-- -- irc.rate_code,
+-- -- irc.rate_price,
+-- -- total_count,
+-- -- total_available_units
+-- -- from room_type_inventory inv
+-- --  join `tabRoom Type Inventory Rate Code` irc on inv.name = irc.parent
+-- --  join rate_code rc on irc.rate_code = rc.name;
+-- --
+-- --
+-- -- CREATE OR REPLACE VIEW v_hotel_snapshot AS
+-- -- WITH base_rooms AS (
+-- --     SELECT COUNT(*) AS total_rooms
+-- --     FROM `tabRoom`
+-- --     WHERE is_pay_master = 0
+-- -- ),
+-- -- inv AS (
+-- --     SELECT
+-- --         for_date AS business_date,
+-- --         SUM(occupied_count) AS rooms_occupied,
+-- --         SUM(out_of_order_count) AS rooms_ooo
+-- --     FROM `tabRoom Type Inventory`
+-- --     GROUP BY for_date
+-- -- ),
+-- -- inhouse AS (
+-- --     SELECT
+-- --         DATE_FORMAT(check_in_date, '%Y%m%d') AS start_date,
+-- --         DATE_FORMAT(check_out_date, '%Y%m%d') AS end_date,
+-- --         COUNT(*) AS reservations_inhouse,
+-- --         SUM(number_of_rooms) AS rooms_inhouse,
+-- --         SUM(number_of_adults) AS adults_inhouse,
+-- --         SUM(number_of_children) AS children_inhouse,
+-- --         SUM(number_of_infants) AS infants_inhouse,
+-- --         SUM(number_of_adults + number_of_children + number_of_infants) AS persons_inhouse,
+-- --         SUM(base_rate_per_night) AS room_revenue,
+-- --         AVG(base_rate_per_night) AS adr
+-- --     FROM `tabHotel Reservation`
+-- --     WHERE check_in_completed = 1
+-- --       AND docstatus = 1
+-- --     GROUP BY check_in_date, check_out_date
+-- -- ),
+-- -- arrivals AS (
+-- --     SELECT
+-- --         DATE_FORMAT(check_in_date, '%Y%m%d') AS business_date,
+-- --         COUNT(*) AS arrival_rooms,
+-- --         SUM(number_of_adults + number_of_children + number_of_infants) AS arrival_persons
+-- --     FROM `tabHotel Reservation`
+-- --     WHERE check_in_completed = 0
+-- --     GROUP BY check_in_date
+-- -- ),
+-- -- departures AS (
+-- --     SELECT
+-- --         DATE_FORMAT(check_out_date, '%Y%m%d') AS business_date,
+-- --         COUNT(*) AS departure_rooms,
+-- --         SUM(number_of_adults + number_of_children + number_of_infants) AS departure_persons
+-- --     FROM `tabHotel Reservation`
+-- --     WHERE check_out_completed = 0
+-- --     GROUP BY check_out_date
+-- -- )
+-- -- SELECT
+-- --     i.business_date,
+-- --     r.total_rooms,
+-- --     i.rooms_occupied,
+-- --     i.rooms_ooo,
+-- --     (r.total_rooms - i.rooms_ooo) AS total_rooms_minus_ooo,
+-- --     (r.total_rooms - i.rooms_ooo - i.rooms_occupied) AS available_rooms,
+-- --     ih.rooms_inhouse,
+-- --     ih.adults_inhouse,
+-- --     ih.children_inhouse,
+-- --     ih.infants_inhouse,
+-- --     ih.persons_inhouse,
+-- --     ih.room_revenue,
+-- --     ih.adr,
+-- --     a.arrival_rooms,
+-- --     a.arrival_persons,
+-- --     d.departure_rooms,
+-- --     d.departure_persons,
+-- --     ROUND((i.rooms_occupied / NULLIF((r.total_rooms - i.rooms_ooo),0)) * 100, 2) AS occ_percent
+-- -- FROM base_rooms r
+-- -- LEFT JOIN inv i ON 1=1
+-- -- LEFT JOIN inhouse ih ON i.business_date BETWEEN ih.start_date AND ih.end_date
+-- -- LEFT JOIN arrivals a ON i.business_date = a.business_date
+-- -- LEFT JOIN departures d ON i.business_date = d.business_date;
+-- --
+-- --
+-- --
+-- --
+-- -- CREATE OR REPLACE VIEW v_hotel_revenue_activity AS
+-- -- WITH res AS (
+-- --     SELECT
+-- --         name,
+-- --         rate_code,
+-- --         number_of_rooms,
+-- --         number_of_nights,
+-- --         number_of_adults,
+-- --         number_of_children,
+-- --         number_of_infants,
+-- --         (number_of_adults + number_of_children + number_of_infants) AS persons,
+-- --         base_rate_per_night,
+-- --         total_amount,
+-- --         DATE_FORMAT(reservation_date, '%Y%m%d') AS reservation_date_fmt,
+-- --         DATE_FORMAT(check_in_date, '%Y%m%d') AS check_in_fmt,
+-- --         DATE_FORMAT(check_out_date, '%Y%m%d') AS check_out_fmt,
+-- --         check_in_completed,
+-- --         check_out_completed,
+-- --         docstatus,
+-- --         modified,
+-- --         customer
+-- --     FROM `tabHotel Reservation`
+-- --     WHERE docstatus IN (0,1,2)
+-- -- )
+-- -- SELECT
+-- --     reservation_date_fmt AS business_date,
+-- --     COUNT(CASE WHEN docstatus = 1 THEN 1 END) AS reservations_made_today,
+-- --     COUNT(CASE WHEN docstatus = 2 AND DATE_FORMAT(modified, '%Y%m%d') = reservation_date_fmt THEN 1 END) AS reservations_cancelled_today,
+-- --     SUM(number_of_rooms * number_of_nights) AS room_nights_reserved_today,
+-- --     SUM(number_of_rooms * number_of_nights) AS todays_demand,
+-- --     AVG(base_rate_per_night) AS adr,
+-- --     AVG(CASE WHEN rate_code <> 'COMP' THEN base_rate_per_night END) AS adr_minus_comp,
+-- --     AVG(CASE WHEN rate_code <> 'HUSE' THEN base_rate_per_night END) AS adr_minus_house,
+-- --     AVG(CASE WHEN rate_code NOT IN ('COMP','HUSE') THEN base_rate_per_night END) AS adr_minus_comp_and_house,
+-- --     SUM(total_amount) / NULLIF(SUM(persons),0) AS avg_person_rate,
+-- --     SUM(total_amount) AS room_revenue,
+-- --     0 AS fnb_revenue,
+-- --     0 AS other_revenue,
+-- --     SUM(total_amount) AS total_revenue,
+-- --     SUM(CASE WHEN rate_code IN ('Corporate-EGP','TAR-EGP') THEN total_amount ELSE 0 END) AS block_revenue,
+-- --     SUM(CASE WHEN rate_code IN ('BAR-EGP','RackEG') THEN total_amount ELSE 0 END) AS individual_revenue,
+-- --     SUM(CASE WHEN rate_code = 'COMP' THEN total_amount ELSE 0 END) AS comp_revenue,
+-- --     SUM(CASE WHEN rate_code = 'HUSE' THEN total_amount ELSE 0 END) AS house_revenue,
+-- --     SUM(total_amount) / NULLIF(SUM(persons),0) AS total_revenue_per_person,
+-- --     SUM(base_rate_per_night * number_of_rooms * number_of_nights) AS maximum_revenue,
+-- --     SUM(base_rate_per_night * number_of_rooms * number_of_nights) AS maximum_revenue_for_occupied,
+-- --     (SUM(total_amount) / NULLIF(SUM(base_rate_per_night * number_of_rooms * number_of_nights),0)) * 100 AS max_revenue_pct,
+-- --     (SUM(total_amount) / NULLIF(SUM(base_rate_per_night * number_of_rooms * number_of_nights),0)) * 100 AS max_revenue_pct_for_occupied
+-- -- FROM res
+-- -- WHERE reservation_date_fmt IS NOT NULL
+-- -- GROUP BY reservation_date_fmt;
+-- --
+-- --
+-- -- --
+-- --
+-- -- CREATE OR REPLACE VIEW v_hotel_forecast AS
+-- -- WITH base_rooms AS (
+-- --     SELECT COUNT(*) AS total_rooms
+-- --     FROM `tabRoom`
+-- --     WHERE is_pay_master = 0
+-- -- ),
+-- -- arrivals AS (
+-- --     SELECT
+-- --         check_in_date AS business_date,
+-- --         COUNT(*) AS arrival_rooms,
+-- --         SUM(number_of_adults + number_of_children + number_of_infants) AS arrival_persons
+-- --     FROM `tabHotel Reservation`
+-- --     WHERE docstatus = 1
+-- --     GROUP BY check_in_date
+-- -- ),
+-- -- departures AS (
+-- --     SELECT
+-- --         check_out_date AS business_date,
+-- --         COUNT(*) AS departure_rooms,
+-- --         SUM(number_of_adults + number_of_children + number_of_infants) AS departure_persons
+-- --     FROM `tabHotel Reservation`
+-- --     WHERE docstatus = 1
+-- --     GROUP BY check_out_date
+-- -- ),
+-- -- occupied AS (
+-- --     SELECT
+-- --         d.for_date AS business_date,
+-- --         COUNT(h.name) AS occupied_rooms,
+-- --         SUM(CASE WHEN (h.number_of_adults + h.number_of_children + h.number_of_infants) > 1 THEN 1 ELSE 0 END) AS multiple_occ_rooms
+-- --     FROM dim_date d
+-- --     LEFT JOIN `tabHotel Reservation` h
+-- --         ON d.for_date BETWEEN h.check_in_date AND h.check_out_date
+-- --        AND h.docstatus = 1
+-- --     GROUP BY d.for_date
+-- -- )
+-- -- SELECT
+-- --     o.business_date,
+-- --     a.arrival_rooms,
+-- --     a.arrival_persons,
+-- --     d.departure_rooms,
+-- --     d.departure_persons,
+-- --     ROUND((o.occupied_rooms / NULLIF(b.total_rooms,0)) * 100, 2) AS occ_percent,
+-- --     ROUND((o.multiple_occ_rooms / NULLIF(o.occupied_rooms,0)) * 100, 2) AS percent_multiple_occupancy
+-- -- FROM occupied o
+-- -- CROSS JOIN base_rooms b
+-- -- LEFT JOIN arrivals a ON o.business_date = a.business_date
+-- -- LEFT JOIN departures d ON o.business_date = d.business_date;
+-- --

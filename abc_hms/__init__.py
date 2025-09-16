@@ -9,7 +9,7 @@ from abc_hms.api.inventory_api import (
 from abc_hms.api.auth_api import (
     cashier_login
 )
-from abc_hms.api.reservation_api import reservation_availability_check ,    render_hello_world_from_file
+from abc_hms.api.reservation_api import reservation_availability_check ,    reservation_sync_days
 from abc_hms.api.room_api import (
     room_list
 )
@@ -19,7 +19,7 @@ __all__ = [
     "room_status_list",
     "inventory_lookup_list",
     "reservation_availability_check",
-    "render_hello_world_from_file",
+    "reservation_sync_days",
     "inventory_upsert",
     "cashier_login"
 ]

@@ -16,7 +16,7 @@ ROLES_CONFIG = {
     "Property Manager": {
         "desk_access": True,
         "perms": {
-            "Hotel Reservation": {"read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1, "amend": 1, "delete": 1},
+            "Reservation": {"read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1, "amend": 1, "delete": 1},
             "Folio": {"read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1, "amend": 1},
             "Folio Window": {"read": 1, "write": 1, "create": 1, "amend": 1},
             "POS Invoice": {"read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1, "amend": 1},
@@ -25,7 +25,6 @@ ROLES_CONFIG = {
             "Mode of Payment": {"read": 1, "write": 1, "create": 1, "delete": 1},
             "Rate Code": {"read": 1, "write": 1, "create": 1, "delete": 1},
             "Room Type": {"read": 1, "write": 1, "create": 1, "delete": 1},
-            "Room Type Inventory": {"read": 1, "write": 1, "create": 1, "delete": 1},
             "Property": {"read": 1, "write": 1, "create": 1, "delete": 1},
             "Room": {"read": 1, "write": 1, "create": 1, "delete": 1},
             "Room Category": {"read": 1, "write": 1, "create": 1, "delete": 1},
@@ -41,7 +40,7 @@ ROLES_CONFIG = {
         "desk_access": True,
         "perms": {
             "Customer": {"read": 1, "create": 1},
-            "Hotel Reservation": {"read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1, "amend": 1},
+            "Reservation": {"read": 1, "write": 1, "create": 1, "submit": 1, "cancel": 1, "amend": 1},
             "Folio": {"read": 1, "write": 1, "create": 1},
             "Folio Window": {"read": 1, "write": 1, "create": 1},
             "POS Invoice": {"read": 1, "write": 1, "create": 1, "submit": 1},
@@ -51,7 +50,6 @@ ROLES_CONFIG = {
             "Room Type": {"read": 1},
             "Rate Code": {"read": 1},
             "Cancelation Policy": {"read": 1},
-            "Room Type Inventory": {"read": 1},
             "Property": {"read": 1},
             "Mode of Payment": {"read": 1},
         },
@@ -60,7 +58,7 @@ ROLES_CONFIG = {
         "desk_access": True,
         "perms": {
             "Room": {"read": 1, "write": 1},                 # update room status (clean/dirty/inspected)
-            "Hotel Reservation": {"read": 1},                # see which rooms are occupied
+            "Reservation": {"read": 1},                # see which rooms are occupied
             "Room Type": {"read": 1},                        # see room types
             "Room Category": {"read": 1},                    # see room categories
             "House Keeping Section": {"read": 1, "write": 1, "create": 1}, # manage housekeeping sections if you use that

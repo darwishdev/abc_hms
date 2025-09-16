@@ -7,7 +7,6 @@ required_apps = ["frappe/erpnext" , "frappe/hrms"]
 app_license = "mit"
 after_install = "abc_hms.setup.installer.after_install"
 after_migrate = "abc_hms.setup.installer.after_migrate"
-before_request = []
 
 
 boot_session = "abc_hms.boot.get_business_date"
@@ -15,23 +14,46 @@ app_include_css = [
     "/assets/abc_hms/css/index.css"
 ]
 app_include_js = [
-    "/assets/abc_hms/js/nav-04.js"
+    "/assets/abc_hms/js/nav-05.js"
 ]
 fixtures = [
+
+    {"doctype": "Company"},
+    {
+        "doctype": "Account" ,
+        "filters": [
+            ["name", "in", [
+                "1310 - City Ledger - CH",
+                "1320 - Guest Ledger - CH",
+                "1330 - Visa - CH",
+                "4120 - Room Revenue - CH",
+                "4130 - F&B Revenue - CH",
+                "2310 - Service Charge - CH",
+                "2320 - Municipality - CH",
+                "2330 - VAT - CH"
+            ]]
+        ]},
     {"doctype": "Customer"},
-    {"doctype": "Room Type"},
-    {"doctype": "Cancelation Policy"},
-    {"doctype": "Rate Code"},
-    {"doctype": "Property"},
-    {"doctype": "Room"},
-    {"doctype": "Amenity"},
-    {"doctype": "Room Category"},
     {"doctype": "Bed Type"},
+    {"doctype": "Room Category"},
+    {"doctype": "Room Type"},
+    {"doctype": "Room"},
+    {"doctype": "Mode of Payment"},
+
+    {"doctype": "Rate Category"},
+    {"doctype": "Rate Code"},
     {"doctype": "POS Profile"},
-    # -- pos
-    	{
-		"doctype": "POS Profile",
-	},
+    {"doctype": "Sales Taxes and Charges Template"},
+    {"doctype": "Workflow State"},
+    {"doctype": "Workflow Action"},
+    {"doctype": "Workflow"},
+    {"doctype": "Workflow"},
+    {"doctype": "Cancelation Policy"},
+    {"doctype": "Property"},
+    {"doctype": "Property Setting"},
+    {"doctype": "Item Group"},
+    {"doctype": "Item"},
+    {"doctype": "Amenity"},
 	{
 		"doctype": "Warehouse",
 	},
