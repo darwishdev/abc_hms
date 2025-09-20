@@ -1,16 +1,14 @@
 {
  "actions": [],
- "autoname": "prompt",
  "creation": "2025-08-07 21:46:58.588552",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "property",
   "pos_profile",
-  "session_status",
   "column_break_gwgd",
   "for_date",
-  "opening_entry",
-  "amended_from"
+  "opening_entry"
  ],
  "fields": [
   {
@@ -19,15 +17,6 @@
    "in_list_view": 1,
    "label": "POS Profile",
    "options": "POS Profile",
-   "reqd": 1
-  },
-  {
-   "default": "Open",
-   "fieldname": "session_status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Status",
-   "options": "Open\nClosed",
    "reqd": 1
   },
   {
@@ -51,14 +40,11 @@
    "reqd": 1
   },
   {
-   "fieldname": "amended_from",
+   "fieldname": "property",
    "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "POS Session",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
+   "label": "Property",
+   "options": "Property",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
@@ -71,11 +57,11 @@
    "link_fieldname": "pos_session"
   }
  ],
- "modified": "2025-09-15 01:54:30.020036",
+ "modified": "2025-09-19 22:57:22.671347",
  "modified_by": "Administrator",
  "module": "Pos",
  "name": "POS Session",
- "naming_rule": "Set by user",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {

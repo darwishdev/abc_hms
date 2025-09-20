@@ -8,7 +8,12 @@
  "field_order": [
   "basic_info_section",
   "property",
-  "business_date"
+  "column_break_ypzi",
+  "business_date",
+  "column_break_vpst",
+  "default_pos_profile",
+  "section_break_lpbp",
+  "default_rooms_item_group"
  ],
  "fields": [
   {
@@ -31,18 +36,45 @@
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Business Date"
+   "label": "Business Date",
+   "reqd": 1
   },
   {
    "fieldname": "basic_info_section",
    "fieldtype": "Section Break",
    "label": "Basic Settings"
+  },
+  {
+   "fieldname": "column_break_ypzi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vpst",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_pos_profile",
+   "fieldtype": "Link",
+   "label": "Default POS Profile",
+   "options": "POS Profile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_lpbp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "default_rooms_item_group",
+   "fieldtype": "Link",
+   "label": "Default Rooms Item Group",
+   "options": "Item Group",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-11 02:52:04.493940",
+ "modified": "2025-09-19 22:55:27.139672",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Property Setting",

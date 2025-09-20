@@ -4,16 +4,17 @@
  "allow_import": 1,
  "autoname": "method",
  "creation": "2025-08-22 12:00:00",
+ "default_view": "List",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "initial_info",
   "property",
-  "customer",
+  "guest",
   "column_break_bkkg",
-  "number_of_adults",
-  "number_of_children",
-  "number_of_infants",
+  "adults",
+  "children",
+  "infants",
   "column_break_wzch",
   "company_profile",
   "travel_agent",
@@ -49,8 +50,8 @@
   "reservation_status",
   "amended_from",
   "column_break_nfvw",
-  "check_out_completed",
-  "check_in_completed"
+  "ignore_availability",
+  "allow_share"
  ],
  "fields": [
   {
@@ -64,18 +65,6 @@
    "fieldtype": "Link",
    "label": "Property",
    "options": "Property",
-   "reqd": 1
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "customer",
-   "fieldtype": "Link",
-   "in_filter": 1,
-   "in_list_view": 1,
-   "in_preview": 1,
-   "in_standard_filter": 1,
-   "label": "Customer",
-   "options": "Customer",
    "reqd": 1
   },
   {
@@ -95,31 +84,12 @@
    "fieldname": "travel_agent",
    "fieldtype": "Link",
    "label": "Travel Agent",
-   "link_filters": "[[\"Customer\",\"customer_type\",\"=\",\"Travel Agent\"]]",
-   "options": "Customer"
+   "link_filters": "[[\"Sales Partner\",\"partner_type\",\"=\",\"Travel Agent\"]]",
+   "options": "Sales Partner"
   },
   {
    "fieldname": "column_break_bkkg",
    "fieldtype": "Column Break"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "number_of_adults",
-   "fieldtype": "Int",
-   "label": "Adults",
-   "reqd": 1
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "number_of_children",
-   "fieldtype": "Int",
-   "label": "Children"
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "number_of_infants",
-   "fieldtype": "Int",
-   "label": "Infants"
   },
   {
    "fieldname": "section_break_psys",
@@ -361,22 +331,53 @@
   {
    "allow_on_submit": 1,
    "default": "0",
-   "fieldname": "check_out_completed",
+   "fieldname": "ignore_availability",
    "fieldtype": "Check",
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Check Out Completed"
+   "label": "Ignore Availability"
   },
   {
    "allow_on_submit": 1,
    "default": "0",
-   "fieldname": "check_in_completed",
+   "fieldname": "allow_share",
    "fieldtype": "Check",
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Check In Completed"
+   "label": "Allow Share"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "adults",
+   "fieldtype": "Int",
+   "label": "Adults",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "children",
+   "fieldtype": "Int",
+   "label": "Children"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "infants",
+   "fieldtype": "Int",
+   "label": "Infants"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "guest",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Guest",
+   "options": "Customer",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -388,7 +389,7 @@
    "link_fieldname": "reservation"
   }
  ],
- "modified": "2025-09-15 08:06:55.246462",
+ "modified": "2025-09-19 14:02:23.516001",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Reservation",

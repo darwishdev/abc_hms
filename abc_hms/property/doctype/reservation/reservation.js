@@ -1,43 +1,17 @@
 frappe.ui.form.on("Reservation", {
+    onload(frm) {
+        // Listen for the reload_doc event
+        frappe.realtime.on("reload_doc", (data) => {
+            console.log("listen happens", data, frm.doc.doctype, frm.doc.name);
+            const { doctype, name } = data;
+            if (frm.doc.doctype === doctype && frm.doc.name === name) {
+                frm.reload_doc().then(() => {
+                    frappe.show_alert({ message: __("Document refreshed"), indicator: "green" });
+                });
+            }
+        });
+    },
     refresh(frm) {
-        //
-        // Check for availability errors after any server call
-        if (
-            frappe.last_response &&
-            frappe.last_response.availability_error &&
-            frappe.last_response.availability_error.has_error
-        ) {
-            let error_data = frappe.last_response.availability_error;
-
-            frappe.msgprint({
-                message: `Error Syncing the reservation: ${error_data.error_message}`,
-                title: "Sync Error",
-                indicator: "red",
-                primary_action: {
-                    label: "Ignore",
-                    action: function () {
-                        console.log("ignoring");
-                        cur_dialog.hide();
-
-                        // Apply workflow with ignore
-                        frappe.call({
-                            method: "frappe.model.workflow.apply_workflow",
-                            args: {
-                                doc: frm.doc,
-                                action: error_data.action,
-                                ignore_availability: 1, // This should be handled in your workflow
-                            },
-                            callback: function () {
-                                frm.reload_doc();
-                            },
-                        });
-                    },
-                },
-            });
-
-            // Clear the error
-            delete frappe.last_response.availability_error;
-        }
         handle_availability_button(frm);
     },
     property(frm) {
@@ -192,20 +166,4 @@ const sync_departure_from_nights = (frm) => {
     if (arrival && nights) {
         frm.set_value("departure", frappe.datetime.add_days(arrival, nights));
     }
-};
-
-window.ignore_availability_action = function () {
-    frappe.call({
-        method: "abc_hms.reservation_sync_days",
-        args: {
-            doc: cur_frm.doc,
-            ignore_availability: 1,
-        },
-        callback: function (r) {
-            frappe.show_alert({ message: "Availability ignored", indicator: "green" });
-            cur_frm.reload_doc();
-            frappe.msgprint.hide();
-        },
-    });
-    console.log("ignoress");
 };

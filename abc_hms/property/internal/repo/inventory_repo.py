@@ -3,9 +3,9 @@ import frappe
 from pymysql import InternalError
 
 class InventoryRepo:
-    def inventory_lookup_list(self , lookup_types: list[str] | None = None):
+    def room_date_lookup_list(self , lookup_types: list[str] | None = None):
         try:
-            query = "SELECT lookup_type, lookup_key, lookup_value FROM inventory_lookup WHERE lookup_type IN %s"
+            query = "SELECT lookup_type, lookup_key, lookup_value FROM room_date_lookup WHERE lookup_type IN %s"
             return frappe.db.sql(query ,(lookup_types,), as_dict=True)
         except Exception as e:
             raise e

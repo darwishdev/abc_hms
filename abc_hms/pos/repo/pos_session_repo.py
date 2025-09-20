@@ -1,20 +1,44 @@
+from typing import List, Optional
 import frappe
-from typing import  Dict
+from abc_hms.dto.pos_session_dto import POSSession
+class POSSessionRepo:
+    def pos_session_upsert(self , docdata: POSSession, commit: bool = True)->POSSession:
+        doc_id = docdata.get('name' , None)
+        if doc_id and frappe.db.exists("POS Session", doc_id):
+            doc: POSSession = frappe.get_doc("POS Session", doc_id) # type: ignore
+        else:
+            doc: POSSession = frappe.new_doc("POS Session") # type: ignore
+        doc.update(docdata)
+        doc.save()
+        if commit:
+            frappe.db.commit()
+
+        return doc
 
 
-class PosSessionRepository:
-    def session_find_active(self, filters: Dict):
-        try:
-            session = frappe.get_all(
-                "POS Session",
-                filters=filters,
-                fields=["name", "pos_profile", "session_status", "opening_entry", "closing_entry"],
-                limit=1,
-                order_by="creation desc"
-            )
-            if not session:
-                return None
-            return session[0]
-        except Exception as e:
-            frappe.log_error(f"Error fetching active pos session: {str(e)}")
-            raise
+
+
+    def pos_sessions_close_crrent_date(self , property: str):
+        query = """
+            UPDATE `tabPOS Session` s
+            JOIN `tabProperty Setting` ps on s.property = ps.name
+            SET s.docstatus = 1
+            WHERE s.property = %s and for_date = date_to_int(ps.business_date);
+        """
+        return frappe.db.sql(query, (property,))
+
+    def pos_session_list_for_current_date(self , property: str)-> Optional[List[str]]:
+        query = """
+            SELECT
+                ps.name AS reservation
+            FROM `tabProperty Setting` s
+            JOIN `tabPOS Session` ps on ps.for_date = date_to_int(s.business_date) and ps.docstatus
+            = 0
+            WHERE s.name = %(property)s;
+        """
+        results : Optional[List[str]] = frappe.db.sql(query, {"property": property}) # type: ignore
+        return results
+
+    def pos_session_list(self , filters: Optional[POSSession])-> Optional[List[POSSession]]:
+        docs = frappe.get_all("POS Session", filters=filters, limit=1)
+        return docs

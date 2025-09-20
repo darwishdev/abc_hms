@@ -1,0 +1,23 @@
+{
+ "creation": "2025-09-18 11:31:01.822932",
+ "currency": "",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "filters_json": "{\"property\":\"CONA\",\"is_arrival\":0,\"is_departure\":0,\"date_filter\":\"2025-08-08\"}",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "label": "Total Adults",
+ "modified": "2025-09-18 11:45:46.355564",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "Total Adults",
+ "owner": "Administrator",
+ "report_field": "adults",
+ "report_function": "Sum",
+ "report_name": "In House",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Report"
+}

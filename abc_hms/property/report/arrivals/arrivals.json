@@ -1,0 +1,161 @@
+{
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "Room",
+   "options": "Room",
+   "width": 0
+  },
+  {
+   "fieldname": "room_status",
+   "fieldtype": "Data",
+   "label": "Room Status",
+   "width": 0
+  },
+  {
+   "fieldname": "base_rate",
+   "fieldtype": "Currency",
+   "label": "Base Rate",
+   "width": 0
+  },
+  {
+   "fieldname": "guest",
+   "fieldtype": "Link",
+   "label": "Guest",
+   "options": "Customer",
+   "width": 0
+  },
+  {
+   "fieldname": "name",
+   "fieldtype": "Link",
+   "label": "Reservation",
+   "options": "Reservation",
+   "width": 0
+  },
+  {
+   "fieldname": "departure",
+   "fieldtype": "Date",
+   "label": "Departure",
+   "width": 0
+  },
+  {
+   "fieldname": "room_type",
+   "fieldtype": "Link",
+   "label": "Room Type",
+   "options": "Room Type",
+   "width": 0
+  },
+  {
+   "fieldname": "guest_comment",
+   "fieldtype": "Data",
+   "label": "Guest Comments",
+   "width": 0
+  },
+  {
+   "fieldname": "reservation_comment",
+   "fieldtype": "Data",
+   "label": "Reservation Comments",
+   "width": 0
+  },
+  {
+   "fieldname": "out_of_order_status",
+   "fieldtype": "Data",
+   "label": "OOO Status",
+   "width": 0
+  },
+  {
+   "fieldname": "company_profile",
+   "fieldtype": "Link",
+   "label": "Company Profile",
+   "options": "Customer",
+   "width": 0
+  },
+  {
+   "fieldname": "travel_agent",
+   "fieldtype": "Link",
+   "label": "Travel Agent",
+   "options": "Sales Partner",
+   "width": 0
+  },
+  {
+   "fieldname": "out_of_order_reason",
+   "fieldtype": "Data",
+   "label": "OOO Reason",
+   "width": 0
+  },
+  {
+   "fieldname": "creation",
+   "fieldtype": "Date",
+   "label": "Created At ",
+   "width": 0
+  }
+ ],
+ "creation": "2025-09-18 04:44:41.021953",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "property",
+   "fieldtype": "Link",
+   "label": "Property",
+   "mandatory": 1,
+   "options": "Property",
+   "wildcard_filter": 0
+  },
+  {
+   "default": "",
+   "fieldname": "date_filter",
+   "fieldtype": "Date",
+   "label": "Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "All",
+   "fieldname": "reservation_status",
+   "fieldtype": "Select",
+   "label": "Reservation Status",
+   "mandatory": 0,
+   "options": "All\nArrival\nIn House\nNo Show",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2025-09-18 08:34:48.036244",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "Arrivals",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "with date_filter as (\n  select d.for_date , date_actual from dim_date d join `tabProperty Setting` s on s.name = %(property)s where d.date_actual = coalesce(NULL , s.business_date)\n)\nselect \n r.room,\n  COALESCE(room_status.lookup_key, 'N/A') AS room_status,\n  r.base_rate,\n  r.guest,\n  r.name,\n  r.departure,\n  r.room_type,\n  COALESCE(GROUP_CONCAT(DISTINCT cc.comment SEPARATOR '</br>'), 'No Guest Comments') AS guest_comment,\n  COALESCE(GROUP_CONCAT(DISTINCT rc.comment SEPARATOR '</br>'), 'No Reservation Comments') AS reservation_comment,\n  COALESCE(ooo_status.lookup_key, 'N/A') AS out_of_order_status,\n  COALESCE(r.company_profile, 'N/A') AS company_profile,\n  COALESCE(r.travel_agent, 'N/A') AS travel_agent,\n  COALESCE(rd.out_of_order_reason, 'N/A') AS out_of_order_reason,\n  r.creation\n  FROM date_filter d\n  join tabReservation r on r.arrival = d.date_actual\n  join tabCustomer c on r.guest = c.name\n  left join `tabGuest Comment` cc on c.name = cc.guest and cc.reservation is null\n  left join `tabGuest Comment` rc on c.name = rc.guest and rc.reservation = r.name\n  left join room_date rd on r.room = rd.room and d.date_actual = r.arrival\n  left join room_date_lookup room_status on room_status.lookup_type = 'room_status' and room_status.lookup_value =coalesce(rd.room_status ,0)\n  LEFT JOIN room_date_lookup ooo_status ON ooo_status.lookup_type = 'ooo_status' AND ooo_status.lookup_value = coalesce(rd.out_of_order_status , 0)\n WHERE\n (%(reservation_status)s = 'ALL' OR r.reservation_status = %(reservation_status)s)\n\n  GROUP BY\n  r.name,\n  r.arrival,\n  r.departure,\n  r.guest,\n  r.room_type,\n  r.room,\n  r.base_rate,\n  r.nights,\n  r.adults,\n  r.children,\n  r.company_profile,\n  r.travel_agent,\n  r.creation,\n  rd.for_date,\n  rd.guest_service_status,\n  rd.house_keeping_status,\n  rd.out_of_order_reason,\n  rd.out_of_order_status,\n  rd.room_status;",
+ "ref_doctype": "Reservation",
+ "report_name": "Arrivals",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Administrator"
+  },
+  {
+   "role": "Front Desk Agent"
+  },
+  {
+   "role": "Hotel Manager"
+  },
+  {
+   "role": "Property Manager"
+  },
+  {
+   "role": "Front Desk"
+  },
+  {
+   "role": "House Keeping"
+  }
+ ],
+ "timeout": 0
+}

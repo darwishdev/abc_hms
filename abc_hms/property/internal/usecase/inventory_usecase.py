@@ -6,8 +6,8 @@ from ..repo.inventory_repo import InventoryRepo
 class InventoryUsecase:
     def __init__(self) -> None:
         self.repo = InventoryRepo()
-    def inventory_lookup_list(self , lookup_type: list[str] | None = None):
-        data = self.repo.inventory_lookup_list(lookup_type)
+    def room_date_lookup_list(self , lookup_type: list[str] | None = None):
+        data = self.repo.room_date_lookup_list(lookup_type)
         result = {}
         for row in data:
             lt = row["lookup_type"]

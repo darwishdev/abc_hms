@@ -38,7 +38,7 @@ def run_sql(callback):
     cur = conn.cursor(pymysql.cursors.DictCursor)
 
     try:
-        result = callback(cur)
+        result = callback(cur , conn)
         return result
     finally:
         cur.close()

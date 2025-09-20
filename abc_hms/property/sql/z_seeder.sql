@@ -1,6 +1,6 @@
 INSERT INTO room_date_lookup (lookup_type, lookup_key, lookup_value) VALUES
-  ('hk_status', 'Vacant', 0),
-  ('hk_status', 'OCC', 1),
+  ('house_keeping_status', 'Vacant', 0),
+  ('house_keeping_status', 'OCC', 1),
   ('service_status', 'No Status', 0),
   ('service_status', 'Make Up', 1),
   ('service_status', 'DND', 2),

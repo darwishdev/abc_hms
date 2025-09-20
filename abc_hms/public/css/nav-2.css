@@ -1,0 +1,40 @@
+.hk-filters {
+    display: grid;
+}
+:root {
+    --glass: rgba(0, 0, 0, 0.08);
+}
+[data-theme="dark"] {
+    --glass: rgba(255, 255, 255, 0.08);
+}
+.top-nav {
+    position: sticky;
+    top: 0;
+    height: 3rem;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 3rem;
+    align-items: center;
+    ul {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin: 0;
+    }
+    li {
+        list-style: none;
+        font-size: 1.5rem;
+    }
+    h4 {
+        margin: 0;
+    }
+}
+@media (min-width: 1000px) {
+    .hk-filters {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+}

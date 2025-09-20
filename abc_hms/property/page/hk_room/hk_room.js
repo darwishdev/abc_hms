@@ -42,7 +42,7 @@ const reload_table = (filter_controls) => {
 const fetch_lookups = () => {
     return new Promise((resolve, reject) => {
         frappe.call({
-            method: "abc_hms.inventory_lookup_list",
+            method: "abc_hms.room_date_lookup_list",
             type: "get",
             args: {
                 lookup_types: "ooo_status",

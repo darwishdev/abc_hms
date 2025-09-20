@@ -1,0 +1,10 @@
+[
+  {
+    "fieldname": "for_date",
+    "label": "For Date",
+    "fieldtype": "Int",
+    "insert_after": "table_number",
+    "in_list_view": 0,
+    "in_standard_filter": 1
+  }
+]

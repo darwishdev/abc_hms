@@ -13,24 +13,6 @@
   "accounts": [
    {
     "company": "Concha Hotel",
-    "default_account": "1110 - Cash - CH",
-    "parent": "Cash",
-    "parentfield": "accounts",
-    "parenttype": "Mode of Payment"
-   }
-  ],
-  "docstatus": 0,
-  "doctype": "Mode of Payment",
-  "enabled": 1,
-  "mode_of_payment": "Cash",
-  "modified": "2025-09-15 03:08:11.759594",
-  "name": "Cash",
-  "type": "Cash"
- },
- {
-  "accounts": [
-   {
-    "company": "Concha Hotel",
     "default_account": "1330 - Visa - CH",
     "parent": "Credit Card",
     "parentfield": "accounts",
@@ -80,5 +62,23 @@
   "modified": "2025-09-15 03:59:00.148349",
   "name": "Wire Transfer",
   "type": "Bank"
+ },
+ {
+  "accounts": [
+   {
+    "company": "Concha Hotel",
+    "default_account": "1110 - Cash - CH",
+    "parent": "Cash",
+    "parentfield": "accounts",
+    "parenttype": "Mode of Payment"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Mode of Payment",
+  "enabled": 1,
+  "mode_of_payment": "Cash",
+  "modified": "2025-09-15 03:08:11.759594",
+  "name": "Cash",
+  "type": "Cash"
  }
 ]

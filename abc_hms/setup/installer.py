@@ -9,7 +9,6 @@ from utils.sql_utils import run_sql_dir
 
 SQL_DIR_PROPERTY = Path(frappe.get_app_path("abc_hms", "property",  "sql"))
 SQL_DIR_POS = Path(frappe.get_app_path("abc_hms", "pos",  "sql"))
-SQL_DIR_CASHIER = Path(frappe.get_app_path("abc_hms", "cashier",  "sql"))
 CUSTOMFIELDS_PATH = os.path.join(frappe.get_app_path("abc_hms"),  "setup", "customfields")
 
 ROLES_CONFIG = {
@@ -73,7 +72,6 @@ def after_migrate():
     install_custom_fields(CUSTOMFIELDS_PATH)
     run_sql_dir(SQL_DIR_PROPERTY)
     run_sql_dir(SQL_DIR_POS)
-    run_sql_dir(SQL_DIR_CASHIER)
     seed_app_roles(ROLES_CONFIG, domain="conchahotel.com")
     return {"ok" : True}
 

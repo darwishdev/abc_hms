@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-18 05:02:18.515090",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "guest",
+  "column_break_wxuz",
+  "comment_group",
+  "column_break_sgsm",
+  "reservation",
+  "section_break_bplc",
+  "comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "guest",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Guest",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wxuz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "comment_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Comment Group",
+   "options": "Guest Comment Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_sgsm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.guest",
+   "fieldname": "reservation",
+   "fieldtype": "Link",
+   "label": "Reservation",
+   "link_filters": "[[\"Reservation\", \"guest\", \"=\", \"eval:doc.guest\"]]",
+   "options": "Reservation"
+  },
+  {
+   "fieldname": "section_break_bplc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "label": "Comment",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-09-18 05:36:24.135905",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "Guest Comment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

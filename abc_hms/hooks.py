@@ -11,14 +11,31 @@ after_migrate = "abc_hms.setup.installer.after_migrate"
 
 boot_session = "abc_hms.boot.get_business_date"
 app_include_css = [
-    "/assets/abc_hms/css/index.css"
+    "/assets/abc_hms/css/nav-2.css"
 ]
 app_include_js = [
-    "/assets/abc_hms/js/nav-05.js"
+    "/assets/abc_hms/js/nav-2.js"
 ]
 fixtures = [
 
     {"doctype": "Company"},
+
+    {
+        "doctype": "Item" ,
+        "filters": [
+            ["item_group", "in", [
+                "F&B",
+                "Rooms",
+            ]]
+        ]},
+    {
+        "doctype": "Item Group" ,
+        "filters": [
+            ["name", "in", [
+                "F&B",
+                "Rooms",
+            ]]
+        ]},
     {
         "doctype": "Account" ,
         "filters": [

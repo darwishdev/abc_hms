@@ -1,9 +1,0 @@
-.hk-filters {
-    display: grid;
-}
-@media (min-width: 1000px) {
-    .hk-filters {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-    }
-}

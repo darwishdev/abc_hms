@@ -1,4 +1,23 @@
---
+CREATE or replace VIEW v_room_date AS
+SELECT
+  rd.room,
+  rd.for_date,
+  coalesce(rd.persons , 'N/A') persons,
+  coalesce(rd.out_of_order_reason , 'N/A') out_of_order_reason,
+  hks.lookup_key AS house_keeping_status,
+  rs.lookup_key AS room_status,
+  oos.lookup_key AS out_of_order_status,
+  gss.lookup_key AS guest_service_status
+FROM
+  room_date rd
+  JOIN
+  room_date_lookup hks ON hks.lookup_type = 'house_keeping_status' AND hks.lookup_value = COALESCE(rd.house_keeping_status, 0)
+  JOIN
+  room_date_lookup rs ON rs.lookup_type = 'room_status' AND rs.lookup_value = COALESCE(rd.room_status, 0)
+  JOIN
+  room_date_lookup oos ON oos.lookup_type = 'ooo_status' AND oos.lookup_value = COALESCE(rd.out_of_order_status, 0)
+  JOIN
+  room_date_lookup gss ON gss.lookup_type = 'service_status' AND gss.lookup_value = COALESCE(rd.guest_service_status, 0);
 -- DROP VIEW IF EXISTS v_room;
 -- CREATE OR REPLACE VIEW v_room AS
 -- SELECT

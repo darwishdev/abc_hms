@@ -28,7 +28,7 @@ Behavior:
     7. Handles errors with rollback and returns descriptive messages.
 ================================================================================
 */
-DROP PROCEDURE IF EXISTS reservation_sync;
+DROP PROCEDURE IF EXISTS reservation_sync$$
 CREATE PROCEDURE reservation_sync(
     IN p_reservation VARCHAR(255),
     IN p_new_arrival DATE,
@@ -174,17 +174,11 @@ proc_body: BEGIN
     FROM dim_date d
     WHERE d.date_actual >= p_new_arrival AND d.date_actual < p_new_departure;
 
-    -- Auto-arrival update
-    IF v_business_date = p_new_arrival THEN
-        UPDATE tabReservation
-        SET reservation_status = 'Arrival'
-        WHERE name = p_reservation;
-    END IF;
+
 
     COMMIT;
 
-END proc_body;
-
+END proc_body$$
 DROP PROCEDURE IF EXISTS reservation_date_sync $$
 CREATE PROCEDURE IF NOT EXISTS reservation_date_sync(IN p_reservation VARCHAR(255))
 BEGIN

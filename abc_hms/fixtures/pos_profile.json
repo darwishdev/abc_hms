@@ -27,7 +27,7 @@
   "income_account": null,
   "item_groups": [],
   "letter_head": null,
-  "modified": "2025-09-15 04:28:56.295992",
+  "modified": "2025-09-18 15:18:11.667305",
   "name": "Main",
   "payments": [
    {
@@ -61,7 +61,7 @@
   "select_print_heading": null,
   "selling_price_list": "Standard Selling",
   "tax_category": null,
-  "taxes_and_charges": null,
+  "taxes_and_charges": "Egypt Tax - CH",
   "tc_name": null,
   "update_stock": 1,
   "validate_stock_on_save": 0,
