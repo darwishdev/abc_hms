@@ -3,6 +3,7 @@ from ..repo.property_setting_repo import PropertySettingRepo
 from abc_hms.dto.property_setting_dto import (
     PropertySettingBusinessDateFindResponse,
     PropertySettingBusinessDateFindResult,
+    PropertySettingData,
     PropertySettingFindResponse,
     PropertySettingUpsertRequest,
     PropertySettingUpsertResponse,
@@ -34,35 +35,24 @@ class PropertySettingUsecase:
     def property_setting_find(
         self,
         property_name: str,
-    ) -> PropertySettingFindResponse:
+    ) -> PropertySettingData:
         """Get business date for a property"""
         try:
             result = self.repo.property_setting_find(property_name)
-            result["business_date_int"] = date_to_int(str(result.get("business_date"))) # type: ignore
-            return {"success" : True , "doc" : result}
+            return result
         except Exception as e:
-            return {
-                "success": False,
-                "error": f"PropertySetting BusinessDateFind Error: {str(e)}",
-            }
+            raise Exception(f"unexpected_error: {str(e)}")
 
     def property_setting_business_date_find(
         self,
         property_name: str,
-    ) -> PropertySettingBusinessDateFindResponse:
+    ) -> PropertySettingBusinessDateFindResult:
         """Get business date for a property"""
         try:
             result = self.repo.property_setting_business_date_find(property_name)
-            return {
-                "success": True,
-                "business_date_str": result["business_date_str"],
-                "business_date_int": result["business_date_int"],
-            }
+            return result
         except Exception as e:
-            return {
-                "success": False,
-                "error": f"PropertySetting BusinessDateFind Error: {str(e)}",
-            }
+            raise Exception(f"unexpected_error: {str(e)}")
 
     def property_setting_increase_business_date(
         self,

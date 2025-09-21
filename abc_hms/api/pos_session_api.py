@@ -12,7 +12,7 @@ def pos_session_find_for_date()-> POSSessionFindForDateResponse:
         frappe.throw(f"Invalid JSON payload: {e}")
         return {"success" : False , "error" : f"{str(e)}"}
 
-    result = app_container.pos_session_usecase.pos_session_find_for_date(payload.get("for_date"))
+    result = app_container.pos_session_usecase.pos_session_find_for_date(payload.get("for_date") ,1)
     return result
 
 @frappe.whitelist(methods=["POST" , "PUT"])
@@ -36,13 +36,7 @@ def pos_session_defaults_find(property_name: str) -> POSSessionDefaultsFindRespo
         if settings:
             pos_profile = str(settings.get("default_pos_profile"))
             for_date = int(str(settings.get("business_date_int")))
-            existing_open_resp = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_profile({"for_date" :for_date ,"pos_profile":pos_profile})
-            if existing_open_resp.get("success"):
-                opening_entry_doc = existing_open_resp.get("doc")
-                if opening_entry_doc:
-                    entry_name = opening_entry_doc.get("name")
-                    if isinstance(entry_name , str):
-                        opening_entry = entry_name
+            opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_property(property_name)
             return {
                 "success": True,
                 "doc": {

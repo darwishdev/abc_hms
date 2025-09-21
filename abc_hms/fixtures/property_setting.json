@@ -1,9 +1,11 @@
 [
  {
   "business_date": "2025-08-11",
+  "default_pos_profile": "Main",
+  "default_rooms_item_group": "Rooms",
   "docstatus": 0,
   "doctype": "Property Setting",
-  "modified": "2025-09-18 20:32:23.956305",
+  "modified": "2025-09-19 22:55:50.279823",
   "name": "CONA",
   "property": "CONA"
  }

@@ -17,11 +17,7 @@ class PosInvoiceUpsertRequest(TypedDict):
     doc: POSInvoiceData
     commit: bool
 
-class PosInvoiceUpsertResult(TypedDict):
-    """API response DTO"""
-    success: bool
-    doc: POSInvoiceData  # return updated doc
-PosInvoiceUpsertResponse = Union[PosInvoiceUpsertResult, ErrorResponse]
+PosInvoiceUpsertResponse = Union[POSInvoiceData, ErrorResponse]
 
 class PosInvoiceFindForDateRequest(TypedDict):
     """API request DTO for fetching POS invoices by date"""

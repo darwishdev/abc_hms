@@ -1,6 +1,7 @@
 from typing import List
 from erpnext.accounts.doctype.pos_invoice.pos_invoice import POSInvoice
 import frappe
+from pydantic import ValidationError
 
 from abc_hms.dto.pos_invoice_dto import POSInvoiceData, PosInvoiceFindForDateRequest, PosInvoiceFindForDateResponse, PosInvoiceUpsertRequest, PosInvoiceUpsertResponse
 from ..repo.pos_invoice_repo import POSInvoiceRepo
@@ -42,10 +43,9 @@ class POSInvoiceUsecase:
     ) -> PosInvoiceUpsertResponse:
         try:
             result = self.repo.pos_invoice_invoice(request['doc'],commit=request['commit'])
-            return {"success" : False , "doc" :result}
+            return result
         except frappe.ValidationError as e:
-            frappe.log_error(f"POS Invoice validation failed: {e}")
-            raise
+            raise frappe.ValidationError(f"POS Invoice validation failed: {e}")
 
         except TypeError as e:
             tb = frappe.get_traceback()
@@ -54,18 +54,8 @@ class POSInvoiceUsecase:
                 and "pos_invoice.py" in tb
                 and "set_pos_fields" in tb
             ):
-                frappe.throw(
-                    _("Customer not found or has missing default configuration"),
-                    exc=frappe.ValidationError,
-                )
-            frappe.throw(
-                str(e),
-            )
-            return {"success" : False , "error" : f"Type error: {str(e)}"}
+                raise frappe.ValidationError(f"Customer not found or has missing default configuration")
+            raise TypeError(f"Type error: {str(e)}")
         except Exception as e:
-            frappe.log_error(frappe.get_traceback(), "POS Invoice Upsert API Error")
-            frappe.throw(
-                str(e),
-            )
-            return {"success" : False , "error" : f"Unexpected error: {str(e)}"}
+            raise e
 

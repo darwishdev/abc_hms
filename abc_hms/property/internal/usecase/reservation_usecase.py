@@ -1,7 +1,10 @@
+import re
 
+from datetime import datetime
 import json
 from time import sleep
 from typing import List
+from pydantic import ValidationError
 from pymysql import err as pymysql_err
 import frappe
 from frappe import Optional, utils
@@ -9,6 +12,7 @@ from frappe import Optional, utils
 
 from erpnext.accounts.doctype.pos_closing_entry.pos_closing_entry import make_closing_entry_from_opening
 from frappe.utils import now_datetime, nowdate, nowtime
+from abc_hms.dto.pos_invoice_dto import POSInvoiceData, PosInvoiceUpsertRequest, PosInvoiceUpsertResponse
 from abc_hms.dto.property_dto import PropertyEndOfDayRequest
 from utils import date_utils
 from ..repo.reservation_repo import ReservationRepo
@@ -16,6 +20,15 @@ from ..repo.reservation_repo import ReservationRepo
 class ReservationUsecase:
     def __init__(self) -> None:
         self.repo = ReservationRepo()
+
+
+    def get_inhouse_reservations(self , business_date: int):
+        try:
+            return self.repo.get_inhouse_reservations(
+                business_date
+            )
+        except Exception as e:
+            raise Exception(f"unexpected error: {str(e)}")
 
 
     def reservation_end_of_day_auto_mark(self , payload: PropertyEndOfDayRequest):
@@ -202,6 +215,46 @@ class ReservationUsecase:
         sleep(0.3)
         frappe.publish_progress(100, title="End Of Day", description=f"Items Created For All Room Types And Rate Code Combinations")
         return {"status" : "Success" , "reservation_data" : reservation_data}
+
+    def reservation_to_pos_invoice(self , reservation: dict) -> dict:
+        now = datetime.now()
+        posting_date = now.strftime("%Y-%m-%d")
+        posting_time = now.strftime("%H:%M:%S")
+
+        return {
+            "customer": reservation["guest"],
+            "posting_date": posting_date,
+            "posting_time": posting_time,
+            "currency": reservation["currency"],
+            "company": reservation["company"],
+            "is_pos": 1,
+            "folio": reservation["folio"].upper(),  # Example: make folio uppercase
+            "number_of_guests": reservation["number_of_guests"],
+            "naming_series": reservation["new_pos_invoice_naming_series"],
+            "for_date": reservation["for_date"],
+            "items": [
+                {
+                    "item_name": reservation["item_name"],
+                    "item_code": reservation["item_code"],
+                    "item_description": reservation["item_description"],
+                    "stock_uom": reservation["stock_uom"],
+                    "currency": reservation["currency"],
+                    "exchange_rate": reservation["exchange_rate"],
+                    "rate": reservation["base_rate"],
+                    "amount": reservation["base_rate"],  # rate * qty
+                    "for_date": reservation["for_date"],
+                    "qty": 1,
+                    "folio_window": reservation["folio_window"],
+                }
+            ],
+            "payments": [
+                {
+                    "mode_of_payment": "Cash",
+                    "amount": 0
+                }
+            ]
+        }
+
     def reservation_availability_check(
         self,
         params : dict | None =None,
@@ -211,3 +264,44 @@ class ReservationUsecase:
         if params:
             return self.repo.reservation_availability_check(params)
         return frappe.throw("should select filters")
+
+    def sync_reservations_to_pos_invoices(self, business_date: int , default_rooms_group: str, upsert_pos_invoice_method ):
+        # Step 1: fetch reservations
+        reservations = self.get_inhouse_reservations(
+            business_date
+        )
+        responses: list[PosInvoiceUpsertResponse] = []
+        for reservation in reservations:
+            invoice_doc: POSInvoiceData = self.reservation_to_pos_invoice(reservation) # type: ignore
+            request: PosInvoiceUpsertRequest = {
+                "doc": invoice_doc,
+                "commit": False,
+            }
+            try:
+                response = upsert_pos_invoice_method(request)
+
+            except frappe.ValidationError as e:
+                msg = str(e)
+                match = re.search(r"Item (.+?) not found", msg)
+                if match:
+                    item_code = match.group(1)
+                    frappe.get_doc({
+                        "doctype": "Item",
+                        "item_code": item_code,
+                        "item_group": default_rooms_group,
+                        "item_name": item_code,
+                        "description": item_code,
+                        "stock_uom": "Nos",   # 👈 adjust if you want a different default
+                        "is_sales_item": 1,
+                        "is_stock_item": 0,
+                    }).insert(ignore_permissions=True)
+                    frappe.db.commit()
+
+                    response = upsert_pos_invoice_method(request)
+                raise
+            except Exception:
+                raise
+
+            responses.append(response)
+
+        return responses

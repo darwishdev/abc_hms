@@ -25,7 +25,9 @@ class PropertySettingBusinessDateFindRequest(TypedDict):
 
 class PropertySettingBusinessDateFindResult(TypedDict):
     """API response DTO"""
-    success: bool
+    company_name: str
+    default_pos_profile: str
+    default_rooms_item_group: str
     business_date_str: str
     business_date_int: int
 
@@ -50,7 +52,10 @@ class PropertySettingFindRequest(TypedDict):
 
 
 class PropertySettingData(PropertySetting):
+    default_pos_profile: str
+    business_date: str
     business_date_int: int
+    company: str
 
 class PropertySettingFindResult(TypedDict):
     success: bool

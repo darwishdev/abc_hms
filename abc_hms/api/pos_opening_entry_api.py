@@ -37,5 +37,5 @@ def pos_closing_entry_from_opening() -> POSClosingEntryFromOpeningResponse:
         frappe.throw(f"Invalid JSON payload: {e}")
         return {"success": False, "error": f"{str(e)}"}
 
-    result = app_container.pos_opening_entry_usecase.pos_closing_entry_from_opening(payload)
+    result = app_container.pos_opening_entry_usecase.pos_closing_entry_from_opening_name(payload)
     return result

@@ -25,39 +25,26 @@ class PropertySettingRepo:
 
 
     def property_setting_find(self, property_name: str) -> PropertySettingData:
-            settings : Optional[PropertySettingData] = frappe.get_doc("Property Setting", property_name) #type: ignore
-            if not settings:
-                frappe.throw(f"Business date not set for Property: {property_name}")
-            return settings.as_dict()
-
-    def property_setting_business_date_find(self, property_name: str) -> PropertySettingBusinessDateFindResult:
-        try:
-            business_date = frappe.db.get_value(
-                "Property Setting", property_name, "business_date"
-            )
-
-            if not business_date:
-                frappe.throw(f"Business date not set for Property: {property_name}")
-
-            return {
-                "success": True,
-                "business_date_str": str(business_date),
-                "business_date_int": date_to_int(business_date),
-            }
-
-        except frappe.DoesNotExistError:
-            frappe.throw(f"Property Setting not found: {property_name}")
-            raise
-        except Exception:
-            frappe.log_error(frappe.get_traceback(), "PropertySetting BusinessDateFind Error")
-            raise
+            property_setting : PropertySettingData = frappe.db.sql("""
+                SELECT
+                p.company ,
+                s.business_date ,
+                date_to_int(s.business_date) business_date_int,
+                s.default_pos_profile,
+                s.default_rooms_item_group
+                FROM `tabProperty Setting` s JOIN tabProperty p ON s.name = p.name WHERE s.name =
+                %s
+            """ , (property_name,) , as_dict=True)[0] # type: ignore
+            return property_setting
 
 
-    def property_setting_increase_business_date(self, property_name: str, commit: bool = False)-> PropertySettingBusinessDateFindResult :
+
+
+    def property_setting_increase_business_date(self, property_name: str, commit: bool = False)-> PropertySettingData :
         try:
             # Reuse existing method to get current business date
-            result = self.property_setting_business_date_find(property_name)
-            current_date_str = result["business_date_str"]
+            result = self.property_setting_find(property_name)
+            current_date_str = result.get("business_date")
 
             # Compute next date
             next_date = add_days(current_date_str, 1)
@@ -68,11 +55,7 @@ class PropertySettingRepo:
             if commit:
                 frappe.db.commit()
 
-            return {
-                "success": True,
-                "business_date_str": str(next_date),
-                "business_date_int": date_to_int(next_date),
-            }
+            return self.property_setting_find(property_name)
 
         except frappe.DoesNotExistError:
             frappe.throw(f"Property Setting not found: {property_name}")

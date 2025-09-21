@@ -88,19 +88,26 @@ class ReservationRepo:
                 f.name AS folio,
                 inv.name AS invoice,
                 CONCAT(r.room_type , '-' , r.rate_code) new_item_name,
+                p.company,
+                r.adults number_of_guests,
+                %(business_date)s for_date,
+                s.default_pos_profile,
                 r.rate_code,
                 r.room_type,
                 r.room,
                 r.base_rate,
-                i.name item_name,
-                i.item_code,
-                i.description item_description,
-                i.stock_uom,
+                CONCAT(r.room_type , '-' , r.rate_code) item_name,
+                CONCAT(r.room_type , '-' , r.rate_code) item_code,
+                CONCAT(r.room_type , '-' , r.rate_code) item_description,
+                "Nos" stock_uom,
                 rc.currency,
                 coalesce(ce.exchange_rate ,1) exchange_rate,
                 min(fw.name) folio_window,
-                CONCAT(f.name , '-W-001') new_folio_window
+                CONCAT(f.name , '-W-001') new_folio_window,
+                CONCAT('PI-' , f.name , '-' , %(business_date)s , '-' , '.####') new_pos_invoice_naming_series
             FROM `tabReservation` r
+            JOIN `tabProperty` p  on r.property = p.name
+            JOIN `tabProperty Setting` s on r.property = s.name
             JOIN `tabFolio` f
                 ON r.name = f.reservation
             JOIN `tabRate Code` rc on r.rate_code = rc.name
@@ -140,6 +147,7 @@ class ReservationRepo:
             WHERE reservation_status = 'Arrival' AND property = %s
         """, (property,))
         frappe.db.sql("""
+
             DELETE rd
             FROM `reservation_date` rd
             JOIN `tabReservation` r on rd.reservation = r.name AND r.reservation_status = 'Arrival' AND r.property = %s

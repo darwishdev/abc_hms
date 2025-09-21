@@ -1,3 +1,4 @@
+from typing import Dict, List
 from erpnext.accounts.doctype.pos_closing_entry.pos_closing_entry import POSClosingEntry
 import frappe
 from frappe import Optional, _
@@ -6,7 +7,7 @@ from abc_hms.dto.pos_opening_entry_dto import POSOpeningEntryData
 class POSOpeningEntryRepo:
 
 
-    def pos_opening_entry_find_by_property(self , property: str):
+    def pos_opening_entry_find_by_property(self , property: str)->List[Dict[str,str]]:
        return frappe.db.sql("""
                                 SELECT e.name
                                 FROM `tabPOS Opening Entry` e
@@ -17,24 +18,23 @@ class POSOpeningEntryRepo:
                                 AND e.docstatus = 1
                                 AND e.status = 'Open'
                             """ ,
-                            (property,))
+                            (property,) , as_dict=True) # type: ignore
     def pos_opening_entry_find(self , name: str) -> POSOpeningEntryData:
         response : POSOpeningEntryData = frappe.get_doc("POS Opening Entry", name) # type: ignore
         return response
 
-    def pos_opening_entry_upsert(self , docdata: POSOpeningEntryData, commit: bool = True):
+    def pos_opening_entry_upsert(self , docdata: POSOpeningEntryData, commit: bool = True) -> POSOpeningEntryData:
         doc_id = docdata.get('name' , None)
         if doc_id and frappe.db.exists("POS Opening Entry", doc_id):
             doc: POSOpeningEntryData = frappe.get_doc("POS Opening Entry", doc_id) # type: ignore
         else:
             doc: POSOpeningEntryData = frappe.new_doc("POS Opening Entry") # type: ignore
 
+
         doc.update(docdata)
+
         doc.save()
         if commit:
             frappe.db.commit()
 
-        return {
-            "ok": True,
-            "doc": doc.as_dict(),
-        }
+        return doc

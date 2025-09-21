@@ -3,6 +3,7 @@ import json
 from abc_hms.container import app_container
 from abc_hms.dto.property_setting_dto import (
     PropertySettingBusinessDateFindResponse,
+    PropertySettingFindResponse,
     PropertySettingUpsertRequest,
     PropertySettingUpsertResponse,
 )
@@ -18,7 +19,13 @@ def property_setting_upsert() -> PropertySettingUpsertResponse:
 
     result = app_container.property_setting_usecase.property_setting_upsert(payload)
     return result
-
+@frappe.whitelist(methods=["GET"])
+def property_setting_find(property_name: str) -> PropertySettingFindResponse:
+    try:
+        result = app_container.property_setting_usecase.property_setting_find(property_name)
+        return result
+    except Exception as e:
+        return {"success": False, "error": f"{str(e)}"}
 @frappe.whitelist(methods=["GET", "POST"])
 def property_setting_business_date_find(property_name: str) -> PropertySettingBusinessDateFindResponse:
     try:

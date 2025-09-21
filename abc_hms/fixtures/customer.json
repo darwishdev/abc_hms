@@ -22,6 +22,7 @@
   "docstatus": 0,
   "doctype": "Customer",
   "email_id": null,
+  "exempt_from_sales_tax": 0,
   "gender": null,
   "image": null,
   "industry": null,

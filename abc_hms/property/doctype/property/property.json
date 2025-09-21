@@ -8,6 +8,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "company",
   "display_name",
   "column_break_faup",
   "star_rating",
@@ -128,11 +129,18 @@
   {
    "fieldname": "column_break_tgnf",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "links": [],
- "modified": "2025-09-09 23:15:08.533886",
+ "modified": "2025-09-21 11:19:55.272838",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Property",

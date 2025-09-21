@@ -7,7 +7,9 @@ required_apps = ["frappe/erpnext" , "frappe/hrms"]
 app_license = "mit"
 after_install = "abc_hms.setup.installer.after_install"
 after_migrate = "abc_hms.setup.installer.after_migrate"
-
+override_doctype_class = {
+    "POS Opening Entry": "abc_hms.overrides.pos_opening_entry.CustomPOSOpeningEntry"
+}
 
 boot_session = "abc_hms.boot.get_business_date"
 app_include_css = [
