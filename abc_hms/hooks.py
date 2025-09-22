@@ -16,7 +16,7 @@ app_include_css = [
     "/assets/abc_hms/css/nav-2.css"
 ]
 app_include_js = [
-    "/assets/abc_hms/js/nav-2.js"
+    "/assets/abc_hms/js/nav-8.js"
 ]
 fixtures = [
 
@@ -24,6 +24,9 @@ fixtures = [
 
     {
         "doctype": "Item" ,
+        "doctype" :"Sales Partner Type",
+        "doctype" :"Sales Partner",
+
         "filters": [
             ["item_group", "in", [
                 "F&B",
@@ -45,11 +48,11 @@ fixtures = [
                 "1310 - City Ledger - CH",
                 "1320 - Guest Ledger - CH",
                 "1330 - Visa - CH",
-                "4120 - Room Revenue - CH",
+                "4140 - Room Revenue - CH",
                 "4130 - F&B Revenue - CH",
-                "2310 - Service Charge - CH",
-                "2320 - Municipality - CH",
-                "2330 - VAT - CH"
+                "2320 - Service Charge - CH",
+                "2330 - Municipality - CH",
+                "2340 - VAT - CH"
             ]]
         ]},
     {"doctype": "Customer"},
@@ -72,6 +75,7 @@ fixtures = [
     {"doctype": "Property Setting"},
     {"doctype": "Item Group"},
     {"doctype": "Item"},
+    {"doctype": "Reservation"},
     {"doctype": "Amenity"},
 	{
 		"doctype": "Warehouse",

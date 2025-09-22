@@ -40,7 +40,7 @@ class POSSessionUsecase:
     def pos_sessions_crrent_date(
         self,
         property :str,
-    ) -> Optional[List[str]]:
+    ):
         result = self.repo.pos_session_list_for_current_date(property)
         return result
     def pos_session_find_for_date(

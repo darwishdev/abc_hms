@@ -27,16 +27,17 @@ class POSSessionRepo:
         """
         return frappe.db.sql(query, (property,))
 
-    def pos_session_list_for_current_date(self , property: str)-> Optional[List[str]]:
+    def pos_session_list_for_current_date(self , property: str):
         query = """
             SELECT
-                ps.name AS reservation
+                ps.name AS session,
+                ps.owner
             FROM `tabProperty Setting` s
             JOIN `tabPOS Session` ps on ps.for_date = date_to_int(s.business_date) and ps.docstatus
             = 0
             WHERE s.name = %(property)s;
         """
-        results : Optional[List[str]] = frappe.db.sql(query, {"property": property}) # type: ignore
+        results = frappe.db.sql(query, {"property": property},as_dict=True)
         return results
 
     def pos_session_list(self , filters: Optional[POSSession])-> Optional[List[POSSession]]:

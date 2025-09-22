@@ -1,10 +1,12 @@
 from datetime import datetime
+from time import sleep
 from typing import List, Optional, TypedDict
 from erpnext.accounts.doctype.pos_opening_entry.pos_opening_entry import POSOpeningEntry
 import frappe
-from frappe import _, enqueue
+from frappe import _, enqueue, publish_realtime
 import json
 
+from frappe.model.workflow import show_progress
 from pydantic import ValidationError
 from abc_hms.api.pos_invoice_api import pos_invoice_upsert
 from abc_hms.container import app_container
@@ -14,6 +16,7 @@ from abc_hms.dto.property_dto import (
     PropertyEndOfDayResponse,
 )
 from abc_hms.dto.property_setting_dto import PropertySettingData
+from abc_hms.exceptions.exceptions import EndOfDayValidationError
 
 
 class ValidateResponse(TypedDict):
@@ -33,6 +36,33 @@ def property_end_of_day_validate(
     valid = not departures and (auto_mark_no_show or not arrivals) and (auto_close_sessions or not arrivals)
     return {"valid" :valid ,"arrivals" : arrivals , "departures" : departures, "sessions": sessions}
 
+
+def _publish_step(property: str, step: str, status: str = "in-progress", details=None):
+    """Helper to publish step progress using frappe.publish_progress directly"""
+    # Complete step order to match property_end_of_day
+    step_order = [
+        "validation",
+        "mark_no_show",
+        "close_sessions",
+        "close_invoices",
+        "closing_entry",
+        "new_opening_entry",
+        "new_invoices",
+        "end"
+    ]
+
+    total_steps = len(step_order)
+    current_index = step_order.index(step) + 1 if step in step_order else 0
+
+    # Calculate progress percentage
+    progress = (current_index / total_steps) * 100
+    sleep(.5)
+    # Publish directly
+    frappe.publish_progress(
+        progress,
+        title=f"{property} : End of Day Progress",
+        description=f"{step}: {status}"
+    )
 def property_setting_to_pos_opening_entry(data: PropertySettingData, property: str) ->POSOpeningEntryData:
     """Convert property settings dict → POS Opening Entry dict."""
     return {
@@ -42,7 +72,7 @@ def property_setting_to_pos_opening_entry(data: PropertySettingData, property: s
         "user": frappe.session.user,
         "pos_profile": data.default_pos_profile,
         "for_date": data.business_date_int,
-        "period_start_date": f"{data['business_date']} 00:00:00",
+        "period_start_date": f"{data.business_date} 00:00:00",
         "balance_details": [{
             "mode_of_payment": "Cash",
             "opening_amount": 0,
@@ -52,93 +82,91 @@ def property_setting_to_pos_opening_entry(data: PropertySettingData, property: s
 
 @frappe.whitelist()
 def enqueue_property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_session_close: bool=False):
-    """Enqueue End of Day process instead of running immediately"""
-    enqueue(
-        "abc_hms.end_of_day.run_property_end_of_day",
-        property=property,
-        auto_mark_no_show=auto_mark_no_show,
-        auto_session_close=auto_session_close,
-        queue="default"
-    )
-    return {"status": "queued"}
-@frappe.whitelist(methods=["POST"])
-def property_end_of_day() -> PropertyEndOfDayResponse:
-    try:
-        data = frappe.local.request.data
-        payload: PropertyEndOfDayRequest = json.loads(data or "{}")
-        property = str(payload.get("property"))
-        auto_mark_no_show = bool(payload.get("auto_mark_no_show" , False))
-        auto_session_close = bool(payload.get("auto_session_close" , False))
-    except Exception as e:
-        frappe.throw(f"Invalid JSON payload: {e}")
-        return {"success": False, "data": None, "error": f"{str(e)}"}
+
+    _publish_step(property, "validation", "in-progress")
     validation_result = property_end_of_day_validate(
-        property ,
+        property,
         auto_mark_no_show,
         auto_session_close
     )
     if not validation_result["valid"]:
-        frappe.local.response.http_status_code = 400
-        return {
-            "success": False,
-            "error": "End-of-day validation failed",
-            "data": validation_result
-        }
+        raise EndOfDayValidationError(_("EOD Validation failed") , validation_result)
 
+    _publish_step(property, "validation", "completed")
 
+    enqueue(
+        "abc_hms.property_end_of_day",
+        property=property,
+        auto_mark_no_show=auto_mark_no_show,
+        auto_session_close=auto_session_close,
+        now="true",
+        queue="long"
+    )
+    # return {"status": "queued"}
+
+def property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_session_close: bool=False) -> PropertyEndOfDayResponse:
     property_setting = app_container.property_setting_usecase.property_setting_find(property)
     if not property_setting:
-        frappe.local.response.http_status_code = 404
-        frappe.throw(f"Property {property} Not Found")
-        raise
+        raise frappe.NotFound(f"Property {property} Not Found")
+
     frappe.db.begin()
     try:
-        updated_reservations = app_container.reservation_usecase.reservation_end_of_day_auto_mark(payload)
-        if auto_session_close:
-            closed_sessions = app_container.pos_session_usecase.pos_sessions_close_crrent_date(property)
+        _publish_step(property, "mark_no_show", "in-progress")
+        closed_sessions = []
+        pos_invoices = []
+        new_opening_entry = ""
 
+        updated_reservations = app_container.reservation_usecase.reservation_end_of_day_auto_mark(property, auto_mark_no_show)
+        _publish_step(property, "mark_no_show", "completed")
+
+        if auto_session_close:
+            _publish_step(property, "close_sessions", "in-progress")
+            closed_sessions = app_container.pos_session_usecase.pos_sessions_close_crrent_date(property)
+            _publish_step(property, "close_sessions", "completed")
+
+        _publish_step(property, "close_invoices", "in-progress")
         closed_invoices = app_container.pos_invoice_usecase.pos_invoice_end_of_day_auto_close(property)
+        _publish_step(property, "close_invoices", "completed")
+
         opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_property(property)
         closing_entry = {}
-        if opening_entry and isinstance(opening_entry , str):
+        if opening_entry and isinstance(opening_entry, str):
+            _publish_step(property, "closing_entry", "in-progress")
             closing_entry = app_container.pos_opening_entry_usecase.pos_closing_entry_from_opening_name({
-                    "opening_entry" : opening_entry,
-                    "commit": False
+                "opening_entry": opening_entry,
+                "commit": False
             })
+            _publish_step(property, "closing_entry", "completed")
 
+        _publish_step(property, "new_opening_entry", "in-progress")
         new_date_settings = app_container.property_setting_usecase.property_setting_increase_business_date(property)
         bzns_date = new_date_settings.get("business_date_int")
         bzns_date_int = new_date_settings.get("business_date")
-        if bzns_date and bzns_date_int:
-            new_opening_entry_params = property_setting_to_pos_opening_entry(property_setting , property)
-            new_opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_upsert({
-                "doc" : new_opening_entry_params,
-                "commit" : False,
-            })
 
+        if bzns_date and bzns_date_int:
+            new_opening_entry_params = property_setting_to_pos_opening_entry(property_setting, property)
+            new_opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_upsert({
+                "doc": new_opening_entry_params,
+                "commit": False,
+            })
+            _publish_step(property, "new_opening_entry", "completed")
+
+            _publish_step(property, "new_invoices", "in-progress")
             pos_invoices = app_container.reservation_usecase.sync_reservations_to_pos_invoices(
                 bzns_date,
                 bzns_date_int,
                 app_container.pos_invoice_usecase.pos_invoice_upsert
             )
-        return {
-            "new_date" : bzns_date,
-            "updated_reservations" : updated_reservations,
-            "closed_invoices" : closed_invoices,
-            "opening_entry" : opening_entry,
-            "closed_sessions" : closed_sessions,
-            "closing_entry" : closing_entry,
-            "new_opening_entry" : opening_entry,
-            "new_invoices" : pos_invoices
-        }
+            _publish_step(property, "new_invoices", "completed")
+
+        sleep(.3)
+        _publish_step(property, "end", "completed")
     except frappe.ValidationError:
         frappe.db.rollback()
         raise
     except Exception as e:
         frappe.db.rollback()
-        raise Exception(f"Unexpected Error : {str(e)}")
-    return {
-        "success": True,
-        "doc" : {},
-    }
+        raise Exception(f"Unexpected Error: {str(e)}")
+    finally:
+        _publish_step(property, "end", "completed")
 

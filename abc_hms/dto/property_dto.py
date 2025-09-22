@@ -11,8 +11,7 @@ class PropertyEndOfDayRequest(TypedDict):
     auto_session_close: Optional[bool]
 
 class PropertyEndOfDayResult(TypedDict):
-    success: bool
-    doc: Dict
+    data: Dict
 
-PropertyEndOfDayResponse = Union[PropertyEndOfDayResult, ErrorResponseWithData]
+PropertyEndOfDayResponse =PropertyEndOfDayResult
 

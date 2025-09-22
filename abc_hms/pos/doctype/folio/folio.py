@@ -5,7 +5,7 @@ from frappe.model.naming import make_autoname
 
 class Folio(Document):
     def autoname(self):
-        self.name = make_autoname(f"F-{self.get("reservation")}-.######")
+        self.name = make_autoname(f"F-{self.reservation}-.######")
 
     def after_insert(self):
         try:

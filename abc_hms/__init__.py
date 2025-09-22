@@ -26,7 +26,7 @@ from abc_hms.api.pos_auth_api import (
 from abc_hms.api.property_reservation_api import (
     reservation_availability_check ,
     ignore_and_resave,
-    reservation_sync_days ,
+    reservation_sync,
     end_of_day,
 )
 
@@ -74,7 +74,7 @@ __all__ = [
     "property_setting_business_date_find",
     "property_setting_increase_business_date",
     "room_date_bulk_upsert",
-    "reservation_sync_days",
+    "reservation_sync",
     "pos_invoice_find_for_date",
     "pos_session_defaults_find",
     "property_end_of_day",

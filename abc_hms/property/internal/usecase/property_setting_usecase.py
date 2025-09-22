@@ -64,7 +64,4 @@ class PropertySettingUsecase:
             result = self.repo.property_setting_increase_business_date(property_name, commit=commit)
             return result
         except Exception as e:
-            return {
-                "success": False,
-                "error": f"PropertySetting IncreaseBusiness Error: {str(e)}",
-            }
+            raise

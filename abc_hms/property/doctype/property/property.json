@@ -139,8 +139,19 @@
   }
  ],
  "grid_page_length": 50,
- "links": [],
- "modified": "2025-09-21 11:19:55.272838",
+ "links": [
+  {
+   "group": "Configuration",
+   "link_doctype": "Property Setting",
+   "link_fieldname": "name"
+  },
+  {
+   "group": "Reservations",
+   "link_doctype": "Reservation",
+   "link_fieldname": "property"
+  }
+ ],
+ "modified": "2025-09-22 10:56:34.495590",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Property",

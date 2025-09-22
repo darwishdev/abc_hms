@@ -52,7 +52,7 @@ BEGIN
         room_type_rate r
       join  `tabRate Code` rc on r.rate_code = rc.name
       LEFT join  `tabCurrency Exchange` ce on rc.currency = ce.from_currency
-      WHERE r.for_date BETWEEN p_date_from AND p_date_to
+      where r.for_date >= p_date_from and r.for_date < p_date_to
         AND (p_room_types IS NULL OR FIND_IN_SET(r.room_type, p_room_types))
       GROUP BY r.room_type,
         r.rate_code,

@@ -5101,5 +5101,26 @@
   "status": "Open",
   "user": null,
   "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-22 10:57:15.697147",
+  "name": "3cl7h4s4t0",
+  "permitted_roles": [
+   {
+    "parent": "3cl7h4s4t0",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000009-000001",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
  }
 ]

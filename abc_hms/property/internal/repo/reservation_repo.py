@@ -7,13 +7,38 @@ import frappe
 from utils.sql_utils import run_sql
 
 class ReservationRepo:
+    def reservation_sync(
+        self,
+        reservation: str,
+        new_arrival: str,
+        new_departure: str,
+        new_docstatus: int,
+        new_reservation_status: str,
+        new_room_type: str,
+        new_room: str,
+        ignore_availability: int,
+        allow_room_sharing: int,
+    ):
+        query = """
+            CALL reservation_sync(%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
 
-    # def reservation_ensure_folio(
-    #      self,
-    #     reservation_name: str,
-    #     commit: bool = True
-    #
-    # ):
+        params = (
+            reservation,
+            new_arrival,
+            new_departure,
+            new_docstatus,
+            new_reservation_status,
+            new_room_type,
+            new_room,
+            ignore_availability,
+            allow_room_sharing,
+        )
+
+        # frappe.db.sql is the right API (not frappe.sql.call)
+        result = frappe.db.sql(query, params, as_dict=True)
+
+        return result
 
     def mark_new_departures(self,tomorrow_date_int: int):
         mark_departures_query = """
@@ -58,25 +83,33 @@ class ReservationRepo:
         return run_sql(procedure_call)
 
 
-    def reservation_departures_for_current_date(self,property: str)->Optional[List[str]]:
+    def reservation_departures_for_current_date(self,property: str):
         query = """
             SELECT
-                r.name AS reservation
+                r.name AS reservation,
+                r.guest,
+                r.room_type,
+                r.room,
+                r.base_rate
             FROM `tabProperty Setting` s
             JOIN `tabReservation` r on r.departure = s.business_date
             WHERE s.name = %(property)s;
         """
-        results : Optional[List[str]] = frappe.db.sql(query, {"property": property}) # type: ignore
+        results = frappe.db.sql(query, {"property": property} , as_dict=True)
         return results
-    def reservation_arrivals_for_current_date(self,property: str)->Optional[List[str]]:
+    def reservation_arrivals_for_current_date(self,property: str):
         query = """
             SELECT
-                r.name AS reservation
+                r.name AS reservation,
+                r.guest,
+                r.room_type,
+                r.room,
+                r.base_rate
             FROM `tabProperty Setting` s
             JOIN `tabReservation` r on r.arrival = s.business_date
             WHERE s.name = %(property)s;
         """
-        results : Optional[List[str]] = frappe.db.sql(query, {"property": property}) # type: ignore
+        results = frappe.db.sql(query, {"property": property} , as_dict=True)
         return results
 
 

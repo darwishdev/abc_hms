@@ -16,11 +16,11 @@ from utils.date_utils import date_to_int
 
 
 @frappe.whitelist()
-def reservation_sync_days(args: str | dict):
+def reservation_sync(args: str | dict):
     if isinstance(args, str):
         args = json.loads(args)
 
-    resp = app_container.reservation_usecase.reservation_sync_days(args)
+    resp = app_container.reservation_usecase.reservation_sync(args)
     return resp
 
 @frappe.whitelist()
@@ -84,7 +84,7 @@ def ignore_and_resave(args: str |  dict):
     update_values = {k: v for k, v in args.items() if k in updatable_fields}
     try:
         frappe.db.begin()
-        app_container.reservation_usecase.reservation_sync_days({
+        app_container.reservation_usecase.reservation_sync({
             "name" : args['name'],
             "arrival" : args['arrival'],
             "departure" : args['departure'],
