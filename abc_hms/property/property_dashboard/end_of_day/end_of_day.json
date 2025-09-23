@@ -1,60 +1,45 @@
 {
-  "cards": [
-    {
-      "card": "Total Adults"
-    },
-    {
-      "card": "Total Children"
-    },
-    {
-      "card": "Total Infants"
-    },
-    {
-      "card": "Total Persons"
-    },
-    {
-      "card": "ADR"
-    },
-    {
-      "card": "Total Revenue"
-    }
-  ],
-  "charts": [
-    {
-      "chart_name": "In House Report",
-      "chart_type": "Report",
-      "report_name": "In House",
-      "width": "Full",
-      "filters_json": "{\"property\":\"CONA\"}"
-    }
-  ],
-  "custom_buttons": [
-    {
-      "label": "View In House Report",
-      "action": "frappe.set_route('query-report', 'In House')",
-      "style": "primary"
-    },
-    {
-      "label": "Export Data",
-      "action": "export_dashboard_data()",
-      "style": "secondary"
-    },
-    {
-      "label": "Refresh Dashboard",
-      "action": "refresh_dashboard()",
-      "style": "success"
-    }
-  ],
-  "creation": "2025-09-18 11:41:38.342043",
-  "dashboard_name": "End Of Day",
-  "docstatus": 0,
-  "doctype": "Dashboard",
-  "idx": 0,
-  "is_default": 1,
-  "is_standard": 1,
-  "modified": "2025-09-18 11:44:37.658683",
-  "modified_by": "Administrator",
-  "module": "Property",
-  "name": "End Of Day",
-  "owner": "Administrator"
+ "cards": [
+  {
+   "card": "Arrivals"
+  },
+  {
+   "card": "Departures"
+  },
+  {
+   "card": "In House"
+  },
+  {
+   "card": "Room Count"
+  },
+  {
+   "card": "ADR"
+  },
+  {
+   "card": "Total Tax"
+  },
+  {
+   "card": "Revenue"
+  },
+  {
+   "card": "Open Cashiers"
+  }
+ ],
+ "charts": [
+  {
+   "width": "Half"
+  }
+ ],
+ "creation": "2025-09-23 03:50:56.931993",
+ "dashboard_name": "End Of Day",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 1,
+ "is_standard": 1,
+ "modified": "2025-09-23 04:00:46.393229",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "End Of Day",
+ "owner": "Administrator"
 }

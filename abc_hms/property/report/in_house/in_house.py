@@ -1,9 +1,4 @@
-# Copyright (c) 2025, DarwishDev and contributors
-# For license information, please see license.txt
-
 import frappe
-
-
 def execute(filters=None):
     if not filters:
         filters = {}
@@ -11,7 +6,16 @@ def execute(filters=None):
     columns = [
         {"fieldname": "room", "label": "Room", "fieldtype": "Link", "options": "Room"},
         {"fieldname": "room_status", "label": "Room Status", "fieldtype": "Data"},
+
+        {"fieldname": "house_use", "label": "House Use", "fieldtype": "check"},
+        {"fieldname": "complementry", "label": "Complementry", "fieldtype": "check"},
+        {"fieldname": "rate_code", "label": "Rate Code", "fieldtype": "Link" , "options" : "Rate Code"},
         {"fieldname": "base_rate", "label": "Base Rate", "fieldtype": "Currency"},
+        {"fieldname": "service_charge", "label": "Service Charge (12% of BR)", "fieldtype": "Currency"},
+        {"fieldname": "municipality", "label": "Municipality (1% of SC)", "fieldtype": "Currency"},
+        {"fieldname": "vat", "label": "VAT (14% of SC)", "fieldtype": "Currency"},
+        {"fieldname": "total_tax", "label": "Total Tax", "fieldtype": "Currency"},
+        {"fieldname": "net", "label": "Net Revenue", "fieldtype": "Currency"},
         {"fieldname": "nights", "label": "Nights", "fieldtype": "Int"},
         {"fieldname": "total_stay", "label": "Total Stay", "fieldtype": "Currency"},
         {"fieldname": "adults", "label": "Adults", "fieldtype": "Int"},
@@ -40,6 +44,8 @@ def execute(filters=None):
     is_arrival = filters.get('is_arrival', False)
     is_departure = filters.get('is_departure', False)
     reservation_status = filters.get('reservation_status')
+    complementry = filters.get('complementry')
+    house_use = filters.get('house_use')
     room_status = filters.get('room_status')
     reservation= filters.get('reservation')
     guest = filters.get('guest')
@@ -72,6 +78,19 @@ def execute(filters=None):
         guest_condition = f"AND r.guest = '{guest}'"
     else:
         guest_condition = ""
+    complementry_condition=""
+    house_use_condition=""
+    # Complementary filter
+    if filters.get("complementry") == "Yes":
+        complementry_condition += " AND rc.complementry = 1 "
+    elif filters.get("complementry") == "No":
+        complementry_condition += " AND rc.complementry = 0 "
+
+    # House Use filter
+    if filters.get("house_use") == "Yes":
+        house_use_condition += " AND rc.house_use = 1 "
+    elif filters.get("house_use") == "No":
+        house_use_condition += " AND rc.house_use = 0 "
     query = f"""
     WITH date_filter AS (
         SELECT d.for_date, d.date_actual
@@ -85,6 +104,11 @@ def execute(filters=None):
         r.base_rate,
         r.nights,
         (r.base_rate * r.nights) total_stay,
+        (r.base_rate / 1.288) AS net,
+        (r.base_rate / 1.288) * 0.12 AS service_charge,
+        ((r.base_rate / 1.288) * 1.12) * 0.01 AS municipality,
+        ((r.base_rate /  1.288) * 1.12) * 0.14 AS vat,
+        r.base_rate * .288 AS total_tax,
         r.adults,
         COALESCE(r.children, 0) children,
         COALESCE(r.infants, 0) infants,
@@ -93,11 +117,14 @@ def execute(filters=None):
         r.name,
         r.arrival,
         r.departure,
+        rc.name rate_code,
+        IF(rc.complementry , 'YES' , 'NO') complementry,
+        IF(rc.house_use , 'YES' , 'NO') house_use,
         r.room_type,
         f.name folio,
         f.folio_status,
         COALESCE(GROUP_CONCAT(DISTINCT cc.comment SEPARATOR '</br>'), 'No Guest Comments') AS guest_comment,
-        COALESCE(GROUP_CONCAT(DISTINCT rc.comment SEPARATOR '</br>'), 'No Reservation Comments') AS reservation_comment,
+        COALESCE(GROUP_CONCAT(DISTINCT rec.comment SEPARATOR '</br>'), 'No Reservation Comments') AS reservation_comment,
         COALESCE(rd.out_of_order_status, 'N/A') AS out_of_order_status,
         COALESCE(r.company_profile, 'N/A') AS company_profile,
         COALESCE(r.travel_agent, 'N/A') AS travel_agent,
@@ -112,18 +139,21 @@ def execute(filters=None):
             {reservation_condition}
             {guest_condition}
             {departure_condition}
+    JOIN `tabRate Code` rc on r.rate_code = rc.name
     JOIN
         `tabFolio` f ON f.reservation = r.name
     LEFT JOIN
         `tabGuest Comment` cc ON r.guest = cc.guest AND cc.reservation IS NULL
     LEFT JOIN
-        `tabGuest Comment` rc ON r.guest = rc.guest AND rc.reservation = r.name
+        `tabGuest Comment` rec ON r.guest = r.guest AND rec.reservation = r.name
     LEFT JOIN
         v_room_date rd ON r.room = rd.room AND rd.for_date = d.for_date
     WHERE
         1=1
         {status_condition}
         {room_status_condition}
+        {complementry_condition}
+        {house_use_condition}
     GROUP BY
         r.room,
         rd.room_status,
@@ -136,6 +166,9 @@ def execute(filters=None):
         r.name,
         r.arrival,
         r.departure,
+        rc.complementry,
+        rc.name,
+        rc.house_use,
         r.room_type,
         rd.out_of_order_status,
         r.company_profile,

@@ -19,7 +19,8 @@ class Reservation(Document):
         if not self.property:
             frappe.throw("Property field is required to generate name")
         self.name = make_autoname(f"{self.property}-.######")
-
+    def validate_room_status(self):
+        return True
     def handle_save_error(self, e):
         """Centralized error handling for save."""
         args = self.as_dict()
@@ -51,12 +52,69 @@ class Reservation(Document):
             title=title,
             primary_action=primary_action
         )
-    def on_before_save(self):
-        frappe.publish_progress(10, title="Saving", description="Initializing reservation save")
-        time.sleep(.3)
-        if self.is_new():
-            return
+
+    def can_check_out(self):
+        result = frappe.db.sql(
+            """
+            WITH items AS (
+                SELECT
+                    i.folio_window,
+                    SUM(i.amount) AS amount
+                FROM `tabPOS Invoice Item` i
+                GROUP BY i.folio_window
+            ), payments AS (
+                SELECT
+                    p.folio_window,
+                    SUM(p.amount) AS amount
+                FROM `tabSales Invoice Payment` p
+                GROUP BY p.folio_window
+            )
+            SELECT
+                fw.name AS folio_window,
+                COALESCE(items.amount, 0) AS amount,
+                COALESCE(payments.amount, 0) AS paid
+            FROM `tabReservation` r
+            JOIN `tabFolio` f ON f.reservation = r.name
+            JOIN `tabFolio Window` fw ON fw.folio = f.name
+            LEFT JOIN items ON fw.name = items.folio_window
+            LEFT JOIN payments ON fw.name = payments.folio_window
+            WHERE r.name = %s
+            """,
+            (self.name,),
+            as_dict=True,
+        )
+
+        if not result:
+            return False  # no folio, cannot check out
+
+        row = result[0]
+        total_amount = row.get("amount") or 0
+        total_paid = row.get("paid") or 0
+
+        return total_amount == total_paid
+    def save(self , *args , **kwargs):
         try:
+            frappe.publish_progress(10, title="Saving", description="Syncing Reservation Dates")
+
+            frappe.db.begin()
+            if self.is_new():
+                super().save(*args, **kwargs)
+                frappe.publish_progress(100, title="Saving", description="Reservation Created Successfully")
+                return
+            if self.reservation_status == "Checked Out":
+                can_checkout = self.can_check_out()
+                if not can_checkout:
+                    frappe.throw(f"Illegal Checkout Please Settle Payments")
+            property_business_date = frappe.db.get_value(
+                "Property Setting",
+                {"property": self.get("property")},
+                "business_date"
+            )
+
+            # Auto-mark arrival if arrival date equals property business date
+            if self.docstatus == 1 and self.reservation_status == 'Confirmed' and date_utils.date_to_int(property_business_date) == date_utils.date_to_int(self.get("arrival")):
+                self.reservation_status = "Arrival"
+
             critical_fields = [
                 "arrival",
                 "departure",
@@ -66,6 +124,7 @@ class Reservation(Document):
                 "ignore_availability",
                 "allow_share",
             ]
+
             for field in critical_fields:
                 old_value = self.get_db_value(field)  # value in DB
                 new_value = self.get(field)           # current value in memory
@@ -76,9 +135,9 @@ class Reservation(Document):
                         new_value = date_utils.date_to_int(new_value)
 
                 if old_value != new_value:
-                    time.sleep(.3)
-                    frappe.publish_progress(10, title="Saving", description="Syncing Reservation Dates")
                     print("changed is" , old_value , new_value , field)
+
+                    frappe.publish_progress(60, title="Saving", description="Syncing Reservation Dates")
                     app_container.reservation_usecase.reservation_sync({
                             "reservation": self.name,
                             "new_arrival": self.arrival,
@@ -88,100 +147,18 @@ class Reservation(Document):
                             "new_room_type": self.room_type,
                             "new_room": self.room,
                             "ignore_availability": self.ignore_availability,
-                            "allow_room_sharing": self.allow_room_sharing
+                            "allow_room_sharing": self.allow_share
                     })
                     time.sleep(1.0)
                     frappe.publish_progress(90, title="Saving", description="Reservation Days Synced Successfully")
                     break
-        except:
-            raise
+            time.sleep(1.0)
 
-    def after_insert(self):
-        time.sleep(1.0)
-        frappe.publish_progress(100, title="Saving", description="Reservation Days Synced Successfully")
-    def on_update_after_submit(self):
-        frappe.publish_progress(1, title="Saving", description="Reservation Days Synced Successfully")
-        frappe.publish_progress(10, title="Saving", description="Syncing Reservation Dates")
-        app_container.reservation_usecase.reservation_sync({
-                "reservation": self.name,
-                "new_arrival": self.arrival,
-                "new_departure": self.departure,
-                "new_docstatus": self.docstatus,
-                "new_reservation_status": self.reservation_status,
-                "new_room_type": self.room_type,
-                "new_room": self.room,
-                "ignore_availability": self.ignore_availability,
-                "allow_room_sharing": self.allow_share
-        })
-        time.sleep(1.0)
-        frappe.publish_progress(100, title="Saving", description="Reservation Days Synced Successfully")
-    # def save(self , *args, **kwargs):
-    #     try:
-    #         frappe.publish_progress(10, title="Saving", description="Initializing reservation save")
-    #         time.sleep(1.0)
-    #         frappe.db.begin()
-    #         if self.is_new():
-    #             super().save(*args, **kwargs)
-    #             frappe.publish_progress(100, title="Saving", description="Reservation Created Successfully")
-    #             return
-    #
-    #
-    #         property_business_date = frappe.db.get_value(
-    #             "Property Setting",
-    #             {"property": self.get("property")},
-    #             "business_date"
-    #         )
-    #
-    #         # Auto-mark arrival if arrival date equals property business date
-    #         if self.docstatus == 1 and self.reservation_status == 'Confirmed' and date_utils.date_to_int(property_business_date) == date_utils.date_to_int(self.get("arrival")):
-    #             self.reservation_status = "Arrival"
-    #
-    #         critical_fields = [
-    #             "arrival",
-    #             "departure",
-    #             "docstatus",
-    #             "room_type",
-    #             "room",
-    #             "ignore_availability",
-    #             "allow_share",
-    #         ]
-    #
-    #
-    #         old_docstatus = self.get_db_value('docstatus')
-    #
-    #         print("argssss" , *args , **kwargs)
-    #         # Check if any critical field has changed
-    #         for field in critical_fields:
-    #             old_value = self.get_db_value(field)  # value in DB
-    #             new_value = self.get(field)           # current value in memory
-    #             if field in ("arrival", "departure"):
-    #                 if old_value:
-    #                     old_value = date_utils.date_to_int(old_value)
-    #                 if new_value:
-    #                     new_value = date_utils.date_to_int(new_value)
-    #
-    #             if old_value != new_value:
-    #                 print("changed is" , old_value , new_value , field)
-    #
-    #                 frappe.publish_progress(60, title="Saving", description="Syncing Reservation Dates")
-    #                 app_container.reservation_date_usecase.reservation_date_sync({"reservation_name":str(self.name),"commit":False})
-    #                 time.sleep(1.0)
-    #                 frappe.publish_progress(90, title="Saving", description="Reservation Days Synced Successfully")
-    #                 break
-    #
-    #
-    #         super().save(*args, **kwargs)
-    #         if old_docstatus == 0 and self.docstatus == 1:
-    #             self.ensure_folio()
-    #
-    #         if old_docstatus == 1 and self.docstatus == 2:
-    #             self.remove_folio()
-    #         frappe.publish_progress(100, title="Saving", description="Reservation Saved Successfully")
-    #         frappe.db.commit()
-    #     except Exception as e:
-    #         frappe.db.rollback()
-    #         self.handle_save_error(e)
-    #
+            super().save(*args, **kwargs)
+            frappe.publish_progress(100, title="Saving", description="Reservation Days Synced Successfully")
+        except Exception as e:
+            frappe.db.rollback()
+            self.handle_save_error(e)
 
     def remove_folio(self):
         folio_name = f"f-{self.name}"

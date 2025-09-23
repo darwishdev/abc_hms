@@ -1,6 +1,8 @@
 frappe.ui.form.on("Reservation", {
     onload(frm) {
         // Listen for the reload_doc event
+
+        console.log(frm);
         frappe.realtime.on("reload_doc", (data) => {
             console.log("listen happens", data, frm.doc.doctype, frm.doc.name);
             const { doctype, name } = data;
@@ -167,3 +169,20 @@ const sync_departure_from_nights = (frm) => {
         frm.set_value("departure", frappe.datetime.add_days(arrival, nights));
     }
 };
+
+function hide_checkin_button(frm) {
+    frm.call("validate_room_status")
+        .then((r) => {
+            console.log(r.message);
+            let $btn = frm.page.btn_secondary.find(`button:contains("Check In")`);
+            if ($btn.length) {
+                $btn.hide();
+            }
+        })
+        .catch((err) => {
+            frappe.show_alert({
+                message: __("Error while checking room availability: {0}", [err.message]),
+                indicator: "red",
+            });
+        });
+}

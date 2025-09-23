@@ -435,4 +435,79 @@ BEGIN
   SET time_zone = old_tz;
 END$$
 
+DROP PROCEDURE IF EXISTS sp_upsert_room_date$$
+CREATE  PROCEDURE `sp_upsert_room_date` (
+  IN p_rooms_list JSON, -- array of room names as JSON: '["1001","3001"]'
+  IN p_for_date INT,
+  IN p_house_keeping_status INT,
+  IN p_room_status INT,
+  IN p_guest_service_status INT,
+  IN p_out_of_order_status INT,
+  IN p_out_of_order_reason TEXT,
+  IN p_persons INT
+) BEGIN
+INSERT INTO
+  room_date (
+    room,
+    for_date,
+    house_keeping_status,
+    room_status,
+    guest_service_status,
+    out_of_order_status,
+    out_of_order_reason,
+    persons
+  )
+SELECT
+  jt.room,
+  p_for_date,
+  p_house_keeping_status,
+  p_room_status,
+  p_guest_service_status,
+  p_out_of_order_status,
+  p_out_of_order_reason,
+  p_persons
+FROM
+  JSON_TABLE(
+    p_rooms_list,
+    "$[*]" COLUMNS (room VARCHAR(50) PATH "$")
+  ) AS jt ON DUPLICATE KEY
+UPDATE
+  house_keeping_status = COALESCE(
+    VALUES
+      (house_keeping_status),
+      house_keeping_status,
+      0
+  ),
+  room_status = COALESCE(
+    VALUES
+      (room_status),
+      room_status,
+      0
+  ),
+  guest_service_status = COALESCE(
+    VALUES
+      (guest_service_status),
+      guest_service_status,
+      0
+  ),
+  out_of_order_status = COALESCE(
+    VALUES
+      (out_of_order_status),
+      out_of_order_status,
+      0
+  ),
+  out_of_order_reason = COALESCE(
+    VALUES
+      (out_of_order_reason),
+      out_of_order_reason,
+      ''
+  ),
+  persons = COALESCE(
+    VALUES
+      (persons),
+      persons,
+      0
+  );
+
+END$$
 DELIMITER ;

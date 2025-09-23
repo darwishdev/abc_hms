@@ -4,7 +4,6 @@ from frappe import Optional
 
 from abc_hms.dto.dto_helpers import ErrorResponse
 
-from abc_hms.property.doctype.property_setting.property_setting import PropertySetting
 
 class RoomDateLookup(TypedDict):
     id: Optional[int]
@@ -46,7 +45,6 @@ class RoomDateView(TypedDict):
     guest_service_status: Optional[str]
 
 class RoomDateBulkUpsertRequest(TypedDict):
-    """API request DTO"""
     room_numbers: List[str]
     for_date: int
     updated_fileds: RoomDateBulkUpsertFields
@@ -57,3 +55,4 @@ class RoomDateBulkUpsertResult(TypedDict):
     affected: List[RoomDateView]
 
 RoomDateBulkUpsertResponse = Union[RoomDateBulkUpsertResult, ErrorResponse]
+

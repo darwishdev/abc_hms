@@ -3,6 +3,7 @@ import frappe
 from typing import  Any, Dict, List
 from frappe import Optional, _
 from abc_hms.dto.pos_invoice_dto import POSInvoiceData
+from utils.date_utils import date_to_int
 class POSInvoiceRepo:
 
     def pos_invoice_find_for_date(
@@ -66,11 +67,26 @@ class POSInvoiceRepo:
 
         return invoice
 
+
     def pos_invoice_end_of_day_auto_close(self, property: str):
-        frappe.db.sql("""
-            UPDATE `tabPOS Invoice` p
-            JOIN `tabProperty Setting` s on s.property = %s
-            SET p.docstatus = 1
-            WHERE p.docstatus = 0 and p.for_date = s.business_date
-        """, (property,))
-        return {}
+        # 1️⃣ Get the business date for the property
+        business_date = frappe.db.get_value("Property Setting", {"property": property}, "business_date")
+        if not business_date:
+            frappe.throw(f"No business date found for property {property}")
+
+        # 2️⃣ Fetch all draft POS Invoices for that date
+        invoices = frappe.get_all(
+            "POS Invoice",
+            filters={"for_date": date_to_int(business_date), "docstatus": 0},
+            fields=["name"]
+        )
+
+        # 3️⃣ Submit each invoice via Frappe Doc API
+        for inv in invoices:
+            doc = frappe.get_doc("POS Invoice", inv.name)
+            try:
+                doc.submit()
+            except frappe.ValidationError as e:
+                frappe.log_error(f"Error submitting POS Invoice {inv.name}: {e}")
+
+        return {"submitted": [inv.name for inv in invoices]}

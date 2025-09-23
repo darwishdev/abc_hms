@@ -1,6 +1,7 @@
 from datetime import datetime
 from time import sleep
 from typing import List, Optional, TypedDict
+from erpnext.accounts.doctype.pos_closing_entry.pos_closing_entry import make_closing_entry_from_opening
 from erpnext.accounts.doctype.pos_opening_entry.pos_opening_entry import POSOpeningEntry
 import frappe
 from frappe import _, enqueue, publish_realtime
@@ -8,6 +9,7 @@ import json
 
 from frappe.model.workflow import show_progress
 from pydantic import ValidationError
+from sentry_sdk.utils import json_dumps
 from abc_hms.api.pos_invoice_api import pos_invoice_upsert
 from abc_hms.container import app_container
 from abc_hms.dto.pos_opening_entry_dto import POSOpeningEntryData
@@ -30,7 +32,10 @@ def property_end_of_day_validate(
     auto_close_sessions :bool,
     auto_mark_no_show: bool,
 ) -> ValidateResponse:
-    departures  = []
+    departures  = app_container.reservation_usecase.reservation_departures_for_current_date(property)
+    if len(departures) > 0:
+        frappe.throw("Please Check Out Or Extend Departure To Be Able To Run The End of Day")
+        raise frappe.ValidationError(f"EOD Failed: Departures not handled")
     arrivals  = None if auto_mark_no_show else app_container.reservation_usecase.reservation_arrivals_for_current_date(property)
     sessions  = None if auto_close_sessions else app_container.pos_session_usecase.pos_sessions_crrent_date(property)
     valid = not departures and (auto_mark_no_show or not arrivals) and (auto_close_sessions or not arrivals)
@@ -68,7 +73,7 @@ def property_setting_to_pos_opening_entry(data: PropertySettingData, property: s
     return {
         "company": data.company,
         "property": property,
-        "docstatus": 0,
+        "docstatus": 1,
         "user": frappe.session.user,
         "pos_profile": data.default_pos_profile,
         "for_date": data.business_date_int,
@@ -104,6 +109,7 @@ def enqueue_property_end_of_day(property: str, auto_mark_no_show: bool=False, au
     )
     # return {"status": "queued"}
 
+@frappe.whitelist()
 def property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_session_close: bool=False) -> PropertyEndOfDayResponse:
     property_setting = app_container.property_setting_usecase.property_setting_find(property)
     if not property_setting:
@@ -117,7 +123,7 @@ def property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_sessi
         new_opening_entry = ""
 
         updated_reservations = app_container.reservation_usecase.reservation_end_of_day_auto_mark(property, auto_mark_no_show)
-        _publish_step(property, "mark_no_show", "completed")
+        _publish_step(property, "Update Reservations", "completed")
 
         if auto_session_close:
             _publish_step(property, "close_sessions", "in-progress")
@@ -128,6 +134,9 @@ def property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_sessi
         closed_invoices = app_container.pos_invoice_usecase.pos_invoice_end_of_day_auto_close(property)
         _publish_step(property, "close_invoices", "completed")
 
+        new_date_settings = app_container.property_setting_usecase.property_setting_increase_business_date(property)
+        bzns_date = new_date_settings.get("business_date_int")
+        bzns_date_int = new_date_settings.get("business_date")
         opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_property(property)
         closing_entry = {}
         if opening_entry and isinstance(opening_entry, str):
@@ -136,12 +145,10 @@ def property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_sessi
                 "opening_entry": opening_entry,
                 "commit": False
             })
+
             _publish_step(property, "closing_entry", "completed")
 
         _publish_step(property, "new_opening_entry", "in-progress")
-        new_date_settings = app_container.property_setting_usecase.property_setting_increase_business_date(property)
-        bzns_date = new_date_settings.get("business_date_int")
-        bzns_date_int = new_date_settings.get("business_date")
 
         if bzns_date and bzns_date_int:
             new_opening_entry_params = property_setting_to_pos_opening_entry(property_setting, property)
@@ -158,7 +165,7 @@ def property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_sessi
                 app_container.pos_invoice_usecase.pos_invoice_upsert
             )
             _publish_step(property, "new_invoices", "completed")
-
+        frappe.db.commit()
         sleep(.3)
         _publish_step(property, "end", "completed")
     except frappe.ValidationError:

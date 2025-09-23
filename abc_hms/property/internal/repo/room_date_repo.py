@@ -1,6 +1,6 @@
-from typing import List
+from typing import Dict, List, Union
 import frappe
-from abc_hms.dto.property_room_date_dto import RoomDateLookup, RoomDateView, RoomDateBulkUpsertRequest
+from abc_hms.dto.property_room_date_dto import RoomDateLookup,  RoomDateView, RoomDateBulkUpsertRequest
 
 from typing import TypedDict, List, Optional
 
@@ -22,56 +22,34 @@ class RoomDateRepo:
             raise e
 
 
-    def bulk_upsert(self, payload: RoomDateBulkUpsertRequest) -> List[RoomDateView]:
-        """
-        Call the SP to upsert room_date for given rooms and date,
-        then return the updated rows from the view.
-        """
-        try:
-            # Prepare params
-            rooms_json = frappe.as_json(payload["room_numbers"])  # JSON array for SP
-            for_date = payload["for_date"]
-            fields = payload["updated_fileds"]
-            commit = payload.get("commit", False)
 
-            # Call the stored procedure
-            frappe.db.sql(
-                """
-                CALL sp_upsert_room_date(
-                    %s, %s, %s, %s, %s, %s, %s, %s
-                )
-                """,
-                (
-                    rooms_json,
-                    for_date,
-                    fields.get("house_keeping_status"),
-                    fields.get("room_status"),
-                    fields.get("guest_service_status"),
-                    fields.get("out_of_order_status"),
-                    fields.get("out_of_order_reason"),
-                    fields.get("persons"),
-                ),
+    def bulk_upsert(
+        self,
+        room_numbers: List[str],
+        for_date: int,
+        updated_fields: Dict[str, int],
+        commit: bool = True):
+        rooms_json = frappe.as_json(room_numbers)  # JSON array for SP
+        frappe.db.sql(
+            """
+            CALL sp_upsert_room_date(
+                %s, %s, %s, %s, %s, %s, %s, %s
             )
+            """,
+            (
+                rooms_json,
+                for_date,
+                updated_fields.get("house_keeping_status"),
+                updated_fields.get("room_status"),
+                updated_fields.get("guest_service_status"),
+                updated_fields.get("out_of_order_status"),
+                updated_fields.get("out_of_order_reason"),
+                updated_fields.get("persons"),
+            ),
+        )
 
-            if commit:
-                frappe.db.commit()
-            filters: RoomDateViewFilters = {}
-            updated_rows: List[RoomDateView] = self.room_date_view_list(filters)
-            # Return updated rows from the view
-            updated_rows: List[RoomDateView] = frappe.db.sql(
-                """
-                SELECT * FROM v_room_date
-                WHERE for_date = %s
-                  AND room IN (%s)
-                """ % (for_date, ",".join(f"'{r}'" for r in payload["room_numbers"])),
-                as_dict=True
-            ) # type: ignore
-
-            return updated_rows
-
-        except Exception as e:
-            frappe.log_error(frappe.get_traceback(), "RoomDateRepo BulkUpsert Error")
-            raise
+        if commit:
+            frappe.db.commit()
 
     def room_date_view_list(
         self,
@@ -123,3 +101,16 @@ class RoomDateRepo:
         except Exception as e:
             frappe.log_error(frappe.get_traceback(), "RoomDateRepo ViewList Error")
             raise
+
+
+
+
+
+
+
+
+
+
+
+
+

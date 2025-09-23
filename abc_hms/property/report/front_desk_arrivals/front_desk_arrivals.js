@@ -6,7 +6,7 @@ frappe.query_reports["Front Desk Arrivals"] = {
             label: __("Property"),
             options: "Property",
             default: "CONA",
-            reqd: 1, // This field is mandatory
+            reqd: 1,
             wildcard_filter: 0,
         },
         {
@@ -77,13 +77,6 @@ frappe.query_reports["Front Desk Arrivals"] = {
     },
 
     getEditor: function (colIndex, rowIndex, value, parent, column, row, data) {
-        // colIndex, rowIndex of the cell being edited
-        // value: value of cell before edit
-        // parent: edit container (use this to append your own custom control)
-        // column: the column object of editing cell
-        // row: the row of editing cell
-        // data: array of all rows
-        console.log("get editor");
         const control = frappe.ui.form.make_control({
             parent: parent,
             df: {
@@ -179,20 +172,5 @@ frappe.query_reports["Front Desk Arrivals"] = {
         };
 
         return options;
-    },
-    onload: function (report) {
-        report.page.add_inner_button(__("Save Rooms"), function () {
-            console.log(report);
-            const data = report.data;
-            const reservation_room = {};
-
-            // Iterate through the data to find changed rooms
-            data.forEach((row) => {
-                if (row.room) {
-                    reservation_room[row.name] = row.room;
-                }
-            });
-            console.log(reservation_room);
-        });
     },
 };

@@ -36,6 +36,18 @@ frappe.query_reports["In House"] = {
             reqd: 0,
             wildcard_filter: 0,
         },
+        {
+            fieldname: "complementry",
+            label: __("Complementary"),
+            fieldtype: "Select",
+            options: ["", "Yes", "No"],
+        },
+        {
+            fieldname: "house_use",
+            label: __("House Use"),
+            fieldtype: "Select",
+            options: ["", "Yes", "No"],
+        },
 
         {
             fieldname: "reservation_status",

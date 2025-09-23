@@ -19,25 +19,30 @@ app_include_js = [
     "/assets/abc_hms/js/nav-8.js"
 ]
 fixtures = [
-
     {"doctype": "Company"},
-
+        {"doctype" :"Sales Partner Type"},
+        {"doctype" :"Sales Partner"},
     {
         "doctype": "Item" ,
-        "doctype" :"Sales Partner Type",
-        "doctype" :"Sales Partner",
-
         "filters": [
             ["item_group", "in", [
                 "F&B",
                 "Rooms",
             ]]
         ]},
-    {
+{
         "doctype": "Item Group" ,
         "filters": [
             ["name", "in", [
                 "F&B",
+                "Rooms",
+            ]]
+        ]},
+    {
+        "doctype": "Custom HTML Block" ,
+        "filters": [
+            ["name", "in", [
+                "F&End Of Day",
                 "Rooms",
             ]]
         ]},
@@ -106,6 +111,5 @@ fixtures = [
 	{
 		"doctype": "Casheir Device Production Area",
 	},
-
 ]
 

@@ -85,15 +85,15 @@ def ignore_and_resave(args: str |  dict):
     try:
         frappe.db.begin()
         app_container.reservation_usecase.reservation_sync({
-            "name" : args['name'],
-            "arrival" : args['arrival'],
-            "departure" : args['departure'],
-            "docstatus" : args['docstatus'],
-            "reservation_status" : args['reservation_status'],
-            "room_type" : args['room_type'],
-            "room" : args['room'],
-            "ignore_availability" : args['ignore_availability'],
-            "allow_share" : args['allow_share'],
+            "reservation": args["name"],
+            "new_arrival": args["arrival"],
+            "new_departure": args["departure"],
+            "new_docstatus": args["docstatus"],
+            "new_reservation_status": args["reservation_status"],
+            "new_room_type": args["room_type"],
+            "new_room": args["room"],
+            "ignore_availability": args["ignore_availability"],
+            "allow_room_sharing": args["allow_share"]
         })
 
         frappe.db.set_value("Reservation", args['name'], update_values)

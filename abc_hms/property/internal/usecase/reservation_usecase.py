@@ -1,3 +1,4 @@
+import json
 import re
 from datetime import datetime
 import frappe
@@ -18,15 +19,15 @@ class ReservationUsecase:
 
     def reservation_sync(self , params:dict):
         return self.repo.reservation_sync(
-            reservation=params.get("reservation"),
-            new_arrival=params.get("new_arrival"),
-            new_departure=params.get("new_departure"),
-            new_docstatus=params.get("new_docstatus"),
-            new_reservation_status=params.get("new_reservation_status"),
-            new_room_type=params.get("new_room_type"),
-            new_room=params.get("new_room"),
-            ignore_availability=params.get("ignore_availability", 0),
-            allow_room_sharing=params.get("allow_room_sharing", 0),
+            params.get("reservation"),
+            params.get("new_arrival"),
+            params.get("new_departure"),
+            params.get("new_docstatus"),
+            params.get("new_reservation_status"),
+            params.get("new_room_type"),
+            params.get("new_room"),
+            params.get("ignore_availability", 0),
+            params.get("allow_room_sharing", 0),
         )
 
     def reservation_end_of_day_auto_mark(self , property:str ,auto_mark_no_show: bool):
@@ -103,25 +104,6 @@ class ReservationUsecase:
             try:
                 response = upsert_pos_invoice_method(request)
 
-            except frappe.ValidationError as e:
-                msg = str(e)
-                match = re.search(r"Item (.+?) not found", msg)
-                if match:
-                    item_code = match.group(1)
-                    frappe.get_doc({
-                        "doctype": "Item",
-                        "item_code": item_code,
-                        "item_group": default_rooms_group,
-                        "item_name": item_code,
-                        "description": item_code,
-                        "stock_uom": "Nos",   # 👈 adjust if you want a different default
-                        "is_sales_item": 1,
-                        "is_stock_item": 0,
-                    }).insert(ignore_permissions=True)
-                    frappe.db.commit()
-
-                    response = upsert_pos_invoice_method(request)
-                raise
             except Exception:
                 raise
 

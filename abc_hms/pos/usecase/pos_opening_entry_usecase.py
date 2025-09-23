@@ -1,6 +1,7 @@
 from typing import Union
 from erpnext.accounts.doctype.pos_closing_entry.pos_closing_entry import POSClosingEntry, make_closing_entry_from_opening
 import frappe
+from sentry_sdk.utils import json_dumps
 
 from abc_hms.dto.dto_helpers import ErrorResponse, ErrorResponseWithData
 from abc_hms.dto.pos_invoice_dto import POSInvoiceData
@@ -57,21 +58,16 @@ class POSOpeningEntryUsecase:
     def pos_closing_entry_from_opening_name(
         self,
         request :POSClosingEntryFromOpeningRequest,
-    ) -> POSClosingEntryFromOpeningResponse:
+    ) -> POSClosingEntry:
         try:
             pos_opening_entry = self.repo.pos_opening_entry_find(request["opening_entry"])
             closing_entry = make_closing_entry_from_opening(pos_opening_entry)
             closing_entry.insert(ignore_permissions=True)
             if request["commit"]:
                 frappe.db.commit()
-            return { "success" : True  ,"doc": closing_entry} # type: ignore
-        except frappe.ValidationError as e:
-            frappe.log_error(f"POS closing_entry validation failed: {e}")
-            raise
-
+            return closing_entry
         except Exception as e:
-            frappe.log_error(frappe.get_traceback(), "POS closing_entry Upsert API Error")
-            return {"success" : False , "error" : f"Unexpected error: {str(e)}"}
+            raise e
     def pos_closing_entry_from_opening(
         self,
         pos_opening_entry :POSOpeningEntryData,

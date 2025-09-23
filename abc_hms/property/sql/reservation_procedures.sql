@@ -76,7 +76,13 @@ proc_body: BEGIN
     LIMIT 1;
 
     -- Validate dates
-    IF p_new_arrival IS NULL OR p_new_departure IS NULL OR p_new_arrival >= p_new_departure THEN
+    IF p_new_arrival IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: Arrival Is Required';
+    END IF;
+    IF p_new_departure IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: Departure Is Required';
+    END IF;
+    IF p_new_arrival >= p_new_departure THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: arrival must be before departure';
     END IF;
 

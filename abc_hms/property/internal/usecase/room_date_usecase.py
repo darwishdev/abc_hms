@@ -1,5 +1,5 @@
 
-from typing import List
+from typing import Dict, List
 from ..repo.room_date_repo import RoomDateRepo
 from abc_hms.dto.property_room_date_dto import RoomDateBulkUpsertRequest, RoomDateView, RoomDateBulkUpsertResponse
 class RoomDateUsecase:
@@ -8,16 +8,13 @@ class RoomDateUsecase:
 
     def room_date_bulk_upsert(
         self,
-        payload: RoomDateBulkUpsertRequest
-    ) -> RoomDateBulkUpsertResponse:
+        room_numbers: List[str],
+        for_date: int,
+        updated_fields: Dict[str, int],
+        commit: bool = True,
+    ) :
         try:
-            result: List[RoomDateView] = self.repo.bulk_upsert(payload)
-            return {
-                "success": True,
-                "affected": result,
-            }
+            result = self.repo.bulk_upsert(room_numbers , for_date , updated_fields , commit)
+            return result
         except Exception as e:
-            return {
-                "success": False,
-                "error": f"RoomDate BulkUpsert Error: {str(e)}",
-            }
+            raise Exception(f"Un Expected Error: {str(e)}")

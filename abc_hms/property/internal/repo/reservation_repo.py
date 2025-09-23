@@ -34,6 +34,10 @@ class ReservationRepo:
             ignore_availability,
             allow_room_sharing,
         )
+        print("query")
+        print(query)
+        print("pramas")
+        print(params)
 
         # frappe.db.sql is the right API (not frappe.sql.call)
         result = frappe.db.sql(query, params, as_dict=True)
@@ -93,6 +97,8 @@ class ReservationRepo:
                 r.base_rate
             FROM `tabProperty Setting` s
             JOIN `tabReservation` r on r.departure = s.business_date
+and r.reservation_status =
+            'Departure'
             WHERE s.name = %(property)s;
         """
         results = frappe.db.sql(query, {"property": property} , as_dict=True)
@@ -106,7 +112,8 @@ class ReservationRepo:
                 r.room,
                 r.base_rate
             FROM `tabProperty Setting` s
-            JOIN `tabReservation` r on r.arrival = s.business_date
+            JOIN `tabReservation` r on r.arrival = s.business_date and r.reservation_status =
+            'Arrival'
             WHERE s.name = %(property)s;
         """
         results = frappe.db.sql(query, {"property": property} , as_dict=True)
@@ -150,7 +157,7 @@ class ReservationRepo:
                 ON f.name  = inv.folio
                AND inv.for_date = %(business_date)s
             LEFT JOIN tabItem i on i.name = CONCAT(r.room_type , '-' , r.rate_code)
-            WHERE r.reservation_status = 'In House'
+            WHERE r.reservation_status IN ('In House' , 'Departure')
             GROUP BY
                 r.name,
                 r.guest,
@@ -172,15 +179,13 @@ class ReservationRepo:
         return results
 
     def reservation_end_of_day_auto_mark(self, property: str, auto_mark_no_show: bool):
-        if not auto_mark_no_show:
-            return {}
+        if auto_mark_no_show:
+            frappe.db.sql("""
+                UPDATE `tabReservation` r
+                SET r.reservation_status = 'No Show', r.docstatus = 2
+                WHERE reservation_status = 'Arrival' AND property = %s
+            """, (property,))
         frappe.db.sql("""
-            UPDATE `tabReservation` r
-            SET r.reservation_status = 'No Show', r.docstatus = 2
-            WHERE reservation_status = 'Arrival' AND property = %s
-        """, (property,))
-        frappe.db.sql("""
-
             DELETE rd
             FROM `reservation_date` rd
             JOIN `tabReservation` r on rd.reservation = r.name AND r.reservation_status = 'Arrival' AND r.property = %s
@@ -202,6 +207,20 @@ class ReservationRepo:
             AND r.property = %s
             AND r.departure =
             DATE_ADD(s.business_date, INTERVAL 1 DAY)
+        """, (property,))
+
+        frappe.db.sql("""
+            insert into room_date (
+                room,
+                for_date,
+                room_status
+            )
+            select r.room , date_to_int(s.business_date) , 0
+            FROM `tabReservation` r
+            JOIN `tabProperty Setting` s on r.property = %s
+            where r.reservation_status = IN('In House' , 'Departure')
+            ON DUPLICATE KEY UPDATE
+                room_status = 0;
         """, (property,))
         return {}
     def reservation_availability_check(

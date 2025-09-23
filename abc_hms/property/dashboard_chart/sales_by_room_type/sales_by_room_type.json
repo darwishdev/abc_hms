@@ -1,0 +1,34 @@
+{
+ "chart_name": "Sales By Room Type",
+ "chart_type": "Report",
+ "creation": "2025-09-23 03:30:00.938112",
+ "currency": "EGP",
+ "custom_options": "{\"x_field\": \"room_type\", \"chart_type\": \"Donut\", \"y_axis_fields\": [{\"idx\": 1, \"__islocal\": true, \"y_field\": \"base_rate\", \"name\": \"row 1\"}], \"y_fields\": [\"base_rate\"], \"colors\": [null]}",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "filters_json": "{\"property\":\"CONA\",\"date_filter\":\"2025-08-07\",\"reservation_status\":\"In House\"}",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "modified": "2025-09-23 03:30:01.030940",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "Sales By Room Type",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "report_name": "In House",
+ "roles": [],
+ "show_values_over_chart": 0,
+ "time_interval": "Yearly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Donut",
+ "use_report_chart": 0,
+ "x_field": "room_type",
+ "y_axis": [
+  {
+   "y_field": "base_rate"
+  }
+ ]
+}
