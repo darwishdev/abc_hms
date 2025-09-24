@@ -5,6 +5,7 @@ frappe.views.calendar["Reservation"] = {
         id: "name",
         allDay: "all_day",
         title: "guest",
+        color: "color",
         status: "reservation_status",
     },
     style_map: {

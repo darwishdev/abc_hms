@@ -63,6 +63,7 @@ class POSOpeningEntryUsecase:
             pos_opening_entry = self.repo.pos_opening_entry_find(request["opening_entry"])
             closing_entry = make_closing_entry_from_opening(pos_opening_entry)
             closing_entry.insert(ignore_permissions=True)
+            closing_entry.submit()
             if request["commit"]:
                 frappe.db.commit()
             return closing_entry

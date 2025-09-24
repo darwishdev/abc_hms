@@ -218,7 +218,7 @@ and r.reservation_status =
             select r.room , date_to_int(s.business_date) , 0
             FROM `tabReservation` r
             JOIN `tabProperty Setting` s on r.property = %s
-            where r.reservation_status = IN('In House' , 'Departure')
+            where r.reservation_status  IN ('In House' , 'Departure')
             ON DUPLICATE KEY UPDATE
                 room_status = 0;
         """, (property,))
