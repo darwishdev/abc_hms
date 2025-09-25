@@ -1,0 +1,38 @@
+[
+ {
+  "commission_rate": 10.0,
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Sales Partner",
+  "introduction": null,
+  "logo": null,
+  "modified": "2025-09-22 11:59:18.238536",
+  "name": "National Security",
+  "partner_name": "National Security",
+  "partner_type": "Travel Agent",
+  "partner_website": null,
+  "referral_code": null,
+  "route": "partners/national-security",
+  "show_in_website": 0,
+  "targets": [],
+  "territory": "Egypt"
+ },
+ {
+  "commission_rate": 10.0,
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Sales Partner",
+  "introduction": null,
+  "logo": null,
+  "modified": "2025-09-22 11:57:35.142370",
+  "name": "Deniz Tours",
+  "partner_name": "Deniz Tours",
+  "partner_type": "Travel Agent",
+  "partner_website": null,
+  "referral_code": null,
+  "route": "partners/deniz-tours",
+  "show_in_website": 0,
+  "targets": [],
+  "territory": "Egypt"
+ }
+]

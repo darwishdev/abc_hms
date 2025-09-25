@@ -3,7 +3,7 @@ from erpnext.accounts.doctype.pos_invoice.pos_invoice import POSInvoice
 import frappe
 from pydantic import ValidationError
 
-from abc_hms.dto.pos_invoice_dto import POSInvoiceData, PosInvoiceFindForDateRequest, PosInvoiceFindForDateResponse, PosInvoiceUpsertRequest, PosInvoiceUpsertResponse
+from abc_hms.dto.pos_invoice_dto import POSInvoiceData, PosInvoiceFindForDateRequest, PosInvoiceFindForDateResponse, PosInvoiceItemTransferRequest, PosInvoiceItemUpdateRequest, PosInvoiceUpsertRequest, PosInvoiceUpsertResponse
 from ..repo.pos_invoice_repo import POSInvoiceRepo
 from frappe import  _
 
@@ -19,6 +19,31 @@ class POSInvoiceUsecase:
             property
         )
 
+
+
+    def pos_invoice_item_transfer(
+        self,
+        params: PosInvoiceItemTransferRequest
+    ):
+        try:
+            result = self.repo.pos_invoice_item_transfer(
+                params
+            )
+            return result
+        except Exception as e:
+            raise e
+    def pos_invoice_item_update_widnow(
+        self,
+        params: PosInvoiceItemUpdateRequest
+    ):
+        try:
+            result = self.repo.pos_invoice_item_update_widnow(
+                params["name"],
+                params["folio_window"]
+            )
+            return result
+        except Exception as e:
+            raise e
     def pos_invoice_find_for_date(
         self,
         params: PosInvoiceFindForDateRequest,
@@ -42,7 +67,7 @@ class POSInvoiceUsecase:
         request :PosInvoiceUpsertRequest,
     ) -> PosInvoiceUpsertResponse:
         try:
-            result = self.repo.pos_invoice_invoice(request['doc'],commit=request['commit'])
+            result = self.repo.pos_invoice_upsert(request['doc'],commit=request['commit'])
             return result
         except frappe.ValidationError as e:
             raise frappe.ValidationError(f"POS Invoice validation failed: {e}")

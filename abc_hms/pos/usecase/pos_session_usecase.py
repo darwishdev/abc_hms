@@ -1,8 +1,7 @@
-from typing import List
 import frappe
-
 from abc_hms.dto.pos_session_dto import POSSessionFindForDateResponse, POSSessionUpsertRequest, POSSessionUpsertResponse
-from frappe import Optional, _
+from frappe import  _
+
 
 from abc_hms.pos.doctype.pos_session.pos_session import POSSession
 from abc_hms.pos.repo.pos_session_repo import POSSessionRepo
@@ -14,21 +13,17 @@ class POSSessionUsecase:
     def pos_session_upsert(
         self,
         request :POSSessionUpsertRequest,
-    ) -> POSSessionUpsertResponse:
+        commit : bool
+    ) -> POSSession:
         try:
-            result = self.repo.pos_session_upsert(request['doc'],commit=request['commit'])
+            return self.repo.pos_session_upsert(request['doc'] , commit)
         except frappe.ValidationError as e:
-            frappe.log_error(f"POS session validation failed: {e}")
+            raise Exception(f"POS session validation failed: {e}")
             raise
 
         except Exception as e:
-            frappe.log_error(frappe.get_traceback(), "POS session Upsert API Error")
-            return {"success" : False , "error" : f"Unexpected error: {str(e)}"}
+            raise Exception(f"Unexpected error: {str(e)}")
 
-        return {
-            "success": True,
-            "doc": result,
-        }
 
 
     def pos_sessions_close_crrent_date(
@@ -37,6 +32,16 @@ class POSSessionUsecase:
     ):
         return self.repo.pos_sessions_close_crrent_date(property)
 
+
+
+    def pos_session_find_for_user(
+        self,
+        user :str,
+        profile: str,
+        docstatus: int
+    ):
+        result = self.repo.pos_session_find_for_user(user , profile , docstatus)
+        return result
     def pos_sessions_crrent_date(
         self,
         property :str,

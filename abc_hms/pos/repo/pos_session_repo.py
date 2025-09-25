@@ -27,6 +27,15 @@ class POSSessionRepo:
         """
         return frappe.db.sql(query, (property,))
 
+    def pos_session_find_for_user(self , user: str , profile: str , docstatus: int ):
+        query = """
+            select s.name , s.owner as "user" , s.for_date  from `tabPOS Session` s
+              join `tabPOS Profile` p on  p.name = s.pos_profile
+              JOIN `tabProperty Setting` ps on p.property = ps.property and  s.for_date = date_to_int(ps.business_date)
+              where s.owner = %s and s.pos_profile = %s and s.docstatus = %s
+        """
+        results = frappe.db.sql(query, (user , profile , docstatus) ,as_dict=True)
+        return results
     def pos_session_list_for_current_date(self , property: str):
         query = """
             SELECT

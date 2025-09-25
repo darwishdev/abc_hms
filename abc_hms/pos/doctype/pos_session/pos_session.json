@@ -4,11 +4,9 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "property",
   "pos_profile",
   "column_break_gwgd",
-  "for_date",
-  "opening_entry"
+  "for_date"
  ],
  "fields": [
   {
@@ -24,26 +22,11 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "opening_entry",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Opening Entry",
-   "options": "POS Opening Entry",
-   "reqd": 1
-  },
-  {
    "fieldname": "for_date",
    "fieldtype": "Int",
    "label": "For Date",
    "length": 8,
    "non_negative": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "property",
-   "fieldtype": "Link",
-   "label": "Property",
-   "options": "Property",
    "reqd": 1
   }
  ],
@@ -57,7 +40,7 @@
    "link_fieldname": "pos_session"
   }
  ],
- "modified": "2025-09-19 22:57:22.671347",
+ "modified": "2025-09-25 05:16:25.859643",
  "modified_by": "Administrator",
  "module": "Pos",
  "name": "POS Session",

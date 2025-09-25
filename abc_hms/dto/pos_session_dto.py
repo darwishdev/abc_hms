@@ -7,13 +7,10 @@ from abc_hms.pos.doctype.pos_session.pos_session import POSSession
 
 class POSSessionUpsertRequest(TypedDict):
     doc: POSSession
-    commit: bool
 
-class POSSessionUpsertResult(TypedDict):
-    success: bool
+class POSSessionUpsertResponse(TypedDict):
     doc: POSSession
 
-POSSessionUpsertResponse = Union[POSSessionUpsertResult, ErrorResponse]
 
 class POSSessionDefaults(TypedDict):
     pos_profile: str

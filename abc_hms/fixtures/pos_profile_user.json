@@ -1,0 +1,101 @@
+[
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 16:59:28.188558",
+  "name": "qs29hbgqbj",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "a.darwish.dev@gmail.com"
+ },
+ {
+  "default": 0,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 17:01:16.399181",
+  "name": "ro3e06va28",
+  "parent": "MRE",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 16:59:28.188558",
+  "name": "qs2qnqo9ik",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 0,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 17:01:16.399181",
+  "name": "ro3iut16pp",
+  "parent": "MRE",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "a.darwish.dev@gmail.com"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 16:59:28.188558",
+  "name": "qs2jrs35s0",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "kareem@conchahotel.com"
+ },
+ {
+  "default": 0,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 17:01:16.399181",
+  "name": "ro38inse85",
+  "parent": "MRE",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "front.desk@conchahotel.com"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 16:59:28.188558",
+  "name": "qs2htncg2u",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "property.manager@conchahotel.com"
+ },
+ {
+  "default": 0,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 17:01:16.399181",
+  "name": "ro3t1pp128",
+  "parent": "MRE",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "property.manager@conchahotel.com"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-09-25 16:59:28.188558",
+  "name": "qs208k5jnt",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "front.desk@conchahotel.com"
+ }
+]

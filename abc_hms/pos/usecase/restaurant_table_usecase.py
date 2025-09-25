@@ -7,22 +7,17 @@ from abc_hms.dto.pos_folio_dto import FolioItem, FolioListFilteredRequest, Folio
 from abc_hms.pos.doctype.folio.folio import Folio
 from abc_hms.pos.doctype.folio_window.folio_window import FolioWindow
 from abc_hms.pos.repo.folio_repo import FolioRepo
+from abc_hms.pos.repo.restaurant_table_repo import RestaurantTableRepo
 
-class FolioUsecase:
+class RestaurantTableUsecase:
     def __init__(self):
-        self.repo = FolioRepo()
+        self.repo = RestaurantTableRepo()
 
-    def folio_upsert(
+    def table_list(
         self,
-        payload :FolioUpsertRequest,
+        property :str,
     ):
-        try:
-            return self.repo.folio_upsert(payload.get("doc") , payload.get("commit"))
-        except frappe.ValidationError as e:
-            raise e
-
-        except Exception as e:
-            raise e
+        return self.repo.table_list(property)
 
 
     def folio_find(self, folio: str):

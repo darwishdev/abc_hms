@@ -70,6 +70,7 @@ fixtures = [
     {"doctype": "Rate Category"},
     {"doctype": "Rate Code"},
     {"doctype": "POS Profile"},
+    {"doctype": "POS Profile User"},
     {"doctype": "Sales Taxes and Charges Template"},
     {"doctype": "Workflow State"},
     {"doctype": "Workflow Action"},
@@ -80,7 +81,9 @@ fixtures = [
     {"doctype": "Property Setting"},
     {"doctype": "Item Group"},
     {"doctype": "Item"},
-    {"doctype": "Reservation"},
+    {"doctype": "Restaurant"},
+    {"doctype": "Restaurant Area"},
+    {"doctype": "Restaurant Table"},
     {"doctype": "Amenity"},
 	{
 		"doctype": "Warehouse",

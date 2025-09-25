@@ -37,12 +37,12 @@ class AuthUsecase:
         api_key = keys_result.get("api_key")
         api_secret = keys_result.get("api_secret")
 
+        profiles = self.repo.user_find_pos_profiles(user_name)
         token_value = f"{api_key}:{api_secret}"
         return {
-            "success": True,
+            "profiles" : profiles,
             "authorization": token_value,
             "token_type": "token",
             "user": user_name,
-            "username": user_name,
-            "message": "Login successful"
+            "username": user_name
         }

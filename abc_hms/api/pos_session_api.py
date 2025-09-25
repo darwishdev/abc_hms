@@ -2,6 +2,7 @@ import frappe
 import json
 from abc_hms.container import app_container
 from abc_hms.dto.pos_session_dto import POSSessionFindForDateRequest, POSSessionDefaultsFindResponse, POSSessionFindForDateResponse, POSSessionUpsertRequest, POSSessionUpsertResponse
+from abc_hms.pos.doctype.pos_session.pos_session import POSSession
 
 @frappe.whitelist(methods=["GET"])
 def pos_session_find_for_date()-> POSSessionFindForDateResponse:
@@ -16,15 +17,13 @@ def pos_session_find_for_date()-> POSSessionFindForDateResponse:
     return result
 
 @frappe.whitelist(methods=["POST" , "PUT"])
-def pos_session_upsert()-> POSSessionUpsertResponse:
+def pos_session_upsert()-> POSSession:
     try:
         data = frappe.local.request.data
         payload: POSSessionUpsertRequest = json.loads(data or "{}")
     except Exception as e:
-        frappe.throw(f"Invalid JSON payload: {e}")
-        return {"success" : False , "error" : f"{str(e)}"}
-
-    result = app_container.pos_session_usecase.pos_session_upsert(payload)
+        raise Exception(f"Invalid JSON payload: {e}")
+    result = app_container.pos_session_usecase.pos_session_upsert(payload , True)
     return result
 
 @frappe.whitelist(methods=["GET"])

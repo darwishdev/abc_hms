@@ -1,0 +1,24 @@
+[
+  {
+    "fieldname": "display_name",
+    "label": "Display Name",
+    "fieldtype": "Data",
+    "in_standard_filter": 1
+  },
+  {
+    "fieldname": "property",
+    "label": "Property",
+    "fieldtype": "Link",
+    "options": "Property",
+    "req": 1,
+    "in_standard_filter": 1
+  },
+  {
+    "fieldname": "restaurant",
+    "label": "Restaurant",
+    "fieldtype": "Link",
+    "options": "Restaurant",
+    "in_list_view": 0,
+    "in_standard_filter": 1
+  }
+]

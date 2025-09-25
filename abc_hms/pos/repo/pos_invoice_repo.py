@@ -1,9 +1,11 @@
 
 import frappe
 from typing import  Any, Dict, List
-from frappe import Optional, _
-from abc_hms.dto.pos_invoice_dto import POSInvoiceData
+from frappe import NotFound, Optional, _, destroy
+from frappe.rate_limiter import update
+from abc_hms.dto.pos_invoice_dto import POSInvoiceData, PosInvoiceItemTransferRequest
 from utils.date_utils import date_to_int
+from utils.sql_utils import run_sql
 class POSInvoiceRepo:
 
     def pos_invoice_find_for_date(
@@ -35,7 +37,54 @@ class POSInvoiceRepo:
         except Exception as e:
             frappe.log_error(frappe.get_traceback(), "POS Invoice Find For Date Error")
             raise
-    def pos_invoice_invoice(self , docdata: POSInvoiceData, commit: bool = True)->POSInvoiceData:
+
+
+    def pos_invoice_item_update_widnow(
+        self ,
+        name : str ,
+        folio_window:str
+    ):
+        def run_update(cur , conn):
+            query = """
+            UPDATE `tabPOS Invoice Item` i
+            SET
+            i.folio_window = coalesce(%s,i.folio_window)
+            where i.name = %s
+            """
+            cur.execute(query,(folio_window,name))
+            conn.commit()
+            return
+
+        return run_sql(run_update)
+
+    def pos_invoice_item_transfer(self , payload: PosInvoiceItemTransferRequest):
+        try:
+            frappe.db.begin()
+            source_invoice = frappe.get_doc("POS Invoice", payload["source_invoice"])
+            if not source_invoice:
+                raise NotFound(f"the source invoice not found {payload["source_invoice"]}")
+            dest_invoice = frappe.get_doc("POS Invoice", payload["destination_invoice"])
+            if not dest_invoice:
+                raise NotFound(f"the source invoice not found {payload["destination_invoice"]}")
+            items_passed = 'items' in payload
+            for item in source_invoice.items:
+                if item.folio_window == payload["source_window"] and (not items_passed or item.name in
+                                                                          payload["items"]):
+                    source_invoice.remove(item)
+                    dest_invoice.append("items" , item)
+
+            if not items_passed:
+                frappe.db.sql("update `tabFolio Window` fw SET fw.folio = %s where name = %s" ,
+                              ( dest_invoice.folio ,payload["source_window"]) )
+            source_invoice.save()
+            dest_invoice.save()
+            frappe.db.commit()
+            return dest_invoice
+        except:
+            frappe.db.rollback()
+            raise
+
+    def pos_invoice_upsert(self , docdata: POSInvoiceData, commit: bool = True)->POSInvoiceData:
         payments = docdata.get("payments", None)
         items = docdata.get("items", None)
         invoice_id = str(docdata.get("name"))

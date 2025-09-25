@@ -6,7 +6,9 @@
  "engine": "InnoDB",
  "field_order": [
   "reservation",
+  "restaurant_table",
   "column_break_hajc",
+  "pos_profile",
   "folio_status",
   "amended_from"
  ],
@@ -25,12 +27,24 @@
    "in_list_view": 1,
    "label": "Reservation",
    "link_filters": "[[\"Reservation\",\"docstatus\",\"=\",\"1\"]]",
-   "options": "Reservation",
-   "reqd": 1
+   "options": "Reservation"
   },
   {
    "fieldname": "column_break_hajc",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "restaurant_table",
+   "fieldtype": "Link",
+   "label": "Restaurant Table",
+   "options": "Restaurant Table"
+  },
+  {
+   "fieldname": "pos_profile",
+   "fieldtype": "Link",
+   "label": "POS Profile",
+   "options": "POS Profile",
+   "reqd": 1
   },
   {
    "fieldname": "amended_from",
@@ -56,7 +70,7 @@
    "link_fieldname": "folio"
   }
  ],
- "modified": "2025-09-19 22:25:57.783228",
+ "modified": "2025-09-25 05:20:59.460553",
  "modified_by": "Administrator",
  "module": "Pos",
  "name": "Folio",

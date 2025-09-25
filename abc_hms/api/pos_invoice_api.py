@@ -1,7 +1,7 @@
 import frappe
 import json
 from abc_hms.container import app_container
-from abc_hms.dto.pos_invoice_dto import  PosInvoiceFindForDateRequest, PosInvoiceFindForDateResponse, PosInvoiceUpsertRequest, PosInvoiceUpsertResponse
+from abc_hms.dto.pos_invoice_dto import  PosInvoiceFindForDateRequest, PosInvoiceFindForDateResponse, PosInvoiceItemTransferRequest, PosInvoiceItemUpdateRequest, PosInvoiceUpsertRequest, PosInvoiceUpsertResponse
 
 
 @frappe.whitelist(methods=["POST" , "PUT"])
@@ -14,6 +14,30 @@ def pos_invoice_upsert()-> PosInvoiceUpsertResponse:
         return {"success" : False , "error" : f"{str(e)}"}
 
     result = app_container.pos_invoice_usecase.pos_invoice_upsert(payload)
+    return result
+
+
+@frappe.whitelist(methods=["POST"])
+def pos_invoice_item_update_widnow():
+    try:
+        data = frappe.local.request.data
+        payload: PosInvoiceItemUpdateRequest = json.loads(data or "{}")
+    except Exception as e:
+        frappe.throw(f"Invalid JSON payload: {e}")
+        return {"success" : False , "error" : f"{str(e)}"}
+
+    result = app_container.pos_invoice_usecase.pos_invoice_item_update_widnow(payload)
+    return result
+@frappe.whitelist(methods=["POST"])
+def pos_invoice_item_transfer():
+    try:
+        data = frappe.local.request.data
+        payload: PosInvoiceItemTransferRequest = json.loads(data or "{}")
+    except Exception as e:
+        frappe.throw(f"Invalid JSON payload: {e}")
+        return {"success" : False , "error" : f"{str(e)}"}
+
+    result = app_container.pos_invoice_usecase.pos_invoice_item_transfer(payload)
     return result
 
 @frappe.whitelist(methods=["GET"])
