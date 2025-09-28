@@ -1,131 +1,125 @@
 {
- "add_total_row": 0,
- "add_translate_data": 0,
- "columns": [
-  {
-   "fieldname": "room",
-   "fieldtype": "Link",
-   "label": "Room",
-   "options": "Room",
-   "width": 0
-  },
-  {
-   "fieldname": "base_rate",
-   "fieldtype": "Currency",
-   "label": "Base Rate",
-   "width": 0
-  },
-  {
-   "fieldname": "nights",
-   "fieldtype": "Int",
-   "label": "Nights",
-   "width": 0
-  },
-  {
-   "fieldname": "total_stay",
-   "fieldtype": "Currency",
-   "label": "Total Stay",
-   "width": 0
-  },
-  {
-   "fieldname": "guest",
-   "fieldtype": "Link",
-   "label": "Guest",
-   "options": "Customer",
-   "width": 0
-  },
-  {
-   "fieldname": "arrival",
-   "fieldtype": "Date",
-   "label": "Arrival",
-   "width": 0
-  },
-  {
-   "fieldname": "adults",
-   "fieldtype": "Int",
-   "label": "Adults",
-   "width": 0
-  },
-  {
-   "fieldname": "children",
-   "fieldtype": "Int",
-   "label": "Children",
-   "width": 0
-  },
-  {
-   "fieldname": "folio",
-   "fieldtype": "Link",
-   "label": "Folio",
-   "options": "Folio",
-   "width": 0
-  },
-  {
-   "fieldname": "folio_status",
-   "fieldtype": "Data",
-   "label": "Folio Status",
-   "width": 0
-  },
-  {
-   "fieldname": "company_profile",
-   "fieldtype": "Link",
-   "label": "Company Profile",
-   "options": "Customer",
-   "width": 0
-  },
-  {
-   "fieldname": "travel_agent",
-   "fieldtype": "Link",
-   "label": "Travel Agent",
-   "options": "Sales Partner",
-   "width": 0
-  }
- ],
- "creation": "2025-09-18 07:33:49.846085",
- "disabled": 0,
- "docstatus": 0,
- "doctype": "Report",
- "filters": [
-  {
-   "fieldname": "property",
-   "fieldtype": "Link",
-   "label": "Property",
-   "mandatory": 1,
-   "options": "Property",
-   "wildcard_filter": 0
-  }
- ],
- "idx": 0,
- "is_standard": "Yes",
- "letterhead": null,
- "modified": "2025-09-18 10:01:09.984566",
- "modified_by": "Administrator",
- "module": "Property",
- "name": "Departures",
- "owner": "Administrator",
- "prepared_report": 0,
- "query": "with business_date as (\n   select s.business_date from `tabProperty Setting` s where  s.name = %(property)s\n)\nselect \n  r.room,\n  r.base_rate,\n  r.nights,\n  (r.base_rate * r.nights) total_stay,\n  r.guest,\n  r.arrival,\n  r.adults,\n  COALESCE(r.children,0) children,\n  f.name folio,\n  f.folio_status,\n  COALESCE(r.company_profile , 'N/A') company_profile,\n  COALESCE(r.travel_agent , 'N/A') travel_agent\n  FROM business_date bd\n  join tabReservation r on r.departure = bd.business_date or true\n  JOIN `tabFolio` f on r.name = f.reservation;\n  ",
- "ref_doctype": "Reservation",
- "report_name": "Departures",
- "report_type": "Script Report",
- "roles": [
-  {
-   "role": "Administrator"
-  },
-  {
-   "role": "Front Desk Agent"
-  },
-  {
-   "role": "Hotel Manager"
-  },
-  {
-   "role": "Property Manager"
-  },
-  {
-   "role": "Front Desk"
-  },
-  {
-   "role": "House Keeping"
-  }
- ],
- "timeout": 0
+  "add_total_row": 0,
+  "add_translate_data": 0,
+  "columns": [
+    {
+      "fieldname": "room",
+      "fieldtype": "Link",
+      "label": "Room",
+      "options": "Room",
+      "width": 0
+    },
+    {
+      "fieldname": "base_rate",
+      "fieldtype": "Currency",
+      "label": "Base Rate",
+      "width": 0
+    },
+    {
+      "fieldname": "nights",
+      "fieldtype": "Int",
+      "label": "Nights",
+      "width": 0
+    },
+    {
+      "fieldname": "total_stay",
+      "fieldtype": "Currency",
+      "label": "Total Stay",
+      "width": 0
+    },
+    {
+      "fieldname": "guest",
+      "fieldtype": "Link",
+      "label": "Guest",
+      "options": "Customer",
+      "width": 0
+    },
+    {
+      "fieldname": "arrival",
+      "fieldtype": "Date",
+      "label": "Arrival",
+      "width": 0
+    },
+    {
+      "fieldname": "adults",
+      "fieldtype": "Int",
+      "label": "Adults",
+      "width": 0
+    },
+    {
+      "fieldname": "children",
+      "fieldtype": "Int",
+      "label": "Children",
+      "width": 0
+    },
+    {
+      "fieldname": "folio",
+      "fieldtype": "Link",
+      "label": "Folio",
+      "options": "Folio",
+      "width": 0
+    },
+    {
+      "fieldname": "company_profile",
+      "fieldtype": "Link",
+      "label": "Company Profile",
+      "options": "Customer",
+      "width": 0
+    },
+    {
+      "fieldname": "travel_agent",
+      "fieldtype": "Link",
+      "label": "Travel Agent",
+      "options": "Sales Partner",
+      "width": 0
+    }
+  ],
+  "creation": "2025-09-18 07:33:49.846085",
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [
+    {
+      "fieldname": "property",
+      "fieldtype": "Link",
+      "label": "Property",
+      "mandatory": 1,
+      "options": "Property",
+      "wildcard_filter": 0
+    }
+  ],
+  "idx": 0,
+  "is_standard": "Yes",
+  "letterhead": null,
+  "modified": "2025-09-18 10:01:09.984566",
+  "modified_by": "Administrator",
+  "module": "Property",
+  "name": "Departures",
+  "owner": "Administrator",
+  "prepared_report": 0,
+  "query": "with business_date as (\n   select s.business_date from `tabProperty Setting` s where  s.name = %(property)s\n)\nselect \n  r.room,\n  r.base_rate,\n  r.nights,\n  (r.base_rate * r.nights) total_stay,\n  r.guest,\n  r.arrival,\n  r.adults,\n  COALESCE(r.children,0) children,\n  f.name folio,\n    COALESCE(r.company_profile , 'N/A') company_profile,\n  COALESCE(r.travel_agent , 'N/A') travel_agent\n  FROM business_date bd\n  join tabReservation r on r.departure = bd.business_date or true\n  JOIN `tabFolio` f on r.name = f.reservation;\n  ",
+  "ref_doctype": "Reservation",
+  "report_name": "Departures",
+  "report_type": "Script Report",
+  "roles": [
+    {
+      "role": "Administrator"
+    },
+    {
+      "role": "Front Desk Agent"
+    },
+    {
+      "role": "Hotel Manager"
+    },
+    {
+      "role": "Property Manager"
+    },
+    {
+      "role": "Front Desk"
+    },
+    {
+      "role": "House Keeping"
+    }
+  ],
+  "timeout": 0
 }

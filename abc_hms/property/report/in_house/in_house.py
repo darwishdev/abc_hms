@@ -27,7 +27,6 @@ def execute(filters=None):
         {"fieldname": "arrival", "label": "Arrival", "fieldtype": "Date"},
         {"fieldname": "departure", "label": "departure", "fieldtype": "Date"},
         {"fieldname": "folio", "label": "Folio", "fieldtype": "Link", "options": "Folio"},
-        {"fieldname": "folio_status", "label": "Folio Status", "fieldtype": "Data"},
         {"fieldname": "room_type", "label": "Room Type", "fieldtype": "Link", "options": "Room Type"},
         {"fieldname": "guest_comment", "label": "Guest Comments", "fieldtype": "Data"},
         {"fieldname": "reservation_comment", "label": "Reservation Comments", "fieldtype": "Data"},
@@ -122,7 +121,6 @@ def execute(filters=None):
         IF(rc.house_use , 'YES' , 'NO') house_use,
         r.room_type,
         f.name folio,
-        f.folio_status,
         COALESCE(GROUP_CONCAT(DISTINCT cc.comment SEPARATOR '</br>'), 'No Guest Comments') AS guest_comment,
         COALESCE(GROUP_CONCAT(DISTINCT rec.comment SEPARATOR '</br>'), 'No Reservation Comments') AS reservation_comment,
         COALESCE(rd.out_of_order_status, 'N/A') AS out_of_order_status,
@@ -174,7 +172,6 @@ def execute(filters=None):
         r.company_profile,
         r.travel_agent,
         f.name,
-        f.folio_status,
         rd.out_of_order_reason,
         r.creation;
     """
