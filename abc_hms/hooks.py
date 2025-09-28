@@ -22,8 +22,16 @@ app_include_js = [
 ]
 fixtures = [
     {"doctype": "Company"},
-        {"doctype" :"Sales Partner Type"},
-        {"doctype" :"Sales Partner"},
+    {"doctype" :"Sales Partner Type"},
+    {"doctype" :"Sales Partner"},
+
+    {
+        "dt": "Workspace",
+        "filters": [
+            ["name", "in", ["EOD"]]   # replace EOD with the exact workspace name
+        ],
+    },
+    {"doctype" :"Custom HTML Block"},
     {
         "doctype": "Item" ,
         "filters": [
@@ -32,7 +40,7 @@ fixtures = [
                 "Rooms",
             ]]
         ]},
-{
+    {
         "doctype": "Item Group" ,
         "filters": [
             ["name", "in", [
@@ -53,7 +61,8 @@ fixtures = [
         "filters": [
             ["name", "in", [
                 "1310 - City Ledger - CH",
-                "1320 - Guest Ledger - CH",
+                "1310 - City Ledger - CH",
+                "1210 - Bank Account - CH",
                 "1330 - Visa - CH",
                 "4140 - Room Revenue - CH",
                 "4130 - F&B Revenue - CH",
@@ -87,34 +96,34 @@ fixtures = [
     {"doctype": "Restaurant Area"},
     {"doctype": "Restaurant Table"},
     {"doctype": "Amenity"},
-	{
-		"doctype": "Warehouse",
-	},
-	{
-		"doctype": "Print Class",
-	},
     {
-		"doctype": "Cashier Printer",
-	},
-	{
-		"doctype": "Cashier Device",
-	},
+        "doctype": "Warehouse",
+    },
+    {
+        "doctype": "Print Class",
+    },
+    {
+        "doctype": "Cashier Printer",
+    },
+    {
+        "doctype": "Cashier Device",
+    },
 
-	{
-		"doctype": "Preparation Printer",
-	},
     {
-		"doctype": "Preparation Printer Print Class",
-	},
+        "doctype": "Preparation Printer",
+    },
     {
-		"doctype": "Production Area",
-	},
+        "doctype": "Preparation Printer Print Class",
+    },
+    {
+        "doctype": "Production Area",
+    },
 
-	{
-		"doctype": "Production Area Preparation Printer",
-	},
-	{
-		"doctype": "Casheir Device Production Area",
-	},
+    {
+        "doctype": "Production Area Preparation Printer",
+    },
+    {
+        "doctype": "Casheir Device Production Area",
+    },
 ]
 
