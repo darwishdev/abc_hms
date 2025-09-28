@@ -55,6 +55,9 @@ frappe.ui.form.on("Reservation", {
 });
 
 const handle_availability_button = (frm) => {
+    frm.add_custom_button(__("Sync Folios"), async () => {
+        frm.call("ensure_all_folios");
+    });
     const can_show =
         frm.doc.property &&
         frm.doc.docstatus === 0 &&

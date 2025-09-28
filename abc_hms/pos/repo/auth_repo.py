@@ -15,6 +15,7 @@ class AuthRepo:
                                   p.allow_partial_payment,
                                   p.customer default_customer,
                                   ps.name pos_session,
+                                  s.default_pos_profile default_room_profile,
                                   s.business_date,
                                   date_to_int(s.business_date) business_date_int,
                                   p.allow_rate_change

@@ -5,10 +5,12 @@ from frappe import Optional
 
 from abc_hms.dto.dto_helpers import ErrorResponse
 
+
 class PosInvoiceItemTransferRequest(TypedDict):
     source_invoice: str
     source_window: str
     items: Optional[List[str]]
+    destination_folio: Optional[str]
     destination_invoice: str
     destination_window: str
     folio_window: Optional[str]

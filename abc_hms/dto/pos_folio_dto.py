@@ -1,11 +1,20 @@
 
 from decimal import Decimal
-from typing import TypedDict, Union
+from typing import List, TypedDict, Union
 
 from frappe import Optional
-from abc_hms.dto.dto_helpers import ErrorResponse
 from abc_hms.pos.doctype.folio.folio import Folio
 from abc_hms.pos.doctype.folio_window.folio_window import FolioWindow
+from erpnext.accounts.doctype.pos_invoice_item.pos_invoice_item import POSInvoiceItem
+
+class FolioInsertRequest(TypedDict):
+    pos_profile: str
+    guest: str
+    number_of_guests: Optional[int]
+    reservation: Optional[str]
+    restaurant_table: Optional[str]
+    items: List[POSInvoiceItem]
+
 
 class FolioUpsertRequest(TypedDict):
     doc: Folio
@@ -22,6 +31,11 @@ class FolioWindowUpsertResult(TypedDict):
 
 
 
+
+class FolioMergeRequest(TypedDict):
+    source_folio: str
+    destination_folio: str
+    destination_window: str
 
 class FolioListFilteredRequest(TypedDict):
     pos_profile: str

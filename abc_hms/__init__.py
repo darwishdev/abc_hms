@@ -9,7 +9,9 @@ from abc_hms.api.pos_restaurant_table import (
 from abc_hms.api.pos_folio_api import (
     folio_list_filtered,
     folio_upsert,
-    folio_find
+    folio_find,
+    folio_merge,
+    folio_insert
 
 )
 from abc_hms.api.property_setting_api import (
@@ -92,6 +94,8 @@ __all__ = [
     "folio_upsert",
     "pos_session_find_for_date",
     "pos_invoice_item_update_widnow",
+    "folio_merge",
+    "folio_insert",
     "inventory_upsert",
     "cashier_login"
 ]

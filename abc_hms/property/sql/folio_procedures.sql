@@ -118,6 +118,7 @@ BEGIN
       SELECT
         fw.folio,
         fw.name folio_window,
+        fw.label folio_lable,
         i.total_required_amount,
         p.total_paid_amount,
         i.items,

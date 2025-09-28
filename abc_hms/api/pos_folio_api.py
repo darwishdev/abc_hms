@@ -4,8 +4,19 @@ import json
 
 from pydantic import ValidationError
 from abc_hms.container import app_container
-from abc_hms.dto.pos_folio_dto import FolioListFilteredResponse, FolioUpsertRequest,  FolioListFilteredRequest
+from abc_hms.dto.pos_folio_dto import FolioInsertRequest, FolioUpsertRequest,  FolioListFilteredRequest
 
+
+@frappe.whitelist(methods=["POST"])
+def folio_insert():
+    try:
+        data = frappe.local.request.data
+        payload: FolioInsertRequest = json.loads(data or "{}")
+    except Exception as e:
+        raise frappe.ValidationError(f"Invalid Request {str(e)}")
+
+    result = app_container.folio_usecase.folio_insert(payload)
+    return result
 @frappe.whitelist(methods=["POST" , "PUT"])
 def folio_upsert():
     try:
@@ -21,6 +32,18 @@ def folio_upsert():
 @frappe.whitelist(methods=["GET"])
 def folio_find(folio: str):
     result = app_container.folio_usecase.folio_find(folio)
+    return  result
+
+
+@frappe.whitelist(methods=["PUT" , "POST"])
+def folio_merge():
+    try:
+        data = frappe.local.request.data
+        payload: FolioUpsertRequest = json.loads(data or "{}")
+    except Exception as e:
+        raise frappe.ValidationError(f"Invalid Request {str(e)}")
+
+    result = app_container.folio_usecase.folio_merge(payload)
     return  result
 
 @frappe.whitelist(methods=["GET"])

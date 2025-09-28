@@ -8,6 +8,7 @@ import os
 from frappe import render_template
 from sentry_sdk.utils import json_dumps
 from abc_hms.container import app_container
+from abc_hms.pos.doctype import folio
 from utils import date_utils
 
 
@@ -53,58 +54,58 @@ class Reservation(Document):
             primary_action=primary_action
         )
 
-    def can_check_out(self):
-        result = frappe.db.sql(
-            """
-            WITH items AS (
-                SELECT
-                    i.folio_window,
-                    SUM(i.amount) AS amount
-                FROM `tabPOS Invoice Item` i
-                GROUP BY i.folio_window
-            ), payments AS (
-                SELECT
-                    p.folio_window,
-                    SUM(p.amount) AS amount
-                FROM `tabSales Invoice Payment` p
-                GROUP BY p.folio_window
-            )
-            SELECT
-                fw.name AS folio_window,
-                COALESCE(items.amount, 0) AS amount,
-                COALESCE(payments.amount, 0) AS paid
-            FROM `tabReservation` r
-            JOIN `tabFolio` f ON f.reservation = r.name
-            JOIN `tabFolio Window` fw ON fw.folio = f.name
-            LEFT JOIN items ON fw.name = items.folio_window
-            LEFT JOIN payments ON fw.name = payments.folio_window
-            WHERE r.name = %s
-            """,
-            (self.name,),
-            as_dict=True,
-        )
-
-        if not result:
-            return False  # no folio, cannot check out
-
-        row = result[0]
-        total_amount = row.get("amount") or 0
-        total_paid = row.get("paid") or 0
-
-        return total_amount == total_paid
+    # def can_check_out(self):
+    #     result = frappe.db.sql(
+    #         """
+    #         WITH items AS (
+    #             SELECT
+    #                 i.folio_window,
+    #                 SUM(i.amount) AS amount
+    #             FROM `tabPOS Invoice Item` i
+    #             GROUP BY i.folio_window
+    #         ), payments AS (
+    #             SELECT
+    #                 p.folio_window,
+    #                 SUM(p.amount) AS amount
+    #             FROM `tabSales Invoice Payment` p
+    #             GROUP BY p.folio_window
+    #         )
+    #         SELECT
+    #             fw.name AS folio_window,
+    #             COALESCE(items.amount, 0) AS amount,
+    #             COALESCE(payments.amount, 0) AS paid
+    #         FROM `tabReservation` r
+    #         JOIN `tabFolio` f ON f.reservation = r.name
+    #         JOIN `tabFolio Window` fw ON fw.folio = f.name
+    #         LEFT JOIN items ON fw.name = items.folio_window
+    #         LEFT JOIN payments ON fw.name = payments.folio_window
+    #         WHERE r.name = %s
+    #         """,
+    #         (self.name,),
+    #         as_dict=True,
+    #     )
+    #
+    #     if not result:
+    #         return False  # no folio, cannot check out
+    #
+    #     row = result[0]
+    #     total_amount = row.get("amount") or 0
+    #     total_paid = row.get("paid") or 0
+    #
+    #     return total_amount == total_paid
     def save(self , *args , **kwargs):
         try:
             frappe.publish_progress(10, title="Saving", description="Syncing Reservation Dates")
 
             frappe.db.begin()
+
             if self.is_new():
                 super().save(*args, **kwargs)
                 frappe.publish_progress(100, title="Saving", description="Reservation Created Successfully")
                 return
             if self.reservation_status == "Checked Out":
-                can_checkout = self.can_check_out()
-                if not can_checkout:
-                    frappe.throw(f"Illegal Checkout Please Settle Payments")
+                folio = frappe.get_doc("Folio" ,{"reservation" : self.name})
+                folio.submit()
             property_business_date = frappe.db.get_value(
                 "Property Setting",
                 {"property": self.get("property")},
@@ -155,10 +156,27 @@ class Reservation(Document):
             time.sleep(1.0)
 
             super().save(*args, **kwargs)
+
+            if self.reservation_status == "Confirmed":
+                self.ensure_folio()
             frappe.publish_progress(100, title="Saving", description="Reservation Days Synced Successfully")
+            frappe.db.commit()
         except Exception as e:
             frappe.db.rollback()
             self.handle_save_error(e)
+    @frappe.whitelist()
+    def ensure_all_folios(self):
+        reservations = frappe.get_all("Reservation")
+        result = []
+        for reservation in reservations:
+            docstatus = frappe.get_value("Reservation" , reservation.name , 'docstatus')
+            if docstatus != 2:
+                result.append(reservation)
+                folio = self.ensure_folio_with_name(reservation.name)
+                result.append(folio)
+
+        frappe.db.commit()
+        return {"res" : result}
 
     def remove_folio(self):
         folio_name = f"f-{self.name}"
@@ -167,15 +185,26 @@ class Reservation(Document):
             folio_doc.delete(ignore_permissions=True)
             frappe.publish_progress(98, title="Saving", description="Folio created for reservation")
 
+
+    def ensure_folio_with_name(self , name: str):
+        folio = frappe.get_doc("Folio" , {"reservation": name}) if frappe.db.exists("Folio" ,{"reservation":name}) else None
+        if folio:
+            return folio
+        folio= frappe.new_doc("Folio")
+        folio.update({
+            "pos_profile": "Main",
+            "reservation": name
+        })
+        folio.save()
+        return folio
     def ensure_folio(self):
         if not frappe.db.exists("Folio", {"reservation": self.name}):
-            folio_doc = frappe.get_doc({
-                "doctype": "Folio",
-                "name": f"f-{self.name}",
-                "reservation": self.name,
-                "folio_status": "Draft"
+            folio= frappe.new_doc("Folio")
+            folio.update({
+                "pos_profile": "Main",
+                "reservation": self.name
             })
-            folio_doc.insert(ignore_permissions=True)
+            folio.save()
             frappe.publish_progress(98, title="Saving", description="Folio created for reservation")
 
     # This function must be whitelisted so the dialog button can call it.

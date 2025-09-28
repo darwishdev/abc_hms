@@ -4,24 +4,6 @@
   "doctype": "Room",
   "floor": 0,
   "hk_section": "SUP-1",
-  "modified": "2025-09-15 04:59:33.804386",
-  "name": "1002",
-  "room_beds": [
-   {
-    "bed_count": 1,
-    "bed_type_name": "King Bed",
-    "parent": "1002",
-    "parentfield": "room_beds",
-    "parenttype": "Room"
-   }
-  ],
-  "room_type": "PRE-KNG"
- },
- {
-  "docstatus": 0,
-  "doctype": "Room",
-  "floor": 0,
-  "hk_section": "SUP-1",
   "modified": "2025-09-15 04:59:33.825290",
   "name": "1003",
   "room_beds": [
@@ -65,60 +47,6 @@
     "bed_count": 1,
     "bed_type_name": "King Bed",
     "parent": "1005",
-    "parentfield": "room_beds",
-    "parenttype": "Room"
-   }
-  ],
-  "room_type": "PRE-KNG"
- },
- {
-  "docstatus": 0,
-  "doctype": "Room",
-  "floor": 0,
-  "hk_section": "SUP-1",
-  "modified": "2025-09-15 04:59:33.865656",
-  "name": "1006",
-  "room_beds": [
-   {
-    "bed_count": 1,
-    "bed_type_name": "King Bed",
-    "parent": "1006",
-    "parentfield": "room_beds",
-    "parenttype": "Room"
-   }
-  ],
-  "room_type": "PRE-KNG"
- },
- {
-  "docstatus": 0,
-  "doctype": "Room",
-  "floor": 0,
-  "hk_section": "SUP-1",
-  "modified": "2025-09-15 04:59:33.877365",
-  "name": "1007",
-  "room_beds": [
-   {
-    "bed_count": 1,
-    "bed_type_name": "King Bed",
-    "parent": "1007",
-    "parentfield": "room_beds",
-    "parenttype": "Room"
-   }
-  ],
-  "room_type": "PRE-KNG"
- },
- {
-  "docstatus": 0,
-  "doctype": "Room",
-  "floor": 0,
-  "hk_section": "SUP-1",
-  "modified": "2025-09-15 04:59:33.888724",
-  "name": "1008",
-  "room_beds": [
-   {
-    "bed_count": 1,
-    "bed_type_name": "King Bed",
-    "parent": "1008",
     "parentfield": "room_beds",
     "parenttype": "Room"
    }
@@ -209,24 +137,6 @@
     "bed_count": 1,
     "bed_type_name": "King Bed",
     "parent": "2006",
-    "parentfield": "room_beds",
-    "parenttype": "Room"
-   }
-  ],
-  "room_type": "SUP-KNG"
- },
- {
-  "docstatus": 0,
-  "doctype": "Room",
-  "floor": 0,
-  "hk_section": "SUP-1",
-  "modified": "2025-09-15 04:59:33.967439",
-  "name": "2007",
-  "room_beds": [
-   {
-    "bed_count": 1,
-    "bed_type_name": "King Bed",
-    "parent": "2007",
     "parentfield": "room_beds",
     "parenttype": "Room"
    }
@@ -1734,6 +1644,60 @@
   "doctype": "Room",
   "floor": 0,
   "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:33.804386",
+  "name": "1002",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "1002",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "PRE-KNG"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:33.888724",
+  "name": "1008",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "1008",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "PRE-KNG"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:33.967439",
+  "name": "2007",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "2007",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUP-KNG"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
   "modified": "2025-09-15 04:59:33.912145",
   "name": "2002",
   "room_beds": [
@@ -1759,6 +1723,42 @@
     "bed_count": 1,
     "bed_type_name": "King Bed",
     "parent": "1001",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "PRE-KNG"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:33.877365",
+  "name": "1007",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "1007",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "PRE-KNG"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:33.865656",
+  "name": "1006",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "1006",
     "parentfield": "room_beds",
     "parenttype": "Room"
    }

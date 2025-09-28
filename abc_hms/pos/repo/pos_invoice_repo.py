@@ -1,4 +1,5 @@
 
+from click import pause
 import frappe
 from typing import  Any, Dict, List
 from frappe import NotFound, Optional, _, destroy
@@ -57,13 +58,36 @@ class POSInvoiceRepo:
 
         return run_sql(run_update)
 
+
     def pos_invoice_item_transfer(self , payload: PosInvoiceItemTransferRequest):
         try:
             frappe.db.begin()
             source_invoice = frappe.get_doc("POS Invoice", payload["source_invoice"])
             if not source_invoice:
                 raise NotFound(f"the source invoice not found {payload["source_invoice"]}")
-            dest_invoice = frappe.get_doc("POS Invoice", payload["destination_invoice"])
+            if "destination_invoice" in payload:
+                dest_invoice = frappe.get_doc("POS Invoice", payload["destination_invoice"])
+
+            if "destination_folio" in payload:
+                pos_profile = frappe.db.get_value("POS Invoice" , payload["source_invoice"] ,
+                                                  "pos_profile")
+                business_date = frappe.db.sql("""
+                    SELECT date_to_int(s.business_date) for_date FROM
+                    `tabPOS Profile` p join `tabProperty Setting` s on p.property = s.name where
+                    p.name = %s
+                                              """ , pos_profile , pluck=['for_date'])
+
+                if len(business_date) != 1:
+                    raise frappe.NotFound("this pos profile attached to property but property settings are not set properly")
+
+                for_date = business_date[0]
+                dest_invoices = frappe.get_all("POS Invoice",{
+                    "folio" : payload["destination_folio"],
+                    "for_date" : for_date
+                } , pluck="name")
+                if len(dest_invoices) == 0:
+                    raise frappe.NotFound("Destination Folio Don not Have POS Invoce For Current Business Date")
+                dest_invoice = frappe.get_doc("POS Invoice" , dest_invoices[0])
             if not dest_invoice:
                 raise NotFound(f"the source invoice not found {payload["destination_invoice"]}")
             items_passed = 'items' in payload
@@ -106,6 +130,7 @@ class POSInvoiceRepo:
                 doc.append("payments", row)
 
         doc.set_missing_values()
+        doc.calculate_taxes_and_totals()
         if hasattr(doc, "set_pos_fields"):
             doc.set_pos_fields()
 

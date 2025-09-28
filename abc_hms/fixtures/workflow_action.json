@@ -252,8 +252,8 @@
   "workflow_state": "Checked Out"
  },
  {
-  "completed_by": null,
-  "completed_by_role": null,
+  "completed_by": "Administrator",
+  "completed_by_role": "All",
   "docstatus": 0,
   "doctype": "Workflow Action",
   "modified": "2025-09-23 15:28:01.517386",
@@ -268,7 +268,7 @@
   ],
   "reference_doctype": "Reservation",
   "reference_name": "CONA-000008",
-  "status": "Open",
+  "status": "Completed",
   "user": null,
   "workflow_state": "Checked Out"
  },
@@ -5668,5 +5668,425 @@
   "status": "Open",
   "user": null,
   "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 16:59:28.146830",
+  "name": "ic181chi0k",
+  "permitted_roles": [
+   {
+    "parent": "ic181chi0k",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-None-000001",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:00:38.385133",
+  "name": "j1v6ff01io",
+  "permitted_roles": [
+   {
+    "parent": "j1v6ff01io",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000001",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:01:48.927468",
+  "name": "jo1ibrf9ui",
+  "permitted_roles": [
+   {
+    "parent": "jo1ibrf9ui",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:04:25.231891",
+  "name": "l8se3g81lb",
+  "permitted_roles": [
+   {
+    "parent": "l8se3g81lb",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000003",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:09:53.128068",
+  "name": "ofb7ka6idj",
+  "permitted_roles": [
+   {
+    "parent": "ofb7ka6idj",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000004",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:15:34.011213",
+  "name": "rpsqimgeuv",
+  "permitted_roles": [
+   {
+    "parent": "rpsqimgeuv",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000005",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:17:00.451802",
+  "name": "skscv7ejh6",
+  "permitted_roles": [
+   {
+    "parent": "skscv7ejh6",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000006",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:18:11.956013",
+  "name": "tb7b5pmke1",
+  "permitted_roles": [
+   {
+    "parent": "tb7b5pmke1",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000007",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:18:35.763705",
+  "name": "tilbp1enag",
+  "permitted_roles": [
+   {
+    "parent": "tilbp1enag",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000008",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 17:19:17.076864",
+  "name": "tviqmqkv07",
+  "permitted_roles": [
+   {
+    "parent": "tviqmqkv07",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-1001-000009",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:17:47.913610",
+  "name": "08ns95etmb",
+  "permitted_roles": [
+   {
+    "parent": "08ns95etmb",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000008-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:19:43.605408",
+  "name": "1cslvv4v7a",
+  "permitted_roles": [
+   {
+    "parent": "1cslvv4v7a",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000009-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:20:53.889457",
+  "name": "22q5l28sbi",
+  "permitted_roles": [
+   {
+    "parent": "22q5l28sbi",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000002-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:21:05.819987",
+  "name": "26ihnnapoc",
+  "permitted_roles": [
+   {
+    "parent": "26ihnnapoc",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000005-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:21:58.778824",
+  "name": "2n3ufphmjg",
+  "permitted_roles": [
+   {
+    "parent": "2n3ufphmjg",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000004-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:22:53.711577",
+  "name": "389tr8rfpn",
+  "permitted_roles": [
+   {
+    "parent": "389tr8rfpn",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000010-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:23:21.794956",
+  "name": "3h1n2ijgk1",
+  "permitted_roles": [
+   {
+    "parent": "3h1n2ijgk1",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000001-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:23:37.888914",
+  "name": "3m2m7fvc0n",
+  "permitted_roles": [
+   {
+    "parent": "3m2m7fvc0n",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000007-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-27 18:23:46.260991",
+  "name": "3omc88qan5",
+  "permitted_roles": [
+   {
+    "parent": "3omc88qan5",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Folio",
+  "reference_name": "F-CONA-000006-000002",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": null,
+  "completed_by_role": null,
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2025-09-28 03:57:05.566101",
+  "name": "jmf46m73ko",
+  "permitted_roles": [
+   {
+    "parent": "jmf46m73ko",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Reservation",
+  "reference_name": "CONA-000008",
+  "status": "Open",
+  "user": null,
+  "workflow_state": "Departure"
  }
 ]

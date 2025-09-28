@@ -126,195 +126,6 @@
   "valid_to": "2025-12-31"
  },
  {
-  "abbriviation": "HUSE",
-  "cacnelation_policy": "Free Cancellation",
-  "color": null,
-  "complementry": 0,
-  "currency": "EGP",
-  "day_use": 0,
-  "days_before_check_in": 0,
-  "docstatus": 0,
-  "doctype": "Rate Code",
-  "flexible_to_ammend": 0,
-  "house_use": 1,
-  "modified": "2025-09-15 06:06:14.090662",
-  "name": "HUSE",
-  "pay_in_advance": 0,
-  "rate_category": "HUSE",
-  "room_types": [
-   {
-    "base_price": 0.0,
-    "parent": "HUSE",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "HUSE",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "HUSE",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "HUSE",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "HUSE",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "HUSE",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "PM"
-   }
-  ],
-  "valid_from": "2025-08-01",
-  "valid_to": "2025-12-31"
- },
- {
-  "abbriviation": "TA-EGP",
-  "cacnelation_policy": "Free Cancellation",
-  "color": null,
-  "complementry": 0,
-  "currency": "EGP",
-  "day_use": 0,
-  "days_before_check_in": 0,
-  "docstatus": 0,
-  "doctype": "Rate Code",
-  "flexible_to_ammend": 0,
-  "house_use": 0,
-  "modified": "2025-09-15 06:06:14.032147",
-  "name": "TAR-EGP",
-  "pay_in_advance": 0,
-  "rate_category": "TAR",
-  "room_types": [
-   {
-    "base_price": 15000.0,
-    "parent": "TAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
-   },
-   {
-    "base_price": 14000.0,
-    "parent": "TAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
-   },
-   {
-    "base_price": 12000.0,
-    "parent": "TAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
-   },
-   {
-    "base_price": 11000.0,
-    "parent": "TAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
-   },
-   {
-    "base_price": 12000.0,
-    "parent": "TAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "TAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "PM"
-   }
-  ],
-  "valid_from": "2025-08-01",
-  "valid_to": "2025-12-31"
- },
- {
-  "abbriviation": "BAR-EGP",
-  "cacnelation_policy": "Free Cancellation",
-  "color": null,
-  "complementry": 0,
-  "currency": "EGP",
-  "day_use": 0,
-  "days_before_check_in": 0,
-  "docstatus": 0,
-  "doctype": "Rate Code",
-  "flexible_to_ammend": 0,
-  "house_use": 0,
-  "modified": "2025-09-15 06:06:13.965370",
-  "name": "BAR-EGP",
-  "pay_in_advance": 0,
-  "rate_category": "BAR",
-  "room_types": [
-   {
-    "base_price": 15000.0,
-    "parent": "BAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
-   },
-   {
-    "base_price": 14000.0,
-    "parent": "BAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
-   },
-   {
-    "base_price": 12000.0,
-    "parent": "BAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
-   },
-   {
-    "base_price": 11000.0,
-    "parent": "BAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
-   },
-   {
-    "base_price": 12000.0,
-    "parent": "BAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "BAR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "PM"
-   }
-  ],
-  "valid_from": "2025-08-01",
-  "valid_to": "2025-12-31"
- },
- {
   "abbriviation": "CORP-EGP",
   "cacnelation_policy": "Free Cancellation",
   "color": null,
@@ -439,5 +250,194 @@
   ],
   "valid_from": "2025-09-01",
   "valid_to": null
+ },
+ {
+  "abbriviation": "BAR-EGP",
+  "cacnelation_policy": "Free Cancellation",
+  "color": null,
+  "complementry": 0,
+  "currency": "EGP",
+  "day_use": 0,
+  "days_before_check_in": 0,
+  "docstatus": 0,
+  "doctype": "Rate Code",
+  "flexible_to_ammend": 0,
+  "house_use": 0,
+  "modified": "2025-09-15 06:06:13.965370",
+  "name": "BAR-EGP",
+  "pay_in_advance": 0,
+  "rate_category": "BAR",
+  "room_types": [
+   {
+    "base_price": 15000.0,
+    "parent": "BAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "PRE-KNG"
+   },
+   {
+    "base_price": 14000.0,
+    "parent": "BAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "SUP-KNG"
+   },
+   {
+    "base_price": 12000.0,
+    "parent": "BAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "SUP-TWN"
+   },
+   {
+    "base_price": 11000.0,
+    "parent": "BAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "DLX-KNG"
+   },
+   {
+    "base_price": 12000.0,
+    "parent": "BAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "DLX-TWN"
+   },
+   {
+    "base_price": 0.0,
+    "parent": "BAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "PM"
+   }
+  ],
+  "valid_from": "2025-08-01",
+  "valid_to": "2025-12-31"
+ },
+ {
+  "abbriviation": "TA-EGP",
+  "cacnelation_policy": "Free Cancellation",
+  "color": null,
+  "complementry": 0,
+  "currency": "EGP",
+  "day_use": 0,
+  "days_before_check_in": 0,
+  "docstatus": 0,
+  "doctype": "Rate Code",
+  "flexible_to_ammend": 0,
+  "house_use": 0,
+  "modified": "2025-09-15 06:06:14.032147",
+  "name": "TAR-EGP",
+  "pay_in_advance": 0,
+  "rate_category": "TAR",
+  "room_types": [
+   {
+    "base_price": 15000.0,
+    "parent": "TAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "PRE-KNG"
+   },
+   {
+    "base_price": 14000.0,
+    "parent": "TAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "SUP-KNG"
+   },
+   {
+    "base_price": 12000.0,
+    "parent": "TAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "SUP-TWN"
+   },
+   {
+    "base_price": 11000.0,
+    "parent": "TAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "DLX-KNG"
+   },
+   {
+    "base_price": 12000.0,
+    "parent": "TAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "DLX-TWN"
+   },
+   {
+    "base_price": 0.0,
+    "parent": "TAR-EGP",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "PM"
+   }
+  ],
+  "valid_from": "2025-08-01",
+  "valid_to": "2025-12-31"
+ },
+ {
+  "abbriviation": "HUSE",
+  "cacnelation_policy": "Free Cancellation",
+  "color": null,
+  "complementry": 0,
+  "currency": "EGP",
+  "day_use": 0,
+  "days_before_check_in": 0,
+  "docstatus": 0,
+  "doctype": "Rate Code",
+  "flexible_to_ammend": 0,
+  "house_use": 1,
+  "modified": "2025-09-15 06:06:14.090662",
+  "name": "HUSE",
+  "pay_in_advance": 0,
+  "rate_category": "HUSE",
+  "room_types": [
+   {
+    "base_price": 0.0,
+    "parent": "HUSE",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "PRE-KNG"
+   },
+   {
+    "base_price": 0.0,
+    "parent": "HUSE",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "SUP-KNG"
+   },
+   {
+    "base_price": 0.0,
+    "parent": "HUSE",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "SUP-TWN"
+   },
+   {
+    "base_price": 0.0,
+    "parent": "HUSE",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "DLX-KNG"
+   },
+   {
+    "base_price": 0.0,
+    "parent": "HUSE",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "DLX-TWN"
+   },
+   {
+    "base_price": 0.0,
+    "parent": "HUSE",
+    "parentfield": "room_types",
+    "parenttype": "Rate Code",
+    "room_type": "PM"
+   }
+  ],
+  "valid_from": "2025-08-01",
+  "valid_to": "2025-12-31"
  }
 ]

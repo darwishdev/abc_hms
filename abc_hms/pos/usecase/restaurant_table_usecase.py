@@ -17,7 +17,11 @@ class RestaurantTableUsecase:
         self,
         property :str,
     ):
-        return self.repo.table_list(property)
+        result = self.repo.table_list(property)
+        for item in result:
+            if item['tables']:
+                item['tables'] = json.loads(item['tables'])
+        return result
 
 
     def folio_find(self, folio: str):

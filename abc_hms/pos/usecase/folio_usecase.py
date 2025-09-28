@@ -3,7 +3,7 @@ import json
 from typing import List
 import frappe
 from frappe import _
-from abc_hms.dto.pos_folio_dto import FolioItem, FolioListFilteredRequest, FolioUpsertRequest,  FolioWindowUpsertRequest
+from abc_hms.dto.pos_folio_dto import FolioInsertRequest , FolioItem, FolioListFilteredRequest, FolioMergeRequest, FolioUpsertRequest,  FolioWindowUpsertRequest
 from abc_hms.pos.doctype.folio.folio import Folio
 from abc_hms.pos.doctype.folio_window.folio_window import FolioWindow
 from abc_hms.pos.repo.folio_repo import FolioRepo
@@ -12,6 +12,18 @@ class FolioUsecase:
     def __init__(self):
         self.repo = FolioRepo()
 
+
+    def folio_insert(
+        self,
+        payload :FolioInsertRequest,
+    ):
+        try:
+            return self.repo.folio_insert(payload)
+        except frappe.ValidationError as e:
+            raise e
+
+        except Exception as e:
+            raise e
     def folio_upsert(
         self,
         payload :FolioUpsertRequest,
@@ -55,3 +67,10 @@ class FolioUsecase:
             return self.repo.folio_window_upsert(req["doc"], commit=req["commit"])
         except Exception as e:
             raise e
+
+    def folio_merge(self, req: FolioMergeRequest):
+        try:
+            return self.repo.folio_merge(req["source_folio"],req["destination_folio"] ,req["destination_window"])
+        except Exception as e:
+            raise e
+

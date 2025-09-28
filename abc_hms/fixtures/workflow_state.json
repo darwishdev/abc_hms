@@ -12,28 +12,10 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2025-09-15 03:21:22.611475",
-  "name": "Settled",
-  "style": "",
-  "workflow_state_name": "Settled"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2025-09-15 03:21:22.624899",
   "name": "Reconcolidated",
   "style": "",
   "workflow_state_name": "Reconcolidated"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2025-09-15 03:40:21.861873",
-  "name": "Submitted",
-  "style": "",
-  "workflow_state_name": "Submitted"
  },
  {
   "docstatus": 0,
@@ -52,6 +34,51 @@
   "name": "Approved",
   "style": "Success",
   "workflow_state_name": "Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2025-09-15 03:21:22.529455",
+  "name": "Check-in Reversed",
+  "style": "",
+  "workflow_state_name": "Check-in Reversed"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "remove",
+  "modified": "2025-09-15 05:30:26.429465",
+  "name": "Rejected",
+  "style": "Danger",
+  "workflow_state_name": "Rejected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-09-27 15:45:49.169635",
+  "name": "Merged",
+  "style": "",
+  "workflow_state_name": "Merged"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-09-15 03:21:22.611475",
+  "name": "Settled",
+  "style": "",
+  "workflow_state_name": "Settled"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-09-15 03:40:21.861873",
+  "name": "Submitted",
+  "style": "",
+  "workflow_state_name": "Submitted"
  },
  {
   "docstatus": 0,
@@ -79,15 +106,6 @@
   "name": "Arrival",
   "style": "",
   "workflow_state_name": "Arrival"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "ok-sign",
-  "modified": "2025-09-15 03:21:22.529455",
-  "name": "Check-in Reversed",
-  "style": "",
-  "workflow_state_name": "Check-in Reversed"
  },
  {
   "docstatus": 0,
@@ -124,15 +142,6 @@
   "name": "Cancelled",
   "style": "",
   "workflow_state_name": "Cancelled"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "remove",
-  "modified": "2025-09-15 05:30:26.429465",
-  "name": "Rejected",
-  "style": "Danger",
-  "workflow_state_name": "Rejected"
  },
  {
   "docstatus": 0,
