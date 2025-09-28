@@ -64,7 +64,7 @@ class POSInvoiceRepo:
             frappe.db.begin()
             source_invoice = frappe.get_doc("POS Invoice", payload["source_invoice"])
             if not source_invoice:
-                raise NotFound(f"the source invoice not found {payload["source_invoice"]}")
+                raise NotFound(f"the source invoice not found {payload['source_invoice']}")
             if "destination_invoice" in payload:
                 dest_invoice = frappe.get_doc("POS Invoice", payload["destination_invoice"])
 
