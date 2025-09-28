@@ -21,7 +21,7 @@
   "label": "EOD",
   "links": [],
   "modified": "2025-09-23 04:30:13.000404",
-  "module": null,
+  "module": "Property",
   "name": "EOD",
   "number_cards": [
    {

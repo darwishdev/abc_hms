@@ -6,6 +6,7 @@ from abc_hms.pos.usecase.pos_invoice_usecase import POSInvoiceUsecase
 from abc_hms.pos.usecase.pos_opening_entry_usecase import POSOpeningEntryUsecase
 from abc_hms.pos.usecase.pos_session_usecase import POSSessionUsecase
 from abc_hms.pos.usecase.restaurant_table_usecase import RestaurantTableUsecase
+from abc_hms.pos.usecase.pos_profile_usecase import POSProfileUsecase
 from abc_hms.property.internal.usecase.property_setting_usecase import PropertySettingUsecase
 from abc_hms.property.internal.usecase.reservation_date_usecase import ReservationDateUsecase
 from abc_hms.property.internal.usecase.reservation_usecase import ReservationUsecase
@@ -19,6 +20,7 @@ class AppContainer:
     def __init__(self):
         self.auth_usecase = AuthUsecase()
         self.pos_invoice_usecase = POSInvoiceUsecase()
+        self.pos_profile_usecase =  POSProfileUsecase()
         self.pos_opening_entry_usecase = POSOpeningEntryUsecase()
         self.pos_closing_entry_usecase = POSClosingEntryUsecase()
         self.property_setting_usecase = PropertySettingUsecase()

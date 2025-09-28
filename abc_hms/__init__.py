@@ -3,6 +3,10 @@ from abc_hms.api.property_room_date_api import (
     room_date_bulk_upsert ,
 )
 
+
+from abc_hms.api.pos_profile_api import (
+    profile_item_list
+)
 from abc_hms.api.pos_restaurant_table import (
     restaurant_table_list
 )
@@ -96,6 +100,7 @@ __all__ = [
     "pos_invoice_item_update_widnow",
     "folio_merge",
     "folio_insert",
+    "profile_item_list",
     "inventory_upsert",
     "cashier_login"
 ]
