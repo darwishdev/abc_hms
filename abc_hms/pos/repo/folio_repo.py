@@ -10,7 +10,7 @@ class FolioRepo:
     def folio_insert(self, request : FolioInsertRequest):
         try:
             if not frappe.db.exists("POS Profile" , request["pos_profile"]):
-                raise frappe.NotFound(f"POS Profile '{request["pos_profile"]}' Not Found")
+                raise frappe.NotFound(f"POS Profile {request['pos_profile']} Not Found")
             frappe.db.begin()
             folio_doc = frappe.new_doc("Folio")
             folio_doc.update({

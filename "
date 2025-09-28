@@ -1,0 +1,166 @@
+
+from click import pause
+import frappe
+from typing import  Any, Dict, List
+from frappe import NotFound, Optional, _, destroy
+from frappe.rate_limiter import update
+from abc_hms.dto.pos_invoice_dto import POSInvoiceData, PosInvoiceItemTransferRequest
+from utils.date_utils import date_to_int
+from utils.sql_utils import run_sql
+class POSInvoiceRepo:
+
+    def pos_invoice_find_for_date(
+        self,
+        for_date: int,
+        fields: Optional[List[str]] = None,
+    ) -> List[POSInvoiceData]:
+        try:
+            default_fields = [
+                "name",
+                "pos_profile",
+                "customer",
+                "grand_total",
+                "posting_date",
+                "posting_time",
+                "docstatus"
+            ]
+
+            fields_to_fetch = fields or default_fields
+
+            invoices = frappe.get_all(
+                "POS Invoice",
+                filters={"for_date": for_date},
+                fields=fields_to_fetch
+            )
+
+            return invoices
+
+        except Exception as e:
+            frappe.log_error(frappe.get_traceback(), "POS Invoice Find For Date Error")
+            raise
+
+
+    def pos_invoice_item_update_widnow(
+        self ,
+        name : str ,
+        folio_window:str
+    ):
+        def run_update(cur , conn):
+            query = """
+            UPDATE `tabPOS Invoice Item` i
+            SET
+            i.folio_window = coalesce(%s,i.folio_window)
+            where i.name = %s
+            """
+            cur.execute(query,(folio_window,name))
+            conn.commit()
+            return
+
+        return run_sql(run_update)
+
+
+    def pos_invoice_item_transfer(self , payload: PosInvoiceItemTransferRequest):
+        try:
+            frappe.db.begin()
+            source_invoice = frappe.get_doc("POS Invoice", payload["source_invoice"])
+            if not source_invoice:
+                raise NotFound(f"the source invoice not found {payload['source_invoice']}")
+            if "destination_invoice" in payload:
+                dest_invoice = frappe.get_doc("POS Invoice", payload["destination_invoice"])
+
+            if "destination_folio" in payload:
+                pos_profile = frappe.db.get_value("POS Invoice" , payload["source_invoice"] ,
+                                                  "pos_profile")
+                business_date = frappe.db.sql("""
+                    SELECT date_to_int(s.business_date) for_date FROM
+                    `tabPOS Profile` p join `tabProperty Setting` s on p.property = s.name where
+                    p.name = %s
+                                              """ , pos_profile , pluck=['for_date'])
+
+                if len(business_date) != 1:
+                    raise frappe.NotFound("this pos profile attached to property but property settings are not set properly")
+
+                for_date = business_date[0]
+                dest_invoices = frappe.get_all("POS Invoice",{
+                    "folio" : payload["destination_folio"],
+                    "for_date" : for_date
+                } , pluck="name")
+                if len(dest_invoices) == 0:
+                    raise frappe.NotFound("Destination Folio Don not Have POS Invoce For Current Business Date")
+                dest_invoice = frappe.get_doc("POS Invoice" , dest_invoices[0])
+            if not dest_invoice:
+                raise NotFound(f"the source invoice not found {payload['destination_invoice']}")
+            items_passed = 'items' in payload
+            for item in source_invoice.items:
+                if item.folio_window == payload["source_window"] and (not items_passed or item.name in
+                                                                          payload["items"]):
+                    source_invoice.remove(item)
+                    dest_invoice.append("items" , item)
+
+            if not items_passed:
+                frappe.db.sql("update `tabFolio Window` fw SET fw.folio = %s where name = %s" ,
+                              ( dest_invoice.folio ,payload["source_window"]) )
+            source_invoice.save()
+            dest_invoice.save()
+            frappe.db.commit()
+            return dest_invoice
+        except:
+            frappe.db.rollback()
+            raise
+
+    def pos_invoice_upsert(self , docdata: POSInvoiceData, commit: bool = True)->POSInvoiceData:
+        payments = docdata.get("payments", None)
+        items = docdata.get("items", None)
+        invoice_id = str(docdata.get("name"))
+        if frappe.db.exists("POS Invoice", invoice_id):
+            doc: POSInvoiceData = frappe.get_doc("POS Invoice", invoice_id) # type: ignore
+        else:
+            doc: POSInvoiceData = frappe.new_doc("POS Invoice") # type: ignore
+
+        doc.update(docdata)
+
+        if items is not None:
+            doc.set("items", [])
+            for row in items:
+                doc.append("items", row)
+
+        if payments is not None:
+            doc.set("payments", [])
+            for row in payments:
+                doc.append("payments", row)
+
+        doc.set_missing_values()
+        doc.calculate_taxes_and_totals()
+        if hasattr(doc, "set_pos_fields"):
+            doc.set_pos_fields()
+
+        doc.save()
+        invoice : POSInvoiceData = doc.as_dict() # type: ignore
+        if commit:
+            frappe.db.commit()
+
+        return invoice
+
+
+    def pos_invoice_end_of_day_auto_close(self, property: str):
+        # 1️⃣ Get the business date for the property
+        business_date = frappe.db.get_value("Property Setting", {"property": property}, "business_date")
+        if not business_date:
+            frappe.throw(f"No business date found for property {property}")
+
+        # 2️⃣ Fetch all draft POS Invoices for that date
+        invoices = frappe.get_all(
+            "POS Invoice",
+            filters={"for_date": date_to_int(business_date), "docstatus": 0},
+            fields=["name"]
+        )
+
+        # 3️⃣ Submit each invoice via Frappe Doc API
+        for inv in invoices:
+            doc = frappe.get_doc("POS Invoice", inv.name)
+            try:
+                doc.submit()
+            except frappe.ValidationError as e:
+                frappe.log_error(f"Error submitting POS Invoice {inv.name}: {e}")
+
+        return {"submitted": [inv.name for inv in invoices]}

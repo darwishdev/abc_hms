@@ -155,5 +155,3 @@ CREATE TABLE
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 
- ALTER TABLE `tabSession`
-            ADD UNIQUE KEY `session_unique_idx` (`pos_profile`, `for_date`, `owner`);
