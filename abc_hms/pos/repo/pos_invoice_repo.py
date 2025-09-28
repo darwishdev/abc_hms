@@ -66,7 +66,7 @@ class POSInvoiceRepo:
             if not source_invoice:
                 raise NotFound(f"the source invoice not found {payload['source_invoice']}")
             if "destination_invoice" in payload:
-                dest_invoice = frappe.get_doc("POS Invoice", payload["destination_invoice"])
+                dest_invoice = frappe.get_doc("POS Invoice", payload['destination_invoice'])
 
             if "destination_folio" in payload:
                 pos_profile = frappe.db.get_value("POS Invoice" , payload["source_invoice"] ,
@@ -89,7 +89,7 @@ class POSInvoiceRepo:
                     raise frappe.NotFound("Destination Folio Don not Have POS Invoce For Current Business Date")
                 dest_invoice = frappe.get_doc("POS Invoice" , dest_invoices[0])
             if not dest_invoice:
-                raise NotFound(f"the source invoice not found {payload["destination_invoice"]}")
+                raise NotFound(f"the source invoice not found {payload['destination_invoice']}")
             items_passed = 'items' in payload
             for item in source_invoice.items:
                 if item.folio_window == payload["source_window"] and (not items_passed or item.name in
