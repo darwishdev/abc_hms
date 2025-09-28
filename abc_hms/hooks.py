@@ -25,6 +25,10 @@ fixtures = [
     {"doctype" :"Sales Partner Type"},
     {"doctype" :"Sales Partner"},
 
+ {
+        "dt": "Workspace Link",
+        "filters": [["parent", "=", "EOD"]],
+    },
     {
         "dt": "Workspace",
         "filters": [
