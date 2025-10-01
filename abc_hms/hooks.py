@@ -89,7 +89,7 @@ fixtures = [
     {"doctype": "POS Profile User"},
     {"doctype": "Sales Taxes and Charges Template"},
     {"doctype": "Workflow State"},
-    {"doctype": "Workflow Action"},
+    {"doctype": "Workflow Action Master"},
     {"doctype": "Workflow"},
     {"doctype": "Workflow"},
     {"doctype": "Cancelation Policy"},
