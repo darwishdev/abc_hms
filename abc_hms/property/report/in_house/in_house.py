@@ -39,7 +39,7 @@ def execute(filters=None):
 
     # Build dynamic conditions properly
     date_condition = filters.get('date_filter')
-    property_value = filters.get('property', 'CONA')
+    property_value = filters.get('property', 'CHNA')
     is_arrival = filters.get('is_arrival', False)
     is_departure = filters.get('is_departure', False)
     reservation_status = filters.get('reservation_status')

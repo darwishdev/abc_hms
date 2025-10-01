@@ -3,7 +3,7 @@
  "currency": "",
  "docstatus": 0,
  "doctype": "Number Card",
- "filters_json": "{\"property\":\"CONA\",\"is_arrival\":0,\"is_departure\":0,\"date_filter\":\"2025-08-08\"}",
+ "filters_json": "{\"property\":\"CHNA\",\"is_arrival\":0,\"is_departure\":0,\"date_filter\":\"2025-08-08\"}",
  "function": "Count",
  "idx": 0,
  "is_public": 0,

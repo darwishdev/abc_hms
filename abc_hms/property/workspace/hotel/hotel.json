@@ -1,13 +1,8 @@
 {
  "charts": [],
- "content": "[{\"id\":\"OjZ1NBcY_X\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Hotel</span>\",\"col\":12}},{\"id\":\"JR7EUfUXQ_\",\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}},{\"id\":\"SWDIj7Q1QV\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"End Of Day\",\"col\":12}}]",
+ "content": "[{\"id\":\"JR7EUfUXQ_\",\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}}]",
  "creation": "2025-09-18 12:08:06.966065",
- "custom_blocks": [
-  {
-   "custom_block_name": "End Of Day",
-   "label": "End Of Day"
-  }
- ],
+ "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
@@ -109,87 +104,8 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Configuration",
-   "link_count": 7,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Property",
-   "link_count": 0,
-   "link_to": "Property",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Room Category",
-   "link_count": 0,
-   "link_to": "Room Category",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Room Type",
-   "link_count": 0,
-   "link_to": "Room Type",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Room",
-   "link_count": 0,
-   "link_to": "Room",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Rate Category",
-   "link_count": 0,
-   "link_to": "Rate Category",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Rate Code",
-   "link_count": 0,
-   "link_to": "Rate Code",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Property Setting",
-   "link_count": 0,
-   "link_to": "Property Setting",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Billing",
-   "link_count": 4,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -227,15 +143,44 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "POS Closing Entry",
+   "label": "Configuration",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Property",
    "link_count": 0,
-   "link_to": "POS Closing Entry",
+   "link_to": "Property",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Room Category",
+   "link_count": 0,
+   "link_to": "Room Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Room Type",
+   "link_count": 0,
+   "link_to": "Room Type",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2025-09-21 08:26:20.985819",
+ "modified": "2025-09-30 20:26:38.428906",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Hotel",
@@ -245,7 +190,7 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 2.0,
+ "sequence_id": 4.0,
  "shortcuts": [],
  "title": "Hotel"
 }

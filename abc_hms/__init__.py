@@ -13,6 +13,7 @@ from abc_hms.api.pos_restaurant_table import (
 from abc_hms.api.pos_folio_api import (
     folio_list_filtered,
     folio_upsert,
+    folio_window_upsert,
     folio_find,
     folio_merge,
     folio_insert
@@ -100,6 +101,7 @@ __all__ = [
     "pos_invoice_item_update_widnow",
     "folio_merge",
     "folio_insert",
+    "folio_window_upsert",
     "profile_item_list",
     "inventory_upsert",
     "cashier_login"

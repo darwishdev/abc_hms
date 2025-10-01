@@ -3,7 +3,7 @@
  "currency": "EGP",
  "docstatus": 0,
  "doctype": "Number Card",
- "filters_json": "{\"property\":\"CONA\",\"date_filter\":\"2025-08-07\"}",
+ "filters_json": "{\"property\":\"CHNA\",\"date_filter\":\"2025-08-07\"}",
  "function": "Count",
  "idx": 0,
  "is_public": 0,

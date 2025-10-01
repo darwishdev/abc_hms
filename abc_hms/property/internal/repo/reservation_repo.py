@@ -234,7 +234,7 @@ and r.reservation_status =
                 """
                 CALL inventory_availability_check(%s, %s, %s, %s, %s)
                 """,
-                ("CONA", arrival, departure, None, None)
+                ("CHNA", arrival, departure, None, None)
             )
             availability = cur.fetchall()
             if not availability:

@@ -123,12 +123,13 @@ class FolioRepo:
         return folios
 
 
-    def folio_find(self,folio : str):
+    def folio_find(self,folio : str , pos_profile : str):
         def procedure_call(cur ,_):
             cur.execute("""
-            CALL folio_find(%s);
+            CALL folio_find(%s , %s);
         """, (
-                folio
+                folio,
+                pos_profile
             ))
 
             return cur.fetchall()

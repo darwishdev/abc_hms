@@ -8,7 +8,7 @@ frappe.query_reports["Departures"] = {
             fieldtype: "Link",
             label: __("Property"),
             options: "Property",
-            default: "CONA",
+            default: "CHNA",
             reqd: 1, // This field is mandatory
             wildcard_filter: 0,
         },

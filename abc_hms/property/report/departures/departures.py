@@ -28,7 +28,7 @@ def execute(filters=None):
 
     # Build dynamic conditions
     date_condition = f"'{filters.get('date_filter')}'" if filters.get('date_filter') else "s.business_date"
-    property_value = filters.get('property', 'CONA')  # Default to 'CONA' if not provided
+    property_value = filters.get('property', 'CHNA')  # Default to 'CHNA' if not provided
     reservation_status_condition = f"r.reservation_status = '{filters.get('reservation_status')}'" if filters.get('reservation_status') else "1=1"
 
     query = f"""

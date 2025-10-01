@@ -52,7 +52,8 @@
   "column_break_nfvw",
   "ignore_availability",
   "allow_share",
-  "color"
+  "color",
+  "no_post"
  ],
  "fields": [
   {
@@ -62,6 +63,7 @@
    "label": "Initial Info"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "property",
    "fieldtype": "Link",
    "label": "Property",
@@ -385,6 +387,12 @@
    "fieldname": "color",
    "fieldtype": "Color",
    "label": "Color"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_post",
+   "fieldtype": "Check",
+   "label": "No Post"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -396,7 +404,7 @@
    "link_fieldname": "reservation"
   }
  ],
- "modified": "2025-09-23 23:06:43.100979",
+ "modified": "2025-09-30 21:13:14.859369",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Reservation",

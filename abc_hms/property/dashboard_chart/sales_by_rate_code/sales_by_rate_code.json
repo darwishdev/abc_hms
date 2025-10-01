@@ -6,7 +6,7 @@
  "custom_options": "{\"x_field\": \"rate_code\", \"chart_type\": \"Donut\", \"y_axis_fields\": [{\"idx\": 1, \"__islocal\": true, \"y_field\": \"base_rate\", \"name\": \"row 1\"}], \"y_fields\": [\"base_rate\"], \"colors\": [null]}",
  "docstatus": 0,
  "doctype": "Dashboard Chart",
- "filters_json": "{\"property\":\"CONA\",\"date_filter\":\"2025-08-07\",\"reservation_status\":\"In House\"}",
+ "filters_json": "{\"property\":\"CHNA\",\"date_filter\":\"2025-08-07\",\"reservation_status\":\"In House\"}",
  "group_by_type": "Count",
  "idx": 0,
  "is_public": 0,

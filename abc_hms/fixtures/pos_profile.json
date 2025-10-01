@@ -32,6 +32,34 @@
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
     "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
    }
   ],
   "apply_discount_on": "Grand Total",
@@ -89,7 +117,7 @@
   "print_receipt_on_order_complete": 0,
   "profile_code": null,
   "project": null,
-  "property": "CONA",
+  "property": "CHNA",
   "restaurant": "Main",
   "select_print_heading": null,
   "selling_price_list": "Standard Selling",
@@ -109,6 +137,13 @@
   "allow_partial_payment": 0,
   "allow_rate_change": 0,
   "applicable_for_users": [
+   {
+    "default": 0,
+    "parent": "F&B",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
    {
     "default": 0,
     "parent": "F&B",
@@ -138,9 +173,40 @@
   "hide_unavailable_items": 0,
   "ignore_pricing_rule": 0,
   "income_account": null,
-  "item_groups": [],
+  "item_groups": [
+   {
+    "item_group": "F&B",
+    "parent": "F&B",
+    "parentfield": "item_groups",
+    "parenttype": "POS Profile"
+   },
+   {
+    "item_group": "FEATURED PLATES",
+    "parent": "F&B",
+    "parentfield": "item_groups",
+    "parenttype": "POS Profile"
+   },
+   {
+    "item_group": "Cocktails",
+    "parent": "F&B",
+    "parentfield": "item_groups",
+    "parenttype": "POS Profile"
+   },
+   {
+    "item_group": "Shisha",
+    "parent": "F&B",
+    "parentfield": "item_groups",
+    "parenttype": "POS Profile"
+   },
+   {
+    "item_group": "WHITE WINE",
+    "parent": "F&B",
+    "parentfield": "item_groups",
+    "parenttype": "POS Profile"
+   }
+  ],
   "letter_head": null,
-  "modified": "2025-09-27 17:15:52.972759",
+  "modified": "2025-10-01 01:43:53.441400",
   "name": "F&B",
   "payments": [
    {
@@ -156,7 +222,7 @@
   "print_receipt_on_order_complete": 0,
   "profile_code": "F&B",
   "project": null,
-  "property": "CONA",
+  "property": "CHNA",
   "restaurant": "Main",
   "select_print_heading": null,
   "selling_price_list": "Standard Selling",
@@ -176,6 +242,48 @@
   "allow_partial_payment": 1,
   "allow_rate_change": 1,
   "applicable_for_users": [
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
    {
     "default": 1,
     "parent": "Main",
@@ -274,7 +382,7 @@
   "print_receipt_on_order_complete": 0,
   "profile_code": null,
   "project": null,
-  "property": "CONA",
+  "property": "CHNA",
   "restaurant": "",
   "select_print_heading": null,
   "selling_price_list": "Standard Selling",

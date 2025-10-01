@@ -13,7 +13,8 @@
   "column_break_vpst",
   "default_pos_profile",
   "section_break_lpbp",
-  "default_rooms_item_group"
+  "default_rooms_item_group",
+  "default_price_list"
  ],
  "fields": [
   {
@@ -69,12 +70,20 @@
    "label": "Default Rooms Item Group",
    "options": "Item Group",
    "reqd": 1
+  },
+  {
+   "fieldname": "default_price_list",
+   "fieldtype": "Link",
+   "label": "Default Price List",
+   "link_filters": "[[\"Price List\",\"selling\",\"=\",1]]",
+   "options": "Price List",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-19 22:55:27.139672",
+ "modified": "2025-10-01 00:38:05.717098",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Property Setting",

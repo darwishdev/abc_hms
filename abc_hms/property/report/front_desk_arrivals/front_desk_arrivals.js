@@ -5,7 +5,7 @@ frappe.query_reports["Front Desk Arrivals"] = {
             fieldtype: "Link",
             label: __("Property"),
             options: "Property",
-            default: "CONA",
+            default: "CHNA",
             reqd: 1,
             wildcard_filter: 0,
         },

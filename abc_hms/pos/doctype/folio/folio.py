@@ -50,11 +50,11 @@ class Folio(Document):
         total_amount = row.get("amount") or 0
         total_paid = row.get("paid") or 0
 
-        return total_amount == total_paid
+        return total_amount - total_paid
     def before_submit(self):
-        can_submit = self.can_submit()
-        if not can_submit:
-            frappe.throw(f"Folio Balance Not Zero")
+        balance = self.can_submit()
+        if balance > 0 :
+            frappe.throw(f"Folio Balance is {balance}")
 
         invoices = frappe.get_all("POS Invoice" , {"folio" : self.name} , pluck="name")
         for invoice in invoices:

@@ -15,10 +15,10 @@ override_doctype_class = {
 
 boot_session = "abc_hms.boot.get_business_date"
 app_include_css = [
-    "/assets/abc_hms/css/nav-2.css"
+    "/assets/abc_hms/css/nav-50.css"
 ]
 app_include_js = [
-    "/assets/abc_hms/js/nav-8.js"
+    "/assets/abc_hms/js/nav-9.js"
 ]
 fixtures = [
     {"doctype": "Company"},

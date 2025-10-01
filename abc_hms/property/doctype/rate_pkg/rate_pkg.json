@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-30 17:26:33.017356",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pkg",
+  "column_break_bsck",
+  "included"
+ ],
+ "fields": [
+  {
+   "fieldname": "pkg",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "PKG",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "0",
+   "fieldname": "included",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Included"
+  },
+  {
+   "fieldname": "column_break_bsck",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-10-01 00:34:03.289204",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "Rate PKG",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

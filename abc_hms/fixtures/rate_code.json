@@ -11,10 +11,19 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-09-15 06:06:14.209588",
+  "modified": "2025-10-01 00:35:33.657533",
   "name": "Paymaster",
   "pay_in_advance": 0,
   "rate_category": "PM",
+  "rate_pkgs": [
+   {
+    "included": 1,
+    "parent": "Paymaster",
+    "parentfield": "rate_pkgs",
+    "parenttype": "Rate Code",
+    "pkg": "Rate Breakfast"
+   }
+  ],
   "room_types": [
    {
     "base_price": 0.0,
@@ -74,10 +83,19 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-09-15 06:06:14.136128",
+  "modified": "2025-10-01 00:35:09.644382",
   "name": "COMP",
   "pay_in_advance": 0,
   "rate_category": "COMP",
+  "rate_pkgs": [
+   {
+    "included": 1,
+    "parent": "COMP",
+    "parentfield": "rate_pkgs",
+    "parenttype": "Rate Code",
+    "pkg": "Rate Breakfast"
+   }
+  ],
   "room_types": [
    {
     "base_price": 0.0,
@@ -137,10 +155,19 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-09-15 06:06:14.250064",
+  "modified": "2025-10-01 00:35:22.235317",
   "name": "Corporate-EGP",
   "pay_in_advance": 0,
   "rate_category": "CORP",
+  "rate_pkgs": [
+   {
+    "included": 1,
+    "parent": "Corporate-EGP",
+    "parentfield": "rate_pkgs",
+    "parenttype": "Rate Code",
+    "pkg": "Rate Breakfast"
+   }
+  ],
   "room_types": [
    {
     "base_price": 15000.0,
@@ -200,10 +227,19 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-09-15 06:06:13.880473",
+  "modified": "2025-10-01 00:34:32.604682",
   "name": "RackEG",
   "pay_in_advance": 0,
   "rate_category": "RACK",
+  "rate_pkgs": [
+   {
+    "included": 1,
+    "parent": "RackEG",
+    "parentfield": "rate_pkgs",
+    "parenttype": "Rate Code",
+    "pkg": "Rate Breakfast"
+   }
+  ],
   "room_types": [
    {
     "base_price": 15000.0,
@@ -263,10 +299,19 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-09-15 06:06:13.965370",
+  "modified": "2025-10-01 00:34:51.594637",
   "name": "BAR-EGP",
   "pay_in_advance": 0,
   "rate_category": "BAR",
+  "rate_pkgs": [
+   {
+    "included": 1,
+    "parent": "BAR-EGP",
+    "parentfield": "rate_pkgs",
+    "parenttype": "Rate Code",
+    "pkg": "Rate Breakfast"
+   }
+  ],
   "room_types": [
    {
     "base_price": 15000.0,
@@ -326,10 +371,19 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-09-15 06:06:14.032147",
+  "modified": "2025-10-01 00:34:43.529498",
   "name": "TAR-EGP",
   "pay_in_advance": 0,
   "rate_category": "TAR",
+  "rate_pkgs": [
+   {
+    "included": 1,
+    "parent": "TAR-EGP",
+    "parentfield": "rate_pkgs",
+    "parenttype": "Rate Code",
+    "pkg": "Rate Breakfast"
+   }
+  ],
   "room_types": [
    {
     "base_price": 15000.0,
@@ -389,10 +443,19 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 1,
-  "modified": "2025-09-15 06:06:14.090662",
+  "modified": "2025-10-01 00:34:59.200187",
   "name": "HUSE",
   "pay_in_advance": 0,
   "rate_category": "HUSE",
+  "rate_pkgs": [
+   {
+    "included": 1,
+    "parent": "HUSE",
+    "parentfield": "rate_pkgs",
+    "parenttype": "Rate Code",
+    "pkg": "Rate Breakfast"
+   }
+  ],
   "room_types": [
    {
     "base_price": 0.0,

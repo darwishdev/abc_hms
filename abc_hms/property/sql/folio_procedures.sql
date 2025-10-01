@@ -29,13 +29,13 @@ BEGIN
             ON f.reservation = r.name
         WHERE f.pos_profile = COALESCE(p_pos_profile, f.pos_profile)
           AND f.docstatus = COALESCE(p_docstatus, f.docstatus)
-          AND r.name = COALESCE(p_reservation, r.name)
+          AND (r.name IS NULL OR r.name = COALESCE(p_reservation, r.name))
           AND (p_guest IS NULL OR r.guest LIKE CONCAT('%', p_guest, '%'))
-          AND r.room = COALESCE(p_room, r.room)
-          AND r.arrival >= COALESCE(p_arrival_from, r.arrival)
-          AND r.arrival <= COALESCE(p_arrival_to, r.arrival)
-          AND r.departure >= COALESCE(p_departure_from, r.departure)
-          AND r.departure <= COALESCE(p_departure_to, r.departure)
+          AND (r.name IS NULL OR r.room = COALESCE(p_room, r.room))
+          AND (r.name IS NULL OR r.arrival >= COALESCE(p_arrival_from, r.arrival))
+          AND (r.name IS NULL OR r.arrival <= COALESCE(p_arrival_to, r.arrival))
+          AND (r.name IS NULL OR r.departure >= COALESCE(p_departure_from, r.departure))
+          AND (r.name IS NULL OR r.departure <= COALESCE(p_departure_to, r.departure))
     ),
     items AS (
         SELECT
@@ -86,6 +86,7 @@ BEGIN
               'item_code', ii.item_code,
               'item_name', ii.item_name,
               'rate', ii.rate,
+              'qty', ii.qty,
               'amount', ii.amount
           )
         ) AS items,
@@ -118,12 +119,12 @@ BEGIN
       SELECT
         fw.folio,
         fw.name folio_window,
-        fw.label folio_lable,
+  fw.window_label,
         i.total_required_amount,
         p.total_paid_amount,
         i.items,
         p.payments
-      FROM `tabFolio Window` fw
+      FROM  `tabFolio Window` fw
       LEFT JOIN items i ON fw.name = i.folio_window
       LEFT JOIN payments p ON fw.name = p.folio_window
       WHERE fw.folio = COALESCE(p_folio, fw.folio)
@@ -141,6 +142,7 @@ BEGIN
       JSON_ARRAYAGG(
         JSON_OBJECT(
           'folio_window',fw.folio_window,
+          'window_label' , fw.window_label,
           'total_required_amount' , fw.total_required_amount,
           'total_paid_amount' , fw.total_paid_amount,
           'items' , fw.items,
@@ -153,6 +155,5 @@ BEGIN
     WHERE f.name = COALESCE(p_folio, f.name)
     GROUP BY f.name, f.restaurant_table, r.room, r.name, r.arrival, r.departure, r.guest;
 END $$
-
 
 DELIMITER ;

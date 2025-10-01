@@ -37,9 +37,9 @@ class FolioUsecase:
             raise e
 
 
-    def folio_find(self, folio: str):
+    def folio_find(self, folio: str , pos_profile: str):
         try:
-            folio_data =  self.repo.folio_find(folio)
+            folio_data =  self.repo.folio_find(folio , pos_profile)
             if folio_data['windows']:
                 folio_data['windows'] = json.loads(folio_data['windows'])
             return folio_data
