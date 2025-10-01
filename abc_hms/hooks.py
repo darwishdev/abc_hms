@@ -26,7 +26,7 @@ fixtures = [
         "filters": [
             ["name", "in", [
                 "1340 - City Ledger - CH",
-                "1320 - Guest Ledget Ledger - CH",
+                "1320 - Guest Ledger - CH",
                 "1210 - Bank Account - CH",
                 "1330 - Visa - CH",
                 "4140 - Room Revenue - CH",
