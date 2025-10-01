@@ -21,6 +21,22 @@ app_include_js = [
     "/assets/abc_hms/js/nav-9.js"
 ]
 fixtures = [
+{
+        "doctype": "Account" ,
+        "filters": [
+            ["name", "in", [
+                "1340 - City Ledger - CH",
+                "1320 - Guest Ledget Ledger - CH",
+                "1210 - Bank Account - CH",
+                "1330 - Visa - CH",
+                "4140 - Room Revenue - CH",
+                "4130 - F&B Revenue - CH",
+                "2320 - Service Charge - CH",
+                "2330 - Municipality - CH",
+                "2340 - VAT - CH"
+            ]]
+        ]},
+
     {"doctype": "Company"},
     {"doctype" :"Sales Partner Type"},
     {"doctype" :"Sales Partner"},
@@ -60,22 +76,7 @@ fixtures = [
                 "Rooms",
             ]]
         ]},
-    {
-        "doctype": "Account" ,
-        "filters": [
-            ["name", "in", [
-                "1310 - City Ledger - CH",
-                "1310 - City Ledger - CH",
-                "1210 - Bank Account - CH",
-                "1330 - Visa - CH",
-                "4140 - Room Revenue - CH",
-                "4130 - F&B Revenue - CH",
-                "2320 - Service Charge - CH",
-                "2330 - Municipality - CH",
-                "2340 - VAT - CH"
-            ]]
-        ]},
-    {"doctype": "Customer"},
+        {"doctype": "Customer"},
     {"doctype": "Bed Type"},
     {"doctype": "Room Category"},
     {"doctype": "Room Type"},
