@@ -40,8 +40,8 @@ class PropertySettingUsecase:
         try:
             result = self.repo.property_setting_find(property_name)
             return result
-        except Exception as e:
-            raise Exception(f"unexpected_error: {str(e)}")
+        except:
+            raise
 
     def property_setting_business_date_find(
         self,
@@ -64,4 +64,4 @@ class PropertySettingUsecase:
             result = self.repo.property_setting_increase_business_date(property_name, commit=commit)
             return result
         except Exception as e:
-            raise
+            raise e

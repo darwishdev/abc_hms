@@ -36,6 +36,7 @@ CREATE PROCEDURE reservation_sync(
     IN p_new_docstatus INT,
     IN p_new_reservation_status VARCHAR(100),
     IN p_new_room_type VARCHAR(255),
+    IN p_new_rate_code VARCHAR(255),
     IN p_new_room VARCHAR(255),
     IN p_ignore_availability TINYINT(1),
     IN p_allow_room_sharing TINYINT(1)
@@ -86,7 +87,7 @@ proc_body: BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: arrival must be before departure';
     END IF;
 
-    IF p_new_arrival < v_business_date THEN
+    IF p_new_reservation_status NOT IN ('In House' , 'Departure') AND  p_new_arrival < v_business_date THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: arrival must be >= business date';
     END IF;
 
@@ -175,8 +176,8 @@ proc_body: BEGIN
     DELETE FROM reservation_date WHERE reservation = p_reservation;
 
     -- Insert new reservation dates
-    INSERT INTO reservation_date (reservation, room_type, room , for_date)
-    SELECT p_reservation, v_actual_room_type, p_new_room , d.for_date
+    INSERT INTO reservation_date (reservation, room_type, room ,rate_code, for_date)
+    SELECT p_reservation, v_actual_room_type, p_new_room ,p_new_rate_code , d.for_date
     FROM dim_date d
     WHERE d.date_actual >= p_new_arrival AND d.date_actual < p_new_departure;
 
@@ -185,22 +186,5 @@ proc_body: BEGIN
     COMMIT;
 
 END proc_body$$
-DROP PROCEDURE IF EXISTS reservation_date_sync $$
-CREATE PROCEDURE IF NOT EXISTS reservation_date_sync(IN p_reservation VARCHAR(255))
-BEGIN
-
-    DELETE FROM reservation_date
-    WHERE reservation = p_reservation;
-
-    INSERT INTO reservation_date (reservation, room_type, for_date)
-    SELECT p_reservation, coalesce(r.room_type , re.room_type) room_type , d.for_date
-    FROM tabReservation re
-    JOIN dim_date d
-      ON d.date_actual >= re.arrival
-     AND d.date_actual < re.departure
-    LEFT JOIN tabRoom r on re.room = r.name
-  where re.docstatus = 1 and re.name = p_reservation;
-
-END$$
 
 DELIMITER $$

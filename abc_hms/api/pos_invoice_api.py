@@ -16,7 +16,7 @@ def pos_invoice_upsert()-> PosInvoiceUpsertResponse:
         frappe.throw(f"Invalid JSON payload: {e}")
         return {"success" : False , "error" : f"{str(e)}"}
 
-    result = app_container.pos_invoice_usecase.pos_invoice_upsert(payload)
+    result = app_container.pos_invoice_usecase.pos_invoice_upsert(payload , False)
     return result
 
 

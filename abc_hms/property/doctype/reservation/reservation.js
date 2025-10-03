@@ -1,60 +1,87 @@
 frappe.ui.form.on("Reservation", {
     onload(frm) {
-        // Listen for the reload_doc event
-
-        console.log(frm);
-        frappe.realtime.on("reload_doc", (data) => {
-            console.log("listen happens", data, frm.doc.doctype, frm.doc.name);
-            const { doctype, name } = data;
-            if (frm.doc.doctype === doctype && frm.doc.name === name) {
-                frm.reload_doc().then(() => {
-                    frappe.show_alert({ message: __("Document refreshed"), indicator: "green" });
-                });
-            }
-        });
+        if (frm.doc.room_type) {
+            frm.set_query("room", function () {
+                return {
+                    filters: {
+                        room_type: frm.doc.room_type,
+                    },
+                };
+            });
+        }
     },
     refresh(frm) {
         handle_availability_button(frm);
     },
     property(frm) {
+        frm.call("get_business_date");
         handle_availability_button(frm);
     },
     validate(frm) {
         validate_reservation(frm);
     },
+    room_type(frm) {
+        frm.set_query("room", function () {
+            return {
+                filters: {
+                    room_type: frm.doc.room_type,
+                },
+            };
+        });
+    },
     arrival(frm) {
         validate_arrival(frm);
-        sync_departure_from_arrival(frm);
-        handle_availability_button(frm);
+        frm.set_value("nights", 1);
+        if (frm.doc.arrival && (!frm.doc.nights || frm.doc.nights == 0)) {
+            frm.set_value("nights", 1);
+            return;
+        }
+        frm.call("sync_arrival_departure_nights", { changed_field: arguments.callee.name }).then(
+            () => {
+                handle_availability_button(frm);
+            },
+        );
     },
     departure(frm) {
-        validate_departure(frm);
-        sync_nights_from_departure(frm);
         handle_availability_button(frm);
+        try {
+            validate_departure(frm);
+            frm.call("sync_arrival_departure_nights", { changed_field: arguments.callee.name });
+        } catch (error) {
+            console.log("validation error");
+            return;
+        }
     },
     base_rate(frm) {
-        console.log("frm", frm.is_dirty(), frm.is_new());
-        const selected = frm.selected_rate;
-        if (!selected) return;
-
-        const current = parseFloat(frm.doc.base_rate || 0);
-        if (current !== selected.base_rate) {
-            frm.set_value("fixed_rate", 1);
-        } else {
-            frm.set_value("fixed_rate", 0);
+        if (frm.doc.base_rate != frm.doc.rate_code_rate) {
+            frm.set_value("fixed_rate", true);
         }
+        frm.call("apply_discount", { changed_field: arguments.callee.name });
     },
     nights(frm) {
         validate_nights(frm);
-        sync_departure_from_nights(frm);
+        console.log("nights changed");
+        frm.call("sync_arrival_departure_nights", { changed_field: arguments.callee.name });
+        // sync_departure_from_nights(frm);
         handle_availability_button(frm);
     },
+
+    discount_percent(frm) {
+        frm.call("apply_discount", { changed_field: arguments.callee.name });
+        // validate_number_of_rooms(frm);
+    },
+    discount_amount(frm) {
+        frm.call("apply_discount", { changed_field: arguments.callee.name });
+        // validate_number_of_rooms(frm);
+    },
     number_of_rooms(frm) {
-        validate_number_of_rooms(frm);
+        frm.call("recalc", { changed_field: arguments.callee.name });
+        // validate_number_of_rooms(frm);
     },
 });
 
 const handle_availability_button = (frm) => {
+    console.log("ahndling availability_html");
     frm.add_custom_button(__("Sync Folios"), async () => {
         frm.call("ensure_all_folios");
     });
@@ -65,6 +92,16 @@ const handle_availability_button = (frm) => {
         frm.doc.departure &&
         frm.doc.nights > 0;
 
+    console.log(
+        "ahndling availability_html",
+        frm.doc,
+        can_show,
+        frm.doc.property,
+        frm.doc.docstatus,
+        frm.doc.arrival,
+        frm.doc.departure,
+        frm.doc.nights,
+    );
     if (!can_show || !frm.is_dirty()) {
         frm.remove_custom_button("Get Availability");
         return;
@@ -111,17 +148,29 @@ const validate_reservation = (frm) => {
 };
 
 const validate_arrival = (frm) => {
-    const { arrival } = frm.doc;
-    const business_date = frappe.boot.business_date;
-
-    if (arrival && arrival < business_date) {
-        frappe.throw(__(`Arrival date cannot be before business date (${business_date}).`));
+    const { arrival, created_on_business_date } = frm.doc;
+    if (!created_on_business_date) {
+        frm.set_value("arrival", "");
+        frappe.throw("Please Choose Property First");
+        return;
+    }
+    if (
+        arrival &&
+        arrival < created_on_business_date &&
+        reservation_status != "In House" &&
+        reservation_status != "Departure"
+    ) {
+        frm.set_value("arrival", "");
+        frappe.throw(
+            __(`Arrival date cannot be before business date (${created_on_business_date}).`),
+        );
     }
 };
 
 const validate_departure = (frm) => {
-    const { arrival, departure } = frm.doc;
-    if (arrival && departure && departure <= arrival) {
+    const { arrival, departure, reservation_status } = frm.doc;
+    if (arrival && departure && departure <= arrival && reservation_status != "In House") {
+        frm.call("recalc", { changed_field: "arrival" });
         frappe.throw(__("Departure date must be after arrival date."));
     }
 };

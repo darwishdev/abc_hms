@@ -26,19 +26,8 @@ class POSOpeningEntryUsecase:
     def pos_opening_entry_find_by_property(
         self,
         property: str,
-    )->Union[Optional[str] , ErrorResponse]:
-        try:
-            entries = self.repo.pos_opening_entry_find_by_property(property)
-            if entries and len(entries) == 1:
-                return entries[0].get("name")
-            return None
-        except frappe.ValidationError as e:
-            frappe.log_error(f"POS opening_entry validation failed: {e}")
-            raise
-
-        except Exception as e:
-            frappe.log_error(frappe.get_traceback(), "POS opening_entry Upsert API Error")
-            return {"success" : False , "error" : f"Unexpected error: {str(e)}"}
+    ):
+        return self.repo.pos_opening_entry_find_by_property(property)
     def pos_opening_entry_upsert(
         self,
         request :POSOpeningEntryUpsertRequest,
@@ -59,16 +48,11 @@ class POSOpeningEntryUsecase:
         self,
         request :POSClosingEntryFromOpeningRequest,
     ) -> POSClosingEntry:
-        try:
-            pos_opening_entry = self.repo.pos_opening_entry_find(request["opening_entry"])
-            closing_entry = make_closing_entry_from_opening(pos_opening_entry)
-            closing_entry.insert(ignore_permissions=True)
-            closing_entry.submit()
-            if request["commit"]:
-                frappe.db.commit()
-            return closing_entry
-        except Exception as e:
-            raise e
+        pos_opening_entry = self.repo.pos_opening_entry_find(request["opening_entry"])
+        closing_entry = make_closing_entry_from_opening(pos_opening_entry)
+        closing_entry.insert(ignore_permissions=True)
+        # closing_entry.submit()
+        return closing_entry
     def pos_closing_entry_from_opening(
         self,
         pos_opening_entry :POSOpeningEntryData,

@@ -1,13 +1,1 @@
-[
- {
-  "business_date": "2025-08-10",
-  "default_pos_profile": "Main",
-  "default_price_list": "Standard Selling",
-  "default_rooms_item_group": "Rooms",
-  "docstatus": 0,
-  "doctype": "Property Setting",
-  "modified": "2025-10-01 14:13:27.285724",
-  "name": "CHNA",
-  "property": "CHNA"
- }
-]
+[]

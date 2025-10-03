@@ -1,4 +1,5 @@
 from asyncio import sleep
+from datetime import timedelta
 import json
 import time
 from frappe.model.document import Document
@@ -6,6 +7,7 @@ from frappe.model.naming import make_autoname
 import frappe
 import os
 from frappe import render_template
+from frappe.utils import getdate
 from sentry_sdk.utils import json_dumps
 from abc_hms.container import app_container
 from abc_hms.pos.doctype import folio
@@ -16,6 +18,57 @@ class AvailabilityWarning(Exception):
     pass
 
 class Reservation(Document):
+    def fix_total_stay(self):
+        base_rate = self.base_rate or 0
+        nights = self.nights or 0
+
+        total_stay = base_rate * nights
+        if total_stay < 0:
+            total_stay = 0
+
+        return total_stay
+
+    def fix_discount_amount(self):
+        base_rate = (self.base_rate * self.nights) or 0
+        rate_code_rate = (self.rate_code_rate * self.nights) or 0
+        return rate_code_rate - base_rate
+
+    def fix_discount_percent(self):
+        base_rate = (self.base_rate * self.nights) or 0
+        rate_code_rate = (self.rate_code_rate * self.nights) or 0
+        return  100 - ((base_rate / rate_code_rate) * 100)
+
+    def fix_base_rate(self):
+        total_stay = self.total_stay or 0
+        nights = self.nights or 0
+        discount_amount = self.discount_amount or 0
+
+        if nights > 0:
+            base_rate = (total_stay + discount_amount) / nights
+        else:
+            base_rate = 0
+
+        return base_rate
+
+
+    def fix_nights(self):
+        arrival_date = self.arrival
+        departure_date = self.departure
+
+        if arrival_date and departure_date:
+            arrival_date = getdate(arrival_date)
+            departure_date = getdate(departure_date)
+            return (departure_date - arrival_date).days
+        return 0
+
+    def fix_departure(self):
+        arrival_date = self.arrival
+        nights = self.nights or 0
+
+        if arrival_date:
+            arrival_date = getdate(arrival_date)
+            departure_date = arrival_date + timedelta(days=nights)
+            return departure_date
     def autoname(self):
         if not self.property:
             frappe.throw("Property field is required to generate name")
@@ -53,46 +106,16 @@ class Reservation(Document):
             title=title,
             primary_action=primary_action
         )
+    @frappe.whitelist()
+    def get_business_date(self):
+        property_business_date = frappe.db.get_value(
+            "Property Setting",
+            {"property": self.get("property")},
+            "business_date"
+        )
+        self.created_on_business_date = property_business_date
 
-    # def can_check_out(self):
-    #     result = frappe.db.sql(
-    #         """
-    #         WITH items AS (
-    #             SELECT
-    #                 i.folio_window,
-    #                 SUM(i.amount) AS amount
-    #             FROM `tabPOS Invoice Item` i
-    #             GROUP BY i.folio_window
-    #         ), payments AS (
-    #             SELECT
-    #                 p.folio_window,
-    #                 SUM(p.amount) AS amount
-    #             FROM `tabSales Invoice Payment` p
-    #             GROUP BY p.folio_window
-    #         )
-    #         SELECT
-    #             fw.name AS folio_window,
-    #             COALESCE(items.amount, 0) AS amount,
-    #             COALESCE(payments.amount, 0) AS paid
-    #         FROM `tabReservation` r
-    #         JOIN `tabFolio` f ON f.reservation = r.name
-    #         JOIN `tabFolio Window` fw ON fw.folio = f.name
-    #         LEFT JOIN items ON fw.name = items.folio_window
-    #         LEFT JOIN payments ON fw.name = payments.folio_window
-    #         WHERE r.name = %s
-    #         """,
-    #         (self.name,),
-    #         as_dict=True,
-    #     )
-    #
-    #     if not result:
-    #         return False  # no folio, cannot check out
-    #
-    #     row = result[0]
-    #     total_amount = row.get("amount") or 0
-    #     total_paid = row.get("paid") or 0
-    #
-    #     return total_amount == total_paid
+
     def save(self , *args , **kwargs):
         try:
             frappe.publish_progress(10, title="Saving", description="Syncing Reservation Dates")
@@ -146,6 +169,7 @@ class Reservation(Document):
                             "new_docstatus": self.docstatus,
                             "new_reservation_status": self.reservation_status,
                             "new_room_type": self.room_type,
+                            "new_rate_code": self.rate_code,
                             "new_room": self.room,
                             "ignore_availability": self.ignore_availability,
                             "allow_room_sharing": self.allow_share
@@ -157,7 +181,7 @@ class Reservation(Document):
 
             super().save(*args, **kwargs)
 
-            if self.reservation_status == "Confirmed":
+            if self.reservation_status in  ("Confirmed" , "Arrival"):
                 self.ensure_folio()
             frappe.publish_progress(100, title="Saving", description="Reservation Days Synced Successfully")
             frappe.db.commit()
@@ -229,3 +253,30 @@ class Reservation(Document):
         return render_template(template_content, data)
 
 
+    @frappe.whitelist()
+    def sync_arrival_departure_nights(self, changed_field: str):
+        if changed_field in ("nights" , "arrival"):
+            self.departure = self.fix_departure()
+        elif changed_field == "departure":
+            self.nights = self.fix_nights()
+
+        self.total_stay = self.fix_total_stay()
+        self.discount_amount = self.fix_discount_amount()
+    @frappe.whitelist()
+    def apply_discount(self, changed_field: str):
+        if changed_field == "base_rate":
+            self.total_stay = self.fix_total_stay()
+            if self.base_rate != self.rate_code_rate and self.rate_code_rate != 0:
+                self.discount_amount = self.fix_discount_amount()
+                self.discount_percent = self.fix_discount_percent()
+            else:
+                self.discount_amount = None
+                self.discount_percent = None
+        if changed_field == "discount_percent":
+            self.base_rate = self.rate_code_rate - ( self.rate_code_rate * (self.discount_percent / 100))
+            self.total_stay = self.fix_total_stay()
+            self.discount_amount = self.fix_discount_amount()
+        if changed_field == "discount_amount":
+            self.base_rate = self.rate_code_rate - (self.discount_amount / self.nights)
+            self.total_stay = self.fix_total_stay()
+            self.discount_percent = self.fix_discount_percent()

@@ -128,6 +128,8 @@ CREATE TABLE IF NOT EXISTS
   `reservation_date` (
     `reservation` varchar(255) NOT NULL,
     `room_type` varchar(255) NOT NULL,
+    `rate_code` varchar(255) NOT NULL,
+    `room` varchar(255),
     `for_date` int(8) NOT NULL,
     UNIQUE KEY `uq_room_for_date` (`reservation`, `for_date`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
@@ -141,17 +143,6 @@ CREATE OR REPLACE TABLE room_type_rate (
     for_date INT(8) NOT NULL,
     PRIMARY KEY (room_type, rate_code, for_date)
 ) ENGINE=InnoDB
-DEFAULT CHARSET=utf8mb4
-COLLATE=utf8mb4_unicode_ci;
-DROP TABLE IF EXISTS reservation_date;
-CREATE TABLE
-  `reservation_date` (
-    `reservation` varchar(255) NOT NULL,
-    `room_type` varchar(255) NOT NULL,
-    `room` varchar(255),
-    `for_date` int(8) NOT NULL,
-    UNIQUE KEY uq_room_for_date (reservation, room , for_date)
-  ) ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 

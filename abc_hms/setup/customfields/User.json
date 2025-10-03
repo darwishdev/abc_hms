@@ -1,13 +1,22 @@
 [
   {
-    "fieldname": "cashier_code",
-    "label": "Cashier Code",
-    "fieldtype": "Int",
+    "fieldname": "cashier_abbriviation",
+    "label": "Cashier Abbriviation",
+    "fieldtype": "Data",
     "length": 6,
+    "unique": 1,
     "reqd": 0,
     "read_only_onload": 0
   },
-
+  {
+    "fieldname": "cashier_code",
+    "label": "Cashier Code",
+    "fieldtype": "Data",
+    "length": 6,
+    "reqd": 0,
+    "unique": 1,
+    "read_only_onload": 0
+  },
   {
     "fieldname": "cashier_password",
     "label": "Cashier Password",

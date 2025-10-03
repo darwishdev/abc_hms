@@ -91,6 +91,7 @@ def ignore_and_resave(args: str |  dict):
             "new_docstatus": args["docstatus"],
             "new_reservation_status": args["reservation_status"],
             "new_room_type": args["room_type"],
+            "new_rate_code": args["rate_code"],
             "new_room": args["room"],
             "ignore_availability": args["ignore_availability"],
             "allow_room_sharing": args["allow_share"]

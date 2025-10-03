@@ -178,3 +178,67 @@ def property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_sessi
     finally:
         _publish_step(property, "end", "completed")
 
+
+@frappe.whitelist()
+def property_eod(property: str, auto_mark_no_show: bool=False, auto_session_close: bool=False):
+    frappe.db.begin()
+    frappe.flags.in_install = True
+    try:
+        property_setting = app_container.property_setting_usecase.property_setting_find(property)
+        if not property_setting:
+            raise frappe.NotFound(f"Property {property} Not Found")
+
+        business_date_int = property_setting["business_date_int"]
+        opening_entries = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_property(property)
+        closing_entries = []
+
+
+
+
+        new_date_settings = app_container.property_setting_usecase.property_setting_increase_business_date(property)
+        updated_reservations = app_container.reservation_usecase.reservation_end_of_day_auto_mark(property, auto_mark_no_show)
+        new_business_date_int = new_date_settings["business_date_int"]
+        new_opening_entry_params = property_setting_to_pos_opening_entry(new_date_settings, property)
+        app_container.pos_opening_entry_usecase.pos_opening_entry_upsert({
+            "doc": new_opening_entry_params,
+            "commit": False,
+        })
+
+        invoices = app_container.reservation_usecase.get_inhouse_reservations_invoices(new_business_date_int)
+
+        for inv in invoices:
+            items = json.loads(inv.pop('items', '[]'))
+            doc = frappe.get_doc({
+                "doctype": "POS Invoice",
+                **inv
+            })
+            for item in items:
+                doc.append("items", item)
+            doc.append("payments", {
+                    "mode_of_payment": "Cash",
+                    "amount": 0
+                })
+            doc.insert()
+
+        for entry in opening_entries:
+            entry_name = entry["name"]
+            if auto_session_close:
+                app_container.pos_session_usecase.pos_sessions_close_for_date_profile(business_date_int,entry_name)
+            invoices = frappe.get_all(
+                    "POS Invoice",
+                filters={"for_date": business_date_int, "docstatus": 0 , "pos_profile" : entry["pos_profile"]},
+                    fields=["name" , "pos_profile"]
+                )
+            for invoice in invoices:
+                invoice_doc = frappe.get_doc("POS Invoice" , invoice["name"])
+                if invoice_doc:
+                    invoice_doc.submit()
+            closing_entry = app_container.pos_opening_entry_usecase.pos_closing_entry_from_opening_name({
+                    "opening_entry": entry_name
+                })
+            closing_entry.submit()
+    except:
+        frappe.db.rollback()
+        raise
+    finally:
+        frappe.flags.in_install = False

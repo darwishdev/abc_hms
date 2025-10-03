@@ -10,15 +10,16 @@ class POSOpeningEntryRepo:
 
     def pos_opening_entry_find_by_property(self , property: str):
         results =  frappe.db.sql("""
-                                SELECT e.name
+                                SELECT e.name ,
+                                e.pos_profile,
+                                (e.pos_profile = default_pos_profile) is_default
                                 FROM `tabPOS Opening Entry` e
                                 JOIN `tabProperty Setting` s
                                 on s.property = %(property)s
-                                AND e.pos_profile = default_pos_profile
                                 AND e.docstatus = 1
                                 AND e.status = 'Open'
                             """ ,
-                                {"property" :property} , as_dict=True) # type: ignore
+                                {"property" :property} , as_dict=True)
 
         return results
     def pos_opening_entry_find(self , name: str) -> POSOpeningEntryData:

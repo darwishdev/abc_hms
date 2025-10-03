@@ -4,9 +4,12 @@ from functools import wraps
 from frappe import _
 
 def _deny(status: int, msg: str):
+    """Properly set response status and throw PermissionError"""
     frappe.local.response = getattr(frappe.local, "response", {}) or {}
     frappe.local.response["http_status_code"] = status
-    raise PermissionError(_(msg))
+    frappe.local.response["message"] = msg
+    # Use PermissionError which Frappe handles properly
+    raise frappe.PermissionError(_(msg))
 
 
 def business_date_protected(fn):

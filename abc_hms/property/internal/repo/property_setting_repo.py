@@ -25,7 +25,7 @@ class PropertySettingRepo:
 
 
     def property_setting_find(self, property_name: str) -> PropertySettingData:
-            property_setting : PropertySettingData = frappe.db.sql("""
+            property_setting  = frappe.db.sql("""
                 SELECT
                 p.company ,
                 s.business_date ,
@@ -34,8 +34,10 @@ class PropertySettingRepo:
                 s.default_rooms_item_group
                 FROM `tabProperty Setting` s JOIN tabProperty p ON s.name = p.name WHERE s.name =
                 %s
-            """ , (property_name,) , as_dict=True)[0] # type: ignore
-            return property_setting
+            """ , (property_name,) , as_dict=True)
+            if not property_setting or len(property_setting) == 0:
+                raise frappe.NotFound(f"Property {property_name} Not Found Or Not Configured")
+            return property_setting[0] # type: ignore
 
 
 
@@ -43,15 +45,9 @@ class PropertySettingRepo:
     def property_setting_increase_business_date(self, property_name: str, commit: bool = False)-> PropertySettingData :
         try:
             # Reuse existing method to get current business date
-            result = self.property_setting_find(property_name)
-            current_date_str = result.get("business_date")
-
-            # Compute next date
-            next_date = add_days(current_date_str, 1)
-
-            # Update business_date in DB directly
-            frappe.db.set_value("Property Setting", property_name, "business_date", next_date)
-
+            property_setting_doc = frappe.get_doc("Property Setting" , property_name)
+            property_setting_doc.update({"business_date" : add_days(property_setting_doc.business_date, 1)})
+            property_setting_doc.save()
             if commit:
                 frappe.db.commit()
 

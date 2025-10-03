@@ -9,6 +9,14 @@ class ReservationUsecase:
     def __init__(self) -> None:
         self.repo = ReservationRepo()
 
+
+    def get_inhouse_reservations_invoices(self , for_date: int):
+        try:
+            return self.repo.get_inhouse_reservations_invoices(
+                for_date
+            )
+        except Exception as e:
+            raise Exception(f"unexpected error: {str(e)}")
     def get_inhouse_reservations(self , business_date: int):
         try:
             return self.repo.get_inhouse_reservations(
@@ -25,6 +33,7 @@ class ReservationUsecase:
             params.get("new_docstatus"),
             params.get("new_reservation_status"),
             params.get("new_room_type"),
+            params.get("new_rate_code"),
             params.get("new_room"),
             params.get("ignore_availability", 0),
             params.get("allow_room_sharing", 0),
@@ -91,6 +100,11 @@ class ReservationUsecase:
 
     def sync_reservations_to_pos_invoices(self, business_date: int , default_rooms_group: str, upsert_pos_invoice_method ):
         # Step 1: fetch reservations
+        invoices = self.repo.get_inhouse_reservations_invoices(
+            business_date
+        )
+        frappe.throw(f"{json.dumps(invoices)}")
+
         reservations = self.get_inhouse_reservations(
             business_date
         )

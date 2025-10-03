@@ -6,7 +6,7 @@ from pymysql import InternalError
 class AuthRepo:
     def user_find_pos_profiles(self, user_name: str):
         return  frappe.db.sql("""
-                                select
+                                select distinct
                                   pu.parent profile,
                                   pu.user,
                                   p.restaurant,

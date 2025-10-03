@@ -1,23 +1,37 @@
 from typing import List, Optional
 import frappe
 from abc_hms.dto.pos_session_dto import POSSession
+from pymysql.err import IntegrityError
 class POSSessionRepo:
     def pos_session_upsert(self , docdata: POSSession, commit: bool = True)->POSSession:
-        doc_id = docdata.get('name' , None)
-        if doc_id and frappe.db.exists("POS Session", doc_id):
-            doc: POSSession = frappe.get_doc("POS Session", doc_id) # type: ignore
-        else:
-            doc: POSSession = frappe.new_doc("POS Session") # type: ignore
-        doc.update(docdata)
-        doc.save()
-        if commit:
-            frappe.db.commit()
+        try:
+            doc_id = docdata.get('name' , None)
+            if doc_id and frappe.db.exists("POS Session", doc_id):
+                doc: POSSession = frappe.get_doc("POS Session", doc_id) # type: ignore
+            else:
+                doc: POSSession = frappe.new_doc("POS Session") # type: ignore
+            doc.update(docdata)
+            doc.save()
+            if commit:
+                frappe.db.commit()
 
-        return doc
+            return doc
+
+        except IntegrityError as e:
+            raise frappe.DuplicateEntryError(f"{str(e)}")
 
 
 
 
+    def pos_sessions_close_for_date_profile(self , for_date: int , profile : str):
+        sessions = frappe.db.get_all("POS Session" , {
+            "pos_profile" : profile,
+            "docstatus" : 0,
+            "for_date" : for_date,
+        })
+        for session in sessions:
+            session.submit()
+        return sessions
     def pos_sessions_close_crrent_date(self , property: str):
         query = """
             UPDATE `tabPOS Session` s

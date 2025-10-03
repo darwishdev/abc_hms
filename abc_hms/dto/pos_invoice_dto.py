@@ -16,7 +16,7 @@ class PosInvoiceItemTransferRequest(TypedDict):
     folio_window: Optional[str]
 
 class PosInvoiceItemUpdateRequest(TypedDict):
-    name: str
+    names: List[str]
     folio_window: Optional[str]
 
 class POSInvoiceData(POSInvoice):

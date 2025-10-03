@@ -1,9 +1,11 @@
 
+import json
 from click import pause
 import frappe
 from typing import  Any, Dict, List
 from frappe import NotFound, Optional, _, destroy
 from frappe.rate_limiter import update
+from pydantic import ValidationError
 from abc_hms.dto.pos_invoice_dto import POSInvoiceData, PosInvoiceItemTransferRequest
 from utils.date_utils import date_to_int
 from utils.sql_utils import run_sql
@@ -42,17 +44,18 @@ class POSInvoiceRepo:
 
     def pos_invoice_item_update_widnow(
         self ,
-        name : str ,
+        names : List[str] ,
         folio_window:str
     ):
         def run_update(cur , conn):
-            query = """
+            names_arg = ','.join(names)
+            query = f"""
             UPDATE `tabPOS Invoice Item` i
             SET
             i.folio_window = coalesce(%s,i.folio_window)
-            where i.name = %s
+            where FIND_IN_SET(i.name, %s)
             """
-            cur.execute(query,(folio_window,name))
+            cur.execute(query,(folio_window,names_arg))
             conn.commit()
             return
 
@@ -107,20 +110,14 @@ class POSInvoiceRepo:
         except:
             frappe.db.rollback()
             raise
-
-    def pos_invoice_upsert(self , docdata: POSInvoiceData, commit: bool = True)->POSInvoiceData:
-        payments = docdata.get("payments", None)
-        items = docdata.get("items", None)
-        invoice_id = str(docdata.get("name"))
-        if frappe.db.exists("POS Invoice", invoice_id):
-            doc: POSInvoiceData = frappe.get_doc("POS Invoice", invoice_id) # type: ignore
-        else:
-            doc: POSInvoiceData = frappe.new_doc("POS Invoice") # type: ignore
-
+    def pos_invoice_update(self, doc ,docdata, reset_items , commit):
+        payments = docdata.pop("payments", None)
+        items = docdata.pop("items", None)
         doc.update(docdata)
-
         if items is not None:
-            doc.set("items", [])
+            if reset_items:
+                doc.set("items", [])
+
             for row in items:
                 doc.append("items", row)
 
@@ -131,24 +128,44 @@ class POSInvoiceRepo:
 
         doc.set_missing_values()
         doc.calculate_taxes_and_totals()
+        doc.save()
         if hasattr(doc, "set_pos_fields"):
             doc.set_pos_fields()
-
-        doc.save()
-        invoice : POSInvoiceData = doc.as_dict() # type: ignore
         if commit:
             frappe.db.commit()
+        invoice : POSInvoiceData = doc.as_dict() # type: ignore
 
         return invoice
+    def pos_invoice_upsert(self , docdata: POSInvoiceData,reset_items: bool = True, commit: bool = True)->POSInvoiceData:
+        doc = frappe.db.sql(
+            """
+                SELECT name from `tabPOS Invoice`
+                WHERE name = %s OR (
+                               docstatus = 0 AND
+                               pos_profile = %s
+                               AND folio = %s
+                               AND for_date = %s
+                               )
+            """ ,
+             (docdata.get("name"),
+             docdata.get("pos_profile" , "Main"),
+             docdata.get("folio"),
+             docdata.get("for_date"),
+              ),
+             pluck="name")
+        if doc and len(doc) == 1:
+            doc_name = doc[0]
+            doc: POSInvoiceData = frappe.get_doc("POS Invoice", doc_name) # type: ignore
+            return self.pos_invoice_update(doc , docdata , reset_items , commit)
+
+        doc: POSInvoiceData = frappe.new_doc("POS Invoice") # type: ignore
+        return self.pos_invoice_update(doc , docdata , reset_items , commit)
 
 
-    def pos_invoice_end_of_day_auto_close(self, property: str):
-        # 1️⃣ Get the business date for the property
-        business_date = frappe.db.get_value("Property Setting", {"property": property}, "business_date")
-        if not business_date:
-            frappe.throw(f"No business date found for property {property}")
 
-        # 2️⃣ Fetch all draft POS Invoices for that date
+
+
+    def pos_invoice_end_of_day_auto_close(self, business_date : int):
         invoices = frappe.get_all(
             "POS Invoice",
             filters={"for_date": date_to_int(business_date), "docstatus": 0},

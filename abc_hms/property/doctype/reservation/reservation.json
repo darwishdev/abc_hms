@@ -37,10 +37,19 @@
   "fixed_rate",
   "column_break_bhlx",
   "total_stay",
+  "column_break_tvzd",
+  "rate_code_rate",
   "column_break_mibr",
   "currency",
   "column_break_re18",
   "exchange_rate",
+  "discounts_section",
+  "column_break_bnic",
+  "discount_percent",
+  "column_break_zgru",
+  "discount_amount",
+  "column_break_cwgx",
+  "discount_reason",
   "section_break_cwwz",
   "availability_html",
   "section_break_vvyp",
@@ -53,7 +62,8 @@
   "ignore_availability",
   "allow_share",
   "color",
-  "no_post"
+  "no_post",
+  "created_on_business_date"
  ],
  "fields": [
   {
@@ -219,6 +229,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "fixed_rate",
    "fieldtype": "Check",
@@ -229,6 +240,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "total_stay",
    "fieldtype": "Currency",
@@ -246,6 +258,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "currency",
    "fieldtype": "Link",
    "label": "Currency",
@@ -257,12 +270,14 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "default": "1",
    "depends_on": "doc.exchange_rate > 1",
    "fieldname": "exchange_rate",
    "fieldtype": "Int",
    "label": "Exchange Rate",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "section_break_cwwz",
@@ -393,6 +408,63 @@
    "fieldname": "no_post",
    "fieldtype": "Check",
    "label": "No Post"
+  },
+  {
+   "fieldname": "discounts_section",
+   "fieldtype": "Section Break",
+   "label": "Discounts"
+  },
+  {
+   "fieldname": "column_break_bnic",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "discount_percent",
+   "fieldtype": "Percent",
+   "label": "Discount %",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_zgru",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "Discount Amount"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "rate_code_rate",
+   "fieldtype": "Currency",
+   "label": "Rate Code Rate",
+   "non_negative": 1,
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "created_on_business_date",
+   "fieldtype": "Date",
+   "label": "Created On Business Date",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "discount_reason",
+   "fieldtype": "Link",
+   "label": "Discount Reason",
+   "mandatory_depends_on": "eval: doc.discount_amount > 0",
+   "options": "Discount Reason"
+  },
+  {
+   "fieldname": "column_break_tvzd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_cwgx",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -404,7 +476,7 @@
    "link_fieldname": "reservation"
   }
  ],
- "modified": "2025-09-30 21:13:14.859369",
+ "modified": "2025-10-02 21:04:56.570403",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Reservation",

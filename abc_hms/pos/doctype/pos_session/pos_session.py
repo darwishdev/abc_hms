@@ -23,8 +23,12 @@ class POSSession(Document):
             })
             if not opening_entry:
                 frappe.throw(f"POS Profile {self.pos_profile} has no POS Opening Entry for date {self.for_date}")
-            frappe.throw(f"Opening Entry is {opening_entry}")
     def autoname(self):
         if self.pos_profile and not self.for_date:
             self.for_date = self.get_current_bussiness_date()
-        self.name = f"S-{self.pos_profile}-{self.for_date}"
+
+        owner = getattr(self, 'owner', None) or frappe.session.user
+        owner_abbr = frappe.get_value("User" , owner , "cashier_abbriviation")
+        if owner_abbr:
+            owner = owner_abbr
+        self.name = f"S-{owner}-{self.pos_profile}-{self.for_date}"

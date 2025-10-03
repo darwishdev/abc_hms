@@ -5,7 +5,7 @@ from frappe import  _
 
 from abc_hms.pos.doctype.pos_session.pos_session import POSSession
 from abc_hms.pos.repo.pos_session_repo import POSSessionRepo
-
+from pymysql.err import IntegrityError
 class POSSessionUsecase:
     def __init__(self):
         self.repo = POSSessionRepo()
@@ -15,17 +15,17 @@ class POSSessionUsecase:
         request :POSSessionUpsertRequest,
         commit : bool
     ) -> POSSession:
-        try:
-            return self.repo.pos_session_upsert(request['doc'] , commit)
-        except frappe.ValidationError as e:
-            raise Exception(f"POS session validation failed: {e}")
-            raise
-
-        except Exception as e:
-            raise Exception(f"Unexpected error: {str(e)}")
+        return self.repo.pos_session_upsert(request['doc'] , commit)
 
 
 
+
+    def pos_sessions_close_for_date_profile(
+        self,
+        for_date :int,
+        profile :str,
+    ):
+        return self.repo.pos_sessions_close_for_date_profile(for_date,  profile)
     def pos_sessions_close_crrent_date(
         self,
         property :str,

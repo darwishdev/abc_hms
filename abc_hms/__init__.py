@@ -49,6 +49,7 @@ pos_session_defaults_find,
     pos_session_find_for_date
 )
 from abc_hms.api.property_api import (
+property_eod,
 property_end_of_day,
     enqueue_property_end_of_day,
 )
@@ -104,6 +105,7 @@ __all__ = [
     "folio_window_upsert",
     "profile_item_list",
     "inventory_upsert",
+    "property_eod",
     "cashier_login"
 ]
 

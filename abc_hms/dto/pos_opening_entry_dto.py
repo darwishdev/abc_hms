@@ -26,7 +26,6 @@ POSOpeningEntryUpsertResponse = Union[POSOpeningEntryUpsertResult, ErrorResponse
 class POSClosingEntryFromOpeningRequest(TypedDict):
     """API request DTO"""
     opening_entry: str        # The POS Opening Entry name (doctype primary key)
-    commit: Optional[bool] # Optional flag to commit transaction
 
 
 class POSClosingEntryFromOpeningResult(TypedDict):

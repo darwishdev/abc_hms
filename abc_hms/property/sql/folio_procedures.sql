@@ -70,7 +70,8 @@ END $$
 -------------------
 DROP PROCEDURE IF EXISTS folio_find $$
 CREATE OR REPLACE PROCEDURE folio_find(
-    IN p_folio varchar(140)
+    IN p_folio varchar(140),
+    IN p_pos_profile varchar(140)
 )
 BEGIN
     WITH items AS (
@@ -94,7 +95,7 @@ BEGIN
       FROM `tabFolio Window` fw
       LEFT JOIN `tabPOS Invoice Item` ii ON fw.name = ii.folio_window
       LEFT JOIN `tabPOS Invoice` i ON ii.parent = i.name
-      WHERE fw.folio = COALESCE(p_folio, fw.folio)
+      WHERE fw.folio = COALESCE(p_folio, fw.folio) and i.pos_profile = p_pos_profile
       GROUP BY ii.folio_window
     ), payments AS (
       SELECT
@@ -111,7 +112,7 @@ BEGIN
         SUM(p.amount) total_paid_amount
       FROM `tabFolio Window` fw
       LEFT JOIN `tabSales Invoice Payment` p ON fw.name = p.folio_window
-      LEFT JOIN `tabPOS Invoice` i ON p.parent = i.name
+      LEFT JOIN `tabPOS Invoice` i ON p.parent = i.name and i.pos_profile = p_pos_profile
       WHERE p.folio_window IS NOT NULL
         AND fw.folio = COALESCE(p_folio, fw.folio)
       GROUP BY p.folio_window
@@ -155,5 +156,7 @@ BEGIN
     WHERE f.name = COALESCE(p_folio, f.name)
     GROUP BY f.name, f.restaurant_table, r.room, r.name, r.arrival, r.departure, r.guest;
 END $$
+
+
 
 DELIMITER ;

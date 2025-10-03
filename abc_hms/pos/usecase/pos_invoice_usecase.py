@@ -13,10 +13,10 @@ class POSInvoiceUsecase:
 
     def pos_invoice_end_of_day_auto_close(
         self,
-        property: str,
+        business_date: int,
     ) :
         return self.repo.pos_invoice_end_of_day_auto_close(
-            property
+            business_date
         )
 
 
@@ -38,7 +38,7 @@ class POSInvoiceUsecase:
     ):
         try:
             result = self.repo.pos_invoice_item_update_widnow(
-                params["name"],
+                params["names"],
                 params["folio_window"]
             )
             return result
@@ -65,9 +65,10 @@ class POSInvoiceUsecase:
     def pos_invoice_upsert(
         self,
         request :PosInvoiceUpsertRequest,
+        reset_items: bool
     ) -> PosInvoiceUpsertResponse:
         try:
-            result = self.repo.pos_invoice_upsert(request['doc'],commit=request['commit'])
+            result = self.repo.pos_invoice_upsert(request['doc'] ,reset_items,commit=request['commit'])
             return result
         except frappe.ValidationError as e:
             raise frappe.ValidationError(f"POS Invoice validation failed: {e}")
