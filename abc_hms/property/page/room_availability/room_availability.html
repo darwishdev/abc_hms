@@ -1,0 +1,16 @@
+<div class="room-availability-container p-4">
+    <h3>Room Availability Overview</h3>
+
+    <div class="mb-3">
+        <p><strong>From:</strong> {{ options.from }}</p>
+        <p><strong>To:</strong> {{ options.to }}</p>
+        <p><strong>Current View:</strong> {{ options.view }}</p>
+        <p><strong>Available Views:</strong> {{ options.available_views.join(", ") }}</p>
+    </div>
+
+    <div id="columns-placeholder" class="mt-4 p-2 bg-light border rounded"></div>
+
+    <div class="mt-3">
+        <p><strong>Dates Column:</strong> <span class="dates-column">{{ dates_column }}</span></p>
+    </div>
+</div>

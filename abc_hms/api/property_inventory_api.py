@@ -21,19 +21,6 @@ def room_date_lookup_list(lookup_types: list[str] | str | None = None):
 
 
 
-@frappe.whitelist(methods=["POST" , "PUT"])
-def inventory_upsert(
-    payload
-):
-    if isinstance(payload, str):
-        try:
-            payload = ast.literal_eval(payload)
-        except (ValueError, SyntaxError) as e:
-            # Handle the error if the string isn't a valid dictionary representation
-            print(f"Error parsing updated_statues string: {e}")
-            return # Or raise an exception, depending on your error handling policy
-    payload['user'] = frappe.session.user
-    return app_container.inventory_usecase.inventory_upsert(payload)
 
 
 @frappe.whitelist(methods=["GET"])

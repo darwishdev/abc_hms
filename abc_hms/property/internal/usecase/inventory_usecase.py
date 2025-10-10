@@ -23,21 +23,6 @@ class InventoryUsecase:
             return int(value)
         except (ValueError, TypeError):
             return None
-    def inventory_upsert(self, params: Dict):
-        args = (
-                params.get("room"),
-                params.get("user"),
-                date_to_int(params.get("date_range")[0]),
-                date_to_int(params.get("date_range")[1]),
-                self.to_int(params.get("physical_status")),
-                self.to_int(params.get("room_status")),
-                self.to_int(params.get("hk_status")),
-                self.to_int(params.get("service_status")),
-                self.to_int(params.get("ooo_status")),
-                params.get("reason"),
-            )
-        return self.repo.inventory_upsert(args)
-
 
     def normalize_status(self ,value: str, status_map: dict):
         """Convert string to mapped int, default to 0 if None/empty/unmapped."""

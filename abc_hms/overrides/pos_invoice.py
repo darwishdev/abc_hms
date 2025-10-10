@@ -1,11 +1,31 @@
+from typing import List
+from click import Option
 from erpnext.accounts.doctype.pos_invoice.pos_invoice import POSInvoice
 import frappe
-from frappe import _
+from frappe import Optional, _
 from frappe.utils import  add_days, flt
 from pydantic import ValidationError
 
 from utils.date_utils import date_to_int
 class CustomPOSInvoice(POSInvoice):
+    def pos_invoice_item_transfer(self , destination_folio: str ,destination_window : str , source_window: str ,item_names:Optional[List[str]] ):
+        destination_folio_doc = frappe.get_doc("Folio" , destination_folio)
+        destination_folio_invoice_doc = destination_folio_doc.folio_active_invoice_doc()
+        for item in self.items:
+            item_dict = item.as_dict()
+            if item_dict['name'] in item_names:
+                new_item = item_dict.copy()
+                new_item["parent"] = destination_folio_invoice_doc.name
+                new_item["idx"] = None
+                new_item["name"] = None
+                new_item['folio_window'] = destination_window
+                destination_folio_invoice_doc.append('items' , new_item)
+                destination_folio_invoice_doc.calculate_taxes_and_totals()
+                self.remove(item)
+                destination_folio_invoice_doc.save()
+                self.calculate_taxes_and_totals()
+                self.save()
+
     def validate_for_date(self):
         if self.for_date:
             current_date = frappe.db.sql("""

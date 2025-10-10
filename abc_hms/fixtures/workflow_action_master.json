@@ -2,6 +2,20 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
+  "modified": "2025-10-02 20:23:17.743393",
+  "name": "Approve",
+  "workflow_action_name": "Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-10-02 20:23:17.747916",
+  "name": "Review",
+  "workflow_action_name": "Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
   "modified": "2025-09-22 11:47:12.220969",
   "name": "Confrim And Mark Arrival",
   "workflow_action_name": "Confrim And Mark Arrival"
@@ -110,5 +124,54 @@
   "modified": "2025-09-22 11:50:21.623026",
   "name": "Mark No Show",
   "workflow_action_name": "Mark No Show"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-10-05 19:12:34.334123",
+  "name": "Mark Unpaid",
+  "workflow_action_name": "Mark Unpaid"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-10-05 19:13:56.521668",
+  "name": "Mark Partially Paid",
+  "workflow_action_name": "Mark Partially Paid"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-10-05 19:15:38.872759",
+  "name": "Create Rest Payment",
+  "workflow_action_name": "Create Rest Payment"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-10-05 19:17:16.717150",
+  "name": "Create Settlement Payment",
+  "workflow_action_name": "Create Settlement Payment"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-10-05 19:11:56.232312",
+  "name": "Require Deposit",
+  "workflow_action_name": "Require Deposit"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-10-05 19:14:18.341250",
+  "name": "Create Partial Payment",
+  "workflow_action_name": "Create Partial Payment"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-10-05 19:15:09.046149",
+  "name": "Create Full Payment",
+  "workflow_action_name": "Create Full Payment"
  }
 ]

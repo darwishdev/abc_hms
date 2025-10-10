@@ -195,6 +195,11 @@ def property_eod(property: str, auto_mark_no_show: bool=False, auto_session_clos
 
 
 
+
+
+        if auto_session_close:
+            for entry in opening_entries:
+                app_container.pos_session_usecase.pos_sessions_close_for_date_profile(business_date_int,entry["pos_profile"])
         new_date_settings = app_container.property_setting_usecase.property_setting_increase_business_date(property)
         updated_reservations = app_container.reservation_usecase.reservation_end_of_day_auto_mark(property, auto_mark_no_show)
         new_business_date_int = new_date_settings["business_date_int"]
@@ -222,8 +227,6 @@ def property_eod(property: str, auto_mark_no_show: bool=False, auto_session_clos
 
         for entry in opening_entries:
             entry_name = entry["name"]
-            if auto_session_close:
-                app_container.pos_session_usecase.pos_sessions_close_for_date_profile(business_date_int,entry_name)
             invoices = frappe.get_all(
                     "POS Invoice",
                 filters={"for_date": business_date_int, "docstatus": 0 , "pos_profile" : entry["pos_profile"]},

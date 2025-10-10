@@ -78,7 +78,7 @@ class InventoryRepo:
         try:
             frappe.db.sql(
                 """
-                CALL upsert_inventory_status(%s,%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                CALL upsert_inventory_status(%s,%s, %s, %s, %s,  %s, %s, %s, %s)
                 """,
                 params
             )

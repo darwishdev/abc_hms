@@ -1,13 +1,44 @@
 
-from typing import List
+from decimal import Decimal
+import json
 import frappe
-from frappe import Optional, _
-from utils import date_utils
 import frappe
 from utils.sql_utils import run_sql
 
 class ReservationRepo:
-    def reservation_sync(
+
+    def reservation_date_list(self,reservation):
+        return frappe.db.sql("""
+                SELECT reservation,
+      room_type,
+      room ,
+      rate_code,
+      rate_code_rate ,
+      base_rate ,
+      discount_type ,
+      discount_value ,
+TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
+
+      FROM reservation_date WHERE reservation = %s
+            """, (reservation,),as_dict=True)
+
+
+    def reservation_date_bulk_upsert(self,reservation_dates):
+        if not isinstance(reservation_dates,str):
+            json_data = json.dumps(reservation_dates)
+        else:
+            json_data = reservation_dates
+        frappe.db.sql("""
+                CALL reservation_date_bulk_upsert(%s)
+            """, (json_data,))
+
+        frappe.db.commit()
+        return
+
+
+
+
+    def reservation_date_sync(
         self,
         reservation: str,
         new_arrival: str,
@@ -17,11 +48,15 @@ class ReservationRepo:
         new_room_type: str,
         new_rate_code: str,
         new_room: str,
+        p_new_rate_code_rate:Decimal,
+        p_new_base_rate:Decimal,
+        p_new_discount_type:str,
+        p_new_discount_value:Decimal,
         ignore_availability: int,
         allow_room_sharing: int,
     ):
         query = """
-            CALL reservation_sync(%s, %s, %s, %s, %s, %s, %s, %s,%s, %s)
+            CALL reservation_date_sync(%s, %s, %s, %s,%s,%s,%s,%s, %s, %s, %s, %s,%s, %s)
         """
 
         params = (
@@ -33,6 +68,10 @@ class ReservationRepo:
             new_room_type,
             new_rate_code,
             new_room,
+            p_new_rate_code_rate,
+            p_new_base_rate,
+            p_new_discount_type,
+            p_new_discount_value,
             ignore_availability,
             allow_room_sharing,
         )
@@ -372,30 +411,55 @@ GROUP BY r.reservation,r.customer,
         # """, (property,))
         return {}
     def reservation_availability_check(
-            self,
-            params: dict
+        self,
+        params: dict
     ):
         def query_logic(cur , _):
-            arrival = date_utils.date_to_int(params['arrival'])
-            departure = date_utils.date_to_int(params['departure'])
+            arrival = params['arrival']
+            departure = params['departure']
+            property = params['property']
+            room_category = params['room_category']
+            room_type = params['room_type']
+            rate_code = params['rate_code']
+            discount_type = params['discount_type']
+            discount_amount = params['discount_amount']
+            discount_percent = params['discount_percent']
             cur.execute(
                 """
-                CALL inventory_availability_check(%s, %s, %s, %s, %s)
+                CALL room_type_availability_range(%s, %s, %s, %s, %s)
                 """,
-                ("CHNA", arrival, departure, None, None)
+                (property, arrival, departure, room_category, room_type)
             )
             availability = cur.fetchall()
             if not availability:
                 return {"availability": [], "rates": []}
 
-            room_type_list = ",".join([row["room_type"] for row in availability])
 
             cur.execute(
                 """
-                CALL room_type_rate_list(%s, %s, %s)
+                CALL room_type_rate_list_range(%s,%s,%s, %s, %s,%s,%s,%s,%s)
                 """,
-                (arrival, departure, room_type_list)
+                (property,arrival, departure,room_category,rate_code ,room_type,discount_type,discount_percent,discount_amount)
             )
 
             return {"availability": availability, "rates": cur.fetchall()}
+        return run_sql(query_logic)
+
+    def room_type_rate_list(
+        self,
+        property: str,
+        from_date: str,
+        to_date: str,
+        room_category: str,
+        room_types: str,
+    ):
+        def query_logic(cur , _):
+            cur.execute(
+                """
+                CALL room_type_rate_list(%s,%s, %s,%s, %s)
+                """,
+                (property,from_date, to_date, room_category,room_types)
+            )
+
+            return cur.fetchall()
         return run_sql(query_logic)

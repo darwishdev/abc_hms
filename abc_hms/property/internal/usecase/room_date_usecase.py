@@ -9,12 +9,13 @@ class RoomDateUsecase:
     def room_date_bulk_upsert(
         self,
         room_numbers: List[str],
-        for_date: int,
+        from_date: str,
+        to_date: str,
         updated_fields: Dict[str, int],
         commit: bool = True,
     ) :
         try:
-            result = self.repo.bulk_upsert(room_numbers , for_date , updated_fields , commit)
+            result = self.repo.bulk_upsert(room_numbers , from_date,to_date , updated_fields , commit)
             return result
         except Exception as e:
             raise Exception(f"Un Expected Error: {str(e)}")

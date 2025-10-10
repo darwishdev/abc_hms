@@ -21,6 +21,11 @@ class FolioUpsertRequest(TypedDict):
     commit: bool
 
 
+class FolioItemTransferRequest(TypedDict):
+    destination_folio: str
+    source_folio: str
+    destination_window: str
+    source_window: Optional[str]
 class FolioWindowUpsertRequest(TypedDict):
     doc: FolioWindow
     commit: bool

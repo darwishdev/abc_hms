@@ -66,15 +66,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2025-09-15 03:21:22.611475",
-  "name": "Settled",
-  "style": "",
-  "workflow_state_name": "Settled"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2025-09-15 03:40:21.861873",
   "name": "Submitted",
   "style": "",
@@ -129,15 +120,6 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2025-09-15 03:21:22.598977",
-  "name": "Draft",
-  "style": "",
-  "workflow_state_name": "Draft"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
   "modified": "2025-09-15 03:26:32.243488",
   "name": "Cancelled",
   "style": "",
@@ -151,5 +133,50 @@
   "name": "In House",
   "style": "",
   "workflow_state_name": "In House"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-10-05 19:10:59.632272",
+  "name": "Deposit Required",
+  "style": "",
+  "workflow_state_name": "Deposit Required"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-10-05 19:10:32.380262",
+  "name": "Unpaid",
+  "style": "",
+  "workflow_state_name": "Unpaid"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-10-05 19:13:18.813461",
+  "name": "Partially Paid",
+  "style": "",
+  "workflow_state_name": "Partially Paid"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-09-15 03:21:22.598977",
+  "name": "Draft",
+  "style": "",
+  "workflow_state_name": "Draft"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-09-15 03:21:22.611475",
+  "name": "Settled",
+  "style": "",
+  "workflow_state_name": "Settled"
  }
 ]

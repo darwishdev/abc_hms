@@ -29,8 +29,8 @@ class POSInvoiceData(POSInvoice):
 class PosInvoiceUpsertRequest(TypedDict):
     """API request DTO"""
     doc: POSInvoiceData
-    commit: bool
-
+    reset_items: bool
+    reset_paymnets: bool
 PosInvoiceUpsertResponse = Union[POSInvoiceData, ErrorResponse]
 
 class PosInvoiceFindForDateRequest(TypedDict):

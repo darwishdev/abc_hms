@@ -1,5 +1,15 @@
 [
   {
+    "fieldname": "old_folio",
+    "label": "Old Folio",
+    "fieldtype": "Link",
+    "options": "Folio",
+    "in_standard_filter": 1,
+    "reqd": 0,
+    "read_only_onload": 0
+  },
+
+  {
     "fieldname": "folio",
     "label": "Folio",
     "fieldtype": "Link",
@@ -36,6 +46,24 @@
     "fieldtype": "Link",
     "options": "Restaurant Table",
     "insert_after": "room_number",
+    "in_list_view": 0,
+    "in_standard_filter": 1
+  },
+  {
+    "fieldname": "issued_at_session",
+    "label": "Issues At Session",
+    "fieldtype": "Link",
+    "insert_after": "table_number",
+    "options": "POS Session",
+    "in_list_view": 0,
+    "in_standard_filter": 1
+  },
+  {
+    "fieldname": "submitted_at_session",
+    "label": "Submitted At Session",
+    "fieldtype": "Link",
+    "insert_after": "issued_at_session",
+    "options": "POS Session",
     "in_list_view": 0,
     "in_standard_filter": 1
   },

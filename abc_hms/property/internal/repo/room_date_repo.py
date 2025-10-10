@@ -26,19 +26,21 @@ class RoomDateRepo:
     def bulk_upsert(
         self,
         room_numbers: List[str],
-        for_date: int,
+        from_date: str,
+        to_date: str,
         updated_fields: Dict[str, int],
         commit: bool = True):
         rooms_json = frappe.as_json(room_numbers)  # JSON array for SP
         frappe.db.sql(
             """
             CALL sp_upsert_room_date(
-                %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s,%s, %s, %s, %s, %s, %s, %s
             )
             """,
             (
                 rooms_json,
-                for_date,
+                from_date,
+                to_date,
                 updated_fields.get("house_keeping_status"),
                 updated_fields.get("room_status"),
                 updated_fields.get("guest_service_status"),

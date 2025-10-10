@@ -5,7 +5,7 @@ import json
 from pydantic import ValidationError
 from abc_hms.api.decorators import business_date_protected
 from abc_hms.container import app_container
-from abc_hms.dto.pos_folio_dto import FolioInsertRequest, FolioUpsertRequest,  FolioListFilteredRequest, FolioWindowUpsertRequest
+from abc_hms.dto.pos_folio_dto import FolioInsertRequest, FolioItemTransferRequest, FolioUpsertRequest,  FolioListFilteredRequest, FolioWindowUpsertRequest
 
 
 @frappe.whitelist(methods=["POST"])
@@ -37,6 +37,24 @@ def folio_find(folio: str):
     return  result
 
 
+
+
+@frappe.whitelist(methods=["POST"])
+def folio_item_transfer():
+    try:
+        data = frappe.local.request.data
+        payload: FolioItemTransferRequest = json.loads(data or "{}")
+        if payload.get("item_names") is None:
+            payload["item_names"] = []
+    except Exception as e:
+        raise frappe.ValidationError(f"Invalid Request {str(e)}")
+
+    return app_container.folio_usecase.folio_item_transfer(payload)
+
+@frappe.whitelist(methods=["GET"])
+def folio_window_list(folio: str):
+    result = app_container.folio_usecase.folio_window_list(folio)
+    return  result
 @frappe.whitelist(methods=["PUT" , "POST"])
 def folio_merge():
     try:

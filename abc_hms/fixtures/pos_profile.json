@@ -1,10 +1,188 @@
 [
  {
   "account_for_change_amount": null,
+  "allow_discount_change": 0,
+  "allow_partial_payment": 0,
+  "allow_rate_change": 0,
+  "applicable_for_users": [
+   {
+    "default": 0,
+    "parent": "F&B",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 0,
+    "parent": "F&B",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "F&B",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "F&B",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   }
+  ],
+  "apply_discount_on": "Grand Total",
+  "auto_add_item_to_cart": 0,
+  "campaign": null,
+  "company": "Concha Hotel",
+  "company_address": null,
+  "cost_center": null,
+  "country": "Egypt",
+  "currency": "EGP",
+  "customer": null,
+  "customer_groups": [],
+  "disable_grand_total_to_default_mop": 0,
+  "disable_rounded_total": 0,
+  "disabled": 0,
+  "display_name": null,
+  "docstatus": 0,
+  "doctype": "POS Profile",
+  "expense_account": null,
+  "hide_images": 0,
+  "hide_unavailable_items": 0,
+  "ignore_pricing_rule": 0,
+  "income_account": null,
+  "item_groups": [
+   {
+    "item_group": "All Item Groups",
+    "parent": "F&B",
+    "parentfield": "item_groups",
+    "parenttype": "POS Profile"
+   }
+  ],
+  "letter_head": null,
+  "modified": "2025-10-05 20:31:02.742096",
+  "name": "F&B",
+  "payments": [
+   {
+    "allow_in_returns": 0,
+    "default": 1,
+    "mode_of_payment": "Cash",
+    "parent": "F&B",
+    "parentfield": "payments",
+    "parenttype": "POS Profile"
+   }
+  ],
+  "print_format": null,
+  "print_receipt_on_order_complete": 0,
+  "project": null,
+  "property": "CHNA",
+  "restaurant": "Main",
+  "select_print_heading": null,
+  "selling_price_list": "Standard Selling",
+  "tax_category": null,
+  "taxes_and_charges": null,
+  "tc_name": null,
+  "update_stock": 1,
+  "validate_stock_on_save": 0,
+  "warehouse": "F&B - CH",
+  "write_off_account": "5218 - Write Off - CH",
+  "write_off_cost_center": "Main - CH",
+  "write_off_limit": 1.0
+ },
+ {
+  "account_for_change_amount": null,
   "allow_discount_change": 1,
   "allow_partial_payment": 1,
   "allow_rate_change": 1,
   "applicable_for_users": [
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
    {
     "default": 0,
     "parent": "MRE",
@@ -38,7 +216,28 @@
     "parent": "MRE",
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
     "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
    },
    {
     "default": 0,
@@ -53,6 +252,69 @@
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
     "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 0,
+    "parent": "MRE",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
    },
    {
     "default": 0,
@@ -83,9 +345,16 @@
   "hide_unavailable_items": 0,
   "ignore_pricing_rule": 1,
   "income_account": null,
-  "item_groups": [],
+  "item_groups": [
+   {
+    "item_group": "All Item Groups",
+    "parent": "MRE",
+    "parentfield": "item_groups",
+    "parenttype": "POS Profile"
+   }
+  ],
   "letter_head": null,
-  "modified": "2025-09-25 17:38:51.089944",
+  "modified": "2025-10-05 18:41:42.210700",
   "name": "MRE",
   "payments": [
    {
@@ -115,7 +384,6 @@
   ],
   "print_format": null,
   "print_receipt_on_order_complete": 0,
-  "profile_code": null,
   "project": null,
   "property": "CHNA",
   "restaurant": "Main",
@@ -133,115 +401,136 @@
  },
  {
   "account_for_change_amount": null,
-  "allow_discount_change": 0,
-  "allow_partial_payment": 0,
-  "allow_rate_change": 0,
-  "applicable_for_users": [
-   {
-    "default": 0,
-    "parent": "F&B",
-    "parentfield": "applicable_for_users",
-    "parenttype": "POS Profile",
-    "user": "kareem@conchahotel.com"
-   },
-   {
-    "default": 0,
-    "parent": "F&B",
-    "parentfield": "applicable_for_users",
-    "parenttype": "POS Profile",
-    "user": "kareem@conchahotel.com"
-   }
-  ],
-  "apply_discount_on": "Grand Total",
-  "auto_add_item_to_cart": 0,
-  "campaign": null,
-  "company": "Concha Hotel",
-  "company_address": null,
-  "cost_center": null,
-  "country": "Egypt",
-  "currency": "EGP",
-  "customer": null,
-  "customer_groups": [],
-  "disable_grand_total_to_default_mop": 0,
-  "disable_rounded_total": 0,
-  "disabled": 0,
-  "display_name": null,
-  "docstatus": 0,
-  "doctype": "POS Profile",
-  "expense_account": null,
-  "hide_images": 0,
-  "hide_unavailable_items": 0,
-  "ignore_pricing_rule": 0,
-  "income_account": null,
-  "item_groups": [
-   {
-    "item_group": "F&B",
-    "parent": "F&B",
-    "parentfield": "item_groups",
-    "parenttype": "POS Profile"
-   },
-   {
-    "item_group": "FEATURED PLATES",
-    "parent": "F&B",
-    "parentfield": "item_groups",
-    "parenttype": "POS Profile"
-   },
-   {
-    "item_group": "Cocktails",
-    "parent": "F&B",
-    "parentfield": "item_groups",
-    "parenttype": "POS Profile"
-   },
-   {
-    "item_group": "Shisha",
-    "parent": "F&B",
-    "parentfield": "item_groups",
-    "parenttype": "POS Profile"
-   },
-   {
-    "item_group": "WHITE WINE",
-    "parent": "F&B",
-    "parentfield": "item_groups",
-    "parenttype": "POS Profile"
-   }
-  ],
-  "letter_head": null,
-  "modified": "2025-10-01 01:43:53.441400",
-  "name": "F&B",
-  "payments": [
-   {
-    "allow_in_returns": 0,
-    "default": 1,
-    "mode_of_payment": "Cash",
-    "parent": "F&B",
-    "parentfield": "payments",
-    "parenttype": "POS Profile"
-   }
-  ],
-  "print_format": null,
-  "print_receipt_on_order_complete": 0,
-  "profile_code": "F&B",
-  "project": null,
-  "property": "CHNA",
-  "restaurant": "Main",
-  "select_print_heading": null,
-  "selling_price_list": "Standard Selling",
-  "tax_category": null,
-  "taxes_and_charges": null,
-  "tc_name": null,
-  "update_stock": 1,
-  "validate_stock_on_save": 0,
-  "warehouse": "F&B - CH",
-  "write_off_account": "5218 - Write Off - CH",
-  "write_off_cost_center": "Main - CH",
-  "write_off_limit": 1.0
- },
- {
-  "account_for_change_amount": null,
   "allow_discount_change": 1,
   "allow_partial_payment": 1,
   "allow_rate_change": 1,
   "applicable_for_users": [
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
    {
     "default": 1,
     "parent": "Main",
@@ -289,7 +578,105 @@
     "parent": "Main",
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
     "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "front.desk@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
    },
    {
     "default": 1,
@@ -310,6 +697,20 @@
     "parent": "Main",
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
+    "user": "property.manager@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "kareem@conchahotel.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
     "user": "kareem@conchahotel.com"
    },
    {
@@ -318,6 +719,20 @@
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
     "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "a.darwish.dev@gmail.com"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
    },
    {
     "default": 1,
@@ -347,10 +762,17 @@
   "hide_images": 0,
   "hide_unavailable_items": 0,
   "ignore_pricing_rule": 1,
-  "income_account": "4140 - Room Revenue - CH",
-  "item_groups": [],
+  "income_account": "",
+  "item_groups": [
+   {
+    "item_group": "All Item Groups",
+    "parent": "Main",
+    "parentfield": "item_groups",
+    "parenttype": "POS Profile"
+   }
+  ],
   "letter_head": null,
-  "modified": "2025-09-27 21:23:24.818118",
+  "modified": "2025-10-05 20:58:50.049555",
   "name": "Main",
   "payments": [
    {
@@ -380,7 +802,6 @@
   ],
   "print_format": null,
   "print_receipt_on_order_complete": 0,
-  "profile_code": null,
   "project": null,
   "property": "CHNA",
   "restaurant": "",

@@ -7,17 +7,8 @@
   "modified": "2025-09-27 17:40:53.120250",
   "name": "1005",
   "no_of_seats": 4,
-  "restaurant_area": "Out Door"
- },
- {
-  "display_name": "1006",
-  "docstatus": 0,
-  "doctype": "Restaurant Table",
-  "is_virtual": 0,
-  "modified": "2025-09-27 17:41:20.365119",
-  "name": "1006",
-  "no_of_seats": 3,
-  "restaurant_area": "Out Door"
+  "restaurant_area": "Out Door",
+  "sequance": 0
  },
  {
   "display_name": "1007",
@@ -27,7 +18,8 @@
   "modified": "2025-09-27 17:41:38.669042",
   "name": "1007",
   "no_of_seats": 5,
-  "restaurant_area": "Out Door"
+  "restaurant_area": "Out Door",
+  "sequance": 0
  },
  {
   "display_name": "1001",
@@ -37,6 +29,18 @@
   "modified": "2025-09-24 03:48:29.781906",
   "name": "1001",
   "no_of_seats": 3,
-  "restaurant_area": "In Door"
+  "restaurant_area": "In Door",
+  "sequance": 0
+ },
+ {
+  "display_name": "1006",
+  "docstatus": 0,
+  "doctype": "Restaurant Table",
+  "is_virtual": 0,
+  "modified": "2025-09-27 17:41:20.365119",
+  "name": "1006",
+  "no_of_seats": 3,
+  "restaurant_area": "Out Door",
+  "sequance": 0
  }
 ]

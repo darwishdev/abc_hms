@@ -130,6 +130,10 @@ CREATE TABLE IF NOT EXISTS
     `room_type` varchar(255) NOT NULL,
     `rate_code` varchar(255) NOT NULL,
     `room` varchar(255),
+    `rate_code_rate` decimal(21,9),
+    `base_rate` decimal(21,9),
+    `discount_type` varchar(10),
+    `discount_value` decimal(21,9),
     `for_date` int(8) NOT NULL,
     UNIQUE KEY `uq_room_for_date` (`reservation`, `for_date`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

@@ -3,6 +3,17 @@ import frappe
 from pymysql import InternalError
 
 class RoomRepo:
+    def room_list_input(self, pay_master=None, txt=None, searchfield=None, start=0, page_len=10):
+        txt = f"%{txt or ''}%"
+        return frappe.db.sql("""
+            SELECT r.name
+            FROM `tabRoom` r
+            INNER JOIN `tabRoom Type` rt ON rt.name = r.room_type
+            WHERE rt.pay_master = COALESCE(%s, rt.pay_master)
+              AND (r.name  LIKE %s)
+            ORDER BY r.name
+            LIMIT %s, %s
+        """, (pay_master, txt,  start, page_len))
     def room_list(self, filters: dict | None = None):
         try:
             # normalize filters (frappe may send JSON string)

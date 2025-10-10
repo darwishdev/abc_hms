@@ -438,7 +438,8 @@ END$$
 DROP PROCEDURE IF EXISTS sp_upsert_room_date$$
 CREATE  PROCEDURE `sp_upsert_room_date` (
   IN p_rooms_list JSON, -- array of room names as JSON: '["1001","3001"]'
-  IN p_for_date INT,
+  IN p_from_date Date,
+  IN p_to_date Date,
   IN p_house_keeping_status INT,
   IN p_room_status INT,
   IN p_guest_service_status INT,
@@ -459,7 +460,7 @@ INSERT INTO
   )
 SELECT
   jt.room,
-  p_for_date,
+  d.for_date,
   p_house_keeping_status,
   p_room_status,
   p_guest_service_status,
@@ -470,7 +471,9 @@ FROM
   JSON_TABLE(
     p_rooms_list,
     "$[*]" COLUMNS (room VARCHAR(50) PATH "$")
-  ) AS jt ON DUPLICATE KEY
+  ) AS jt
+JOIN dim_date d on d.date_actual BETWEEN p_from_date and p_to_date
+ON DUPLICATE KEY
 UPDATE
   house_keeping_status = COALESCE(
     VALUES

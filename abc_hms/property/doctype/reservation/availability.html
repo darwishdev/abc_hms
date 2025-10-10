@@ -97,7 +97,7 @@
 
     /* Price block */
     .rate-card .price {
-        font-size: 1.5rem;
+        font-size: .9rem;
         font-weight: bold;
         margin-bottom: 0.6rem;
     }
@@ -162,66 +162,103 @@
     <h3 id="rooms-title">rooms</h3>
     <ul class="room-list" id="room-list" role="listbox">
         {% for room in availability %}
-        <li>
-            <button
-                class="room-card"
-                data-room="{{ room.room_type }}"
-                aria-pressed="false"
-                onclick="filterRates('{{ room.room_type }}', this)"
-                role="option"
-            >
-                <span class="room-type">{{ room.room_type }}</span>
-                <span class="count">{{ room.available }}</span>
-            </button>
-        </li>
+            <li>
+                <button class="room-card"
+                        data-room="{{ room.room_type }}"
+                        aria-pressed="false"
+                        onclick="filterRates('{{ room.room_type }}', this)"
+                        role="option">
+                    <span class="room-type">{{ room.room_type }}</span>
+                    <span class="count">{{ room.available }}</span>
+                </button>
+            </li>
         {% endfor %}
     </ul>
 </section>
-
 <section aria-labelledby="rates-title">
-    <h3 id="rates-title">rates</h3>
+    <h3 id="rates-title">Rates</h3>
     <div class="rate-wrapper">
         <button class="scroll-btn left" onclick="scrollRates(-1)">‹</button>
         <ul class="rate-grid" id="rate-list">
-            {% for rate in rates %}
-            <li
-                class="rate-card"
-                data-room="{{ rate.room_type }}"
-                data-rate-code="{{ rate.rate_code }}"
-                data-currency="{{ rate.currency }}"
-                data-exchange-rate="{{ rate.exchange_rate }}"
-                data-base-rate="{{ rate.base_rate }}"
-                data-total-stay="{{ rate.total_stay }}"
-                data-base-rate-default="{{ rate.base_rate_default_currency }}"
-                data-total-stay-default="{{ rate.total_stay_default_currency }}"
-                onclick="onRateClick(this)"
-            >
-                <header>
-                    <span class="rate-code">{{ rate.rate_code }}</span>
-                    <span class="info">
-                        <span class="currency-badge">{{ rate.currency }}</span>
-                        {% if rate.exchange_rate > 1 %} ×{{ rate.exchange_rate }} {% endif %} {% if
-                        rate.currency != "egp" %} ({{
-                        frappe.utils.fmt_money(rate.base_rate_default_currency, currency="egp") }})
-                        {% endif %}
-                    </span>
-                </header>
-                <div class="price">
-                    {{ frappe.utils.fmt_money(rate.base_rate, currency=rate.currency) }}
-                </div>
-                <div class="total">
-                    {{ frappe.utils.fmt_money(rate.total_stay, currency=rate.currency) }} {% if
-                    rate.currency != "egp" %} · {{
-                    frappe.utils.fmt_money(rate.total_stay_default_currency, currency="egp") }} {%
-                    endif %}
-                </div>
-            </li>
-            {% endfor %}
+            {% if rates %}
+                {% for rate in rates %}
+                    {% set has_discount = (rate.discount_percent > 0 or rate.discount_value > 0) %}
+                    {% if rate.discount_percent > 0 %}
+                        {% set discount_label = rate.discount_percent ~ "% OFF" %}
+                    {% elif rate.discount_value > 0 %}
+                        {% set discount_label = frappe.utils.fmt_money(rate.discount_value, currency=rate.currency) ~ " OFF" %}
+                    {% else %}
+                        {% set discount_label = None %}
+                    {% endif %}
+                    <li class="rate-card"
+                        data-room="{{ rate.room_type }}"
+                        data-rate-code="{{ rate.rate_code }}"
+                        data-currency="{{ rate.currency }}"
+                        data-exchange-rate="{{ rate.exchange_rate }}"
+                        data-base-rate="{{ rate.base_rate }}"
+                        data-total-stay="{{ rate.total_stay }}"
+                        data-base-rate-default="{{ rate.base_rate_default_currency }}"
+                        data-total-stay-default="{{ rate.total_stay_default_currency }}"
+                        onclick="onRateClick(this)">
+                        <header>
+                            <span class="rate-code">{{ rate.rate_code }}</span>
+                            <span class="info">
+                                {% if discount_label %}<span class="discount-label">{{ discount_label }}</span>{% endif %}
+                                {% if rate.exchange_rate > 1 %}
+                                    <span class="currency-badge">{{ rate.currency }}</span> ×{{ rate.exchange_rate }}
+                                {% endif %}
+                                {% if rate.currency and rate.currency.lower() != "egp" %}
+                                    ({{ frappe.utils.fmt_money(rate.base_rate_default_currency, currency="EGP") }})
+                                {% endif %}
+                            </span>
+                        </header>
+                        <div class="price">
+                            {% if has_discount %}
+                                <span class="old-price">{{ frappe.utils.fmt_money(rate.base_rate, currency=rate.currency) }}</span>
+                                <span class="new-price">{{ frappe.utils.fmt_money(rate.discounted_base_rate, currency=rate.currency) }}</span>
+                            {% else %}
+                                {{ frappe.utils.fmt_money(rate.base_rate, currency=rate.currency) }}
+                            {% endif %}
+                        </div>
+                        <div class="total">
+                            {% if has_discount %}
+                                <span class="old-price">{{ frappe.utils.fmt_money(rate.total_stay, currency=rate.currency) }}</span>
+                                <span class="new-price">{{ frappe.utils.fmt_money(rate.discounted_total_stay or rate.total_stay, currency=rate.currency) }}</span>
+                            {% else %}
+                                {{ frappe.utils.fmt_money(rate.total_stay, currency=rate.currency) }}
+                            {% endif %}
+                            {% if rate.currency and rate.currency.lower() != "egp" %}
+                                · {{ frappe.utils.fmt_money(rate.total_stay_default_currency, currency="EGP") }}
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="no-rates">No rates found.</li>
+            {% endif %}
         </ul>
         <button class="scroll-btn right" onclick="scrollRates(1)">›</button>
     </div>
 </section>
-
+<style>
+    .old-price {
+        text-decoration: line-through;
+        color: #888;
+        margin-right: 6px;
+    }
+    .new-price {
+        font-weight: 600;
+        color: #28a745;
+    }
+    .discount-label {
+        background: #ffe0e0;
+        color: #d32f2f;
+        font-size: 0.8rem;
+        padding: 2px 6px;
+        border-radius: 6px;
+        margin-left: 6px;
+    }
+</style>
 <script>
     let activeRoom = null;
 

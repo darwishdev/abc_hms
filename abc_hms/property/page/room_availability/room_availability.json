@@ -1,0 +1,33 @@
+{
+ "content": null,
+ "creation": "2025-10-06 18:03:41.233821",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "",
+ "idx": 0,
+ "modified": "2025-10-06 18:03:46.609145",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "room_availability",
+ "owner": "Administrator",
+ "page_name": "room_availability",
+ "roles": [
+  {
+   "role": "Front Desk"
+  },
+  {
+   "role": "Front Desk Agent"
+  },
+  {
+   "role": "Administrator"
+  },
+  {
+   "role": "Hotel Manager"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 1,
+ "title": "Room Availability"
+}

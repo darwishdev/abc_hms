@@ -7,9 +7,12 @@
  "field_order": [
   "reservation",
   "restaurant_table",
+  "folio_status",
   "column_break_hajc",
   "pos_profile",
-  "amended_from"
+  "amended_from",
+  "merged_with_folio",
+  "old_folio"
  ],
  "fields": [
   {
@@ -46,6 +49,26 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "merged_with_folio",
+   "fieldtype": "Link",
+   "label": "Merged With Folio",
+   "options": "Folio"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "folio_status",
+   "fieldtype": "Select",
+   "label": "Folio Status",
+   "options": "Draft\nPartially Paid\nSettled\nSubmitted\nMerged\nCacnelled\nDeposit Required",
+   "reqd": 1
+  },
+  {
+   "fieldname": "old_folio",
+   "fieldtype": "Link",
+   "label": "Old Folio",
+   "options": "Folio"
   }
  ],
  "grid_page_length": 50,
@@ -61,7 +84,7 @@
    "link_fieldname": "folio"
   }
  ],
- "modified": "2025-09-27 19:58:27.404183",
+ "modified": "2025-10-08 22:44:14.999328",
  "modified_by": "Administrator",
  "module": "Pos",
  "name": "Folio",
@@ -108,6 +131,15 @@
  "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
+ "states": [
+  {
+   "color": "Green",
+   "title": "Open"
+  },
+  {
+   "color": "Red",
+   "title": "Closed"
+  }
+ ],
  "track_changes": 1
 }

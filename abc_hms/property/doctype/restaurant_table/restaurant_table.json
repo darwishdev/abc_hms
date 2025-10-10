@@ -11,7 +11,8 @@
   "display_name",
   "column_break_isbr",
   "no_of_seats",
-  "is_virtual"
+  "is_virtual",
+  "sequance"
  ],
  "fields": [
   {
@@ -41,6 +42,11 @@
    "fieldname": "is_virtual",
    "fieldtype": "Check",
    "label": "Is Virtual"
+  },
+  {
+   "fieldname": "sequance",
+   "fieldtype": "Int",
+   "label": "Sequance"
   }
  ],
  "grid_page_length": 50,
@@ -52,7 +58,7 @@
    "link_fieldname": "table_number"
   }
  ],
- "modified": "2025-09-24 04:17:05.752488",
+ "modified": "2025-10-05 18:40:40.996187",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Restaurant Table",

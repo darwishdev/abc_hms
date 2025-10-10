@@ -28,8 +28,9 @@ Behavior:
     7. Handles errors with rollback and returns descriptive messages.
 ================================================================================
 */
-DROP PROCEDURE IF EXISTS reservation_sync$$
-CREATE PROCEDURE reservation_sync(
+
+DROP PROCEDURE IF EXISTS `reservation_date_sync`$$
+CREATE   PROCEDURE `reservation_date_sync`(
     IN p_reservation VARCHAR(255),
     IN p_new_arrival DATE,
     IN p_new_departure DATE,
@@ -38,6 +39,10 @@ CREATE PROCEDURE reservation_sync(
     IN p_new_room_type VARCHAR(255),
     IN p_new_rate_code VARCHAR(255),
     IN p_new_room VARCHAR(255),
+    IN p_new_rate_code_rate decimal(21,9),
+    IN p_new_base_rate decimal(21,9),
+    IN p_new_discount_type varchar(10),
+    IN p_new_discount_value decimal(21,9),
     IN p_ignore_availability TINYINT(1),
     IN p_allow_room_sharing TINYINT(1)
 )
@@ -51,7 +56,7 @@ proc_body: BEGIN
     DECLARE msg_text TEXT;
     DECLARE final_msg TEXT;
 
-    -- Error handler
+
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         GET DIAGNOSTICS CONDITION 1 msg_text = MESSAGE_TEXT;
@@ -61,22 +66,22 @@ proc_body: BEGIN
     END;
 
     START TRANSACTION;
--- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "error";
-    -- Early exit for canceled reservations
+
+
     IF p_new_docstatus = 2 THEN
         DELETE FROM reservation_date WHERE reservation = p_reservation;
         COMMIT;
         LEAVE proc_body;
     END IF;
 
-    -- Fetch business date
+
     SELECT pr.business_date
         INTO v_business_date
     FROM `tabProperty Setting` pr
     JOIN `tabReservation` r ON pr.name = r.property AND r.name = p_reservation
     LIMIT 1;
 
-    -- Validate dates
+
     IF p_new_arrival IS NULL THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: Arrival Is Required';
     END IF;
@@ -91,12 +96,12 @@ proc_body: BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: arrival must be >= business date';
     END IF;
 
-    -- Validate room/room_type
+
     IF (p_new_room IS NULL AND (p_new_room_type IS NULL OR TRIM(p_new_room_type) = '')) THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Either p_new_room or p_new_room_type must be provided';
     END IF;
 
-    -- Determine actual room type
+
     IF p_new_room IS NOT NULL THEN
         SELECT room_type INTO v_actual_room_type
         FROM tabRoom
@@ -109,28 +114,28 @@ proc_body: BEGIN
     ELSE
         SET v_actual_room_type = p_new_room_type;
     END IF;
--- NEW: Check if specific room is already occupied by other reservations
+
     IF p_new_room IS NOT NULL AND p_allow_room_sharing = 0 THEN
-        -- Check for overlapping reservations in the same room
+
         SELECT COUNT(DISTINCT rd.reservation),
                GROUP_CONCAT(DISTINCT rd.reservation SEPARATOR ', ')
         INTO v_occupied_room_count, v_existing_reservations
         FROM reservation_date rd
         JOIN `tabReservation` r ON rd.reservation = r.name
         WHERE rd.room = p_new_room
-          AND rd.reservation != p_reservation  -- Exclude current reservation
+          AND rd.reservation != p_reservation
           AND rd.for_date >= p_new_arrival
           AND rd.for_date < p_new_departure
-          AND r.docstatus != 2  -- Exclude canceled reservations
+          AND r.docstatus != 2
           AND r.reservation_status NOT IN ('Canceled', 'No Show');
 
         IF v_occupied_room_count > 0 THEN
             SET msg_text = CONCAT('Room ', p_new_room, ' is already occupied by reservation(s): ',
                                 v_existing_reservations, '. Do you want to share the room?');
-            SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = msg_text;  -- Using different error code for room sharing
+            SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = msg_text;
         END IF;
     END IF;
-    -- Availability check
+
     IF p_ignore_availability = 0 THEN
         WITH dates AS (
             SELECT for_date
@@ -172,19 +177,17 @@ proc_body: BEGIN
         END IF;
     END IF;
 
-    -- Delete old reservation dates
+
     DELETE FROM reservation_date WHERE reservation = p_reservation;
 
-    -- Insert new reservation dates
-    INSERT INTO reservation_date (reservation, room_type, room ,rate_code, for_date)
-    SELECT p_reservation, v_actual_room_type, p_new_room ,p_new_rate_code , d.for_date
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: Arrival Is Required';
+    INSERT INTO reservation_date (reservation, room_type, room ,rate_code,rate_code_rate , base_rate , discount_type , discount_value , for_date)
+    SELECT p_reservation, v_actual_room_type, p_new_room ,p_new_rate_code , p_new_rate_code_rate,p_new_base_rate,p_new_discount_type,p_new_discount_value, d.for_date
     FROM dim_date d
     WHERE d.date_actual >= p_new_arrival AND d.date_actual < p_new_departure;
 
 
 
     COMMIT;
-
 END proc_body$$
-
-DELIMITER $$
+DELIMITER ;

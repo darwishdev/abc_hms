@@ -14,12 +14,17 @@ override_doctype_class = {
     "POS Invoice": "abc_hms.overrides.pos_invoice.CustomPOSInvoice"
 }
 
+# override_whitelisted_methods = {
+#     "frappe.model.workflow.apply_workflow": "abc_hms.overrides.workflow.apply_folio_workflow"
+# }
 boot_session = "abc_hms.boot.get_business_date"
 app_include_css = [
-    "/assets/abc_hms/css/nav-50.css"
+    "/assets/abc_hms/css/nav-52.css"
 ]
 app_include_js = [
-    "/assets/abc_hms/js/nav-9.js"
+    "/assets/abc_hms/js/nav-9.js",
+    "/assets/abc_hms/js/date_fields_2.js"
+
 ]
 fixtures = [
 {
