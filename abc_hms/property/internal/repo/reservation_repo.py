@@ -81,16 +81,16 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
 
         return result
 
-    def mark_new_departures(self,tomorrow_date_int: int):
-        mark_departures_query = """
-            update `tabReservation` r set reservation_status = 'Departure' where date_to_int(r.departure) = %s
-        """
-        def procedure_call(cur ,conn):
-            cur.execute(mark_departures_query,(tomorrow_date_int ))
-            conn.commit()
-            return cur.fetchall()
-        return run_sql(procedure_call)
-
+    # def mark_new_departures(self,tomorrow_date_int: int):
+    #     mark_departures_query = """
+    #         update `tabReservation` r set reservation_status = 'Departure' where date_to_int(r.departure) = %s
+    #     """
+    #     def procedure_call(cur ,conn):
+    #         cur.execute(mark_departures_query,(tomorrow_date_int ))
+    #         conn.commit()
+    #         return cur.fetchall()
+    #     return run_sql(procedure_call)
+    #
     def mark_tomorrow_reservations(self,tomorrow_date_int: int):
         print("arrivals querssss" , tomorrow_date_int)
         room_date_query = """
@@ -107,9 +107,9 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
         mark_arrival_query = """
             update `tabReservation` r set reservation_status = 'Arrival' where date_to_int(r.arrival) = %s
         """
-        mark_departures_query = """
-            update `tabReservation` r set reservation_status = 'Departure' where date_to_int(r.departure) = %s
-        """
+        # mark_departures_query = """
+        #     update `tabReservation` r set reservation_status = 'Departure' where date_to_int(r.departure) = %s
+        # """
 
         print("arrivals quersss" , mark_arrival_query , tomorrow_date_int)
         def procedure_call(cur , conn):
@@ -118,7 +118,7 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
 
             cur.fetchall()
             cur.execute(mark_arrival_query,(tomorrow_date_int))
-            cur.execute(mark_departures_query,(tomorrow_date_int))
+            # cur.execute(mark_departures_query,(tomorrow_date_int))
             conn.commit()
             return cur.fetchall()
         return run_sql(procedure_call)
@@ -133,9 +133,7 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
                 r.room,
                 r.base_rate
             FROM `tabProperty Setting` s
-            JOIN `tabReservation` r on r.departure = s.business_date
-and r.reservation_status =
-            'Departure'
+            JOIN `tabReservation` r on r.departure = s.business_date and r.reservation_status = 'In House'
             WHERE s.name = %(property)s;
         """
         results = frappe.db.sql(query, {"property": property} , as_dict=True)
@@ -158,6 +156,9 @@ and r.reservation_status =
 
 
     def get_inhouse_reservations_invoices(self , for_date: int):
+        query_2 = """
+        call reservation_inouse_invoices(%s)
+        """
         query = """
 with reservations as (
   select
@@ -307,7 +308,11 @@ GROUP BY r.reservation,r.customer,
   r.naming_series
 
         """
-        invoices = frappe.db.sql(query , {"for_date" : for_date} , as_dict=True)
+        def sql_proc(cur,_):
+            cur.execute(query_2 , for_date)
+            return cur.fetchall()
+        return run_sql(sql_proc)
+        invoices = frappe.db.sql(query_2 , {"for_date" : for_date} , as_dict=True)
         return invoices
     def get_inhouse_reservations(self,business_date: int):
         query = """
@@ -346,7 +351,7 @@ GROUP BY r.reservation,r.customer,
                 ON f.name  = inv.folio
                AND inv.for_date = %(business_date)s
             LEFT JOIN tabItem i on i.name = CONCAT(r.room_type , '-' , r.rate_code)
-            WHERE r.reservation_status IN ('In House' , 'Departure')
+            WHERE r.reservation_status = 'In House'
             GROUP BY
                 r.name,
                 r.guest,
@@ -387,28 +392,28 @@ GROUP BY r.reservation,r.customer,
             AND r.property = %s
             AND r.arrival =s.business_date
         """, (property,))
-        frappe.db.sql("""
-            UPDATE `tabReservation` r
-            JOIN `tabProperty Setting` s on r.property = s.name
-            SET r.reservation_status = 'Departure'
-            WHERE reservation_status = 'In House'
-            AND r.property = %s
-            AND r.departure = s.business_date
-        """, (property,))
-
         # frappe.db.sql("""
-        #     insert into room_date (
-        #         room,
-        #         for_date,
-        #         room_status
-        #     )
-        #     select r.room , date_to_int(s.business_date) , 0
-        #     FROM `tabReservation` r
-        #     JOIN `tabProperty Setting` s on r.property = %s
-        #     where r.reservation_status  IN ('In House' , 'Departure')
-        #     ON DUPLICATE KEY UPDATE
-        #         room_status = 0;
+        #     UPDATE `tabReservation` r
+        #     JOIN `tabProperty Setting` s on r.property = s.name
+        #     SET r.reservation_status = 'Departure'
+        #     WHERE reservation_status = 'In House'
+        #     AND r.property = %s
+        #     AND r.departure = s.business_date
         # """, (property,))
+
+        frappe.db.sql("""
+            insert into room_date (
+                room,
+                for_date,
+                room_status
+            )
+            select r.room , date_to_int(s.business_date) , 0
+            FROM `tabReservation` r
+            JOIN `tabProperty Setting` s on r.property = %s
+            where r.reservation_status  = 'In House'
+            ON DUPLICATE KEY UPDATE
+                room_status = 0;
+        """, (property,))
         return {}
     def reservation_availability_check(
         self,

@@ -1,6 +1,6 @@
 
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `reservation_date_sync`(
+CREATE OR REPLACE PROCEDURE `reservation_date_sync`(
     IN p_reservation VARCHAR(255),
     IN p_new_arrival DATE,
     IN p_new_departure DATE,
@@ -58,7 +58,7 @@ proc_body: BEGIN
     IF p_new_departure IS NULL THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: Departure Is Required';
     END IF;
-    IF p_new_arrival >= p_new_departure THEN
+    IF p_new_arrival > p_new_departure THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid dates: arrival must be before departure';
     END IF;
 
@@ -164,7 +164,7 @@ END proc_body ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `reservation_date_bulk_upsert`(
+CREATE OR REPLACE PROCEDURE `reservation_date_bulk_upsert`(
      IN p_data JSON
 )
 BEGIN

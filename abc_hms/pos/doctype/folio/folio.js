@@ -117,9 +117,8 @@ frappe.ui.form.on("Folio", {
                                                 window: folio_window,
                                             }).then((res) => {
                                                 if (res.message) {
-                                                    const { amount, paid } = res.message;
-                                                    balance = amount - paid;
-                                                    console.log("fra", res.message);
+                                                    const { amount, paid } = res.message.balance;
+                                                    const balance = amount - paid;
                                                     d.set_value("amount", balance || 0);
                                                 }
                                             });

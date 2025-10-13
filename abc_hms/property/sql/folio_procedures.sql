@@ -132,6 +132,8 @@ WITH
       p.folio_window,
       JSON_ARRAYAGG(
         JSON_OBJECT(
+          'invoice_item_name',
+          ii.name,
           'invoice_name',
           i.name,
           'invoice_submitted',
@@ -228,7 +230,7 @@ GROUP BY
 END $$
 
 DROP PROCEDURE IF EXISTS folio_find_balance $$
-CREATE PROCEDURE folio_find_balance(
+CREATE OR REPLACE PROCEDURE folio_find_balance(
     IN p_folio varchar(140),
     IN p_folio_window varchar(140)
 )
@@ -264,7 +266,7 @@ BEGIN
 END$$
 
 drop PROCEDURE folio_merge_submitted_invoices$$
-CREATE PROCEDURE folio_merge_submitted_invoices(
+CREATE OR REPLACE PROCEDURE folio_merge_submitted_invoices(
     IN p_source_folio varchar(140),
     IN p_destination_folio varchar(140),
     IN p_destination_window varchar(140)

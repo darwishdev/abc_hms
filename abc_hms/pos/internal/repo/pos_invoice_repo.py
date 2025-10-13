@@ -1,12 +1,8 @@
 
 import json
-from click import pause
 import frappe
-from typing import  Any, Dict, List
-from frappe import NotFound, Optional, _, destroy
-from frappe.rate_limiter import update
-from pydantic import ValidationError
-from sentry_sdk.utils import json_dumps
+from typing import   List
+from frappe import NotFound, Optional, _
 from abc_hms.dto.pos_invoice_dto import POSInvoiceData, PosInvoiceItemTransferRequest
 from utils.date_utils import date_to_int
 from utils.sql_utils import run_sql
@@ -134,8 +130,17 @@ class POSInvoiceRepo:
 
         if payments is not None:
             for row in payments:
-                row["pos_session"] = frappe.local.pos_session
-                doc.append("payments", row)
+                row_name = row.get("name")
+                if row_name:
+                    existing_row = next((p for p in doc.payments if p.name == row_name), None)
+                    if existing_row:
+                        setattr(existing_row, "pos_session", frappe.local.pos_session)
+                        for field, val in row.items():
+                            if field not in ("name", "parent", "parentfield", "parenttype") and val not in ("", None):
+                                setattr(existing_row, field, val)
+                else:
+                    row["pos_session"] = frappe.local.pos_session
+                    doc.append("payments", row)
 
         doc.set_missing_values()
         doc.calculate_taxes_and_totals()
@@ -147,6 +152,45 @@ class POSInvoiceRepo:
         invoice : POSInvoiceData = doc.as_dict() # type: ignore
 
         return invoice
+    def pos_invoice_upsert(self , docdata: POSInvoiceData,reset_items: bool = True,reset_payments: bool = True, commit: bool = True)->POSInvoiceData:
+        if docdata['is_return']:
+            against = docdata['against_invoice']
+            if not against:
+                raise frappe.ValidationError("against invoice is required on return onvpoce")
+            docdata['naming_series'] = f"{against}-RE-"
+            doc: POSInvoiceData = frappe.new_doc("POS Invoice") # type: ignore
+            docdata["issued_at_session"] = frappe.local.pos_session
+            return self.pos_invoice_update(doc , docdata ,   commit)
+
+        doc_names : List[str] = frappe.db.sql(
+            """
+                SELECT name from `tabPOS Invoice`
+                WHERE name = %s OR (
+                               docstatus = 0 AND
+                               pos_profile = %s
+                               AND folio = %s
+                               AND for_date = %s
+                               )
+            """ ,
+             (docdata.get("name"),
+             docdata.get("pos_profile" , "Main"),
+             docdata.get("folio"),
+             docdata.get("for_date"),
+              ),
+            pluck="name") # type: ignore
+        if not doc_names or len(doc_names) == 0:
+            doc: POSInvoiceData = frappe.new_doc("POS Invoice") # type: ignore
+            docdata["issued_at_session"] = frappe.local.pos_session
+            return self.pos_invoice_update(doc , docdata ,   commit)
+        doc_name = doc_names[len(doc_names) - 1]
+
+        doc: POSInvoiceData = frappe.get_doc("POS Invoice", doc_name) # type: ignore
+
+
+        if docdata.get("docstatus") == 1:
+            docdata["submitted_at_session"] = frappe.local.pos_session
+
+        return self.pos_invoice_update(doc , docdata ,  commit)
     def pos_invoice_upsert(self , docdata: POSInvoiceData,reset_items: bool = True,reset_payments: bool = True, commit: bool = True)->POSInvoiceData:
         doc_names : List[str] = frappe.db.sql(
             """

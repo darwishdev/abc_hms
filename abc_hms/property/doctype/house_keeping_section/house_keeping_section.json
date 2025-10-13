@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "prompt",
  "creation": "2025-09-09 23:52:31.075765",
@@ -36,8 +37,8 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-10 00:00:53.694895",
- "modified_by": "Administrator",
+ "modified": "2025-10-13 18:23:09.458788",
+ "modified_by": "concha@conchahotel.com",
  "module": "Property",
  "name": "House Keeping Section",
  "naming_rule": "Set by user",
@@ -52,30 +53,6 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Property Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Front Desk",
    "share": 1,
    "write": 1
   }

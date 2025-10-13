@@ -1,9 +1,18 @@
 [
   {
+    "fieldname": "display_name",
+    "label": "Display Name",
+    "fieldtype": "Data",
+    "insert_after": "parent_item_group",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "reqd": 0
+  },
+  {
     "fieldname": "print_class",
     "label": "Print Class",
     "fieldtype": "Link",
-    "insert_after": "name",
+    "insert_after": "parent_item_group",
     "options": "Print Class",
     "in_list_view": 1,
     "in_standard_filter": 1,

@@ -27,6 +27,9 @@
    "allow_in_quick_entry": 1,
    "fieldname": "base_price",
    "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Base Price",
    "non_negative": 1
   }
@@ -35,7 +38,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-09-11 06:32:31.776605",
+ "modified": "2025-10-11 15:27:15.928164",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Rate Code Room Type",

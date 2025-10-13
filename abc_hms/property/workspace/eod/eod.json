@@ -1,0 +1,89 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"KH8xcRyOQK\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"End Of Day\",\"col\":12}},{\"id\":\"qqUM5c0oaR\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"5Qg1PyqC0F\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">EOD</span>\",\"col\":12}},{\"id\":\"xwD4ePOZrT\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Arrivals\",\"col\":4}},{\"id\":\"lHTmGfvjIL\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Departures\",\"col\":4}},{\"id\":\"yMgSD3UgUx\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Open Cashiers\",\"col\":4}},{\"id\":\"xnvmifrw-g\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"In House\",\"col\":4}},{\"id\":\"E793_m-wYt\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Occupancy %\",\"col\":4}},{\"id\":\"a7Hd2q_ESV\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"ADR\",\"col\":4}},{\"id\":\"olezYASBpn\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Room Revenue\",\"col\":4}},{\"id\":\"Z21cSbgP-7\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Revenue\",\"col\":4}},{\"id\":\"k-CVF19F5z\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Rev.PAR\",\"col\":4}},{\"id\":\"5QkSOlg4tg\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Room Revenue Gross\",\"col\":4}},{\"id\":\"OSBMFHOBNm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Revenue Gross\",\"col\":4}}]",
+ "creation": "2025-10-12 17:14:31.976415",
+ "custom_blocks": [
+  {
+   "custom_block_name": "End Of Day",
+   "label": "End Of Day"
+  }
+ ],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "calendar",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "EOD",
+ "links": [],
+ "modified": "2025-10-13 18:29:48.823538",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "EOD",
+ "number_cards": [
+  {
+   "label": "Departures",
+   "number_card_name": "Departures"
+  },
+  {
+   "label": "Room Revenue",
+   "number_card_name": "Revenue"
+  },
+  {
+   "label": "Open Cashiers",
+   "number_card_name": "Open Cashiers"
+  },
+  {
+   "label": "Occupancy %",
+   "number_card_name": "In House"
+  },
+  {
+   "label": "Total Revenue",
+   "number_card_name": "Total Revenue"
+  },
+  {
+   "label": "Arrivals",
+   "number_card_name": "Arrivals"
+  },
+  {
+   "label": "Rev.PAR",
+   "number_card_name": "ADR"
+  },
+  {
+   "label": "Room Revenue Gross",
+   "number_card_name": "Revenue"
+  },
+  {
+   "label": "ADR",
+   "number_card_name": "ADR"
+  },
+  {
+   "label": "Total Revenue Gross",
+   "number_card_name": "Total Revenue"
+  },
+  {
+   "label": "In House",
+   "number_card_name": "In House"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "PMS",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Administrator"
+  },
+  {
+   "role": "Hotel Manager"
+  },
+  {
+   "role": "Accounts Manager"
+  }
+ ],
+ "sequence_id": 3.0,
+ "shortcuts": [],
+ "title": "EOD"
+}

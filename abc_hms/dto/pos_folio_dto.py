@@ -41,6 +41,7 @@ class FolioMergeRequest(TypedDict):
     source_folio: str
     destination_folio: str
     destination_window: str
+    keep_source_folio: Optional[bool]
 
 class FolioListFilteredRequest(TypedDict):
     pos_profile: str

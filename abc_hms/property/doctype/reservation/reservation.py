@@ -5,6 +5,7 @@ import frappe
 import time
 import os
 from frappe import render_template
+from sentry_sdk.utils import json_dumps
 from abc_hms.container import app_container
 from abc_hms.exceptions.exceptions import AvailabilityError, RoomShareError
 from utils.date_utils import date_to_int
@@ -67,7 +68,20 @@ class Reservation(Document):
         self.reservation_date_sync()
         self.reservation_folio_sync()
 
+    @frappe.whitelist()
+    def reservation_status_update(self,
+        new_status
+    ):
+        if new_status == 'Checked Out':
+            folio = self.reservation_folio_find()
+            balance = folio["balance"]
+            if balance > 1 :
+                frappe.throw(f"Folio balance is not zero")
+        self.reservation_status = new_status
+        self.save()
     def before_submit(self):
+        business_date = self.get_business_date()
+        self.reservation_status = 'Confirmed' if self.arrival != business_date else 'Arrival'
         self.handle_sync(is_submit=True)
     def before_update_after_submit(self):
         self.handle_sync(is_submit=False)
@@ -137,6 +151,15 @@ class Reservation(Document):
             time.sleep(.2)
             frappe.publish_progress(95, title="Saving Reservation", description="Reservation Dates Synced Successflly")
 
+    @frappe.whitelist()
+    def reservation_folio_find(self):
+        doc = frappe.get_doc("Folio", {"reservation": self.name})
+        balance_data = doc.folio_find_balance()
+        balance_dict = balance_data['balance']
+        balance_value =balance_dict["amount"] - balance_dict["paid"]
+        # self._current_folio_balance = balance_value
+        # self._current_folio_name = doc.name
+        return {"balance" : balance_value, "folio_name" : doc.name}
     def reservation_folio_sync(self):
         if not frappe.db.exists("Folio", {"reservation": self.name}):
             folio= frappe.new_doc("Folio")

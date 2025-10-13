@@ -1,6 +1,6 @@
 DELIMITER $$
 DROP procedure IF EXISTS inventory_availability_check  $$
--- CREATE PROCEDURE inventory_availability_check (
+-- CREATE OR REPLACE PROCEDURE inventory_availability_check (
 --     IN p_property VARCHAR(140),
 --     IN p_date_from int(8),
 --     IN p_date_to int(8),
@@ -64,7 +64,7 @@ DROP procedure IF EXISTS inventory_availability_check  $$
 -- END$$
 --
 
-CREATE PROCEDURE inventory_availability_check (
+CREATE OR REPLACE PROCEDURE inventory_availability_check (
     IN p_property VARCHAR(140),
     IN p_date_from date,
     IN p_date_to date,
@@ -128,7 +128,7 @@ WITH dates as(
 END$$
 
 DROP PROCEDURE IF EXISTS room_type_availability_list;
-CREATE PROCEDURE room_type_availability_list(
+CREATE OR REPLACE PROCEDURE room_type_availability_list(
     IN p_from DATE,
     IN p_to DATE,
     IN p_room_category VARCHAR(255),

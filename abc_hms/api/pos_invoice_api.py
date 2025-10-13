@@ -80,6 +80,31 @@ def currency_list():
         return {"success" : False , "error" : f"{str(e)}"}
 
 
+@frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
+def currency_list_input(doctype, txt, searchfield, start, page_len, filters):
+    try:
+        txt = f"%{txt or ''}%"
+
+        return frappe.db.sql(
+            """
+            SELECT 'EGP' as name, 1 as exchange_rate
+            UNION
+            SELECT DISTINCT c.name, e.exchange_rate
+            FROM `tabCurrency` c
+            JOIN `tabCurrency Exchange` e
+                ON e.from_currency = c.name
+            WHERE c.name LIKE %s
+            ORDER BY name
+            LIMIT %s, %s
+            """,
+            (txt, start, page_len)
+        )
+    except Exception as e:
+        frappe.log_error(f"Currency list input error: {str(e)}")
+        return []
+
+
 @frappe.whitelist(methods=["POST" , "PUT"])
 @business_date_protected
 def pos_invoice_upsert()-> PosInvoiceUpsertResponse:

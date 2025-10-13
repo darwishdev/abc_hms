@@ -74,7 +74,7 @@ class FolioUsecase:
         return self.repo.folio_window_list(folio)
     def folio_merge(self, req: FolioMergeRequest):
         try:
-            return self.repo.folio_merge(req["source_folio"],req["destination_folio"] ,req["destination_window"])
+            return self.repo.folio_merge(req["source_folio"],req["destination_folio"],req["destination_window"],req["keep_source_folio"])
         except Exception as e:
             raise e
 

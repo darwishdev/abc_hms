@@ -1,6 +1,7 @@
 
+
 DELIMITER ;;
-CREATE  PROCEDURE `folio_find`(
+CREATE OR REPLACE PROCEDURE `folio_find`(
     IN p_folio varchar(140),
     IN p_pos_profile varchar(140)
 )
@@ -10,11 +11,15 @@ BEGIN
         ii.folio_window,
         JSON_ARRAYAGG(
           JSON_OBJECT(
-              'invoice_name', i.name,
+              'invoice_item_name',ii.name,
+              'print_class',ii.print_class,
               'invoice_submitted', i.docstatus,
               'invoice_for_date', i.for_date,
               'invoice_item_for_date', ii.for_date,
               'pos_session', ii.pos_session,
+              'invoice_remarks',i.remarks,
+              'price_list_rate',ii.price_list_rate,
+              'consolidated_invoice',i.consolidated_invoice,
               'discount_percentage',ii.discount_percentage,
               'discount_amount', ii.discount_amount,
               'distributed_discount_amount', ii.distributed_discount_amount,
@@ -40,6 +45,8 @@ BEGIN
           JSON_OBJECT(
               'invoice_name', i.name,
               'invoice_submitted', i.docstatus,
+              'payment_name', p.name,
+              'consolidated_invoice',i.consolidated_invoice,
               'invoice_for_date', i.for_date,
               'pos_session', p.pos_session,
               'mode_of_payment', p.mode_of_payment,
@@ -78,7 +85,7 @@ BEGIN
       r.departure,
       SUM(fw.total_item_discount_amount) total_item_discount_amount,
   SUM(fw.total_distributed_discount_amount) total_distributed_discount_amount,
-
+-- SELECT * FROM `tabPOS Invoice Item`
       SUM(fw.total_required_amount) total_required_amount,
       SUM(fw.total_paid_amount) total_paid_amount,
       r.guest,
@@ -103,7 +110,7 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE DEFINER=`staging`@`localhost` PROCEDURE `folio_find_balance`(
+CREATE OR REPLACE PROCEDURE `folio_find_balance`(
     IN p_folio varchar(140),
     IN p_folio_window varchar(140)
 )
@@ -140,9 +147,9 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `folio_list_filtered`(
+CREATE OR REPLACE PROCEDURE `folio_list_filtered`(
     IN p_pos_profile TEXT,
-    IN p_docstatus INT ,
+    IN p_docstatus INT,
     IN p_reservation TEXT,
     IN p_guest TEXT ,
     IN p_room TEXT ,
@@ -157,6 +164,7 @@ BEGIN
             r.room,
             fw.name folio_window,
             f.restaurant_table,
+            f.docstatus,
             f.name folio,
             r.name reservation,
             r.arrival,
@@ -180,26 +188,28 @@ BEGIN
     items AS (
         SELECT
             f.folio,
+            i.customer guest,
             SUM(ii.amount) total_required_amount
         FROM folios f
         LEFT JOIN `tabPOS Invoice Item` ii
             ON ii.folio_window = f.folio_window
+        LEFT JOIN `tabPOS Invoice` i
+            ON ii.parent = i.name and ii.parenttype = 'POS Invoice'
         GROUP BY f.folio
     )
     SELECT
         f.room,
-
         f.restaurant_table,
+        f.docstatus,
         f.folio,
         f.reservation,
         f.arrival,
         f.departure,
-        f.guest,
+        coalesce(f.guest , i.guest) guest,
         i.total_required_amount,
     GROUP_CONCAT(f.folio_window) windows,
         SUM(p.amount) total_paid_amount
     FROM folios f
-
     JOIN items i
         ON i.folio = f.folio
     LEFT JOIN `tabSales Invoice Payment` p
@@ -211,10 +221,11 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `folio_merge_submitted_invoices`(
+CREATE OR REPLACE PROCEDURE `folio_merge_submitted_invoices`(
     IN p_source_folio varchar(140),
     IN p_destination_folio varchar(140),
-    IN p_destination_window varchar(140)
+    IN p_destination_window varchar(140),
+    IN p_source_folio_docstatus INT
 )
 BEGIN
     DELETE FROM `tabPOS Invoice` WHERE folio = p_source_folio AND docstatus = 0;
@@ -222,12 +233,12 @@ BEGIN
     update `tabPOS Invoice Item` i join `tabFolio Window` fw on i.folio_window = fw.name and fw.folio = p_source_folio set i.folio_window = p_destination_window;
     update `tabSales Invoice Payment` p join `tabFolio Window` fw on p.folio_window =
             fw.name and fw.folio = p_source_folio set p.folio_window = p_destination_window;
-    UPDATE `tabFolio` SET folio_status = 'Merged' , merged_with_folio = p_destination_folio, docstatus = 2 WHERE name = p_source_folio;
+    UPDATE `tabFolio` SET folio_status = 'Merged' , merged_with_folio = p_destination_folio, docstatus = p_source_folio_docstatus WHERE name = p_source_folio;
 END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE  PROCEDURE "folio_transfer_submitted_items"(
+CREATE OR REPLACE PROCEDURE `folio_transfer_submitted_items`(
   IN p_destination_window varchar(140),
     IN p_source_window varchar(140),
     IN p_item_names TEXT

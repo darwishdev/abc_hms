@@ -56,7 +56,8 @@ class Folio(Document):
        active_invoice_doc = self.folio_active_invoice_doc()
        active_invoice_doc.pos_invoice_item_transfer(destination_folio,destination_window,source_window,item_names)
     @frappe.whitelist()
-    def folio_merge(self , destination_folio: str ,  destination_window: str):
+    @frappe.whitelist()
+    def folio_merge(self , destination_folio: str ,  destination_window: str , keep_source :bool = False):
         destination_folio_doc = frappe.get_doc("Folio" , destination_folio)
         source_active_invoice = self.folio_active_invoice_doc()
         dest_active_invoice = destination_folio_doc.folio_active_invoice_doc()
@@ -69,10 +70,10 @@ class Folio(Document):
 
         dest_active_invoice.calculate_taxes_and_totals()
         dest_active_invoice.save()
-
+        source_folio_docstatus = 0 if keep_source else 2
         frappe.db.sql("""
-        CALL folio_merge_submitted_invoices(%s,%s,%s);
-        """ , (self.name , destination_folio, destination_window))
+        CALL folio_merge_submitted_invoices(%s,%s,%s,%s);
+        """ , (self.name , destination_folio, destination_window,source_folio_docstatus))
         frappe.msgprint(
                 msg=f"✅ Successfully merged folio <b>{self.name}</b> into <b>{destination_folio_doc.name}</b> ({destination_window})",
                 title="Folio Merge Successful",
@@ -91,7 +92,8 @@ class Folio(Document):
                 "amount": amount
             })
             active_invoice.save()
-            folio_balance = self.folio_find_balance()
+            folio_balance_result = self.folio_find_balance()
+            folio_balance = folio_balance_result['balance']
             paid_amount = folio_balance.get("paid" , 0) + amount
             balance = folio_balance.get("amount") - paid_amount
             if balance > 1:
@@ -143,7 +145,9 @@ class Folio(Document):
         reservation = self.as_dict()['reservation']
         if reservation:
             reservation_doc = frappe.get_doc("Reservation" , reservation)
-            if reservation_doc.as_dict()['reservation_status'] != 'Departure':
+            business_date = reservation_doc.get_business_date()
+            reservation_dict = reservation_doc.as_dict()
+            if not (reservation_dict["departure"] == business_date and reservation_dict["reservation_status"] == 'In House'):
                 frappe.throw(f"Folio cann't be submitted unless the linked reservation departure date is today")
 
         active = self.folio_active_invoice()
@@ -160,6 +164,10 @@ class Folio(Document):
         for invoice in invoices:
             invoice_doc = frappe.get_doc("POS Invoice" ,invoice)
             invoice_doc.submit()
+
+        if reservation:
+            reservation_doc = frappe.get_doc("Reservation" , reservation)
+            reservation_doc.reservation_status_update('Checked Out')
 
 
     def after_submit(self):

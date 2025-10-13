@@ -1,6 +1,6 @@
 DELIMITER $$
 DROP PROCEDURE IF EXISTS property_tables_cleanup$$
-CREATE PROCEDURE property_tables_cleanup()
+CREATE OR REPLACE PROCEDURE property_tables_cleanup()
 BEGIN
 UPDATE tabSeries SET current = 0 WHERE name LIKE '%CHNA%';
 TRUNCATE TABLE `tabPOS Opening Entry`;

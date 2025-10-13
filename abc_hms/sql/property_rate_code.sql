@@ -1,6 +1,6 @@
 
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `room_type_rate_bulk_upsert`(
+CREATE OR REPLACE PROCEDURE `room_type_rate_bulk_upsert`(
   IN p_room_type varchar(114),
   IN p_rate_code varchar(114),
   IN p_rate decimal,
@@ -22,7 +22,7 @@ UPDATE
 END ;;
 DELIMITER ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `room_type_rate_list`(
+CREATE OR REPLACE PROCEDURE `room_type_rate_list`(
   IN p_property varchar(114),
   IN p_date_from Date,
   IN p_date_to Date,
@@ -85,7 +85,7 @@ order by
 END ;;
 DELIMITER ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `room_type_rate_list_range`(
+CREATE OR REPLACE PROCEDURE `room_type_rate_list_range`(
   IN p_property varchar(114),
   IN p_date_from date,
   IN p_date_to date,

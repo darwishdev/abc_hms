@@ -1,6 +1,6 @@
 DELIMITER $$
 DROP PROCEDURE IF EXISTS seed_room_rates$$
-CREATE PROCEDURE seed_room_rates(
+CREATE OR REPLACE PROCEDURE seed_room_rates(
     IN p_date_from INT,
     IN p_date_to   INT
 )
@@ -26,7 +26,7 @@ END$$
 
 
 DROP PROCEDURE IF EXISTS room_type_rate_list$$
-CREATE PROCEDURE room_type_rate_list (
+CREATE OR REPLACE PROCEDURE room_type_rate_list (
     IN p_date_from INT(8),
     IN p_date_to   INT(8),
     IN p_room_types TEXT

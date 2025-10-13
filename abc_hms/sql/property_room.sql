@@ -1,6 +1,6 @@
 
 DELIMITER ;;
-CREATE  PROCEDURE `seed_room_type_rate`(
+CREATE OR REPLACE PROCEDURE `seed_room_type_rate`(
     IN p_date_from INT,
     IN p_date_to   INT
 )
@@ -26,7 +26,7 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE  PROCEDURE `room_availability_list`(
+CREATE OR REPLACE PROCEDURE `room_availability_list`(
   IN p_property VARCHAR(255),
   IN p_from DATE,
   IN p_to DATE,
@@ -232,7 +232,7 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE  PROCEDURE `room_date_upsert`(
+CREATE OR REPLACE PROCEDURE `room_date_upsert`(
   IN p_rooms_list JSON, -- array of room names as JSON: '["1001","3001"]'
   IN p_from_date Date,
   IN p_to_date Date,

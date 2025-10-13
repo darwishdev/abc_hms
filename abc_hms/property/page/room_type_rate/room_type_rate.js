@@ -54,7 +54,6 @@ frappe.pages["room_type_rate"].on_page_load = function (wrapper) {
             fieldtype: "Date",
             reqd: 1,
         },
-
         {
             fieldname: "room_category",
             label: __("Room Category"),
@@ -76,6 +75,7 @@ frappe.pages["room_type_rate"].on_page_load = function (wrapper) {
     page.set_primary_action(__("Search"), function () {
         load_rate_data();
     });
+
     function open_bulk_upsert_dialog() {
         const d = new frappe.ui.Dialog({
             title: __("Bulk Update Room Type Rate"),
@@ -86,87 +86,227 @@ frappe.pages["room_type_rate"].on_page_load = function (wrapper) {
                     label: __("From Date"),
                     fieldtype: "Date",
                     reqd: 1,
-                    onchange: () => dialogController.update("from_date"),
                 },
-                { fieldtype: "Column Break" },
-                {
-                    fieldname: "nights",
-                    label: __("Nights"),
-                    fieldtype: "Int",
-                    reqd: 1,
-                    onchange: () => dialogController.update("nights"),
-                },
-
                 { fieldtype: "Column Break" },
                 {
                     fieldname: "to_date",
                     label: __("To Date"),
                     fieldtype: "Date",
-
-                    column: 3,
-                    columns: 3,
-                    reqd: 1,
-                    onchange: () => dialogController.update("to_date"),
-                },
-
-                { fieldtype: "Section Break" },
-                {
-                    fieldname: "room_type",
-                    label: __("Room Type"),
-                    fieldtype: "Link",
-                    options: "Room Type",
                     reqd: 1,
                 },
-
                 { fieldtype: "Column Break" },
+
+                // rate_code field
                 {
                     fieldname: "rate_code",
                     label: __("Rate Code"),
                     fieldtype: "Link",
                     options: "Rate Code",
                     reqd: 1,
-                },
+                    onchange: async function () {
+                        const selected_rate_code = d.get_value("rate_code");
+                        if (!selected_rate_code) return;
 
-                { fieldtype: "Column Break" },
+                        // Use the object form of frappe.call and pass args as an object
+                        frappe.call({
+                            method: "abc_hms.rate_code_room_type_list",
+                            type: "GET",
+                            args: { rate_code: selected_rate_code },
+                            callback: function (r) {
+                                if (r && r.message) {
+                                    d.fields_dict["room_types"].df.data = r.message;
+                                    d.fields_dict["room_types"].refresh();
+                                    console.log("data is", r.message);
+                                    // if you want to populate the table with room types returned:
+                                    // d.set_value("room_types", r.message.map(rt => ({ room_type: rt })));
+                                } else {
+                                    console.log("no data returned", r);
+                                }
+                            },
+                            error: function (err) {
+                                console.error("Error fetching rate_code mapping:", err);
+                            },
+                        });
+                    },
+                },
+                { fieldtype: "Section Break" },
+
+                // Inline table definition
                 {
-                    fieldname: "rate",
-                    label: __("Rate (EGP)"),
-                    fieldtype: "Currency",
+                    fieldname: "room_types",
+                    fieldtype: "Table",
+                    label: __("Room Rates"),
+                    cannot_delete_rows: 0,
+                    in_place_edit: true,
                     reqd: 1,
+                    fields: [
+                        {
+                            fieldname: "room_type",
+                            label: __("Room Type"),
+                            fieldtype: "Link",
+                            in_list_view: 1,
+                            options: "Room Type",
+                            reqd: 1,
+                        },
+                        {
+                            fieldname: "rate",
+                            label: __("Rate (EGP)"),
+                            fieldtype: "Currency",
+                            in_list_view: 1,
+                            reqd: 0,
+                        },
+                    ],
                 },
             ],
+
             primary_action_label: __("Save"),
+
             primary_action(values) {
+                const { from_date, to_date, rate_code } = values;
+                const room_types = d.get_values().room_types || [];
+
+                if (!from_date || !to_date || !rate_code || !room_types.length) {
+                    frappe.msgprint(
+                        __("Please fill all required fields and add at least one room type."),
+                    );
+                    return;
+                }
+
+                // Prepare JSON array for backend
+                const items = room_types.map((row) => ({
+                    room_type: row.room_type,
+                    rate: row.rate || 0,
+                }));
+
                 frappe.call({
-                    method: "abc_hms.room_type_rate_bulk_upsert",
+                    method: "abc_hms.room_type_rate_bulk_upsert_json",
                     type: "POST",
-                    args: values,
+                    args: {
+                        date_from: from_date,
+                        date_to: to_date,
+                        rate: rate_code,
+                        items: JSON.stringify(items),
+                    },
+                    freeze: true,
+                    freeze_message: __("Updating room type rates..."),
                     callback: function (r) {
-                        if (!r.exc) {
-                            frappe.msgprint(__("Rates updated successfully"));
+                        if (r && !r.exc) {
+                            frappe.msgprint(__("Room type rates have been updated successfully."));
                             d.hide();
-                            load_rate_data();
+                        } else {
+                            frappe.msgprint({
+                                title: __("Error"),
+                                message: __("An error occurred while updating room type rates."),
+                                indicator: "red",
+                            });
                         }
                     },
                     error: function (err) {
-                        frappe.msgprint(__("Error updating rates"));
+                        frappe.msgprint({
+                            title: __("Error"),
+                            message: __("Failed to connect to the server."),
+                            indicator: "red",
+                        });
                         console.error(err);
                     },
                 });
             },
         });
 
-        // Create new controller for dialog
-        const dialogController = window.createDateRangeController({
-            fromKey: "from_date",
-            nightsKey: "nights",
-            toKey: "to_date",
-            get: (key) => d.get_value(key),
-            set: (key, value) => d.set_value(key, value),
-        });
-
         d.show();
     }
+
+    //function open_bulk_upsert_dialog() {
+    //    const d = new frappe.ui.Dialog({
+    //        title: __("Bulk Update Room Type Rate"),
+    //        size: "extra-large",
+    //        fields: [
+    //            {
+    //                fieldname: "from_date",
+    //                label: __("From Date"),
+    //                fieldtype: "Date",
+    //                reqd: 1,
+    //                onchange: () => dialogController.update("from_date"),
+    //            },
+    //            { fieldtype: "Column Break" },
+    //            {
+    //                fieldname: "nights",
+    //                label: __("Nights"),
+    //                fieldtype: "Int",
+    //                reqd: 1,
+    //                onchange: () => dialogController.update("nights"),
+    //            },
+    //
+    //            { fieldtype: "Column Break" },
+    //            {
+    //                fieldname: "to_date",
+    //                label: __("To Date"),
+    //                fieldtype: "Date",
+    //
+    //                column: 3,
+    //                columns: 3,
+    //                reqd: 1,
+    //                onchange: () => dialogController.update("to_date"),
+    //            },
+    //
+    //            { fieldtype: "Section Break" },
+    //            {
+    //                fieldname: "room_type",
+    //                label: __("Room Type"),
+    //                fieldtype: "Link",
+    //                options: "Room Type",
+    //                reqd: 1,
+    //            },
+    //
+    //            { fieldtype: "Column Break" },
+    //            {
+    //                fieldname: "rate_code",
+    //                label: __("Rate Code"),
+    //                fieldtype: "Link",
+    //                options: "Rate Code",
+    //                reqd: 1,
+    //            },
+    //
+    //            { fieldtype: "Column Break" },
+    //            {
+    //                fieldname: "rate",
+    //                label: __("Rate (EGP)"),
+    //                fieldtype: "Currency",
+    //                reqd: 1,
+    //            },
+    //        ],
+    //        primary_action_label: __("Save"),
+    //        primary_action(values) {
+    //            frappe.call({
+    //                method: "abc_hms.room_type_rate_bulk_upsert",
+    //                type: "POST",
+    //                args: values,
+    //                callback: function (r) {
+    //                    if (!r.exc) {
+    //                        frappe.msgprint(__("Rates updated successfully"));
+    //                        d.hide();
+    //                        load_rate_data();
+    //                    }
+    //                },
+    //                error: function (err) {
+    //                    frappe.msgprint(__("Error updating rates"));
+    //                    console.error(err);
+    //                },
+    //            });
+    //        },
+    //    });
+    //
+    //    // Create new controller for dialog
+    //    const dialogController = window.createDateRangeController({
+    //        fromKey: "from_date",
+    //        nightsKey: "nights",
+    //        toKey: "to_date",
+    //        get: (key) => d.get_value(key),
+    //        set: (key, value) => d.set_value(key, value),
+    //    });
+    //
+    //    d.show();
+    //}
     const $result_container = $('<div class="result-container" style="margin-top: 20px;"></div>');
     $(page.body).append($result_container);
     function load_rate_data() {
@@ -212,19 +352,19 @@ frappe.pages["room_type_rate"].on_page_load = function (wrapper) {
                     new Diary($result_container[0], context);
                 } else {
                     $result_container.html(`
-                        <div class="alert alert-info" style="margin-top:20px;">
-                            <i class="fa fa-info-circle"></i> No data found for the selected filters
-                        </div>
-                    `);
+<div class="alert alert-info" style="margin-top:20px;">
+<i class="fa fa-info-circle"></i> No data found for the selected filters
+</div>
+`);
                 }
             },
             error: function (r) {
                 $result_container.html(`
-                    <div class="alert alert-danger" style="margin-top:20px;">
-                        <i class="fa fa-exclamation-triangle"></i>
-                        Error loading data. Please check your filters and try again.
-                    </div>
-                `);
+<div class="alert alert-danger" style="margin-top:20px;">
+<i class="fa fa-exclamation-triangle"></i>
+Error loading data. Please check your filters and try again.
+</div>
+`);
                 console.error("Error:", r);
             },
         });
@@ -283,17 +423,17 @@ class Diary {
                 : ``;
 
         $toolbar = $(`
-        <div id='tool-bar' class="btn-group" style="margin-bottom: 10px; display: flex; gap: 6px; justify-content:flex-end; align-items: center;">
-            <button class="btn btn-default btn-sm rounded nav-btn" style='max-width:7rem' data-action="prev">← Prev</button>
-            <button class="btn btn-default btn-sm rounded nav-btn" style='max-width:7rem' data-action="next">Next →</button>
-            <div class="btn-group" style="margin-left: 12px;">
-                <button class="btn btn-default mr-2 rounded btn-sm" data-view="week">Week</button>
-                ${month_button}
-            </div>
-            <span id="current-range" style="margin-left: 12px; font-size: 13px; opacity: 0.8;"></span>
-        </div>
-        <div id="filter-form" style="margin-top: 10px; display: flex; gap: 6px; align-items: center;"></div>
-    `);
+<div id='tool-bar' class="btn-group" style="margin-bottom: 10px; display: flex; gap: 6px; justify-content:flex-end; align-items: center;">
+<button class="btn btn-default btn-sm rounded nav-btn" style='max-width:7rem' data-action="prev">← Prev</button>
+<button class="btn btn-default btn-sm rounded nav-btn" style='max-width:7rem' data-action="next">Next →</button>
+<div class="btn-group" style="margin-left: 12px;">
+<button class="btn btn-default mr-2 rounded btn-sm" data-view="week">Week</button>
+${month_button}
+</div>
+<span id="current-range" style="margin-left: 12px; font-size: 13px; opacity: 0.8;"></span>
+</div>
+<div id="filter-form" style="margin-top: 10px; display: flex; gap: 6px; align-items: center;"></div>
+`);
 
         $(this.container).prepend($toolbar);
 
@@ -520,8 +660,8 @@ class Diary {
 
     render_template() {
         const html = `
-            <div id="datatable-container" style="margin-top: 12px;"></div>
-        `;
+<div id="datatable-container" style="margin-top: 12px;"></div>
+`;
         $(html).appendTo(this.container);
     }
 

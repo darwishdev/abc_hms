@@ -1,6 +1,6 @@
 
 DELIMITER ;;
-CREATE  FUNCTION `date_to_int`(p_date DATE) RETURNS int(8)
+CREATE  OR REPLACE FUNCTION `date_to_int`(p_date DATE) RETURNS int(8)
     DETERMINISTIC
 BEGIN
     RETURN CAST(DATE_FORMAT(p_date, '%Y%m%d') AS UNSIGNED);
@@ -8,7 +8,7 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE DEFINER=`staging`@`localhost` PROCEDURE `seed_dim_date`(
+CREATE OR REPLACE PROCEDURE `seed_dim_date`(
   IN p_start DATE,
   IN p_end   DATE,
   IN p_weekend_mode VARCHAR(7),

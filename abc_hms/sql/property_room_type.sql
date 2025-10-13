@@ -1,5 +1,5 @@
 DELIMITER ;;
-CREATE  PROCEDURE `room_type_availability_range`(
+CREATE OR REPLACE PROCEDURE `room_type_availability_range`(
   IN p_property VARCHAR(140),
   IN p_date_from date,
   IN p_date_to date,
@@ -103,7 +103,7 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE  PROCEDURE `room_type_availability_list`(
+CREATE OR REPLACE PROCEDURE `room_type_availability_list`(
     IN p_from DATE,
     IN p_to DATE,
     IN p_room_category VARCHAR(255),

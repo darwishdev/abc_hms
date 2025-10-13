@@ -1,7 +1,7 @@
 
 DELIMITER $$
 DROP procedure IF EXISTS pos_session_find$$
-CREATE PROCEDURE pos_session_find (
+CREATE OR REPLACE PROCEDURE pos_session_find (
     IN session_id VARCHAR(255)
 )
 BEGIN

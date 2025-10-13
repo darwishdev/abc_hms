@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"JR7EUfUXQ_\",\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}}]",
+ "content": "[{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"AbqWGfr_WU\",\"type\":\"card\",\"data\":{\"card_name\":\"Cashier\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2025-09-18 12:08:06.966065",
  "custom_blocks": [],
  "docstatus": 0,
@@ -11,7 +11,7 @@
  "idx": 0,
  "indicator_color": "",
  "is_hidden": 0,
- "label": "Hotel",
+ "label": "PMS",
  "links": [
   {
    "hidden": 0,
@@ -143,8 +143,8 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Configuration",
-   "link_count": 3,
+   "label": "Cashier",
+   "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -152,9 +152,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Property",
+   "label": "Currency Exchange",
    "link_count": 0,
-   "link_to": "Property",
+   "link_to": "Currency Exchange",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -162,35 +162,25 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Room Category",
+   "label": "Cashier Closing",
    "link_count": 0,
-   "link_to": "Room Category",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Room Type",
-   "link_count": 0,
-   "link_to": "Room Type",
+   "link_to": "Cashier Closing",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2025-09-30 20:26:38.428906",
+ "modified": "2025-10-13 15:26:21.362966",
  "modified_by": "Administrator",
  "module": "Property",
- "name": "Hotel",
+ "name": "PMS",
  "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 4.0,
+ "sequence_id": 2.0,
  "shortcuts": [],
- "title": "Hotel"
+ "title": "PMS"
 }

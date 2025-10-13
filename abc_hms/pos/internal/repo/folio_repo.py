@@ -152,11 +152,11 @@ class FolioRepo:
 
         return folios[0]
 
-    def folio_merge(self,source_folio : str,destination_folio : str , destination_window : str):
+    def folio_merge(self,source_folio : str,destination_folio : str , destination_window : str, keep_source_folio : bool =False):
         folio = frappe.get_doc("Folio" , source_folio)
         if not folio:
             raise frappe.NotFound("Folio Not Found")
-        return folio.folio_merge(destination_folio , destination_window)
+        return folio.folio_merge(destination_folio , destination_window , keep_source_folio)
 
         # try:
             # source_folio_doc = frappe.get_doc("Folio" , source_folio)

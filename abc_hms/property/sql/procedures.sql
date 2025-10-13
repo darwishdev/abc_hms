@@ -1,7 +1,7 @@
 DELIMITER $$
 -- -- describe inventory;
 -- DROP procedure upsert_inventory_status $$
--- CREATE PROCEDURE `upsert_inventory_status` (
+-- CREATE OR REPLACE PROCEDURE `upsert_inventory_status` (
 --   IN p_room VARCHAR(50),
 --   IN p_date_from DATE,
 --   IN p_date_to DATE,
@@ -71,7 +71,7 @@ DELIMITER $$
 --
 -- END$$
 -- DROP PROCEDURE IF EXISTS seed_room_type_inventory $$
--- CREATE PROCEDURE seed_room_type_inventory(
+-- CREATE OR REPLACE PROCEDURE seed_room_type_inventory(
 --   IN p_start       DATE,          -- inclusive
 --   IN p_end         DATE,          -- inclusive
 --   IN p_batch_days  INT,           -- window size, e.g. 30
@@ -119,7 +119,7 @@ DELIMITER $$
 --   SELECT v_created AS created_rows;
 -- END$$
 -- drop PROCEDURE IF EXISTS seed_room_type_inventory_rate_codes$$
--- CREATE PROCEDURE seed_room_type_inventory_rate_codes(
+-- CREATE OR REPLACE PROCEDURE seed_room_type_inventory_rate_codes(
 --   IN p_rate_code VARCHAR(255),
 --   IN p_room_type VARCHAR(255),
 --   IN p_start     INT,          -- inclusive
@@ -141,7 +141,7 @@ DELIMITER $$
 --
 --
 -- DROP PROCEDURE IF EXISTS get_available_inventory $$
--- CREATE PROCEDURE get_available_inventory(
+-- CREATE OR REPLACE PROCEDURE get_available_inventory(
 --   IN p_start INT,
 --   IN p_end   INT,
 --   IN p_rooms INT,
@@ -171,7 +171,7 @@ DELIMITER $$
 --   HAVING MIN(r.total_available_units) >= p_rooms;
 -- END$$
 -- DROP PROCEDURE IF EXISTS apply_reservation_inventory $$
--- CREATE PROCEDURE apply_reservation_inventory(
+-- CREATE OR REPLACE PROCEDURE apply_reservation_inventory(
 --   IN p_reservation_name VARCHAR(140),  -- e.g. 'RES-2025-08-00001'
 --   IN p_target_docstatus INT            -- 1 = Submit (hold), 2 = Cancel (release)
 -- )
@@ -226,7 +226,7 @@ DELIMITER $$
 --   FROM tmp_inv_delta;
 -- END $$
 -- DROP PROCEDURE IF EXISTS seed_room_type_inventory_rate_codes $$
--- CREATE PROCEDURE seed_room_type_inventory_rate_codes(
+-- CREATE OR REPLACE PROCEDURE seed_room_type_inventory_rate_codes(
 --   IN p_rate_code VARCHAR(255),
 --   IN p_room_type VARCHAR(255),
 --   IN p_start     DATE,          -- inclusive
@@ -253,7 +253,7 @@ DELIMITER $$
 -- END$$
 --
 -- DROP PROCEDURE IF EXISTS seed_room_type_inventory_rate_codes $$
--- CREATE PROCEDURE seed_room_type_inventory_rate_codes(
+-- CREATE OR REPLACE PROCEDURE seed_room_type_inventory_rate_codes(
 --   IN p_rate_code VARCHAR(255),
 --   IN p_room_type VARCHAR(255),
 --   IN p_start     DATE,          -- inclusive
@@ -280,7 +280,7 @@ DELIMITER $$
 -- END$$
 --
 -- DROP PROCEDURE IF EXISTS switch_night_candidates $$
--- CREATE PROCEDURE switch_night_candidates(p_audit_date DATE)
+-- CREATE OR REPLACE PROCEDURE switch_night_candidates(p_audit_date DATE)
 -- BEGIN
 --     SELECT
 --         r.name                AS reservation_id,
@@ -321,7 +321,7 @@ DELIMITER $$
 -- --     13000
 -- --   )$$
 DROP PROCEDURE IF EXISTS seed_dim_date$$
-CREATE PROCEDURE seed_dim_date(
+CREATE OR REPLACE PROCEDURE seed_dim_date(
   IN p_start DATE,
   IN p_end   DATE,
   IN p_weekend_mode VARCHAR(7),   -- 'FRI_SAT' or 'SAT_SUN'

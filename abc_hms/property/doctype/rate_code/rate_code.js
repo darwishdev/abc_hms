@@ -5,7 +5,7 @@ frappe.ui.form.on("Rate Code", {
     refresh(frm) {
         frm.set_query("currency", () => {
             return {
-                query: "abc_pos.abc_pos.api.pos_session.currency_list2", // path to your Python function
+                query: "abc_hms.currency_list_input", // path to your Python function
             };
         });
     },

@@ -19,13 +19,13 @@ function reset_discount_fields(frm) {
     frm.set_value("fixed_rate", false);
 }
 function set_room_filter(frm) {
-    frm.set_query("room", function () {
-        return {
-            filters: {
-                room_type: frm.doc.room_type,
-            },
-        };
-    });
+    //frm.set_query("room", function () {
+    //    return {
+    //        filters: {
+    //            room_type: frm.doc.room_type,
+    //        },
+    //    };
+    //});
 }
 frappe.ui.form.on("Reservation", {
     onload(frm) {
@@ -44,9 +44,11 @@ frappe.ui.form.on("Reservation", {
             frm.call("get_business_date").then(({ message }) => {
                 frm._current_business_date = message;
                 handle_check_in(frm);
+                handle_reverse_check_in(frm);
                 handle_check_out(frm);
                 handle_early_checkin(frm);
                 handle_early_checkout(frm);
+                handle_reinstate(frm);
             });
         }
         setTimeout(() => {
@@ -98,14 +100,14 @@ frappe.ui.form.on("Reservation", {
         if (base_rate > rate_code_rate) {
             reset_discount_fields(frm);
             frm.set_value("fixed_rate", true);
-            reservation_availability_check(frm);
+            //reservation_availability_check(frm);
             set_ignore_discount(frm, false, 500);
             return;
         }
         if (!discount_type) frm.set_value("discount_type", "Percent");
         const discount_amount = rate_code_rate - base_rate;
         const discount_percent = (discount_amount / rate_code_rate) * 100;
-        reservation_availability_check(frm);
+        //reservation_availability_check(frm);
         frm.set_value("discount_amount", discount_amount);
         frm.set_value("discount_percent", discount_percent);
         set_ignore_discount(frm, false, 500);
@@ -161,7 +163,8 @@ frappe.ui.form.on("Reservation", {
 });
 
 const handle_reservation_days_button = (frm) => {
-    const can_show = frm.doc.property && frm.doc.docstatus === 1;
+    const can_show =
+        frm.doc.property && frm.doc.docstatus === 1 && frm.doc.reservation_status == "In House";
 
     if (!can_show) {
         frm.remove_custom_button(__("View Daily Details"));
@@ -339,6 +342,42 @@ const set_ignore_discount = (frm, value = true, delay = 0) => {
 const date_to_int = (date) => {
     return parseInt(date.replace(/-/g, ""));
 };
+const update_reservation_status = (frm, new_status, msg) => {
+    frm.call("reservation_status_update", { new_status }).then(() => {
+        frappe.show_alert({
+            message: __(msg),
+            indicator: "green",
+        });
+        frm.reload();
+    });
+};
+
+const handle_reverse_check_in = (frm) => {
+    const { docstatus, reservation_status, arrival, name, room, guest } = frm.doc;
+    const _current_business_date = frm._current_business_date;
+
+    const can_show =
+        date_to_int(arrival) == date_to_int(_current_business_date) &&
+        room.length > 0 &&
+        reservation_status == "In House";
+    docstatus == 1;
+    if (!can_show) {
+        frm.remove_custom_button(__("Reverse Check In"));
+        return;
+    }
+
+    frm.add_custom_button(__("Reverse Check In"), () => {
+        frappe.confirm(
+            `Reverse Check-in Guest: ${guest}. from Room: ${room}. for Reservation: ${name}`,
+            () => {
+                update_reservation_status(frm, "Arrival", "Guest Check In Reversed Successfully");
+            },
+            () => {
+                // action to perform if No is selected
+            },
+        );
+    });
+};
 const handle_check_in = (frm) => {
     const { docstatus, reservation_status, arrival, name, room, guest } = frm.doc;
     const _current_business_date = frm._current_business_date;
@@ -346,7 +385,7 @@ const handle_check_in = (frm) => {
     const can_show =
         date_to_int(arrival) == date_to_int(_current_business_date) &&
         room.length > 0 &&
-        reservation_status != "In House";
+        reservation_status == "Confirmed";
     docstatus == 1;
     if (!can_show) {
         frm.remove_custom_button(__("Check In"));
@@ -361,22 +400,7 @@ const handle_check_in = (frm) => {
         frappe.confirm(
             `Check-in Guest: ${guest}. into Room: ${room}. for Reservation: ${name}`,
             () => {
-                frappe.call({
-                    method: "frappe.client.set_value",
-                    args: {
-                        doctype: frm.doctype,
-                        name: frm.doc.name,
-                        fieldname: "reservation_status",
-                        value: "In House",
-                    },
-                    callback: (r) => {
-                        frm.reload_doc();
-                        frappe.show_alert({
-                            message: __("Guest Checked In Successfully"),
-                            indicator: "green",
-                        });
-                    },
-                });
+                update_reservation_status(frm, "In House", "Guest Checked In Successfully");
             },
             () => {
                 // action to perform if No is selected
@@ -387,20 +411,73 @@ const handle_check_in = (frm) => {
 };
 
 const handle_check_out = (frm) => {
-    const { departure, reservation_status } = frm.doc;
+    const { departure, reservation_status, guest, room, name } = frm.doc;
     const _current_business_date = frm._current_business_date;
-    const _current_folio_balance = frm._current_folio_balance;
+    //const _current_folio_balance = frm._current_folio_balance;
 
     const can_show =
         date_to_int(departure) == date_to_int(_current_business_date) &&
-        _current_folio_balance < 1 &&
         reservation_status == "In House";
     if (!can_show) {
         frm.remove_custom_button(__("Check Out"));
         return;
     }
     frm.add_custom_button(__("Check Out"), async () => {
-        console.log("checcking Out");
+        frm.call("reservation_folio_find").then((resp) => {
+            const { balance, folio_name } = resp.message;
+            if (balance > 1) {
+                frappe.throw(`
+    The current folio balance is ${balance}.
+    Please <a href="http://localhost:5173/folio/${folio_name}"
+        target="_blank"
+        style="font-weight:600; color:#007bff; text-decoration:underline;">
+        open the folio
+    </a> to settle it before checking out the guest.
+`);
+            }
+            frappe.confirm(
+                `Check-Out Guest: ${guest}. From Room: ${room}. for Reservation: ${name}`,
+                () => {
+                    update_reservation_status(
+                        frm,
+                        "Checked Out",
+                        "Guest Checked Out Successfully",
+                    );
+                },
+                () => {
+                    // action to perform if No is selected
+                },
+            );
+        });
+    });
+};
+const handle_reinstate = (frm) => {
+    const { departure, reservation_status, guest, room, name } = frm.doc;
+    const _current_business_date = frm._current_business_date;
+
+    // show only when departure == business date and guest is Checked Out
+    const can_show =
+        date_to_int(departure) == date_to_int(_current_business_date) &&
+        reservation_status === "Checked Out";
+
+    if (!can_show) {
+        frm.remove_custom_button(__("Reinstate"));
+        return;
+    }
+
+    // add button (will be deduped if already added because we always remove when !can_show)
+    frm.add_custom_button(__("Reinstate"), async () => {
+        // confirm with the user
+        frappe.confirm(
+            `Reinstate Guest: ${guest}. Back to Room: ${room}. for Reservation: ${name}?`,
+            () => {
+                // Yes callback -> update status to In House
+                update_reservation_status(frm, "In House", "Guest reinstated successfully");
+            },
+            () => {
+                // No callback -> do nothing
+            },
+        );
     });
 };
 
@@ -419,41 +496,59 @@ const date_diff_days = (date1_int, date2_int) => {
     return Math.floor((d1 - d2) / (1000 * 60 * 60 * 24));
 };
 const handle_early_checkin = (frm) => {
-    const { arrival, reservation_status } = frm.doc;
+    const { reservation_status, arrival, nights, guest, room, name } = frm.doc;
     const _current_business_date = frm._current_business_date;
-
-    // Calculate the difference in days
     const arrival_int = date_to_int(arrival);
     const current_date_int = date_to_int(_current_business_date);
     const days_until_arrival = date_diff_days(arrival_int, current_date_int);
-
-    const can_show = days_until_arrival > 0 && days_until_arrival <= 2;
+    const new_nights = nights + days_until_arrival;
+    const can_show = days_until_arrival > 0 && reservation_status == "Confirmed";
 
     if (!can_show) {
         frm.remove_custom_button(__("Early Check-in"));
         return;
     }
 
-    frm.add_custom_button(__("Early Check-in"), async () => {});
+    frm.add_custom_button(__("Early Check-in"), async () => {
+        frappe.confirm(
+            `Early Check-in: ${guest}.  to Room: ${room}. for Reservation: ${name}?\n Please Note that this action will affect the arrival date of the reservation\n New Arrival date will become ${_current_business_date} and Length Of Stay will become ${new_nights}`,
+            () => {
+                frm.set_value("arrival", _current_business_date);
+                frm.set_value("nights", new_nights);
+                update_reservation_status(frm, "In House", "Guest checked-in successfully");
+            },
+            () => {
+                // No callback -> do nothing
+            },
+        );
+    });
 };
 
 const handle_early_checkout = (frm) => {
-    const { departure, arrival, reservation_status } = frm.doc;
+    const { departure, name, guest, room, reservation_status, nights } = frm.doc;
     const _current_business_date = frm._current_business_date;
-    const arrival_int = date_to_int(arrival);
     const departure_int = date_to_int(departure);
     const current_date_int = date_to_int(_current_business_date);
     const days_until_departure = date_diff_days(departure_int, current_date_int);
-    const can_show =
-        arrival_int != current_date_int &&
-        days_until_departure >= 0 &&
-        days_until_departure <= 2 &&
-        reservation_status == "In House";
+    const new_nights = nights - days_until_departure;
+    const can_show = departure_int > current_date_int && reservation_status == "In House";
 
     if (!can_show) {
         frm.remove_custom_button(__("Early Checkout"));
         return;
     }
 
-    frm.add_custom_button(__("Early Checkout"), async () => {});
+    frm.add_custom_button(__("Early Checkout"), async () => {
+        frappe.confirm(
+            `Early Check-out: ${guest}.  from Room: ${room}. for Reservation: ${name}?\n Please Note that this action will affect the departure date of the reservation\n New Departure date will become ${_current_business_date} and Length Of Stay will become ${new_nights}`,
+            () => {
+                frm.set_value("departure", _current_business_date);
+                frm.set_value("nights", new_nights);
+                update_reservation_status(frm, "Checked Out", "Guest checked-out successfully");
+            },
+            () => {
+                // No callback -> do nothing
+            },
+        );
+    });
 };

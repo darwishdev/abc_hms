@@ -1,5 +1,5 @@
 DELIMITER ;;
-CREATE  PROCEDURE "pos_session_find"(
+CREATE OR REPLACE PROCEDURE `pos_session_find`(
     IN session_id VARCHAR(255)
 )
 BEGIN
@@ -17,7 +17,7 @@ BEGIN
             parent,
             (amount - (qty * (price_list_rate - rate))) AS total_discount_amount
         FROM
-            "tabPOS Invoice Item"
+            `tabPOS Invoice Item`
         WHERE
             pos_session = session_id -- Filter by the input parameter
     )
@@ -41,7 +41,7 @@ BEGIN
         SUM(base_amount) AS total_base_amount,
         pos_session
     FROM
-        "tabSales Invoice Payment"
+        `tabSales Invoice Payment`
     WHERE
         pos_session = session_id -- Filter by the input parameter
     GROUP BY
