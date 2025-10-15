@@ -4,6 +4,14 @@ frappe.pages["room_availability"].on_page_load = function (wrapper) {
         title: "Room Availability",
         single_column: true,
     });
+
+    const dateController = window.createDateRangeController({
+        fromKey: "date_from",
+        nightsKey: "nights",
+        toKey: "date_to",
+        get: (key) => frm.doc[key],
+        set: (key, value) => frm.set_value(key, value),
+    });
     const filters = [
         {
             fieldname: "date_range",

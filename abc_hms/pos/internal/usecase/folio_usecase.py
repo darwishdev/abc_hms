@@ -3,6 +3,7 @@ import json
 from typing import List
 import frappe
 from frappe import _
+from sentry_sdk.utils import json_dumps
 from abc_hms.dto.pos_folio_dto import FolioInsertRequest , FolioItem, FolioItemTransferRequest, FolioListFilteredRequest, FolioMergeRequest, FolioUpsertRequest,  FolioWindowUpsertRequest
 from abc_hms.pos.doctype.folio.folio import Folio
 from abc_hms.pos.doctype.folio_window.folio_window import FolioWindow
@@ -47,7 +48,7 @@ class FolioUsecase:
             raise Exception(f"Error Decoding Response Body : {str(e)}")
         except Exception as e:
             raise e
-    def folio_list_filtered(self, req: FolioListFilteredRequest) -> List[FolioItem]:
+    def folio_list_filtered(self, req) -> List[FolioItem]:
         try:
             return self.repo.folio_list_filtered(
                 pos_profile=req['pos_profile'],
@@ -58,7 +59,8 @@ class FolioUsecase:
                 arrival_from=req.get('arrival_from'),
                 arrival_to=req.get('arrival_to'),
                 departure_from=req.get('departure_from'),
-                departure_to=req.get('departure_to')
+                departure_to=req.get('departure_to'),
+                include_paymaster=req.get('pay_master')
             )
         except Exception as e:
             raise e

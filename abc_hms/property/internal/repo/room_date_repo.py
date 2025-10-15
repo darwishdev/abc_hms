@@ -33,7 +33,7 @@ class RoomDateRepo:
         rooms_json = frappe.as_json(room_numbers)  # JSON array for SP
         frappe.db.sql(
             """
-            CALL sp_upsert_room_date(
+            CALL room_date_bulk_upsert(
                 %s, %s,%s, %s, %s, %s, %s, %s, %s
             )
             """,

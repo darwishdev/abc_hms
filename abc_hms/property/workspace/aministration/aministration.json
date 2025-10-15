@@ -132,7 +132,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-10-13 18:56:01.993594",
+ "modified": "2025-10-14 18:01:53.309693",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Aministration",
@@ -142,7 +142,7 @@
  "public": 1,
  "quick_lists": [],
  "roles": [],
- "sequence_id": 4.0,
+ "sequence_id": 5.0,
  "shortcuts": [],
  "title": "Aministration"
 }

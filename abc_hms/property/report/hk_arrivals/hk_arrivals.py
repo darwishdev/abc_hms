@@ -4,8 +4,16 @@ def execute(filters=None):
         filters = {}
 
     columns = [
+        {"fieldname": "business_date", "label": "Business Date", "fieldtype": "Date"},
         {"fieldname": "room",  "label": "Room", "fieldtype": "Link", "options": "Room"},
         {"fieldname": "room_status","editable" : True , "label": "Room Status", "fieldtype": "Data"},
+        {"fieldname": "house_keeping_status","editable" : True , "label": "HK Status", "fieldtype": "Data"},
+
+        {"fieldname": "discrepency","editable" : True , "label": "Discrepency", "fieldtype": "Int"},
+        {"fieldname": "guest_service_status","editable" : True , "label": "Guest Service Status",
+         "fieldtype": "Data"},
+
+        {"fieldname": "vip_level",  "label": "VIP Level", "fieldtype": "Int"},
         {"fieldname": "nights", "label": "Nights", "fieldtype": "Int"},
         {"fieldname": "adults", "label": "Adults", "fieldtype": "Int"},
         {"fieldname": "children", "label": "Children", "fieldtype": "Int"},
@@ -39,7 +47,11 @@ def execute(filters=None):
         from `tabProperty Setting` s where s.name = '{property_value}'
     )
     SELECT
+        s.business_date,
         r.room,
+        COALESCE(rd.house_keeping_status, 'N\A') AS house_keeping_status,
+        COALESCE(rd.persons, 'N\A') AS discrepency,
+        COALESCE(rd.guest_service_status, 'N\A') AS guest_service_status,
         COALESCE(rd.room_status, 'Dirty') AS room_status,
         r.base_rate,
         r.nights,
@@ -49,6 +61,7 @@ def execute(filters=None):
         r.guest,
         r.name,
         r.room_type,
+        c.vip_level,
         r.departure,
         COALESCE(GROUP_CONCAT(DISTINCT cc.comment SEPARATOR '</br>'), 'No Guest Comments') AS guest_comment,
         COALESCE(GROUP_CONCAT(DISTINCT rc.comment SEPARATOR '</br>'), 'No Reservation Comments') AS reservation_comment,
@@ -61,6 +74,9 @@ def execute(filters=None):
         property_settings s
     JOIN
         `tabReservation` r ON r.arrival = s.business_date
+
+    JOIN
+        `tabCustomer` c ON c.name = r.guest
     LEFT JOIN
         `tabGuest Comment` cc ON r.guest = cc.guest AND cc.reservation IS NULL
     LEFT JOIN
@@ -84,6 +100,7 @@ def execute(filters=None):
         r.infants,
         r.guest,
         r.name,
+        s.business_date,
         r.room_type,
         rd.out_of_order_status,
         r.company_profile,

@@ -153,14 +153,15 @@ class POSInvoiceRepo:
 
         return invoice
     def pos_invoice_upsert(self , docdata: POSInvoiceData,reset_items: bool = True,reset_payments: bool = True, commit: bool = True)->POSInvoiceData:
-        if docdata['is_return']:
-            against = docdata['against_invoice']
-            if not against:
-                raise frappe.ValidationError("against invoice is required on return onvpoce")
-            docdata['naming_series'] = f"{against}-RE-"
-            doc: POSInvoiceData = frappe.new_doc("POS Invoice") # type: ignore
-            docdata["issued_at_session"] = frappe.local.pos_session
-            return self.pos_invoice_update(doc , docdata ,   commit)
+        if 'is_return' in docdata:
+            if  docdata['is_return']:
+                against = docdata['against_invoice']
+                if not against:
+                    raise frappe.ValidationError("against invoice is required on return onvpoce")
+                docdata['naming_series'] = f"{against}-RE-"
+                doc: POSInvoiceData = frappe.new_doc("POS Invoice") # type: ignore
+                docdata["issued_at_session"] = frappe.local.pos_session
+                return self.pos_invoice_update(doc , docdata ,   commit)
 
         doc_names : List[str] = frappe.db.sql(
             """
@@ -191,40 +192,6 @@ class POSInvoiceRepo:
             docdata["submitted_at_session"] = frappe.local.pos_session
 
         return self.pos_invoice_update(doc , docdata ,  commit)
-    def pos_invoice_upsert(self , docdata: POSInvoiceData,reset_items: bool = True,reset_payments: bool = True, commit: bool = True)->POSInvoiceData:
-        doc_names : List[str] = frappe.db.sql(
-            """
-                SELECT name from `tabPOS Invoice`
-                WHERE name = %s OR (
-                               docstatus = 0 AND
-                               pos_profile = %s
-                               AND folio = %s
-                               AND for_date = %s
-                               )
-            """ ,
-             (docdata.get("name"),
-             docdata.get("pos_profile" , "Main"),
-             docdata.get("folio"),
-             docdata.get("for_date"),
-              ),
-            pluck="name") # type: ignore
-        if doc_names and len(doc_names) > 0:
-            doc_name = doc_names[len(doc_names) - 1]
-
-            doc: POSInvoiceData = frappe.get_doc("POS Invoice", doc_name) # type: ignore
-
-
-            if docdata.get("docstatus") == 1:
-                docdata["submitted_at_session"] = frappe.local.pos_session
-
-            return self.pos_invoice_update(doc , docdata ,  commit)
-
-        doc: POSInvoiceData = frappe.new_doc("POS Invoice") # type: ignore
-        docdata["issued_at_session"] = frappe.local.pos_session
-        return self.pos_invoice_update(doc , docdata ,   commit)
-
-
-
 
 
     def pos_invoice_end_of_day_auto_close(self, business_date : int):

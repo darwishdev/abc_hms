@@ -8,7 +8,7 @@
  "field_order": [
   "restaurant",
   "section_break_lebq",
-  "print_classes"
+  "printers"
  ],
  "fields": [
   {
@@ -24,17 +24,16 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "print_classes",
+   "fieldname": "printers",
    "fieldtype": "Table",
-   "label": "Preparation Printers",
-   "options": "Production Area Preparation Printer",
-   "reqd": 1
+   "label": "Printers",
+   "options": "Production Area Printer"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-24 12:17:09.023477",
+ "modified": "2025-10-15 01:37:18.487588",
  "modified_by": "Administrator",
  "module": "Pos",
  "name": "Production Area",

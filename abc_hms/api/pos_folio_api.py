@@ -69,23 +69,24 @@ def folio_merge():
 @frappe.whitelist(methods=["GET"])
 @business_date_protected
 def folio_list_filtered():
-    try:
-        args = frappe.form_dict
-        payload: FolioListFilteredRequest = {
-            "pos_profile": frappe.local.pos_profile,
-            "docstatus": args.get("docstatus"),
-            "reservation": args.get("reservation"),
-            "guest": args.get("guest"),
-            "room": args.get("room"),
-            "arrival_from": args.get("arrival_from"),
-            "arrival_to": args.get("arrival_to"),
-            "departure_from": args.get("departure_from"),
-            "departure_to": args.get("departure_to"),
-        }
-    except Exception as e:
-        raise frappe.ValidationError(f"Invalid Request {str(e)}")
-
-    result = app_container.folio_usecase.folio_list_filtered(payload)
+    # try:
+    #     args = frappe.form_dict
+    #     payload: FolioListFilteredRequest = {
+    #         "pos_profile": frappe.local.pos_profile,
+    #         "docstatus": args.get("docstatus"),
+    #         "reservation": args.get("reservation"),
+    #         "guest": args.get("guest"),
+    #         "room": args.get("room"),
+    #         "arrival_from": args.get("arrival_from"),
+    #         "arrival_to": args.get("arrival_to"),
+    #         "departure_from": args.get("departure_from"),
+    #         "departure_to": args.get("departure_to"),
+    #         "departure_to": args.get("departure_to"),
+    #     }
+    # except Exception as e:
+    #     raise frappe.ValidationError(f"Invalid Request {str(e)}")
+    #
+    result = app_container.folio_usecase.folio_list_filtered(frappe.form_dict)
     return  result
 
 

@@ -58,6 +58,9 @@ pos_session_defaults_find,
     pos_session_upsert,
     pos_session_find_for_date
 )
+from abc_hms.api.pos_device_api import (
+    printer_list_by_pos_profile
+)
 from abc_hms.api.property_api import (
 property_eod,
 # property_end_of_day,
@@ -141,6 +144,7 @@ __all__ = [
     "currency_list_input",
     "rate_code_room_type_list",
     "room_type_rate_bulk_upsert_json",
+    "printer_list_by_pos_profile",
     "room_type_rate_bulk_upsert",
     "cashier_login"
 ]

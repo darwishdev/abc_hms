@@ -381,12 +381,11 @@ const handle_reverse_check_in = (frm) => {
 const handle_check_in = (frm) => {
     const { docstatus, reservation_status, arrival, name, room, guest } = frm.doc;
     const _current_business_date = frm._current_business_date;
-
     const can_show =
         date_to_int(arrival) == date_to_int(_current_business_date) &&
         room.length > 0 &&
-        reservation_status == "Confirmed";
-    docstatus == 1;
+        ["Arrival", "Confirmed"].includes(reservation_status);
+
     if (!can_show) {
         frm.remove_custom_button(__("Check In"));
         frm.remove_custom_button(__("Mark No Show"));

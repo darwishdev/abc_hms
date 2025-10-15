@@ -114,11 +114,12 @@ class FolioRepo:
             arrival_from: Optional[str],
             arrival_to: Optional[str],
             departure_from: Optional[str],
-            departure_to: Optional[str]
+            departure_to: Optional[str],
+            include_paymaster: Optional[bool]
     )-> List[FolioItem]:
         def procedure_call(cur ,_):
             cur.execute("""
-            CALL folio_list_filtered(%s, %s, %s, %s, %s, %s, %s, %s, %s);
+            CALL folio_list_filtered(%s, %s, %s, %s, %s, %s, %s, %s, %s,%s);
         """, (
                 pos_profile ,
                 docstatus ,
@@ -129,6 +130,7 @@ class FolioRepo:
                 arrival_to ,
                 departure_from ,
                 departure_to,
+                include_paymaster
              ))
             return cur.fetchall()
 

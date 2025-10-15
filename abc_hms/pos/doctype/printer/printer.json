@@ -2,55 +2,54 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "prompt",
- "creation": "2025-08-23 16:42:31.651084",
+ "creation": "2025-10-15 01:30:58.275662",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "ip_adress",
-  "column_break_dhxp",
-  "port_number",
-  "column_break_pwfp",
-  "fallback_printer"
+  "ip_address",
+  "column_break_suhe",
+  "port",
+  "column_break_uvrp",
+  "print_class"
  ],
  "fields": [
   {
-   "fieldname": "ip_adress",
+   "fieldname": "ip_address",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "IP Adress",
+   "label": "IP Address",
    "reqd": 1
   },
   {
-   "default": "9100",
-   "fieldname": "port_number",
-   "fieldtype": "Int",
-   "in_list_view": 1,
-   "label": "Port Number",
-   "non_negative": 1,
-   "reqd": 1
-  },
-  {
-   "fieldname": "fallback_printer",
-   "fieldtype": "Link",
-   "label": "Fallback Printer",
-   "options": "Preparation Printer"
-  },
-  {
-   "fieldname": "column_break_dhxp",
+   "fieldname": "column_break_suhe",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_pwfp",
+   "fieldname": "port",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Port",
+   "reqd": 1
+  },
+  {
+   "fieldname": "print_class",
+   "fieldtype": "Link",
+   "label": "Print Class",
+   "options": "Print Class",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_uvrp",
    "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-15 01:30:04.336580",
+ "modified": "2025-10-15 01:51:59.084336",
  "modified_by": "Administrator",
  "module": "Pos",
- "name": "Preparation Printer",
+ "name": "Printer",
  "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [
@@ -68,6 +67,7 @@
   }
  ],
  "row_format": "Dynamic",
+ "search_fields": "ip_address",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

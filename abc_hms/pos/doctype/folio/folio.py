@@ -70,10 +70,9 @@ class Folio(Document):
 
         dest_active_invoice.calculate_taxes_and_totals()
         dest_active_invoice.save()
-        source_folio_docstatus = 0 if keep_source else 2
         frappe.db.sql("""
         CALL folio_merge_submitted_invoices(%s,%s,%s,%s);
-        """ , (self.name , destination_folio, destination_window,source_folio_docstatus))
+        """ , (self.name , destination_folio, destination_window,keep_source))
         frappe.msgprint(
                 msg=f"✅ Successfully merged folio <b>{self.name}</b> into <b>{destination_folio_doc.name}</b> ({destination_window})",
                 title="Folio Merge Successful",

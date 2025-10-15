@@ -147,113 +147,117 @@ END ;;
 DELIMITER ;
 
 DELIMITER ;;
-CREATE OR REPLACE PROCEDURE `folio_list_filtered`(
-    IN p_pos_profile TEXT,
-    IN p_docstatus INT,
-    IN p_reservation TEXT,
-    IN p_guest TEXT ,
-    IN p_room TEXT ,
-    IN p_arrival_from DATE,
-    IN p_arrival_to DATE,
-    IN p_departure_from DATE,
-    IN p_departure_to DATE
-)
-BEGIN
-    WITH folios AS (
-        SELECT
-            r.room,
-            fw.name folio_window,
-            f.restaurant_table,
-            f.docstatus,
-            f.name folio,
-            r.name reservation,
-            r.arrival,
-            r.departure,
-            r.guest
-        FROM tabFolio f
-        JOIN `tabFolio Window` fw
-            ON f.name = fw.folio
-        LEFT JOIN tabReservation r
-            ON f.reservation = r.name
-        WHERE f.pos_profile = COALESCE(p_pos_profile, f.pos_profile)
-          AND f.docstatus = COALESCE(p_docstatus, f.docstatus)
-          AND (r.name IS NULL OR r.name = COALESCE(p_reservation, r.name))
-          AND (p_guest IS NULL OR r.guest LIKE CONCAT('%', p_guest, '%'))
-          AND (r.name IS NULL OR r.room = COALESCE(p_room, r.room))
-          AND (r.name IS NULL OR r.arrival >= COALESCE(p_arrival_from, r.arrival))
-          AND (r.name IS NULL OR r.arrival <= COALESCE(p_arrival_to, r.arrival))
-          AND (r.name IS NULL OR r.departure >= COALESCE(p_departure_from, r.departure))
-          AND (r.name IS NULL OR r.departure <= COALESCE(p_departure_to, r.departure))
-    ),
-    items AS (
-        SELECT
-            f.folio,
-            i.customer guest,
-            SUM(ii.amount) total_required_amount
-        FROM folios f
-        LEFT JOIN `tabPOS Invoice Item` ii
-            ON ii.folio_window = f.folio_window
-        LEFT JOIN `tabPOS Invoice` i
-            ON ii.parent = i.name and ii.parenttype = 'POS Invoice'
-        GROUP BY f.folio
-    )
+CREATE OR REPLACE PROCEDURE folio_list_filtered (
+  IN p_pos_profile TEXT,
+  IN p_docstatus INT,
+  IN p_reservation TEXT,
+  IN p_guest TEXT,
+  IN p_room TEXT,
+  IN p_arrival_from DATE,
+  IN p_arrival_to DATE,
+  IN p_departure_from DATE,
+  IN p_departure_to DATE,
+  IN p_include_paymaster bool
+) BEGIN
+WITH
+  folios AS (
     SELECT
-        f.room,
-        f.restaurant_table,
-        f.docstatus,
-        f.folio,
-        f.reservation,
-        f.arrival,
-        f.departure,
-        coalesce(f.guest , i.guest) guest,
-        i.total_required_amount,
-    GROUP_CONCAT(f.folio_window) windows,
-        SUM(p.amount) total_paid_amount
-    FROM folios f
-    JOIN items i
-        ON i.folio = f.folio
-    LEFT JOIN `tabSales Invoice Payment` p
-        ON p.folio_window = f.folio_window
-    GROUP BY f.folio, f.room,  f.restaurant_table,
-             f.reservation, f.arrival, f.departure, f.guest,
-             i.total_required_amount;
-END ;;
-DELIMITER ;
+      r.room,
+      fw.name folio_window,
+      f.restaurant_table,
+      f.docstatus,
+      f.name folio,
+      r.name reservation,
+      ps.business_date,
+      r.arrival,
+      rt.pay_master,
+      r.departure,
+      r.guest
+    FROM
+      tabFolio f
+      JOIN `tabFolio Window` fw ON f.name = fw.folio
+      LEFT JOIN tabReservation r ON f.reservation = r.name
+      LEFT JOIN `tabProperty Setting` ps ON r.property = ps.name
+      LEFT JOIN tabRoom ro ON r.room = ro.name
+      LEFT JOIN `tabRoom Type` rt ON ro.room_type = rt.name
+    WHERE
+      f.pos_profile = COALESCE(p_pos_profile, f.pos_profile)
+      AND f.docstatus = COALESCE(p_docstatus, f.docstatus)
+      AND (
+        r.name IS NULL
+        OR r.name = COALESCE(p_reservation, r.name)
+      )
+      AND (
+        p_guest IS NULL
+        OR r.guest LIKE CONCAT('%', p_guest, '%')
+      )
+      AND (
+        r.name IS NULL
+        OR r.room = COALESCE(p_room, r.room)
+      )
+      AND (
+        r.name IS NULL
+        OR r.arrival >= COALESCE(p_arrival_from, r.arrival)
+      )
+      AND (
+        r.name IS NULL
+        OR r.arrival <= COALESCE(p_arrival_to, r.arrival)
+      )
+      AND (
+        r.name IS NULL
+        OR r.departure >= COALESCE(p_departure_from, r.departure)
+      )
+      AND (
+        r.name IS NULL
+        OR r.departure <= COALESCE(p_departure_to, r.departure)
+      )
+  ),
+  items AS (
+    SELECT
+      f.folio,
+      i.customer guest,
+      SUM(ii.amount) total_required_amount
+    FROM
+      folios f
+      LEFT JOIN `tabPOS Invoice Item` ii ON ii.folio_window = f.folio_window
+      LEFT JOIN `tabPOS Invoice` i ON ii.parent = i.name
+      and ii.parenttype = 'POS Invoice'
+    GROUP BY
+      f.folio
+  )
+SELECT
+  f.room,
+  f.restaurant_table,
+  f.docstatus,
+  f.folio,
+  f.reservation,
+  f.arrival,
+  f.pay_master,
+  f.departure,
+  (f.arrival = f.business_date) is_arrival,
+  (f.departure = f.business_date) is_departure,
+  coalesce(f.guest, i.guest) guest,
+  i.total_required_amount,
+  GROUP_CONCAT(f.folio_window) windows,
+  SUM(p.amount) total_paid_amount
+FROM
+  folios f
+  JOIN items i ON i.folio = f.folio
+  LEFT JOIN `tabSales Invoice Payment` p ON p.folio_window = f.folio_window
+WHERE
+  f.pay_master = IF(p_include_paymaster, f.pay_master, 0)
+  and (f.arrival is null or f.arrival <= f.business_date)
+  and (f.departure is null or f.departure <= f.business_date)
+GROUP BY
+  f.folio,
+  f.pay_master,
+  f.room,
+  f.restaurant_table,
+  f.reservation,
+  f.arrival,
+  f.departure,
+  f.guest,
+  i.total_required_amount;
 
-DELIMITER ;;
-CREATE OR REPLACE PROCEDURE `folio_merge_submitted_invoices`(
-    IN p_source_folio varchar(140),
-    IN p_destination_folio varchar(140),
-    IN p_destination_window varchar(140),
-    IN p_source_folio_docstatus INT
-)
-BEGIN
-    DELETE FROM `tabPOS Invoice` WHERE folio = p_source_folio AND docstatus = 0;
-    UPDATE `tabPOS Invoice` SET old_folio = p_source_folio , folio = p_destination_folio WHERE folio = p_source_folio AND docstatus = 1;
-    update `tabPOS Invoice Item` i join `tabFolio Window` fw on i.folio_window = fw.name and fw.folio = p_source_folio set i.folio_window = p_destination_window;
-    update `tabSales Invoice Payment` p join `tabFolio Window` fw on p.folio_window =
-            fw.name and fw.folio = p_source_folio set p.folio_window = p_destination_window;
-    UPDATE `tabFolio` SET folio_status = 'Merged' , merged_with_folio = p_destination_folio, docstatus = p_source_folio_docstatus WHERE name = p_source_folio;
-END ;;
-DELIMITER ;
-
-DELIMITER ;;
-CREATE OR REPLACE PROCEDURE `folio_transfer_submitted_items`(
-  IN p_destination_window varchar(140),
-    IN p_source_window varchar(140),
-    IN p_item_names TEXT
-)
-BEGIN
-  IF p_destination_window  then
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid p_destination_window is required for transfer';
-  END IF;
-  IF p_source_window IS NULL AND  p_item_names IS NULL then
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid p_source_window or p_item_names is required for transfer';
-  END IF;
-  UPDATE `tabPOS Invoice Item` ii
-  join `tabPOS Invoice` i on ii.parent = i.name and ii.parenttype = 'POS Invoice' and ii.docstatus = 1
-  SET folio_window = p_destination_window
-  WHERE ii.folio_window = coalesce(p_source_window , ii.folio_window)
-  AND (p_item_names is null or find_in_set(ii.name , p_item_names));
-END ;;
+END;;
 DELIMITER ;

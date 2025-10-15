@@ -147,6 +147,7 @@ SELECT
                                 'name', i.name,
                                 'item_group', i.item_group,
                                 'item_code', i.item_code,
+                                'print_class', i.print_class,
                                 'item_price', ip.price_list_rate
                             )
                         )

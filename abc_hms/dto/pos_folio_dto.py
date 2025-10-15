@@ -45,6 +45,7 @@ class FolioMergeRequest(TypedDict):
 
 class FolioListFilteredRequest(TypedDict):
     pos_profile: str
+    pay_master:Optional[bool]
     docstatus: Optional[int]
     reservation: Optional[str]
     guest: Optional[str]
