@@ -1,3 +1,4 @@
+__version__ = "0.0.1"
 #
 # from abc_hms.api.property_room_date_api import (
 #     room_date_bulk_upsert ,
