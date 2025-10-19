@@ -1,1863 +1,1863 @@
 [
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.255994",
-    "name": "1003",
-    "room_beds": [],
-    "room_type": "CNCHK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.268219",
-    "name": "1004",
-    "room_beds": [],
-    "room_type": "CNCHK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.281024",
-    "name": "1005",
-    "room_beds": [],
-    "room_type": "CNCHK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.341851",
-    "name": "2001",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "2001",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.371987",
-    "name": "2003",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "2003",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.387487",
-    "name": "2004",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "2004",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.404651",
-    "name": "2005",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "2005",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.423973",
-    "name": "2006",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "2006",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.458232",
-    "name": "2008",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "2008",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.477116",
-    "name": "3001",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "3001",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRT",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.497675",
-    "name": "3002",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "3002",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRT",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.517069",
-    "name": "3003",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "3003",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRT",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.538895",
-    "name": "3004",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "3004",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRT",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.554572",
-    "name": "3005",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "3005",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRT",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.694236",
-    "name": "3006",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "3006",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRT",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.702014",
-    "name": "3007",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "3007",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRT",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.719996",
-    "name": "3008",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "3008",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "SUPRT",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.729467",
-    "name": "4001",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4001",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.741178",
-    "name": "4002",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4002",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.751247",
-    "name": "4003",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4003",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.760035",
-    "name": "4004",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4004",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.770116",
-    "name": "4005",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4005",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.778507",
-    "name": "4006",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4006",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.787265",
-    "name": "4007",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4007",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.796004",
-    "name": "4008",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4008",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.805659",
-    "name": "4009",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4009",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.815789",
-    "name": "4010",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "4010",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.826090",
-    "name": "5001",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "5001",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXT",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.836193",
-    "name": "5002",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "5002",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXT",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.846327",
-    "name": "5003",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "5003",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXT",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MB",
-    "modified": "2025-10-11 14:51:19.857111",
-    "name": "5004",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "5004",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXT",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.867980",
-    "name": "5005",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "5005",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXT",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.878287",
-    "name": "5006",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "5006",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXT",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.888976",
-    "name": "5007",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "5007",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXT",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MD",
-    "modified": "2025-10-11 14:51:19.899613",
-    "name": "5008",
-    "room_beds": [
-      {
-        "bed_count": 2,
-        "bed_type_name": "Twin Bed",
-        "parent": "5008",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "DLXT",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.331484",
-    "name": "9000",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.346650",
-    "name": "9001",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.360213",
-    "name": "9002",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.370891",
-    "name": "9003",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.381699",
-    "name": "9004",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.387871",
-    "name": "9005",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.396791",
-    "name": "9006",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.409251",
-    "name": "9007",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.418187",
-    "name": "9008",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.426694",
-    "name": "9009",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.436159",
-    "name": "9010",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.445385",
-    "name": "9011",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.454789",
-    "name": "9012",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.464417",
-    "name": "9013",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.474146",
-    "name": "9014",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.484616",
-    "name": "9015",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.492902",
-    "name": "9016",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.501844",
-    "name": "9017",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.511242",
-    "name": "9018",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.520681",
-    "name": "9019",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.528965",
-    "name": "9020",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.539837",
-    "name": "9021",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.549575",
-    "name": "9022",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.565156",
-    "name": "9023",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.574582",
-    "name": "9024",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.587020",
-    "name": "9025",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.600280",
-    "name": "9026",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.623137",
-    "name": "9027",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.637161",
-    "name": "9028",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.649187",
-    "name": "9029",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.658617",
-    "name": "9030",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.666919",
-    "name": "9031",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.674822",
-    "name": "9032",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.685679",
-    "name": "9033",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.696203",
-    "name": "9034",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.705138",
-    "name": "9035",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.715849",
-    "name": "9036",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.724928",
-    "name": "9037",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.734603",
-    "name": "9038",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.743101",
-    "name": "9039",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.752741",
-    "name": "9040",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.762568",
-    "name": "9041",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.773670",
-    "name": "9042",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.784021",
-    "name": "9043",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.793653",
-    "name": "9044",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.807186",
-    "name": "9045",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.822701",
-    "name": "9046",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.835416",
-    "name": "9047",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.846618",
-    "name": "9048",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.857606",
-    "name": "9049",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.869013",
-    "name": "9050",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.881891",
-    "name": "9051",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.897052",
-    "name": "9052",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.910000",
-    "name": "9053",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.920883",
-    "name": "9054",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.930031",
-    "name": "9055",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.938495",
-    "name": "9056",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.948414",
-    "name": "9057",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.960091",
-    "name": "9058",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.974519",
-    "name": "9059",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:34.990690",
-    "name": "9060",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.003029",
-    "name": "9061",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.016806",
-    "name": "9062",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.029330",
-    "name": "9063",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.041715",
-    "name": "9064",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.054236",
-    "name": "9065",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.065067",
-    "name": "9066",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.077568",
-    "name": "9067",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.090618",
-    "name": "9068",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.103131",
-    "name": "9069",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.114929",
-    "name": "9070",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.126033",
-    "name": "9071",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.139393",
-    "name": "9072",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.154168",
-    "name": "9073",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.166865",
-    "name": "9074",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.180673",
-    "name": "9075",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.192461",
-    "name": "9076",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.205303",
-    "name": "9077",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.215265",
-    "name": "9078",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.228410",
-    "name": "9079",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.242672",
-    "name": "9080",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.255642",
-    "name": "9081",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.268029",
-    "name": "9082",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.282213",
-    "name": "9083",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.292519",
-    "name": "9084",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.302989",
-    "name": "9085",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.316642",
-    "name": "9086",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.330695",
-    "name": "9087",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.345789",
-    "name": "9088",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.358541",
-    "name": "9089",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.371617",
-    "name": "9090",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.383052",
-    "name": "9091",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.393833",
-    "name": "9092",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.404120",
-    "name": "9093",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.419248",
-    "name": "9094",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.431192",
-    "name": "9095",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.442356",
-    "name": "9096",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.453319",
-    "name": "9097",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.464937",
-    "name": "9098",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.474316",
-    "name": "9099",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "SUP-1",
-    "modified": "2025-09-15 04:59:35.484243",
-    "name": "9100",
-    "room_beds": [],
-    "room_type": "PM",
-    "super_visor_section": null
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.241901",
-    "name": "1002",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "1002",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "CNCHK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.325397",
-    "name": "1008",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "1008",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "CNCHK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.440760",
-    "name": "2007",
-    "room_beds": [],
-    "room_type": "SUPRK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.356732",
-    "name": "2002",
-    "room_beds": [],
-    "room_type": "SUPRK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MA",
-    "modified": "2025-10-11 14:51:19.216891",
-    "name": "1001",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "1001",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "CNCHK",
-    "super_visor_section": "S.V-MR"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.308594",
-    "name": "1007",
-    "room_beds": [
-      {
-        "bed_count": 1,
-        "bed_type_name": "King Bed",
-        "parent": "1007",
-        "parentfield": "room_beds",
-        "parenttype": "Room"
-      }
-    ],
-    "room_type": "CNCHK",
-    "super_visor_section": "S.V-ML"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Room",
-    "floor": 0,
-    "hk_section": "HK-MC",
-    "modified": "2025-10-11 14:51:19.293615",
-    "name": "1006",
-    "room_beds": [],
-    "room_type": "CNCHK",
-    "super_visor_section": "S.V-ML"
-  }
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.255994",
+  "name": "1003",
+  "room_beds": [],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.268219",
+  "name": "1004",
+  "room_beds": [],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.281024",
+  "name": "1005",
+  "room_beds": [],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.341851",
+  "name": "2001",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "2001",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.371987",
+  "name": "2003",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "2003",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.387487",
+  "name": "2004",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "2004",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.404651",
+  "name": "2005",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "2005",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.423973",
+  "name": "2006",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "2006",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.458232",
+  "name": "2008",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "2008",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.477116",
+  "name": "3001",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3001",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.497675",
+  "name": "3002",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3002",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.517069",
+  "name": "3003",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3003",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.538895",
+  "name": "3004",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3004",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.554572",
+  "name": "3005",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3005",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.694236",
+  "name": "3006",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3006",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.702014",
+  "name": "3007",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3007",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.719996",
+  "name": "3008",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3008",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.729467",
+  "name": "4001",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4001",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.741178",
+  "name": "4002",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4002",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.751247",
+  "name": "4003",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4003",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.760035",
+  "name": "4004",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4004",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.770116",
+  "name": "4005",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4005",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.778507",
+  "name": "4006",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4006",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.787265",
+  "name": "4007",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4007",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.796004",
+  "name": "4008",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4008",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.805659",
+  "name": "4009",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4009",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.815789",
+  "name": "4010",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "4010",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.826090",
+  "name": "5001",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "5001",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXT",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.836193",
+  "name": "5002",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "5002",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXT",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.846327",
+  "name": "5003",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "5003",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXT",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MB",
+  "modified": "2025-10-11 14:51:19.857111",
+  "name": "5004",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "5004",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXT",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.867980",
+  "name": "5005",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "5005",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXT",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.878287",
+  "name": "5006",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "5006",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXT",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.888976",
+  "name": "5007",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "5007",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXT",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MD",
+  "modified": "2025-10-11 14:51:19.899613",
+  "name": "5008",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "5008",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "DLXT",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.331484",
+  "name": "9000",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.346650",
+  "name": "9001",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.360213",
+  "name": "9002",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.370891",
+  "name": "9003",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.381699",
+  "name": "9004",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.387871",
+  "name": "9005",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.396791",
+  "name": "9006",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.409251",
+  "name": "9007",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.418187",
+  "name": "9008",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.426694",
+  "name": "9009",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.436159",
+  "name": "9010",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.445385",
+  "name": "9011",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.454789",
+  "name": "9012",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.464417",
+  "name": "9013",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.474146",
+  "name": "9014",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.484616",
+  "name": "9015",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.492902",
+  "name": "9016",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.501844",
+  "name": "9017",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.511242",
+  "name": "9018",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.520681",
+  "name": "9019",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.528965",
+  "name": "9020",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.539837",
+  "name": "9021",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.549575",
+  "name": "9022",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.565156",
+  "name": "9023",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.574582",
+  "name": "9024",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.587020",
+  "name": "9025",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.600280",
+  "name": "9026",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.623137",
+  "name": "9027",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.637161",
+  "name": "9028",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.649187",
+  "name": "9029",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.658617",
+  "name": "9030",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.666919",
+  "name": "9031",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.674822",
+  "name": "9032",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.685679",
+  "name": "9033",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.696203",
+  "name": "9034",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.705138",
+  "name": "9035",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.715849",
+  "name": "9036",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.724928",
+  "name": "9037",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.734603",
+  "name": "9038",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.743101",
+  "name": "9039",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.752741",
+  "name": "9040",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.762568",
+  "name": "9041",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.773670",
+  "name": "9042",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.784021",
+  "name": "9043",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.793653",
+  "name": "9044",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.807186",
+  "name": "9045",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.822701",
+  "name": "9046",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.835416",
+  "name": "9047",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.846618",
+  "name": "9048",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.857606",
+  "name": "9049",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.869013",
+  "name": "9050",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.881891",
+  "name": "9051",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.897052",
+  "name": "9052",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.910000",
+  "name": "9053",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.920883",
+  "name": "9054",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.930031",
+  "name": "9055",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.938495",
+  "name": "9056",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.948414",
+  "name": "9057",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.960091",
+  "name": "9058",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.974519",
+  "name": "9059",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:34.990690",
+  "name": "9060",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.003029",
+  "name": "9061",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.016806",
+  "name": "9062",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.029330",
+  "name": "9063",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.041715",
+  "name": "9064",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.054236",
+  "name": "9065",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.065067",
+  "name": "9066",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.077568",
+  "name": "9067",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.090618",
+  "name": "9068",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.103131",
+  "name": "9069",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.114929",
+  "name": "9070",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.126033",
+  "name": "9071",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.139393",
+  "name": "9072",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.154168",
+  "name": "9073",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.166865",
+  "name": "9074",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.180673",
+  "name": "9075",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.192461",
+  "name": "9076",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.205303",
+  "name": "9077",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.215265",
+  "name": "9078",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.228410",
+  "name": "9079",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.242672",
+  "name": "9080",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.255642",
+  "name": "9081",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.268029",
+  "name": "9082",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.282213",
+  "name": "9083",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.292519",
+  "name": "9084",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.302989",
+  "name": "9085",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.316642",
+  "name": "9086",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.330695",
+  "name": "9087",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.345789",
+  "name": "9088",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.358541",
+  "name": "9089",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.371617",
+  "name": "9090",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.383052",
+  "name": "9091",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.393833",
+  "name": "9092",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.404120",
+  "name": "9093",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.419248",
+  "name": "9094",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.431192",
+  "name": "9095",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.442356",
+  "name": "9096",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.453319",
+  "name": "9097",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.464937",
+  "name": "9098",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.474316",
+  "name": "9099",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "SUP-1",
+  "modified": "2025-09-15 04:59:35.484243",
+  "name": "9100",
+  "room_beds": [],
+  "room_type": "PM",
+  "super_visor_section": null
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.241901",
+  "name": "1002",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "1002",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.325397",
+  "name": "1008",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "1008",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.440760",
+  "name": "2007",
+  "room_beds": [],
+  "room_type": "SUPRK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.356732",
+  "name": "2002",
+  "room_beds": [],
+  "room_type": "SUPRK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.216891",
+  "name": "1001",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "1001",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.308594",
+  "name": "1007",
+  "room_beds": [
+   {
+    "bed_count": 1,
+    "bed_type_name": "King Bed",
+    "parent": "1007",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.293615",
+  "name": "1006",
+  "room_beds": [],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-ML"
+ }
 ]

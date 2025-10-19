@@ -1,11 +1,11 @@
 [
  {
-  "default_tax_template": null,
   "description": null,
   "docstatus": 0,
   "doctype": "Restaurant",
   "modified": "2025-09-24 03:47:24.421319",
   "name": "Main",
+  "production_areas": [],
   "property": "CHNA"
  }
 ]

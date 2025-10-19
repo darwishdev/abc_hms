@@ -1,0 +1,13 @@
+[
+ {
+  "default": 0,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-16 14:21:51.938224",
+  "name": "l8vtamk8bm",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "waleed@conchahotel.com"
+ }
+]

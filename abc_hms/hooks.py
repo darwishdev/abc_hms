@@ -21,38 +21,19 @@ boot_session = "abc_hms.boot.get_business_date"
 app_include_css = ["/assets/abc_hms/css/nav-52.css"]
 app_include_js = ["/assets/abc_hms/js/nav-9.js", "/assets/abc_hms/js/date_fields_2.js"]
 fixtures = [
-    {
-        "doctype": "Account",
-        "filters": [
-            [
-                "name",
-                "in",
-                [
-                    "1340 - City Ledger - CH",
-                    "1320 - Guest Ledger - CH",
-                    "1210 - Bank Account - CH",
-                    "1330 - Visa - CH",
-                    "4140 - Room Revenue - CH",
-                    "4130 - F&B Revenue - CH",
-                    "2320 - Service Charge - CH",
-                    "2330 - Municipality - CH",
-                    "2340 - VAT - CH",
-                ],
-            ]
-        ],
-    },
     {"doctype": "Company"},
     {"doctype": "Sales Partner Type"},
+    {"doctype": "Reservation"},
+    {"doctype": "Folio"},
+    {"doctype": "Folio Window"},
     {"doctype": "Sales Partner"},
     {
         "dt": "Workspace Link",
-        "filters": [["parent", "=", "EOD"]],
+        "filters": [["parent", "in", ["EOD", "Administration", "PMS"]]],
     },
     {
         "dt": "Workspace",
-        "filters": [
-            ["name", "in", ["EOD"]]  # replace EOD with the exact workspace name
-        ],
+        "filters": [["name", "in", ["EOD", "Administration", "PMS"]]],
     },
     {"doctype": "Custom HTML Block"},
     {

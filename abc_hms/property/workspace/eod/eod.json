@@ -18,7 +18,7 @@
  "is_hidden": 0,
  "label": "EOD",
  "links": [],
- "modified": "2025-10-14 18:01:53.218864",
+ "modified": "2025-10-19 16:58:33.840618",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "EOD",
@@ -83,7 +83,7 @@
    "role": "Accounts Manager"
   }
  ],
- "sequence_id": 4.0,
+ "sequence_id": 7.0,
  "shortcuts": [],
  "title": "EOD"
 }

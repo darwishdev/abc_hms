@@ -1,0 +1,58 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Sales Partner Type",
+  "modified": "2025-10-15 13:35:55.273688",
+  "name": "Channel Partner",
+  "sales_partner_type": "Channel Partner"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Sales Partner Type",
+  "modified": "2025-10-15 13:35:55.278268",
+  "name": "Distributor",
+  "sales_partner_type": "Distributor"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Sales Partner Type",
+  "modified": "2025-10-15 13:35:55.279830",
+  "name": "Dealer",
+  "sales_partner_type": "Dealer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Sales Partner Type",
+  "modified": "2025-10-15 13:35:55.281349",
+  "name": "Agent",
+  "sales_partner_type": "Agent"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Sales Partner Type",
+  "modified": "2025-10-15 13:35:55.282862",
+  "name": "Retailer",
+  "sales_partner_type": "Retailer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Sales Partner Type",
+  "modified": "2025-10-15 13:35:55.284161",
+  "name": "Implementation Partner",
+  "sales_partner_type": "Implementation Partner"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Sales Partner Type",
+  "modified": "2025-10-15 13:35:55.285517",
+  "name": "Reseller",
+  "sales_partner_type": "Reseller"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Sales Partner Type",
+  "modified": "2025-10-19 18:36:36.883325",
+  "name": "Travel Agent",
+  "sales_partner_type": "Travel Agent"
+ }
+]
