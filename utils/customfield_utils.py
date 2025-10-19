@@ -16,4 +16,7 @@ def install_custom_fields(custom_dir: str):
             frappe.throw(f"Invalid Doctype from customefields filename: {doctype}")
 
         fieldmap = {doctype: fields}
-        create_custom_fields(fieldmap, update=True)
+        try:
+            create_custom_fields(fieldmap, update=True)
+        except:
+            pass
