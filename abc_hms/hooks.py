@@ -3,7 +3,7 @@ app_title = "ABC HMS"
 app_publisher = "DarwishDev"
 app_description = "Hospitality Management System for ABC Hotels"
 app_email = "support@darwishdev.com"
-required_apps = ["frappe/erpnext" , "frappe/hrms"]
+required_apps = ["frappe/erpnext"]
 app_license = "mit"
 after_install = "abc_hms.setup.installer.after_install"
 after_migrate = "abc_hms.setup.installer.after_migrate"
@@ -11,84 +11,95 @@ after_migrate = "abc_hms.setup.installer.after_migrate"
 override_doctype_class = {
     "POS Opening Entry": "abc_hms.overrides.pos_opening_entry.CustomPOSOpeningEntry",
     "Sales Invoice": "abc_hms.overrides.sales_invoice.CustomSalesInvoice",
-    "POS Invoice": "abc_hms.overrides.pos_invoice.CustomPOSInvoice"
+    "POS Invoice": "abc_hms.overrides.pos_invoice.CustomPOSInvoice",
 }
 
 # override_whitelisted_methods = {
 #     "frappe.model.workflow.apply_workflow": "abc_hms.overrides.workflow.apply_folio_workflow"
 # }
 boot_session = "abc_hms.boot.get_business_date"
-app_include_css = [
-    "/assets/abc_hms/css/nav-52.css"
-]
-app_include_js = [
-    "/assets/abc_hms/js/nav-9.js",
-    "/assets/abc_hms/js/date_fields_2.js"
-
-]
+app_include_css = ["/assets/abc_hms/css/nav-52.css"]
+app_include_js = ["/assets/abc_hms/js/nav-9.js", "/assets/abc_hms/js/date_fields_2.js"]
 fixtures = [
-{
-        "doctype": "Account" ,
+    {
+        "doctype": "Account",
         "filters": [
-            ["name", "in", [
-                "1340 - City Ledger - CH",
-                "1320 - Guest Ledger - CH",
-                "1210 - Bank Account - CH",
-                "1330 - Visa - CH",
-                "4140 - Room Revenue - CH",
-                "4130 - F&B Revenue - CH",
-                "2320 - Service Charge - CH",
-                "2330 - Municipality - CH",
-                "2340 - VAT - CH"
-            ]]
-        ]},
-
+            [
+                "name",
+                "in",
+                [
+                    "1340 - City Ledger - CH",
+                    "1320 - Guest Ledger - CH",
+                    "1210 - Bank Account - CH",
+                    "1330 - Visa - CH",
+                    "4140 - Room Revenue - CH",
+                    "4130 - F&B Revenue - CH",
+                    "2320 - Service Charge - CH",
+                    "2330 - Municipality - CH",
+                    "2340 - VAT - CH",
+                ],
+            ]
+        ],
+    },
     {"doctype": "Company"},
-    {"doctype" :"Sales Partner Type"},
-    {"doctype" :"Sales Partner"},
-
- {
+    {"doctype": "Sales Partner Type"},
+    {"doctype": "Sales Partner"},
+    {
         "dt": "Workspace Link",
         "filters": [["parent", "=", "EOD"]],
     },
     {
         "dt": "Workspace",
         "filters": [
-            ["name", "in", ["EOD"]]   # replace EOD with the exact workspace name
+            ["name", "in", ["EOD"]]  # replace EOD with the exact workspace name
         ],
     },
-    {"doctype" :"Custom HTML Block"},
+    {"doctype": "Custom HTML Block"},
     {
-        "doctype": "Item" ,
+        "doctype": "Item",
         "filters": [
-            ["item_group", "in", [
-                "F&B",
-                "Rooms",
-            ]]
-        ]},
+            [
+                "item_group",
+                "in",
+                [
+                    "F&B",
+                    "Rooms",
+                ],
+            ]
+        ],
+    },
     {
-        "doctype": "Item Group" ,
+        "doctype": "Item Group",
         "filters": [
-            ["name", "in", [
-                "F&B",
-                "Rooms",
-            ]]
-        ]},
+            [
+                "name",
+                "in",
+                [
+                    "F&B",
+                    "Rooms",
+                ],
+            ]
+        ],
+    },
     {
-        "doctype": "Custom HTML Block" ,
+        "doctype": "Custom HTML Block",
         "filters": [
-            ["name", "in", [
-                "F&End Of Day",
-                "Rooms",
-            ]]
-        ]},
-        {"doctype": "Customer"},
+            [
+                "name",
+                "in",
+                [
+                    "F&End Of Day",
+                    "Rooms",
+                ],
+            ]
+        ],
+    },
+    {"doctype": "Customer"},
     {"doctype": "Bed Type"},
     {"doctype": "Room Category"},
     {"doctype": "Room Type"},
     {"doctype": "Room"},
     {"doctype": "Mode of Payment"},
-
     {"doctype": "Rate Category"},
     {"doctype": "Rate Code"},
     {"doctype": "POS Profile"},
@@ -119,7 +130,6 @@ fixtures = [
     {
         "doctype": "Cashier Device",
     },
-
     {
         "doctype": "Preparation Printer",
     },
@@ -129,7 +139,6 @@ fixtures = [
     {
         "doctype": "Production Area",
     },
-
     {
         "doctype": "Production Area Preparation Printer",
     },
@@ -137,4 +146,3 @@ fixtures = [
         "doctype": "Casheir Device Production Area",
     },
 ]
-

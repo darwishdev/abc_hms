@@ -25,16 +25,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "S.V Section",
-   "link_count": 0,
-   "link_to": "Super Visor Section",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "H.K Section",
    "link_count": 0,
    "link_to": "House Keeping Section",
@@ -71,15 +61,6 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "FINANCIALS",
-   "link_count": 5,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
   },
   {
    "hidden": 0,
@@ -132,7 +113,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-10-14 18:01:53.309693",
+ "modified": "2025-10-18 17:23:36.362777",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Aministration",

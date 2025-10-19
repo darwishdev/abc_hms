@@ -1,0 +1,42 @@
+[
+  {
+    "display_name": "SUP-1",
+    "docstatus": 0,
+    "doctype": "House Keeping Section",
+    "modified": "2025-10-11 12:53:37.101206",
+    "name": "SUP-1",
+    "property": "CHNA"
+  },
+  {
+    "display_name": "Housekeeping- Mid. D",
+    "docstatus": 0,
+    "doctype": "House Keeping Section",
+    "modified": "2025-10-11 14:50:57.857954",
+    "name": "HK-MD",
+    "property": "CHNA"
+  },
+  {
+    "display_name": "Housekeeping- Mid. C",
+    "docstatus": 0,
+    "doctype": "House Keeping Section",
+    "modified": "2025-10-11 14:50:57.867759",
+    "name": "HK-MC",
+    "property": "CHNA"
+  },
+  {
+    "display_name": "Housekeeping- Mid. B",
+    "docstatus": 0,
+    "doctype": "House Keeping Section",
+    "modified": "2025-10-11 14:50:57.871179",
+    "name": "HK-MB",
+    "property": "CHNA"
+  },
+  {
+    "display_name": "Housekeeping- Mid. A",
+    "docstatus": 0,
+    "doctype": "House Keeping Section",
+    "modified": "2025-10-11 14:50:57.874561",
+    "name": "HK-MA",
+    "property": "CHNA"
+  }
+]

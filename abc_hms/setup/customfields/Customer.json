@@ -1,13 +1,1 @@
-[
-  {
-    "fieldname": "vip_level",
-    "fieldtype": "Link",
-    "label": "VIP Level",
-    "options": "VIP Level"
-  },
-  {
-    "fieldname": "birthdate",
-    "fieldtype": "Date",
-    "label": "Birthdate"
-  }
-]
+[]

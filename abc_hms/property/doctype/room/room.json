@@ -62,8 +62,7 @@
    "in_preview": 1,
    "in_standard_filter": 1,
    "label": "HK Section",
-   "options": "House Keeping Section",
-   "reqd": 1
+   "options": "House Keeping Section"
   },
   {
    "fieldname": "column_break_zeym",
@@ -77,15 +76,14 @@
    "fieldname": "super_visor_section",
    "fieldtype": "Link",
    "label": "Super Visor Section",
-   "options": "Super Visor Section",
-   "reqd": 1
+   "options": "Super Visor Section"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-11 13:33:22.394262",
- "modified_by": "concha@conchahotel.com",
+ "modified": "2025-10-19 13:14:55.207862",
+ "modified_by": "Administrator",
  "module": "Property",
  "name": "Room",
  "naming_rule": "Set by user",

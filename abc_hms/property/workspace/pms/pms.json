@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"AbqWGfr_WU\",\"type\":\"card\",\"data\":{\"card_name\":\"Cashier\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"AbqWGfr_WU\",\"type\":\"card\",\"data\":{\"card_name\":\"Cashier\",\"col\":4}},{\"id\":\"ysKkVcuEY5\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2025-09-18 12:08:06.966065",
  "custom_blocks": [],
  "docstatus": 0,
@@ -24,10 +24,58 @@
   },
   {
    "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reservations",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
    "is_query_report": 1,
    "label": "In House",
    "link_count": 0,
    "link_to": "In House",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Folios",
+   "link_count": 0,
+   "link_to": "Folio",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Arrivals",
+   "link_count": 0,
+   "link_to": "Arrivals",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Departures",
+   "link_count": 0,
+   "link_to": "Asset Depreciation Ledger",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
@@ -44,6 +92,15 @@
   },
   {
    "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reservations",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
    "is_query_report": 1,
    "label": "Departures",
    "link_count": 0,
@@ -51,15 +108,6 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Reservations",
-   "link_count": 4,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
   },
   {
    "hidden": 0,
@@ -74,9 +122,107 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Billing",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Reservations",
    "link_count": 0,
    "link_to": "Reservation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "In House",
+   "link_count": 0,
+   "link_to": "In House",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Folios",
+   "link_count": 0,
+   "link_to": "Folio",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "POS Opening Entry",
+   "link_count": 0,
+   "link_to": "POS Opening Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Travel Agents",
+   "link_count": 0,
+   "link_to": "Sales Partner",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Guest Profiles",
+   "link_count": 0,
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Billing",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Folios",
+   "link_count": 0,
+   "link_to": "Folio",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "POS Invoices",
+   "link_count": 0,
+   "link_to": "POS Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "POS Invoices",
+   "link_count": 0,
+   "link_to": "POS Invoice",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -104,38 +250,19 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Billing",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "POS Invoices",
-   "link_count": 0,
-   "link_to": "POS Invoice",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Folios",
-   "link_count": 0,
-   "link_to": "Folio",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "POS Opening Entry",
    "link_count": 0,
    "link_to": "POS Opening Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reservations",
+   "link_count": 0,
+   "link_to": "Reservation",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -162,15 +289,83 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Currency Exchange",
+   "link_count": 0,
+   "link_to": "Currency Exchange",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cashier",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Cashier Closing",
    "link_count": 0,
    "link_to": "Cashier Closing",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cashier Closing",
+   "link_count": 0,
+   "link_to": "Cashier Closing",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Room Management",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Room Availability",
+   "link_count": 0,
+   "link_to": "room_availability",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "HK Arrivals",
+   "link_count": 0,
+   "link_to": "HK Arrivals",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Inhouse",
+   "link_count": 0,
+   "link_to": "In House",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-10-14 18:01:53.104331",
+ "modified": "2025-10-19 13:41:21.249085",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "PMS",
