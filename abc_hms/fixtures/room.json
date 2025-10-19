@@ -4,17 +4,6 @@
   "doctype": "Room",
   "floor": 0,
   "hk_section": "HK-MA",
-  "modified": "2025-10-11 14:51:19.255994",
-  "name": "1003",
-  "room_beds": [],
-  "room_type": "CNCHK",
-  "super_visor_section": "S.V-MR"
- },
- {
-  "docstatus": 0,
-  "doctype": "Room",
-  "floor": 0,
-  "hk_section": "HK-MA",
   "modified": "2025-10-11 14:51:19.268219",
   "name": "1004",
   "room_beds": [],
@@ -234,25 +223,6 @@
     "bed_count": 2,
     "bed_type_name": "Twin Bed",
     "parent": "3005",
-    "parentfield": "room_beds",
-    "parenttype": "Room"
-   }
-  ],
-  "room_type": "SUPRT",
-  "super_visor_section": "S.V-ML"
- },
- {
-  "docstatus": 0,
-  "doctype": "Room",
-  "floor": 0,
-  "hk_section": "HK-MC",
-  "modified": "2025-10-11 14:51:19.694236",
-  "name": "3006",
-  "room_beds": [
-   {
-    "bed_count": 2,
-    "bed_type_name": "Twin Bed",
-    "parent": "3006",
     "parentfield": "room_beds",
     "parenttype": "Room"
    }
@@ -1858,6 +1828,36 @@
   "name": "1006",
   "room_beds": [],
   "room_type": "CNCHK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MA",
+  "modified": "2025-10-11 14:51:19.255994",
+  "name": "1003",
+  "room_beds": [],
+  "room_type": "CNCHK",
+  "super_visor_section": "S.V-MR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.694236",
+  "name": "3006",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3006",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
   "super_visor_section": "S.V-ML"
  }
 ]

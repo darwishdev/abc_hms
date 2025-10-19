@@ -2,7 +2,6 @@
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -49,13 +48,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -102,13 +99,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -155,13 +150,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -208,13 +201,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -261,13 +252,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -314,13 +303,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -367,13 +354,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -420,13 +405,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -473,13 +456,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -526,13 +507,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -579,13 +558,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -632,13 +609,11 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  },
  {
   "account_manager": null,
   "accounts": [],
-  "birthdate": null,
   "companies": [],
   "credit_limits": [],
   "customer_details": null,
@@ -685,7 +660,6 @@
   "tax_id": null,
   "tax_withholding_category": null,
   "territory": null,
-  "vip_level": null,
   "website": null
  }
 ]

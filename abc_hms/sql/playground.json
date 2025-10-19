@@ -1,0 +1,26 @@
+[
+  {
+    "item_name": "Rate Breakfast",
+    "for_date": 20250807,
+    "item_code": "Rate Breakfast",
+    "item_description": "Rate Breakfast",
+    "stock_uom": "Nos",
+    "price_list_rate": 800,
+    "discount_percentage": 0,
+    "qty": 1,
+    "amount": 800,
+    "folio_window": "F-CHNA-000024-000001-W-001"
+  },
+  {
+    "item_name": "CNCHK-BAR-EGP",
+    "for_date": 20250807,
+    "item_code": "CNCHK-BAR-EGP",
+    "item_description": "CNCHK-BAR-EGP",
+    "stock_uom": "Nos",
+    "price_list_rate": 10000,
+    "discount_percentage": 14.375,
+    "qty": 1,
+    "amount": 10000,
+    "folio_window": "F-CHNA-000024-000001-W-001"
+  }
+]

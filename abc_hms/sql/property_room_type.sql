@@ -1,12 +1,12 @@
 DELIMITER ;;
-CREATE OR REPLACE PROCEDURE `room_type_availability_range`(
+CREATE  OR REPLACE PROCEDURE `room_type_availability_range` (
   IN p_property VARCHAR(140),
   IN p_date_from date,
   IN p_date_to date,
-  IN p_room_types TEXT,
-  IN p_room_categories TEXT
-)
-BEGIN IF p_property IS NULL
+  IN p_room_categories TEXT,
+  IN p_room_types TEXT
+
+) BEGIN IF p_property IS NULL
 OR p_property = '' THEN SIGNAL SQLSTATE '45000'
 SET
   MESSAGE_TEXT = 'Property is required';
@@ -32,8 +32,8 @@ WITH
     from
       dim_date
     where
-      for_date >= p_date_from
-      and for_date < p_date_to
+      date_actual >= p_date_from
+      and date_actual < p_date_to
   ),
   rooms AS (
     SELECT
@@ -78,7 +78,8 @@ WITH
       reservation_date rd
       join dates d on rd.for_date = d.for_date
     GROUP BY
-      rd.room_type
+      rd.room_type,
+      d.for_date
   ),
   resp as (
     SELECT

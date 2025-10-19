@@ -3,6 +3,198 @@
   "docstatus": 0,
   "doctype": "Folio Window",
   "folio": "F-CHNA-000019-000001",
+  "modified": "2025-10-20 00:59:48.017860",
+  "name": "F-CHNA-000019-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000021-000001",
+  "modified": "2025-10-20 00:59:48.050042",
+  "name": "F-CHNA-000021-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000020-000001",
+  "modified": "2025-10-20 00:59:48.075659",
+  "name": "F-CHNA-000020-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000022-000001",
+  "modified": "2025-10-20 00:59:48.106110",
+  "name": "F-CHNA-000022-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000023-000001",
+  "modified": "2025-10-20 00:59:48.131760",
+  "name": "F-CHNA-000023-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000024-000001",
+  "modified": "2025-10-20 00:59:48.151921",
+  "name": "F-CHNA-000024-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000025-000001",
+  "modified": "2025-10-20 00:59:48.169724",
+  "name": "F-CHNA-000025-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000026-000001",
+  "modified": "2025-10-20 00:59:48.186856",
+  "name": "F-CHNA-000026-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000027-000001",
+  "modified": "2025-10-20 00:59:48.203053",
+  "name": "F-CHNA-000027-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000028-000001",
+  "modified": "2025-10-20 00:59:48.218811",
+  "name": "F-CHNA-000028-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000029-000001",
+  "modified": "2025-10-20 00:59:48.249374",
+  "name": "F-CHNA-000029-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000030-000001",
+  "modified": "2025-10-20 00:59:48.266297",
+  "name": "F-CHNA-000030-000001-W-002",
+  "window_label": "002"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000019-000001",
+  "modified": "2025-10-20 01:03:25.650405",
+  "name": "F-CHNA-000019-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000021-000001",
+  "modified": "2025-10-20 01:03:25.677893",
+  "name": "F-CHNA-000021-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000020-000001",
+  "modified": "2025-10-20 01:03:25.694727",
+  "name": "F-CHNA-000020-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000022-000001",
+  "modified": "2025-10-20 01:03:25.707928",
+  "name": "F-CHNA-000022-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000023-000001",
+  "modified": "2025-10-20 01:03:25.728894",
+  "name": "F-CHNA-000023-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000024-000001",
+  "modified": "2025-10-20 01:03:25.745329",
+  "name": "F-CHNA-000024-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000025-000001",
+  "modified": "2025-10-20 01:03:25.759171",
+  "name": "F-CHNA-000025-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000026-000001",
+  "modified": "2025-10-20 01:03:25.774674",
+  "name": "F-CHNA-000026-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000027-000001",
+  "modified": "2025-10-20 01:03:25.786264",
+  "name": "F-CHNA-000027-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000028-000001",
+  "modified": "2025-10-20 01:03:25.797680",
+  "name": "F-CHNA-000028-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000029-000001",
+  "modified": "2025-10-20 01:03:25.809618",
+  "name": "F-CHNA-000029-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000030-000001",
+  "modified": "2025-10-20 01:03:25.822177",
+  "name": "F-CHNA-000030-000001-W-003",
+  "window_label": "003"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Folio Window",
+  "folio": "F-CHNA-000019-000001",
   "modified": "2025-10-19 13:58:14.614202",
   "name": "F-CHNA-000019-000001-W-001",
   "window_label": "001"

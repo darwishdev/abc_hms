@@ -57,6 +57,18 @@ frappe.ui.form.on("Reservation", {
     },
 
     refresh(frm) {
+        if (frm.doc.property) {
+            frm.call("get_business_date").then(({ message }) => {
+                frm._current_business_date = message;
+                handle_check_in(frm);
+                handle_reverse_check_in(frm);
+                handle_check_out(frm);
+                handle_early_checkin(frm);
+                handle_early_checkout(frm);
+                handle_reinstate(frm);
+            });
+        }
+
         handle_availability_button(frm);
     },
     property(frm) {
@@ -69,9 +81,13 @@ frappe.ui.form.on("Reservation", {
         handle_availability_button(frm);
     },
     room_type(frm) {
-        if (frm.doc.room_type) {
-            set_room_filter(frm);
-        }
+        reservation_availability_check(frm);
+        // if (frm.doc.room_type) {
+        //     set_room_filter(frm);
+        // }
+    },
+    rate_code(frm) {
+        reservation_availability_check(frm);
     },
     arrival(frm) {
         validate_arrival(frm);
@@ -86,6 +102,8 @@ frappe.ui.form.on("Reservation", {
         frm.dateController?.update("departure");
     },
     base_rate(frm) {
+        const total_stay = frm.doc.base_rate * frm.doc.nights;
+        frm.set_value("total_stay", total_stay);
         if (frm._ignore_discount_events) return;
         set_ignore_discount(frm);
         console.log(frm.doc, frm.doc.rate_code_rate);

@@ -85,7 +85,7 @@ order by
 END ;;
 DELIMITER ;
 DELIMITER ;;
-CREATE OR REPLACE PROCEDURE `room_type_rate_list_range`(
+CREATE OR REPLACE PROCEDURE `room_type_rate_list_range` (
   IN p_property varchar(114),
   IN p_date_from date,
   IN p_date_to date,
@@ -93,14 +93,12 @@ CREATE OR REPLACE PROCEDURE `room_type_rate_list_range`(
   IN p_room_rate_codes TEXT,
   IN p_room_types TEXT,
   IN p_discount_type VARCHAR(32),
-  IN p_discount_percent DECIMAL(10,2),
-  IN p_discount_amount DECIMAL(10,2)
-)
-BEGIN
-  IF p_date_from > p_date_to THEN
-  SIGNAL SQLSTATE '45000'
+  IN p_discount_percent DECIMAL(10, 2),
+  IN p_discount_amount DECIMAL(10, 2)
+) BEGIN IF p_date_from > p_date_to THEN SIGNAL SQLSTATE '45000'
 SET
   MESSAGE_TEXT = 'Date From must be earlier than Date To and both must be 8 digits (YYYYMMDD)';
+
 END IF;
 
 SET
@@ -126,7 +124,7 @@ WITH
     where
       r.for_date >= p_date_from
       and r.for_date < p_date_to
-      and rt.room_category = coalesce(p_room_category , rt.room_category)
+      and rt.room_category = coalesce(p_room_category, rt.room_category)
       and c.property_name = p_property
       AND (
         p_room_rate_codes IS NULL
@@ -142,23 +140,34 @@ WITH
       rc.currency,
       rt.room_category,
       ce.exchange_rate
-  ) , response as (
-select
-  r.room_category,
-  r.room_type,
-  r.rate_code,
-  r.currency,
-  r.exchange_rate,
-  coalesce(p_discount_percent , 0) discount_percent,
-  IF(coalesce(p_discount_type , 'Value') = 'Value' , coalesce(p_discount_amount,0),(r.base_rate * coalesce(p_discount_percent , 0) / 100)) discount_value,
-  ROUND(r.base_rate, 2) base_rate,
-  ROUND(r.total_stay, 2) total_stay,
-  ROUND((r.base_rate * r.exchange_rate), 2) base_rate_default_currency,
-  ROUND((r.total_stay * r.exchange_rate), 2) total_stay_default_currency
-from
-  rate_codes_data r order by r.room_category,r.room_type,r.rate_code
+  ),
+  response as (
+    select
+      r.room_category,
+      r.room_type,
+      r.rate_code,
+      r.currency,
+      r.exchange_rate,
+      coalesce(p_discount_percent, 0) discount_percent,
+      IF(
+        coalesce(p_discount_type, 'Value') = 'Value',
+        coalesce(p_discount_amount, 0),
+        (
+          r.base_rate * coalesce(p_discount_percent, 0) / 100
+        )
+      ) discount_value,
+      ROUND(r.base_rate, 2) base_rate,
+      ROUND(r.total_stay, 2) total_stay,
+      ROUND((r.base_rate * r.exchange_rate), 2) base_rate_default_currency,
+      ROUND((r.total_stay * r.exchange_rate), 2) total_stay_default_currency
+    from
+      rate_codes_data r
+    order by
+      r.room_category,
+      r.room_type,
+      r.rate_code
   )
-  select
+select
   r.room_category,
   r.room_type,
   r.rate_code,
@@ -168,12 +177,14 @@ from
   (r.base_rate - r.discount_value) discounted_base_rate,
   r.total_stay,
   r.base_rate_default_currency,
-  (r.base_rate_default_currency - (r.discount_value * r.exchange_rate)) discounted_base_rate_default_currency,
+  (
+    r.base_rate_default_currency - (r.discount_value * r.exchange_rate)
+  ) discounted_base_rate_default_currency,
   r.total_stay_default_currency,
   r.discount_percent,
   r.discount_value
-  from response r;
+from
+  response r;
 
-
-END ;;
+END;;
 DELIMITER ;

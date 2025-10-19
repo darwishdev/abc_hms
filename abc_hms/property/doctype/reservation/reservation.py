@@ -41,6 +41,13 @@ class Reservation(Document):
             "rate_code": getattr(self, "rate_code", None),
         }
         data = app_container.reservation_usecase.reservation_availability_check(params)
+        if self.get('room_type') !=  None and self.get('rate_code') != None:
+            self.base_rate = data["rates"][0]['base_rate']
+            self.rate_code_rate = data["rates"][0]['base_rate']
+            self.currency = data["rates"][0]['currency']
+            self.exchange_rate = data["rates"][0]['exchange_rate']
+            self.total_stay = self.base_rate * self.nights
+        # frappe.throw(f"datais {json_dumps(data)}")
         return render_template(template_content, data)
 
     @frappe.whitelist()

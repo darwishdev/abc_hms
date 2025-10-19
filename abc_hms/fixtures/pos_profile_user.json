@@ -9,5 +9,16 @@
   "parentfield": "applicable_for_users",
   "parenttype": "POS Profile",
   "user": "waleed@conchahotel.com"
+ },
+ {
+  "default": 0,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-20 01:03:34.396262",
+  "name": "ggv2opnpbh",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "waleed@conchahotel.com"
  }
 ]
