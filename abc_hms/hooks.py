@@ -83,6 +83,7 @@ fixtures = [
     {"doctype": "Mode of Payment"},
     {"doctype": "Rate Category"},
     {"doctype": "Rate Code"},
+    {"doctype": "Rate Code Room Type"},
     {"doctype": "POS Profile"},
     {"doctype": "POS Profile User"},
     {"doctype": "Sales Taxes and Charges Template"},

@@ -11,13 +11,6 @@
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
     "user": "waleed@conchahotel.com"
-   },
-   {
-    "default": 0,
-    "parent": "Main",
-    "parentfield": "applicable_for_users",
-    "parenttype": "POS Profile",
-    "user": "waleed@conchahotel.com"
    }
   ],
   "apply_discount_on": "Grand Total",

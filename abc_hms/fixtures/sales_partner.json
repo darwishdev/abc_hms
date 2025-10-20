@@ -27,5 +27,34 @@
    }
   ],
   "territory": "Egypt"
+ },
+ {
+  "commission_rate": 0.0,
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Sales Partner",
+  "introduction": null,
+  "logo": null,
+  "modified": "2025-10-20 12:39:01.563591",
+  "name": "Blue Sky Travel",
+  "partner_name": "Blue Sky Travel",
+  "partner_type": "Travel Agent",
+  "partner_website": null,
+  "referral_code": null,
+  "route": "partners/blue-sky-travel",
+  "show_in_website": 0,
+  "targets": [
+   {
+    "distribution_id": "New",
+    "fiscal_year": "2025",
+    "item_group": null,
+    "parent": "Blue Sky Travel",
+    "parentfield": "targets",
+    "parenttype": "Sales Partner",
+    "target_amount": 0.0,
+    "target_qty": 0.0
+   }
+  ],
+  "territory": "Egypt"
  }
 ]

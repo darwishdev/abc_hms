@@ -11,7 +11,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-11 15:40:36.777767",
+  "modified": "2025-10-20 14:15:53.862314",
   "name": "COR-EGP",
   "pay_in_advance": 0,
   "rate_category": "CORP",
@@ -54,20 +54,6 @@
     "room_type": "SUPRT"
    },
    {
-    "base_price": 11000.0,
-    "parent": "COR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXK"
-   },
-   {
-    "base_price": 12000.0,
-    "parent": "COR-EGP",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXT"
-   },
-   {
     "base_price": 0.0,
     "parent": "COR-EGP",
     "parentfield": "room_types",
@@ -97,7 +83,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-11 15:30:43.807619",
+  "modified": "2025-10-20 14:23:49.407802",
   "name": "BAR-USD",
   "pay_in_advance": 0,
   "rate_category": "BAR",
@@ -147,20 +133,6 @@
     "room_type": "SUPRT"
    },
    {
-    "base_price": 11000.0,
-    "parent": "BAR-USD",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXK"
-   },
-   {
-    "base_price": 12000.0,
-    "parent": "BAR-USD",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXT"
-   },
-   {
     "base_price": 0.0,
     "parent": "BAR-USD",
     "parentfield": "room_types",
@@ -172,7 +144,7 @@
   "valid_to": "2025-12-31"
  },
  {
-  "abbriviation": "Booking.",
+  "abbriviation": "Booking",
   "cacnelation_policy": "Non-refundable",
   "color": null,
   "complementry": 0,
@@ -183,13 +155,13 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-11 15:46:10.186664",
+  "modified": "2025-10-20 16:28:18.654214",
   "name": "Booking.com",
   "pay_in_advance": 0,
   "rate_category": "ONLN",
   "rate_pkgs": [
    {
-    "included": 0,
+    "included": 1,
     "parent": "Booking.com",
     "parentfield": "rate_pkgs",
     "parenttype": "Rate Code",
@@ -237,20 +209,6 @@
     "parent": "Booking.com",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLXK"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "Booking.com",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXT"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "Booking.com",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
     "room_type": "PM"
    }
   ],
@@ -269,7 +227,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-12 17:50:12.025495",
+  "modified": "2025-10-20 14:14:10.351348",
   "name": "TAR-USD",
   "pay_in_advance": 0,
   "rate_category": "TAR",
@@ -323,20 +281,6 @@
     "parent": "TAR-USD",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLXK"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "TAR-USD",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXT"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "TAR-USD",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
     "room_type": "PM"
    }
   ],
@@ -355,7 +299,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-12 16:24:17.627458",
+  "modified": "2025-10-20 14:14:57.502497",
   "name": "COR-USD",
   "pay_in_advance": 0,
   "rate_category": "CORP",
@@ -375,20 +319,6 @@
     "parentfield": "room_types",
     "parenttype": "Rate Code",
     "room_type": "CNCHK"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "COR-USD",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXK"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "COR-USD",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXT"
    },
    {
     "base_price": 0.0,
@@ -441,54 +371,46 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-01 00:35:33.657533",
+  "modified": "2025-10-20 14:17:49.297242",
   "name": "Paymaster",
   "pay_in_advance": 0,
   "rate_category": "PM",
-  "rate_pkgs": [
-   {
-    "included": 1,
-    "parent": "Paymaster",
-    "parentfield": "rate_pkgs",
-    "parenttype": "Rate Code",
-    "pkg": "Rate Breakfast"
-   }
-  ],
+  "rate_pkgs": [],
   "room_types": [
    {
     "base_price": 0.0,
     "parent": "Paymaster",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
+    "room_type": "CNCHK"
    },
    {
     "base_price": 0.0,
     "parent": "Paymaster",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
+    "room_type": "PREMK"
    },
    {
     "base_price": 0.0,
     "parent": "Paymaster",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
+    "room_type": "PREMT"
    },
    {
     "base_price": 0.0,
     "parent": "Paymaster",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
+    "room_type": "SUPRK"
    },
    {
     "base_price": 0.0,
     "parent": "Paymaster",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
+    "room_type": "SUPRT"
    },
    {
     "base_price": 0.0,
@@ -513,54 +435,46 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-01 00:35:09.644382",
+  "modified": "2025-10-20 14:19:38.699900",
   "name": "COMP",
   "pay_in_advance": 0,
   "rate_category": "COMP",
-  "rate_pkgs": [
-   {
-    "included": 1,
-    "parent": "COMP",
-    "parentfield": "rate_pkgs",
-    "parenttype": "Rate Code",
-    "pkg": "Rate Breakfast"
-   }
-  ],
+  "rate_pkgs": [],
   "room_types": [
    {
     "base_price": 0.0,
     "parent": "COMP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
+    "room_type": "CNCHK"
    },
    {
     "base_price": 0.0,
     "parent": "COMP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
+    "room_type": "PREMK"
    },
    {
     "base_price": 0.0,
     "parent": "COMP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
+    "room_type": "PREMT"
    },
    {
     "base_price": 0.0,
     "parent": "COMP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
+    "room_type": "SUPRK"
    },
    {
     "base_price": 0.0,
     "parent": "COMP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
+    "room_type": "SUPRT"
    },
    {
     "base_price": 0.0,
@@ -585,7 +499,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-01 00:35:22.235317",
+  "modified": "2025-10-20 14:18:52.621737",
   "name": "Corporate-EGP",
   "pay_in_advance": 0,
   "rate_category": "CORP",
@@ -600,39 +514,39 @@
   ],
   "room_types": [
    {
-    "base_price": 15000.0,
+    "base_price": 0.0,
     "parent": "Corporate-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
+    "room_type": "CNCHK"
    },
    {
-    "base_price": 14000.0,
+    "base_price": 0.0,
     "parent": "Corporate-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
+    "room_type": "PREMK"
    },
    {
-    "base_price": 12000.0,
+    "base_price": 0.0,
     "parent": "Corporate-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
+    "room_type": "PREMT"
    },
    {
-    "base_price": 11000.0,
+    "base_price": 0.0,
     "parent": "Corporate-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
+    "room_type": "SUPRK"
    },
    {
-    "base_price": 12000.0,
+    "base_price": 0.0,
     "parent": "Corporate-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
+    "room_type": "SUPRT"
    },
    {
     "base_price": 0.0,
@@ -657,7 +571,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-01 00:34:32.604682",
+  "modified": "2025-10-20 14:22:37.062943",
   "name": "RackEG",
   "pay_in_advance": 0,
   "rate_category": "RACK",
@@ -672,39 +586,39 @@
   ],
   "room_types": [
    {
-    "base_price": 15000.0,
+    "base_price": 0.0,
     "parent": "RackEG",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
+    "room_type": "CNCHK"
    },
    {
-    "base_price": 14000.0,
+    "base_price": 0.0,
     "parent": "RackEG",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
+    "room_type": "PREMK"
    },
    {
-    "base_price": 12000.0,
+    "base_price": 0.0,
     "parent": "RackEG",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
+    "room_type": "PREMT"
    },
    {
-    "base_price": 11000.0,
+    "base_price": 0.0,
     "parent": "RackEG",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
+    "room_type": "SUPRK"
    },
    {
-    "base_price": 12000.0,
+    "base_price": 0.0,
     "parent": "RackEG",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
+    "room_type": "SUPRT"
    },
    {
     "base_price": 0.0,
@@ -729,7 +643,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-01 00:34:51.594637",
+  "modified": "2025-10-20 14:20:40.388359",
   "name": "BAR-EGP",
   "pay_in_advance": 0,
   "rate_category": "BAR",
@@ -744,39 +658,39 @@
   ],
   "room_types": [
    {
-    "base_price": 15000.0,
+    "base_price": 0.0,
     "parent": "BAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
+    "room_type": "CNCHK"
    },
    {
-    "base_price": 14000.0,
+    "base_price": 0.0,
     "parent": "BAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
+    "room_type": "PREMK"
    },
    {
-    "base_price": 12000.0,
+    "base_price": 0.0,
     "parent": "BAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
+    "room_type": "PREMT"
    },
    {
-    "base_price": 11000.0,
+    "base_price": 0.0,
     "parent": "BAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
+    "room_type": "SUPRK"
    },
    {
-    "base_price": 12000.0,
+    "base_price": 0.0,
     "parent": "BAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
+    "room_type": "SUPRT"
    },
    {
     "base_price": 0.0,
@@ -801,7 +715,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-01 00:34:43.529498",
+  "modified": "2025-10-20 14:21:24.658220",
   "name": "TAR-EGP",
   "pay_in_advance": 0,
   "rate_category": "TAR",
@@ -816,39 +730,39 @@
   ],
   "room_types": [
    {
-    "base_price": 15000.0,
+    "base_price": 0.0,
     "parent": "TAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
+    "room_type": "CNCHK"
    },
    {
-    "base_price": 14000.0,
+    "base_price": 0.0,
     "parent": "TAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
+    "room_type": "PREMK"
    },
    {
-    "base_price": 12000.0,
+    "base_price": 0.0,
     "parent": "TAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
+    "room_type": "PREMT"
    },
    {
-    "base_price": 11000.0,
+    "base_price": 0.0,
     "parent": "TAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
+    "room_type": "SUPRK"
    },
    {
-    "base_price": 12000.0,
+    "base_price": 0.0,
     "parent": "TAR-EGP",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
+    "room_type": "SUPRT"
    },
    {
     "base_price": 0.0,
@@ -873,54 +787,46 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 1,
-  "modified": "2025-10-01 00:34:59.200187",
+  "modified": "2025-10-20 14:13:14.461431",
   "name": "HUSE",
   "pay_in_advance": 0,
   "rate_category": "HUSE",
-  "rate_pkgs": [
-   {
-    "included": 1,
-    "parent": "HUSE",
-    "parentfield": "rate_pkgs",
-    "parenttype": "Rate Code",
-    "pkg": "Rate Breakfast"
-   }
-  ],
+  "rate_pkgs": [],
   "room_types": [
    {
     "base_price": 0.0,
     "parent": "HUSE",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "PRE-KNG"
+    "room_type": "CNCHK"
    },
    {
     "base_price": 0.0,
     "parent": "HUSE",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-KNG"
+    "room_type": "PREMK"
    },
    {
     "base_price": 0.0,
     "parent": "HUSE",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "SUP-TWN"
+    "room_type": "PREMT"
    },
    {
     "base_price": 0.0,
     "parent": "HUSE",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-KNG"
+    "room_type": "SUPRK"
    },
    {
     "base_price": 0.0,
     "parent": "HUSE",
     "parentfield": "room_types",
     "parenttype": "Rate Code",
-    "room_type": "DLX-TWN"
+    "room_type": "SUPRT"
    },
    {
     "base_price": 0.0,
@@ -945,7 +851,7 @@
   "doctype": "Rate Code",
   "flexible_to_ammend": 0,
   "house_use": 0,
-  "modified": "2025-10-13 14:04:10.392470",
+  "modified": "2025-10-20 14:11:11.249768",
   "name": "Day Use",
   "pay_in_advance": 0,
   "rate_category": "BAR",
@@ -957,20 +863,6 @@
     "parentfield": "room_types",
     "parenttype": "Rate Code",
     "room_type": "CNCHK"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "Day Use",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXK"
-   },
-   {
-    "base_price": 0.0,
-    "parent": "Day Use",
-    "parentfield": "room_types",
-    "parenttype": "Rate Code",
-    "room_type": "DLXT"
    },
    {
     "base_price": 0.0,

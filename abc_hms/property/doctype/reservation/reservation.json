@@ -39,19 +39,19 @@
   "column_break_bhlx",
   "total_stay",
   "column_break_tvzd",
-  "currency",
-  "column_break_mibr",
   "rate_code_rate",
+  "column_break_mibr",
+  "currency",
   "column_break_re18",
   "exchange_rate",
   "discounts_section",
   "column_break_bnic",
   "discount_type",
-  "column_break_zgru",
-  "discount_reason",
   "column_break_ygxb",
   "discount_percent",
   "discount_amount",
+  "column_break_zgru",
+  "discount_reason",
   "section_break_cwwz",
   "availability_html",
   "section_break_vvyp",
@@ -274,6 +274,7 @@
   {
    "allow_on_submit": 1,
    "default": "1",
+   "depends_on": "doc.exchange_rate > 1",
    "fieldname": "exchange_rate",
    "fieldtype": "Int",
    "label": "Exchange Rate",
@@ -413,7 +414,8 @@
   {
    "fieldname": "discounts_section",
    "fieldtype": "Section Break",
-   "label": "Discounts"
+   "label": "Discounts",
+   "mandatory_depends_on": "eval:doc.discount_type == \"Value\""
   },
   {
    "fieldname": "column_break_bnic",
@@ -463,10 +465,10 @@
    "reqd": 1
   },
   {
-   "allow_on_submit": 1,
    "fieldname": "discount_reason",
    "fieldtype": "Link",
    "label": "Discount Reason",
+   "mandatory_depends_on": "eval: doc.discount_amount > 0 || doc.discount_percent > 0",
    "options": "Discount Reason"
   },
   {
@@ -503,7 +505,7 @@
    "link_fieldname": "reservation"
   }
  ],
- "modified": "2025-10-20 02:48:43.041898",
+ "modified": "2025-10-20 16:59:59.169143",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Reservation",
