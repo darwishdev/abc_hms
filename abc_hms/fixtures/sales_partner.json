@@ -56,5 +56,34 @@
    }
   ],
   "territory": "Egypt"
+ },
+ {
+  "commission_rate": 0.0,
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Sales Partner",
+  "introduction": null,
+  "logo": null,
+  "modified": "2025-10-21 14:09:52.275037",
+  "name": "Monaliza Tours",
+  "partner_name": "Monaliza Tours",
+  "partner_type": "",
+  "partner_website": null,
+  "referral_code": null,
+  "route": "partners/monaliza-tours",
+  "show_in_website": 0,
+  "targets": [
+   {
+    "distribution_id": "New",
+    "fiscal_year": "2025",
+    "item_group": "TRVL - INDV",
+    "parent": "Monaliza Tours",
+    "parentfield": "targets",
+    "parenttype": "Sales Partner",
+    "target_amount": 0.0,
+    "target_qty": 0.0
+   }
+  ],
+  "territory": "Egypt"
  }
 ]

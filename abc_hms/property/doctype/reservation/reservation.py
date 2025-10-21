@@ -22,7 +22,6 @@ class Reservation(Document):
             frappe.throw("Property field is required to generate name")
         self.name = make_autoname(f"{property}-.######")
 
-    @frappe.whitelist()
     def get_availability(self):
         doctype_path = os.path.dirname(__file__)
         template_path = os.path.join(doctype_path, "availability.html")
@@ -42,25 +41,14 @@ class Reservation(Document):
             "rate_code": getattr(self, "rate_code", None),
         }
         data = app_container.reservation_usecase.reservation_availability_check(params)
-<<<<<<< Updated upstream
         if self.get("room_type") != None and self.get("rate_code") != None:
             if data["rates"]:
                 if len(data["rates"] > 0):
-=======
-
-        if self.get("room_type") != None and self.get("rate_code") != None:
-            if data["rates"]:
-                if len(data["rates"]) > 0:
->>>>>>> Stashed changes
                     self.base_rate = data["rates"][0]["base_rate"]
                     self.rate_code_rate = data["rates"][0]["base_rate"]
                     self.currency = data["rates"][0]["currency"]
                     self.exchange_rate = data["rates"][0]["exchange_rate"]
                     self.total_stay = self.base_rate * self.nights
-<<<<<<< Updated upstream
-        # frappe.throw(f"datais {json_dumps(data)}")
-=======
->>>>>>> Stashed changes
         return render_template(template_content, data)
 
     @frappe.whitelist()
