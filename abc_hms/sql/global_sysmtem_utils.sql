@@ -22,3 +22,22 @@ TRUNCATE TABLE `tabGL Entry`;
 UPDATE `tabProperty Setting` SET business_date = '2025-08-07';
 END ;;
 DELIMITER ;
+DELIMITER ;;
+CREATE OR REPLACE procedure reservations_fix()
+BEGIN
+  update
+  `tabReservation` r
+  join `tabRate Code` rc on r.rate_code = rc.name
+  join room_type_rate rtr on rtr.room_type = r.room_type and rtr.rate_code = r.rate_code and rtr.for_date = date_to_int(r.arrival)
+ LEFT join  `tabCurrency Exchange` ex on rc.currency = ex.from_currency and ex.to_currency = 'EGP'
+  set
+  rate_code_rate = IF(rtr.rate >= r.base_rate , rtr.rate , r.base_rate),
+  r.total_stay = r.nights * r.base_rate ,
+  discount_amount = IF(rtr.rate >= r.base_rate , rtr.rate - r.base_rate , 0),
+  discount_type = IF(rtr.rate >= r.base_rate , 'Percent' , Null),
+  discount_reason = IF(rtr.rate >= r.base_rate , 'Owner' , Null),
+  discount_percent = IF(rtr.rate >= r.base_rate , ((rtr.rate - r.base_rate) / rtr.rate * 100) , 0);
+
+  END;;
+
+DELIMITER ;

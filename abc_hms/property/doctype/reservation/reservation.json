@@ -414,8 +414,7 @@
   {
    "fieldname": "discounts_section",
    "fieldtype": "Section Break",
-   "label": "Discounts",
-   "mandatory_depends_on": "eval:doc.discount_type == \"Value\""
+   "label": "Discounts"
   },
   {
    "fieldname": "column_break_bnic",
@@ -468,7 +467,6 @@
    "fieldname": "discount_reason",
    "fieldtype": "Link",
    "label": "Discount Reason",
-   "mandatory_depends_on": "eval: doc.discount_amount > 0 || doc.discount_percent > 0",
    "options": "Discount Reason"
   },
   {
@@ -505,7 +503,7 @@
    "link_fieldname": "reservation"
   }
  ],
- "modified": "2025-10-20 16:59:59.169143",
+ "modified": "2025-10-21 22:14:14.676415",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Reservation",

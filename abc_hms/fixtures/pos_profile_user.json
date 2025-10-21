@@ -1,13 +1,90 @@
 [
  {
-  "default": 0,
+  "default": 1,
   "docstatus": 0,
   "doctype": "POS Profile User",
-  "modified": "2025-10-16 14:21:51.938224",
-  "name": "l8vtamk8bm",
+  "modified": "2025-10-21 22:58:19.626484",
+  "name": "ednh3e7k6m",
   "parent": "Main",
   "parentfield": "applicable_for_users",
   "parenttype": "POS Profile",
-  "user": "waleed@conchahotel.com"
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-21 23:08:24.176543",
+  "name": "4hhq7aadj5",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-21 23:22:55.300904",
+  "name": "d1olin94p0",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-21 23:22:55.311421",
+  "name": "d1o58t5dnv",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 00:41:39.904840",
+  "name": "r66ht6u787",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 00:41:39.910337",
+  "name": "r66jtjs454",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 00:41:39.911314",
+  "name": "r66lpagico",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 00:41:39.911987",
+  "name": "r66fmi5mbe",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
  }
 ]

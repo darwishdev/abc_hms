@@ -22,6 +22,7 @@ class Reservation(Document):
             frappe.throw("Property field is required to generate name")
         self.name = make_autoname(f"{property}-.######")
 
+    @frappe.whitelist()
     def get_availability(self):
         doctype_path = os.path.dirname(__file__)
         template_path = os.path.join(doctype_path, "availability.html")
@@ -43,7 +44,7 @@ class Reservation(Document):
         data = app_container.reservation_usecase.reservation_availability_check(params)
         if self.get("room_type") != None and self.get("rate_code") != None:
             if data["rates"]:
-                if len(data["rates"] > 0):
+                if len(data["rates"]) > 0:
                     self.base_rate = data["rates"][0]["base_rate"]
                     self.rate_code_rate = data["rates"][0]["base_rate"]
                     self.currency = data["rates"][0]["currency"]
@@ -98,6 +99,8 @@ class Reservation(Document):
         self.save()
 
     def before_submit(self):
+        if frappe.flags.in_import:
+            return
         business_date = self.get_business_date()
         self.reservation_status = (
             "Confirmed" if self.arrival != business_date else "Arrival"

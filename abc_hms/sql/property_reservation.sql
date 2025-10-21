@@ -3,6 +3,7 @@ CREATE OR REPLACE PROCEDURE reservation_inouse_invoices(IN p_current_date INT)
 BEGIN
     WITH reservations AS (
         SELECT
+  r.reservation_status,
             r.name reservation,
             r.rate_code_rate,
             r.room_type,
@@ -37,9 +38,9 @@ BEGIN
             pkgp.item_description,
             pkgp.uom stock_uom,
             pkgp.currency,
-            (pkgp.price_list_rate / exchange_rate) rate,
+            pkgp.price_list_rate rate,
             1 qty,
-            (pkgp.price_list_rate / exchange_rate) amount,
+            pkgp.price_list_rate  amount,
             p_current_date for_date,
             CONCAT(r.folio, '-W-001') folio_window
         FROM reservations r
@@ -49,12 +50,11 @@ BEGIN
             AND pkgp.price_list = s.default_price_list
             AND pkgp.valid_from <= r.arrival
             AND pkgp.valid_upto >= r.departure
-    ),
-    room_item AS (
+ )     ,
+ room_item AS (
         SELECT
             r.reservation,
-            r.rate_code_rate price_before_discount,
-            ((r.discount_amount / r.nights) + SUM(i.amount)) discount_amount,
+            IF ((r.rate_code_rate - SUM(i.amount)) > 0 ,  r.rate_code_rate - SUM(i.amount) , 0) price_before_discount,
             SUM(i.amount) pkgs_rate,
             CONCAT(r.room_type, '-', r.rate_code) item_name,
             CONCAT(r.room_type, '-', r.rate_code) item_code,
@@ -62,9 +62,8 @@ BEGIN
             'Nos' stock_uom,
             id.income_account,
             r.currency,
-            r.rate_code_rate rate,
+            r.base_rate rate,
             1 qty,
-            r.base_rate amount,
             p_current_date for_date,
             CONCAT(r.folio, '-W-001') folio_window
         FROM reservations r
@@ -81,9 +80,36 @@ BEGIN
             r.currency,
             r.rate_code_rate,
             r.base_rate
+    ),room_discounts as (
+      select
+      reservation,
+      IF((rate - pkgs_rate) > 0 , (rate - pkgs_rate), 0) rate ,
+      IF((price_before_discount - rate ) > 0 , (price_before_discount - rate ), 0)  discount_amount
+      FROM room_item
     ),
+      prepared_room_item as (
+      select
+      d.rate,
+      d.rate amount,
+      d.discount_amount,
+      (d.discount_amount * 100 / r.price_before_discount) discount_percentage,
+      r.reservation,
+      r.price_before_discount,
+      r.pkgs_rate,
+      r.item_name,
+      r.item_code,
+      r.item_description,
+      r.stock_uom,
+      r.income_account,
+      r.currency,
+      r.qty,
+      p_current_date for_date,
+      r.folio_window
+      from room_item r join room_discounts d on r.reservation = d.reservation
+      ),
     items AS (
         SELECT
+            NULL income_account,
             reservation,
             0 discount_amount,
             0 discount_percentage,
@@ -93,6 +119,7 @@ BEGIN
             stock_uom,
             currency,
             rate,
+            rate price_list_rate,
             qty,
             amount,
             p_current_date for_date,
@@ -102,21 +129,23 @@ BEGIN
         UNION
 
         SELECT
+            income_account,
             reservation,
             discount_amount,
-            (discount_amount / price_before_discount) * 100 discount_percentage,
+            discount_percentage,
             item_name,
             item_code,
             item_description,
             'Nos' stock_uom,
             currency,
-            price_before_discount rate,
+             rate,
+            price_before_discount price_list_rate,
             1 qty,
-            price_before_discount amount,
+            amount,
             p_current_date for_date,
             folio_window
-        FROM room_item
-    )
+        FROM prepared_room_item
+    )  ,resp as (
     SELECT
         SUM(i.amount) total_amount,
         r.rate_code_rate,
@@ -134,11 +163,14 @@ BEGIN
         r.naming_series,
         JSON_ARRAYAGG(JSON_OBJECT(
             'item_name', i.item_name,
+            'price_list_rate', i.price_list_rate,
+            'rate', i.rate,
+            'discount_amount', i.discount_amount,
+            'income_account', i.income_account,
             'for_date', p_current_date,
             'item_code', i.item_code,
             'item_description', i.item_description,
             'stock_uom', i.stock_uom,
-            'price_list_rate', i.rate,
             'discount_percentage', i.discount_percentage,
             'qty', 1,
             'amount', i.amount,
@@ -157,7 +189,7 @@ BEGIN
         r.currency,
         r.number_of_guests,
         r.for_date,
-        r.naming_series;
+        r.naming_series)
+      SELECT * FROM resp;
 END;;
-
 DELIMITER ;

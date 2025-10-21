@@ -2,15 +2,64 @@
  {
   "account_for_change_amount": null,
   "allow_discount_change": 0,
-  "allow_partial_payment": 0,
+  "allow_partial_payment": 1,
   "allow_rate_change": 0,
   "applicable_for_users": [
    {
-    "default": 0,
+    "default": 1,
     "parent": "Main",
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
-    "user": "waleed@conchahotel.com"
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
    }
   ],
   "apply_discount_on": "Grand Total",
@@ -50,7 +99,7 @@
    }
   ],
   "letter_head": null,
-  "modified": "2025-10-16 14:21:51.938224",
+  "modified": "2025-10-21 22:58:19.626484",
   "name": "Main",
   "payments": [
    {
@@ -65,17 +114,17 @@
   "print_format": null,
   "print_receipt_on_order_complete": 0,
   "project": null,
-  "property": null,
+  "property": "CHNA",
   "restaurant": null,
   "select_print_heading": null,
   "selling_price_list": "Standard Selling",
   "tax_category": null,
-  "taxes_and_charges": null,
+  "taxes_and_charges": "Egypt Tax - CH",
   "tc_name": null,
   "update_stock": 1,
   "validate_stock_on_save": 0,
   "warehouse": "Stores - CH",
-  "write_off_account": "301108 - ROOMS:Other Revenue - CH",
+  "write_off_account": "301100 - ----- Rooms Revenue ----- - CH",
   "write_off_cost_center": "Main - CH",
   "write_off_limit": 1.0
  }

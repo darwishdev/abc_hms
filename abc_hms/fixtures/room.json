@@ -246,25 +246,6 @@
   "doctype": "Room",
   "floor": 0,
   "hk_section": "HK-MC",
-  "modified": "2025-10-11 14:51:19.694236",
-  "name": "3006",
-  "room_beds": [
-   {
-    "bed_count": 2,
-    "bed_type_name": "Twin Bed",
-    "parent": "3006",
-    "parentfield": "room_beds",
-    "parenttype": "Room"
-   }
-  ],
-  "room_type": "SUPRT",
-  "super_visor_section": "S.V-ML"
- },
- {
-  "docstatus": 0,
-  "doctype": "Room",
-  "floor": 0,
-  "hk_section": "HK-MC",
   "modified": "2025-10-11 14:51:19.702014",
   "name": "3007",
   "room_beds": [
@@ -1847,6 +1828,25 @@
    }
   ],
   "room_type": "CNCHK",
+  "super_visor_section": "S.V-ML"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Room",
+  "floor": 0,
+  "hk_section": "HK-MC",
+  "modified": "2025-10-11 14:51:19.694236",
+  "name": "3006",
+  "room_beds": [
+   {
+    "bed_count": 2,
+    "bed_type_name": "Twin Bed",
+    "parent": "3006",
+    "parentfield": "room_beds",
+    "parenttype": "Room"
+   }
+  ],
+  "room_type": "SUPRT",
   "super_visor_section": "S.V-ML"
  },
  {

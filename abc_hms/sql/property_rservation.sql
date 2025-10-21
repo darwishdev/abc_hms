@@ -141,7 +141,7 @@ proc_body: BEGIN
         LEFT JOIN reserved_rooms rr ON r.room_type = rr.room_type
         LIMIT 1;
 
-        IF v_is_available_count <= 0 THEN
+        IF v_is_available_count <= 0 AND 1 = 2 THEN
             SET msg_text = CONCAT('No availability for room_type ', v_actual_room_type);
             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg_text;
         END IF;
