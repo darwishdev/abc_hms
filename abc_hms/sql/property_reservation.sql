@@ -3,9 +3,9 @@ CREATE OR REPLACE PROCEDURE reservation_inouse_invoices(IN p_current_date INT)
 BEGIN
     WITH reservations AS (
         SELECT
-  r.reservation_status,
+            r.reservation_status,
             r.name reservation,
-            r.rate_code_rate,
+            (r.rate_code_rate * r.exchange_rate) rate_code_rate,
             r.room_type,
             r.exchange_rate,
             r.arrival,
@@ -16,7 +16,7 @@ BEGIN
             r.guest customer,
             r.departure,
             r.rate_code,
-            r.base_rate,
+            (r.base_rate * r.exchange_rate) base_rate,
             r.property,
             p.company,
             CONCAT('F-', r.name, '-000001') folio,
@@ -27,7 +27,9 @@ BEGIN
         FROM `tabReservation` r
         JOIN `tabRate Code` rc ON r.rate_code = rc.name
         JOIN `tabProperty` p ON r.property = p.name
-        WHERE r.reservation_status = 'In House'
+  WHERE date_to_int(r.arrival) <= p_current_date and
+  date_to_int(r.departure) >= p_current_date
+        and r.reservation_status = 'In House'
     ),
     pkg_items AS (
         SELECT
@@ -50,6 +52,7 @@ BEGIN
             AND pkgp.price_list = s.default_price_list
             AND pkgp.valid_from <= r.arrival
             AND pkgp.valid_upto >= r.departure
+        where date_to_int(r.departure) > p_current_date
  )     ,
  room_item AS (
         SELECT
@@ -70,6 +73,7 @@ BEGIN
         JOIN pkg_items i ON r.reservation = i.reservation
         JOIN `tabItem Default` id ON r.market_segment = id.parent
             AND id.parenttype = 'Item Group'
+
         GROUP BY
             r.reservation,
             r.rate_code_rate,
@@ -89,11 +93,12 @@ BEGIN
     ),
       prepared_room_item as (
       select
+      r.reservation,
       d.rate,
       d.rate amount,
       d.discount_amount,
       (d.discount_amount * 100 / r.price_before_discount) discount_percentage,
-      r.reservation,
+      -- r.reservation,
       r.price_before_discount,
       r.pkgs_rate,
       r.item_name,

@@ -86,5 +86,93 @@
   "parentfield": "applicable_for_users",
   "parenttype": "POS Profile",
   "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 17:28:28.325776",
+  "name": "93rh14er83",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 17:28:28.326602",
+  "name": "93rfseena2",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 17:28:28.327195",
+  "name": "93rmmljndf",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 17:28:28.327777",
+  "name": "93r836fvod",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 17:28:28.328320",
+  "name": "93ri3hcp96",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 17:28:28.328889",
+  "name": "93r6lc1cgj",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 17:28:28.329416",
+  "name": "93r256por6",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
+ },
+ {
+  "default": 1,
+  "docstatus": 0,
+  "doctype": "POS Profile User",
+  "modified": "2025-10-22 17:28:28.329949",
+  "name": "93rhuh5rlt",
+  "parent": "Main",
+  "parentfield": "applicable_for_users",
+  "parenttype": "POS Profile",
+  "user": "Administrator"
  }
 ]

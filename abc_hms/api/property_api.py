@@ -189,6 +189,32 @@ def property_eod(property: str, auto_mark_no_show: bool=False, auto_session_clos
 
         business_date_int = property_setting["business_date_int"]
         opening_entries = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_property(property)
+        is_first_day = not frappe.db.exists(
+            "POS Opening Entry",
+            {"property": property, "for_date": ["<", property_setting["business_date_int"]]},
+        )
+
+        if is_first_day:
+            frappe.logger().info(f"[EOD] Detected first business day for {property} ({business_date_int})")
+            new_opening_entry_params = property_setting_to_pos_opening_entry(property_setting, property)
+            opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_upsert({
+                "doc": new_opening_entry_params,
+                "commit": False,
+            })
+            invoices = app_container.reservation_usecase.get_inhouse_reservations_invoices(business_date_int)
+            for inv in invoices:
+                items = json.loads(inv.pop("items", "[]"))
+                doc = frappe.get_doc({"doctype": "POS Invoice", **inv})
+                for item in items:
+                    doc.append("items", item)
+                doc.append("payments", {"mode_of_payment": "Cash", "amount": 0})
+                doc.insert()
+                doc.submit()
+            closing_entry = app_container.pos_opening_entry_usecase.pos_closing_entry_from_opening_name({
+                    "opening_entry": opening_entry.name
+                })
+            closing_entry.submit()
+
         closing_entries = []
 
         if auto_session_close:

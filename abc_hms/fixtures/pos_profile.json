@@ -60,6 +60,62 @@
     "parentfield": "applicable_for_users",
     "parenttype": "POS Profile",
     "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
+   },
+   {
+    "default": 1,
+    "parent": "Main",
+    "parentfield": "applicable_for_users",
+    "parenttype": "POS Profile",
+    "user": "Administrator"
    }
   ],
   "apply_discount_on": "Grand Total",

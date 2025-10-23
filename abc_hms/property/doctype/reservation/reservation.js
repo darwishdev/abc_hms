@@ -188,6 +188,9 @@ const handle_reservation_days_button = (frm) => {
         frm.remove_custom_button(__("View Daily Details"));
         return;
     }
+    frm.add_custom_button("Sync", async () => {
+        frm.call("reservations_folio_sync");
+    });
     frm.add_custom_button(__("View Daily Details"), async () => {
         frappe
             .call("abc_hms.reservation_date_list", { reservation: frm.doc.name })

@@ -197,6 +197,20 @@ class Reservation(Document):
         # self._current_folio_name = doc.name
         return {"balance": balance_value, "folio_name": doc.name}
 
+
+    @frappe.whitelist()
+    def reservations_folio_sync(self):
+        reservations = frappe.get_all("Reservation")
+        for reservation in reservations:
+            if not frappe.db.exists("Folio", {"reservation": reservation.name}):
+                folio = frappe.new_doc("Folio")
+                folio.update({"pos_profile": "Main", "reservation": reservation.name})
+                folio.save()
+                frappe.publish_progress(
+                    100,
+                    title="Saving Reservation",
+                    description="Reservation Dates Synced Successflly",
+                )
     def reservation_folio_sync(self):
         if not frappe.db.exists("Folio", {"reservation": self.name}):
             folio = frappe.new_doc("Folio")
