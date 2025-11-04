@@ -56,7 +56,7 @@ class CustomPOSInvoice(POSInvoice):
     def validate(self):
         """Override validate method to add custom validation."""
         # Validate for_date field
-        self.validate_for_date()
+        # self.validate_for_date()
 
         # Call parent validate method to keep all existing validations
         super().validate()
