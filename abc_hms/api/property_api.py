@@ -146,75 +146,6 @@ def enqueue_property_end_of_day(
     # return {"status": "queued"}
 
 
-# @frappe.whitelist()
-# def property_end_of_day(property: str, auto_mark_no_show: bool=False, auto_session_close: bool=False) -> PropertyEndOfDayResponse:
-#     property_setting = app_container.property_setting_usecase.property_setting_find(property)
-#     if not property_setting:
-#         raise frappe.NotFound(f"Property {property} Not Found")
-#
-#     frappe.db.begin()
-#     try:
-#         _publish_step(property, "mark_no_show", "in-progress")
-#         closed_sessions = []
-#         pos_invoices = []
-#         new_opening_entry = ""
-#
-#         updated_reservations = app_container.reservation_usecase.reservation_end_of_day_auto_mark(property, auto_mark_no_show)
-#         _publish_step(property, "Update Reservations", "completed")
-#
-#         if auto_session_close:
-#             _publish_step(property, "close_sessions", "in-progress")
-#             closed_sessions = app_container.pos_session_usecase.pos_sessions_close_crrent_date(property)
-#             _publish_step(property, "close_sessions", "completed")
-#
-#         _publish_step(property, "close_invoices", "in-progress")
-#         closed_invoices = app_container.pos_invoice_usecase.pos_invoice_end_of_day_auto_close(property)
-#         _publish_step(property, "close_invoices", "completed")
-#
-#         new_date_settings = app_container.property_setting_usecase.property_setting_increase_business_date(property)
-#         bzns_date = new_date_settings.get("business_date_int")
-#         bzns_date_int = new_date_settings.get("business_date")
-#         opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_property(property)
-#         closing_entry = {}
-#         if opening_entry and isinstance(opening_entry, str):
-#             _publish_step(property, "closing_entry", "in-progress")
-#             closing_entry = app_container.pos_opening_entry_usecase.pos_closing_entry_from_opening_name({
-#                 "opening_entry": opening_entry,
-#                 "commit": False
-#             })
-#
-#             _publish_step(property, "closing_entry", "completed")
-#
-#         _publish_step(property, "new_opening_entry", "in-progress")
-#
-#         if bzns_date and bzns_date_int:
-#             new_opening_entry_params = property_setting_to_pos_opening_entry(property_setting, property)
-#             new_opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_upsert({
-#                 "doc": new_opening_entry_params,
-#                 "commit": False,
-#             })
-#             _publish_step(property, "new_opening_entry", "completed")
-#
-#             _publish_step(property, "new_invoices", "in-progress")
-#             pos_invoices = app_container.reservation_usecase.sync_reservations_to_pos_invoices(
-#                 bzns_date,
-#                 bzns_date_int,
-#                 app_container.pos_invoice_usecase.pos_invoice_upsert
-#             )
-#             _publish_step(property, "new_invoices", "completed")
-#         frappe.db.commit()
-#         sleep(.3)
-#         _publish_step(property, "end", "completed")
-#     except frappe.ValidationError:
-#         frappe.db.rollback()
-#         raise
-#     except Exception as e:
-#         frappe.db.rollback()
-#         raise Exception(f"Unexpected Error: {str(e)}")
-#     finally:
-#         _publish_step(property, "end", "completed")
-#
-#
 @frappe.whitelist()
 def property_eod(
     property: str, auto_mark_no_show: bool = False, auto_session_close: bool = False
@@ -233,22 +164,14 @@ def property_eod(
                 property
             )
         )
-        is_first_day = not frappe.db.exists(
-            "POS Opening Entry",
-            {
-                "property": property,
-                "for_date": ["<", property_setting["business_date_int"]],
-            },
-        )
-
 
         closing_entries = []
 
-        if auto_session_close:
-            for entry in opening_entries:
-                app_container.pos_session_usecase.pos_sessions_close_for_date_profile(
-                    business_date_int, entry["pos_profile"]
-                )
+        # if auto_session_close:
+        #     for entry in opening_entries:
+        #         app_container.pos_session_usecase.pos_sessions_close_for_date_profile(
+        #             business_date_int, entry["pos_profile"]
+        #         )
         new_date_settings = app_container.property_setting_usecase.property_setting_increase_business_date(
             property
         )
@@ -257,7 +180,7 @@ def property_eod(
                 property, auto_mark_no_show
             )
         )
-        new_business_date_int = new_date_settings["business_date_int"]
+        # new_business_date_int = new_date_settings["business_date_int"]
         new_opening_entry_params = property_setting_to_pos_opening_entry(
             new_date_settings, property
         )
@@ -268,17 +191,18 @@ def property_eod(
             }
         )
 
-        invoices = app_container.reservation_usecase.get_inhouse_reservations_invoices(business_date_int)
+        invoices = app_container.reservation_usecase.get_inhouse_reservations_invoices(
+            business_date_int
+        )
 
         for inv in invoices:
-            inv["currency"] = "EGP"
-            inv["conversion_rate"] = 1.0
             items = json.loads(inv.pop("items", "[]"))
             doc = frappe.get_doc({"doctype": "POS Invoice", **inv})
             for item in items:
                 doc.append("items", item)
             doc.append("payments", {"mode_of_payment": "Cash", "amount": 0})
             doc.insert()
+        # frappe.throw(f"error is {json_dumps(invoices)}")
 
         for entry in opening_entries:
             entry_name = entry["name"]
