@@ -41,6 +41,13 @@ frappe.ui.form.on("Reservation", {
         });
 
         if (frm.doc.property) {
+            frm.call("get_folio").then(({ message }) => {
+                frm.add_custom_button("Open Folio", async () => {
+                    const url = `https://chshier.conchahotel.com/folio/${message}`;
+                    window.open(url, "_blank");
+                    console.log("open te folio", message);
+                });
+            });
             frm.call("get_business_date").then(({ message }) => {
                 frm._current_business_date = message;
                 handle_check_in(frm);

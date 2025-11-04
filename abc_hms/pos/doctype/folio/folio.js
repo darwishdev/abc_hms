@@ -74,6 +74,7 @@ frappe.ui.form.on("Folio", {
             });
             return;
         }
+        console.log("makeing the payment");
         // --- Make Payment Button ---
         frm.add_custom_button("Make Payment", () => {
             frappe.call({

@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"AbqWGfr_WU\",\"type\":\"card\",\"data\":{\"card_name\":\"Cashier\",\"col\":4}},{\"id\":\"ysKkVcuEY5\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"t6JQ9f4f4i\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Billing\",\"col\":12}},{\"id\":\"iLleZJLJAh\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"AbqWGfr_WU\",\"type\":\"card\",\"data\":{\"card_name\":\"Cashier\",\"col\":4}},{\"id\":\"ysKkVcuEY5\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2025-09-18 12:08:06.966065",
  "custom_blocks": [],
  "docstatus": 0,
@@ -145,84 +145,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reports",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Arrivals",
-   "link_count": 0,
-   "link_to": "Arrivals",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Departures",
-   "link_count": 0,
-   "link_to": "Asset Depreciation Ledger",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "In House",
-   "link_count": 0,
-   "link_to": "In House",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Reservations",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Reservations",
-   "link_count": 0,
-   "link_to": "Reservation",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Profiles",
-   "link_count": 0,
-   "link_to": "Customer",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Travel Agents",
-   "link_count": 0,
-   "link_to": "Sales Partner",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Cashier",
    "link_count": 1,
    "link_type": "DocType",
@@ -277,9 +199,97 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reservations",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reservations",
+   "link_count": 0,
+   "link_to": "Reservation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Profiles",
+   "link_count": 0,
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Travel Agents",
+   "link_count": 0,
+   "link_to": "Sales Partner",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Departures",
+   "link_count": 0,
+   "link_to": "Departures",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Arrivals",
+   "link_count": 0,
+   "link_to": "Arrivals",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Departures",
+   "link_count": 0,
+   "link_to": "Departures",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "In House",
+   "link_count": 0,
+   "link_to": "In House",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-10-21 12:53:26.297825",
+ "modified": "2025-10-28 18:28:10.929359",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "PMS",
@@ -290,6 +300,14 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 6.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Billing",
+   "type": "URL",
+   "url": "https://cashier.conchahotel.com"
+  }
+ ],
  "title": "PMS"
 }

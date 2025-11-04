@@ -261,3 +261,41 @@ GROUP BY
 
 END;;
 DELIMITER ;
+
+
+DELIMITER ;;
+CREATE  PROCEDURE folio_transfer_submitted_items(
+  IN p_destination_window varchar(140),
+    IN p_source_window varchar(140),
+    IN p_item_names TEXT
+)
+BEGIN
+  IF p_destination_window  then
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid p_destination_window is required for transfer';
+  END IF;
+  IF p_source_window IS NULL AND  p_item_names IS NULL then
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid p_source_window or p_item_names is required for transfer';
+  END IF;
+  UPDATE `tabPOS Invoice Item` ii
+  join `tabPOS Invoice` i on ii.parent = i.name and ii.parenttype = 'POS Invoice' and ii.docstatus = 1
+  SET folio_window = p_destination_window
+  WHERE ii.folio_window = coalesce(p_source_window , ii.folio_window)
+  AND (p_item_names is null or find_in_set(ii.name , p_item_names));
+END ;;
+DELIMITER ;
+
+DELIMITER ;;
+CREATE OR REPLACE PROCEDURE folio_merge_submitted_invoices(
+    IN p_source_folio varchar(140),
+    IN p_destination_folio varchar(140),
+    IN p_destination_window varchar(140)
+)
+BEGIN
+    DELETE FROM `tabPOS Invoice` WHERE folio = p_source_folio AND docstatus = 0;
+    UPDATE `tabPOS Invoice` SET old_folio = p_source_folio , folio = p_destination_folio WHERE folio = p_source_folio AND docstatus = 1;
+    update `tabPOS Invoice Item` i join `tabFolio Window` fw on i.folio_window = fw.name and fw.folio = p_source_folio set i.folio_window = p_destination_window;
+    update `tabSales Invoice Payment` p join `tabFolio Window` fw on p.folio_window =
+            fw.name and fw.folio = p_source_folio set p.folio_window = p_destination_window;
+    UPDATE `tabFolio` SET folio_status = 'Merged' , merged_with_folio = p_destination_folio, docstatus = 2 WHERE name = p_source_folio;
+END;;
+DELIMITER ;

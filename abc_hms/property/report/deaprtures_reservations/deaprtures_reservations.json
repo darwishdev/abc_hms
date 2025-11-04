@@ -1,0 +1,47 @@
+{
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [],
+ "creation": "2025-10-28 14:34:02.767973",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{\"filters\":[[\"Reservation\",\"reservation_status\",\"=\",\"In House\",false],[\"Reservation\",\"departure\",\"=\",\"2025-08-11\"]],\"fields\":[[\"name\",\"Reservation\"],[\"docstatus\",\"Reservation\"],[\"guest\",\"Reservation\"],[\"arrival\",\"Reservation\"],[\"departure\",\"Reservation\"],[\"rate_code\",\"Reservation\"],[\"room_type\",\"Reservation\"],[\"room_type_assigned\",\"Reservation\"],[\"base_rate\",\"Reservation\"],[\"total_stay\",\"Reservation\"],[\"discount_percent\",\"Reservation\"],[\"discount_amount\",\"Reservation\"],[\"room\",\"Reservation\"],[\"naming_series\",\"Reservation\"],[\"reservation_status\",\"Reservation\"],[\"ignore_availability\",\"Reservation\"],[\"allow_share\",\"Reservation\"],[\"property\",\"Reservation\"]],\"order_by\":\"`tabReservation`.`modified` desc\",\"add_totals_row\":0,\"page_length\":100,\"column_widths\":{\"name\":120,\"docstatus\":120,\"guest\":120,\"arrival\":120,\"departure\":120,\"rate_code\":120,\"room_type\":120,\"room_type_assigned\":120,\"base_rate\":120,\"total_stay\":120,\"discount_percent\":120,\"discount_amount\":120,\"room\":120,\"naming_series\":120,\"reservation_status\":120,\"ignore_availability\":120,\"allow_share\":120,\"property\":120},\"group_by\":null}",
+ "letterhead": null,
+ "modified": "2025-10-28 14:34:38.605999",
+ "modified_by": "Administrator",
+ "module": "Property",
+ "name": "Deaprtures Reservations",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Reservation",
+ "report_name": "Deaprtures Reservations",
+ "report_type": "Report Builder",
+ "roles": [
+  {
+   "role": "Hotel Manager"
+  },
+  {
+   "role": "Front Desk Agent"
+  },
+  {
+   "role": "Administrator"
+  },
+  {
+   "role": "Reservation"
+  },
+  {
+   "role": "Property Manager"
+  },
+  {
+   "role": "Front Desk"
+  },
+  {
+   "role": "House Keeping"
+  }
+ ],
+ "timeout": 0
+}

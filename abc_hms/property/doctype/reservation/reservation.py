@@ -53,6 +53,11 @@ class Reservation(Document):
         return render_template(template_content, data)
 
     @frappe.whitelist()
+    def get_folio(self):
+        folio = frappe.db.get_value("Folio", {"reservation": self.name}, "name")
+        return folio
+
+    @frappe.whitelist()
     def get_business_date(self):
         property_business_date = frappe.db.get_value(
             "Property Setting", {"property": self.get("property")}, "business_date"
@@ -197,7 +202,6 @@ class Reservation(Document):
         # self._current_folio_name = doc.name
         return {"balance": balance_value, "folio_name": doc.name}
 
-
     @frappe.whitelist()
     def reservations_folio_sync(self):
         reservations = frappe.get_all("Reservation")
@@ -211,6 +215,7 @@ class Reservation(Document):
                     title="Saving Reservation",
                     description="Reservation Dates Synced Successflly",
                 )
+
     def reservation_folio_sync(self):
         if not frappe.db.exists("Folio", {"reservation": self.name}):
             folio = frappe.new_doc("Folio")
