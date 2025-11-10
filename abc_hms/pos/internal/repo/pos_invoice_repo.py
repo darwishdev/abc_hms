@@ -219,6 +219,7 @@ class POSInvoiceRepo:
                                AND folio = %s
                                AND for_date = %s
                                )
+                               LIMIT 1;
             """,
             (
                 docdata.get("name"),
