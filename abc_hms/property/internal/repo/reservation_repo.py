@@ -1,14 +1,16 @@
-
 from decimal import Decimal
 import json
 import frappe
 import frappe
+from sentry_sdk.utils import json_dumps
 from utils.sql_utils import run_sql
+
 
 class ReservationRepo:
 
-    def reservation_date_list(self,reservation):
-        return frappe.db.sql("""
+    def reservation_date_list(self, reservation):
+        return frappe.db.sql(
+            """
                 SELECT reservation,
       room_type,
       room ,
@@ -20,23 +22,25 @@ class ReservationRepo:
 TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
 
       FROM reservation_date WHERE reservation = %s
-            """, (reservation,),as_dict=True)
+            """,
+            (reservation,),
+            as_dict=True,
+        )
 
-
-    def reservation_date_bulk_upsert(self,reservation_dates):
-        if not isinstance(reservation_dates,str):
+    def reservation_date_bulk_upsert(self, reservation_dates):
+        if not isinstance(reservation_dates, str):
             json_data = json.dumps(reservation_dates)
         else:
             json_data = reservation_dates
-        frappe.db.sql("""
+        frappe.db.sql(
+            """
                 CALL reservation_date_bulk_upsert(%s)
-            """, (json_data,))
+            """,
+            (json_data,),
+        )
 
         frappe.db.commit()
         return
-
-
-
 
     def reservation_date_sync(
         self,
@@ -48,10 +52,10 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
         new_room_type: str,
         new_rate_code: str,
         new_room: str,
-        p_new_rate_code_rate:Decimal,
-        p_new_base_rate:Decimal,
-        p_new_discount_type:str,
-        p_new_discount_value:Decimal,
+        p_new_rate_code_rate: Decimal,
+        p_new_base_rate: Decimal,
+        p_new_discount_type: str,
+        p_new_discount_value: Decimal,
         ignore_availability: int,
         allow_room_sharing: int,
     ):
@@ -91,8 +95,8 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
     #         return cur.fetchall()
     #     return run_sql(procedure_call)
     #
-    def mark_tomorrow_reservations(self,tomorrow_date_int: int):
-        print("arrivals querssss" , tomorrow_date_int)
+    def mark_tomorrow_reservations(self, tomorrow_date_int: int):
+        print("arrivals querssss", tomorrow_date_int)
         room_date_query = """
             insert into room_date(room,for_date , room_status)
               select
@@ -111,20 +115,21 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
         #     update `tabReservation` r set reservation_status = 'Departure' where date_to_int(r.departure) = %s
         # """
 
-        print("arrivals quersss" , mark_arrival_query , tomorrow_date_int)
-        def procedure_call(cur , conn):
+        print("arrivals quersss", mark_arrival_query, tomorrow_date_int)
+
+        def procedure_call(cur, conn):
             # step 1: availability
-            cur.execute(room_date_query,(tomorrow_date_int , tomorrow_date_int ))
+            cur.execute(room_date_query, (tomorrow_date_int, tomorrow_date_int))
 
             cur.fetchall()
-            cur.execute(mark_arrival_query,(tomorrow_date_int))
+            cur.execute(mark_arrival_query, (tomorrow_date_int))
             # cur.execute(mark_departures_query,(tomorrow_date_int))
             conn.commit()
             return cur.fetchall()
+
         return run_sql(procedure_call)
 
-
-    def reservation_departures_for_current_date(self,property: str):
+    def reservation_departures_for_current_date(self, property: str):
         query = """
             SELECT
                 r.name AS reservation,
@@ -136,9 +141,10 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
             JOIN `tabReservation` r on r.departure = s.business_date and r.reservation_status = 'In House'
             WHERE s.name = %(property)s;
         """
-        results = frappe.db.sql(query, {"property": property} , as_dict=True)
+        results = frappe.db.sql(query, {"property": property}, as_dict=True)
         return results
-    def reservation_arrivals_for_current_date(self,property: str):
+
+    def reservation_arrivals_for_current_date(self, property: str):
         query = """
             SELECT
                 r.name AS reservation,
@@ -149,13 +155,14 @@ TO_CHAR(DATE(for_date), 'YYYY-MM-DD') for_date
             FROM `tabProperty Setting` s
             JOIN `tabReservation` r on r.arrival = s.business_date and r.reservation_status =
             'Arrival'
-            WHERE s.name = %(property)s;
+            WHERE s.name = %(property)s
+        AND r.docstatus != 2;
         """
-        results = frappe.db.sql(query, {"property": property} , as_dict=True)
+        results = frappe.db.sql(query, {"property": property}, as_dict=True)
+
         return results
 
-
-    def get_inhouse_reservations_invoices(self , for_date: int):
+    def get_inhouse_reservations_invoices(self, for_date: int):
         query_2 = """
         call reservation_inouse_invoices(%s)
         """
@@ -308,13 +315,16 @@ GROUP BY r.reservation,r.customer,
   r.naming_series
 
         """
-        def sql_proc(cur,_):
-            cur.execute(query_2 , for_date)
+
+        def sql_proc(cur, _):
+            cur.execute(query_2, for_date)
             return cur.fetchall()
+
         return run_sql(sql_proc)
-        invoices = frappe.db.sql(query_2 , {"for_date" : for_date} , as_dict=True)
+        invoices = frappe.db.sql(query_2, {"for_date": for_date}, as_dict=True)
         return invoices
-    def get_inhouse_reservations(self,business_date: int):
+
+    def get_inhouse_reservations(self, business_date: int):
         query = """
             SELECT
                 r.name AS reservation,
@@ -374,24 +384,33 @@ GROUP BY r.reservation,r.customer,
 
     def reservation_end_of_day_auto_mark(self, property: str, auto_mark_no_show: bool):
         if auto_mark_no_show:
-            frappe.db.sql("""
+            frappe.db.sql(
+                """
                 UPDATE `tabReservation` r
                 SET r.reservation_status = 'No Show', r.docstatus = 2
                 WHERE reservation_status = 'Arrival' AND property = %s
-            """, (property,))
-            frappe.db.sql("""
+            """,
+                (property,),
+            )
+            frappe.db.sql(
+                """
                 DELETE rd
                 FROM `reservation_date` rd
                 JOIN `tabReservation` r on rd.reservation = r.name AND r.reservation_status = 'Arrival' AND r.property = %s
-            """, (property,))
-        frappe.db.sql("""
+            """,
+                (property,),
+            )
+        frappe.db.sql(
+            """
             UPDATE `tabReservation` r
             JOIN `tabProperty Setting` s on r.property = s.name
             SET r.reservation_status = 'Arrival'
             WHERE reservation_status = 'Confirmed'
             AND r.property = %s
             AND r.arrival =s.business_date
-        """, (property,))
+        """,
+            (property,),
+        )
         # frappe.db.sql("""
         #     UPDATE `tabReservation` r
         #     JOIN `tabProperty Setting` s on r.property = s.name
@@ -401,7 +420,8 @@ GROUP BY r.reservation,r.customer,
         #     AND r.departure = s.business_date
         # """, (property,))
 
-        frappe.db.sql("""
+        frappe.db.sql(
+            """
             insert into room_date (
                 room,
                 for_date,
@@ -413,41 +433,51 @@ GROUP BY r.reservation,r.customer,
             where r.reservation_status  = 'In House'
             ON DUPLICATE KEY UPDATE
                 room_status = 0;
-        """, (property,))
+        """,
+            (property,),
+        )
         return {}
-    def reservation_availability_check(
-        self,
-        params: dict
-    ):
-        def query_logic(cur , _):
-            arrival = params['arrival']
-            departure = params['departure']
-            property = params['property']
-            room_category = params['room_category']
-            room_type = params['room_type']
-            rate_code = params['rate_code']
-            discount_type = params['discount_type']
-            discount_amount = params['discount_amount']
-            discount_percent = params['discount_percent']
+
+    def reservation_availability_check(self, params: dict):
+        def query_logic(cur, _):
+            arrival = params["arrival"]
+            departure = params["departure"]
+            property = params["property"]
+            room_category = params["room_category"]
+            room_type = params["room_type"]
+            rate_code = params["rate_code"]
+            discount_type = params["discount_type"]
+            discount_amount = params["discount_amount"]
+            discount_percent = params["discount_percent"]
             cur.execute(
                 """
                 CALL room_type_availability_range(%s, %s, %s, %s, %s)
                 """,
-                (property, arrival, departure, room_category, room_type)
+                (property, arrival, departure, room_category, room_type),
             )
             availability = cur.fetchall()
             if not availability:
                 return {"availability": [], "rates": []}
 
-
             cur.execute(
                 """
                 CALL room_type_rate_list_range(%s,%s,%s, %s, %s,%s,%s,%s,%s)
                 """,
-                (property,arrival, departure,room_category,rate_code ,room_type,discount_type,discount_percent,discount_amount)
+                (
+                    property,
+                    arrival,
+                    departure,
+                    room_category,
+                    rate_code,
+                    room_type,
+                    discount_type,
+                    discount_percent,
+                    discount_amount,
+                ),
             )
 
             return {"availability": availability, "rates": cur.fetchall()}
+
         return run_sql(query_logic)
 
     def room_type_rate_list(
@@ -458,13 +488,14 @@ GROUP BY r.reservation,r.customer,
         room_category: str,
         room_types: str,
     ):
-        def query_logic(cur , _):
+        def query_logic(cur, _):
             cur.execute(
                 """
                 CALL room_type_rate_list(%s,%s, %s,%s, %s)
                 """,
-                (property,from_date, to_date, room_category,room_types)
+                (property, from_date, to_date, room_category, room_types),
             )
 
             return cur.fetchall()
+
         return run_sql(query_logic)

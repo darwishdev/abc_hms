@@ -1,18 +1,23 @@
-import  json
+import json
 import frappe
+
+
 class POSProfileRepo:
     def profile_mode_of_payment_list(self, pos_profile: str):
         return frappe.get_all(
-            "POS Payment Method" ,
-            {
-                "parent" : pos_profile , "parenttype" : "POS Profile"
-            },
+            "POS Payment Method",
+            {"parent": pos_profile, "parenttype": "POS Profile"},
             "mode_of_payment as name",
         )
-    def profile_item_list(self , pos_profile: str):
-        profile_groups = frappe.db.sql("""
+
+    def profile_item_list(self, pos_profile: str):
+        profile_groups = frappe.db.sql(
+            """
         select item_group from `tabPOS Item Group` where parent = %s
-        """ , (pos_profile) , pluck="name")
+        """,
+            (pos_profile),
+            pluck="name",
+        )
         results = []
 
         for group in profile_groups:
@@ -163,11 +168,7 @@ SELECT
         WHERE h1.parent_item_group = %s
     ) as children;
             """
-            items = frappe.db.sql(
-                groups_q,
-                (group,group,group),
-                as_dict=True
-            )
+            items = frappe.db.sql(groups_q, (group, group, group), as_dict=True)
             for item in items:
                 children = item.get("children")
                 if children:
@@ -176,9 +177,10 @@ SELECT
                             item["children"] = json.loads(children)
                         except json.JSONDecodeError:
                             # log it for debugging
-                            frappe.logger().warning(f"Invalid JSON in children for item {item.get('name')}")
+                            frappe.logger().warning(
+                                f"Invalid JSON in children for item {item.get('name')}"
+                            )
                             # fallback: leave it as raw string
                             item["children"] = children
             results.extend(items)  # push results from each group
         return results
-

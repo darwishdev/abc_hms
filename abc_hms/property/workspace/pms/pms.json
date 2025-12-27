@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"t6JQ9f4f4i\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Billing\",\"col\":12}},{\"id\":\"iLleZJLJAh\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"AbqWGfr_WU\",\"type\":\"card\",\"data\":{\"card_name\":\"Cashier\",\"col\":4}},{\"id\":\"ysKkVcuEY5\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"t6JQ9f4f4i\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Billing\",\"col\":12}},{\"id\":\"iLleZJLJAh\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"UC9HSczrtk\",\"type\":\"card\",\"data\":{\"card_name\":\"Reservations\",\"col\":4}},{\"id\":\"FyyESC5lJT\",\"type\":\"card\",\"data\":{\"card_name\":\"Billing\",\"col\":4}},{\"id\":\"AbqWGfr_WU\",\"type\":\"card\",\"data\":{\"card_name\":\"POS Session\",\"col\":4}},{\"id\":\"ysKkVcuEY5\",\"type\":\"card\",\"data\":{\"card_name\":\"Room Management\",\"col\":4}},{\"id\":\"GSsrH5iBa7\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2025-09-18 12:08:06.966065",
  "custom_blocks": [],
  "docstatus": 0,
@@ -145,25 +145,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Cashier",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Cashier Closing",
-   "link_count": 0,
-   "link_to": "Cashier Closing",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Billing",
    "link_count": 3,
    "link_type": "DocType",
@@ -252,8 +233,27 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "POS Session",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "POS Session",
+   "link_count": 0,
+   "link_to": "POS Session",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Reports",
-   "link_count": 3,
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -287,9 +287,29 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Property Daily Sales",
+   "link_count": 0,
+   "link_to": "Property Daily Sales",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Daily Sales Dashboard",
+   "link_count": 0,
+   "link_to": "property-daily-sales",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-10-28 18:28:10.929359",
+ "modified": "2025-11-22 10:11:06.818948",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "PMS",

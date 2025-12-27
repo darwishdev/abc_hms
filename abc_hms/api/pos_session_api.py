@@ -2,9 +2,16 @@ import frappe
 import json
 from abc_hms.api.decorators import business_date_protected
 from abc_hms.container import app_container
-from abc_hms.dto.pos_session_dto import POSSessionFindForDateRequest, POSSessionDefaultsFindResponse, POSSessionFindForDateResponse, POSSessionUpsertRequest, POSSessionUpsertResponse
+from abc_hms.dto.pos_session_dto import (
+    POSSessionFindForDateRequest,
+    POSSessionDefaultsFindResponse,
+    POSSessionFindForDateResponse,
+    POSSessionUpsertRequest,
+    POSSessionUpsertResponse,
+)
 from abc_hms.pos.doctype.pos_session.pos_session import POSSession
 from utils.date_utils import int_to_date
+
 
 @frappe.whitelist()
 def session_totals(session_id: str):
@@ -43,6 +50,8 @@ def session_totals(session_id: str):
         "total_paid": total_paid,
         "total_outstanding": total_outstanding,
     }
+
+
 @frappe.whitelist()
 def pos_session_invoice_list(session_id: str):
     if not session_id:
@@ -73,57 +82,75 @@ def pos_session_invoice_list(session_id: str):
 
 
 @frappe.whitelist(methods=["GET"])
-def pos_session_find_for_date()-> POSSessionFindForDateResponse:
+def pos_session_find_for_date() -> POSSessionFindForDateResponse:
     try:
         data = frappe.local.request.data
         payload: POSSessionFindForDateRequest = json.loads(data or "{}")
     except Exception as e:
         frappe.throw(f"Invalid JSON payload: {e}")
-        return {"success" : False , "error" : f"{str(e)}"}
+        return {"success": False, "error": f"{str(e)}"}
 
-    result = app_container.pos_session_usecase.pos_session_find_for_date(payload.get("for_date") ,1)
+    result = app_container.pos_session_usecase.pos_session_find_for_date(
+        payload.get("for_date"), 1
+    )
     return result
 
-@frappe.whitelist(methods=["POST" , "PUT"])
-def pos_session_upsert()-> POSSession:
+
+@frappe.whitelist(methods=["POST", "PUT"])
+def pos_session_upsert() -> POSSession:
     try:
         data = frappe.local.request.data
         payload: POSSessionUpsertRequest = json.loads(data or "{}")
     except Exception as e:
         raise Exception(f"Invalid JSON payload: {e}")
-    pos_profile =payload["doc"]["pos_profile"]
-    # opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_pos_profile(pos_profile,for_date)
-    # if not opening_entry:
-    #     app_container.pos_opening_entry_usecase.pos_opening_entry_upsert({
-    #         "doc" : {
-    #             "docstatus": 1,
-    #             "user": frappe.session.user,
-    #             "pos_profile": pos_profile,
-    #             "period_start_date": f"{int_to_date(for_date)} 00:00:00",
-    #             "balance_details": [{
-    #                 "mode_of_payment": "Cash",
-    #                 "opening_amount": 0,
-    #             }],
-    #         },
-    #         "commit" : True
-    #     })
-    result = app_container.pos_session_usecase.pos_session_upsert(payload , True)
+    for_date = payload["doc"]["for_date"]
+    pos_profile = payload["doc"]["pos_profile"]
+    opening_entry = (
+        app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_pos_profile(
+            pos_profile, for_date
+        )
+    )
+    if not opening_entry:
+        app_container.pos_opening_entry_usecase.pos_opening_entry_upsert(
+            {
+                "doc": {
+                    "docstatus": 1,
+                    "user": frappe.session.user,
+                    "pos_profile": pos_profile,
+                    "period_start_date": f"{int_to_date(for_date)} 00:00:00",
+                    "balance_details": [
+                        {
+                            "mode_of_payment": "Cash",
+                            "opening_amount": 0,
+                        }
+                    ],
+                },
+                "commit": True,
+            }
+        )
+    result = app_container.pos_session_usecase.pos_session_upsert(payload, True)
     return result
 
 
 @frappe.whitelist(methods=["GET"])
 def pos_session_find(pos_session: str):
     return app_container.pos_session_usecase.pos_session_find(pos_session)
+
+
 @frappe.whitelist(methods=["GET"])
 def pos_session_defaults_find(property_name: str) -> POSSessionDefaultsFindResponse:
-    settings_resp = app_container.property_setting_usecase.property_setting_find(property_name)
-    opening_entry:str = ""
+    settings_resp = app_container.property_setting_usecase.property_setting_find(
+        property_name
+    )
+    opening_entry: str = ""
     if settings_resp.get("success"):
         settings = settings_resp.get("doc")
         if settings:
             pos_profile = str(settings.get("default_pos_profile"))
             for_date = int(str(settings.get("business_date_int")))
-            opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_property(property_name)
+            opening_entry = app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_property(
+                property_name
+            )
             return {
                 "success": True,
                 "doc": {
@@ -133,4 +160,4 @@ def pos_session_defaults_find(property_name: str) -> POSSessionDefaultsFindRespo
                 },
             }
 
-    return {"success": True , "doc" : None}
+    return {"success": True, "doc": None}

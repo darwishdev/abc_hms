@@ -10,7 +10,8 @@
   "column_break_ommv",
   "description",
   "section_break_djik",
-  "production_areas"
+  "production_areas",
+  "default_tax_template"
  ],
  "fields": [
   {
@@ -39,12 +40,18 @@
    "fieldtype": "Table",
    "label": "Production Areas",
    "options": "Restaurant Production Area"
+  },
+  {
+   "fieldname": "default_tax_template",
+   "fieldtype": "Link",
+   "label": "default tax template",
+   "options": "Sales Taxes and Charges"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-15 01:42:52.907588",
+ "modified": "2025-12-17 15:15:51.892432",
  "modified_by": "Administrator",
  "module": "Property",
  "name": "Restaurant",

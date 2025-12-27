@@ -107,7 +107,7 @@ def property_setting_to_pos_opening_entry(
         "company": data.company,
         "property": property,
         "docstatus": 1,
-        "user": frappe.session.user,
+        "user": "eod_bot@conchahotel.com",
         "pos_profile": data.default_pos_profile,
         "for_date": data.business_date_int,
         "period_start_date": f"{data.business_date} 00:00:00",
@@ -117,7 +117,7 @@ def property_setting_to_pos_opening_entry(
                 "opening_amount": 0,
             }
         ],
-        "posting_date": datetime.now().replace(microsecond=0),
+        "posting_date": data.business_date,
     }  # type: ignore
 
 
@@ -219,6 +219,8 @@ def enqueue_property_end_of_day(
 def property_eod(
     property: str, auto_mark_no_show: bool = False, auto_session_close: bool = False
 ):
+    frappe.set_user("eod_bot@conchahotel.com")
+
     frappe.db.begin()
     try:
         # 1 - check for the opening engry
@@ -380,6 +382,7 @@ def property_eod(
             closing_entry = app_container.pos_opening_entry_usecase.pos_closing_entry_from_opening_name(
                 {"opening_entry": entry_name}
             )
+            closing_entry.set("posting_date", property_setting.get("business_date"))
             closing_entry.submit()
     # 1 - update business data
 
@@ -447,3 +450,137 @@ def property_eod_fix(
     finally:
         frappe.flags.in_install = False
         _publish_step(property, "end", "completed")
+
+
+@frappe.whitelist()
+def get_daily_summary(filters):
+    """Get daily summary data for the cards"""
+    filters = (
+        frappe._dict(filters) if isinstance(filters, dict) else json.loads(filters)
+    )
+
+    for_date = filters.get("for_date")
+    if not for_date:
+        return None
+
+    # Get daily sales row
+    daily_row = frappe.db.sql(
+        """
+        SELECT
+            daily_total_gross,
+            daily_total_net,
+            (daily_service_charge_tax + daily_vat_tax) as daily_total_tax,
+            mtd_total_gross,
+            mtd_total_net,
+            (mtd_service_charge_tax + mtd_vat_tax) as mtd_total_tax,
+            sales_invoices
+        FROM daily_sales
+        WHERE for_date = date_to_int(%s)
+    """,
+        for_date,
+        as_dict=True,
+    )
+
+    if not daily_row:
+        return None
+
+    row = daily_row[0]
+
+    # Count invoices and issues
+    invoice_count = 0
+    issue_count = 0
+
+    if row.get("sales_invoices"):
+        invoices = json.loads(row["sales_invoices"])
+        invoice_count = len(invoices)
+        issue_count = len(
+            [
+                inv
+                for inv in invoices
+                if not inv.get("is_tax_correct") or not inv.get("is_pi_total_correct")
+            ]
+        )
+
+    return {
+        "daily_total_gross": row.get("daily_total_gross", 0),
+        "daily_total_net": row.get("daily_total_net", 0),
+        "daily_total_tax": row.get("daily_total_tax", 0),
+        "mtd_total_gross": row.get("mtd_total_gross", 0),
+        "mtd_total_net": row.get("mtd_total_net", 0),
+        "mtd_total_tax": row.get("mtd_total_tax", 0),
+        "invoice_count": invoice_count,
+        "issue_count": issue_count,
+    }
+
+
+@frappe.whitelist()
+def get_invoice_data(filters):
+    """Get invoice data for the table"""
+    filters = (
+        frappe._dict(filters) if isinstance(filters, dict) else json.loads(filters)
+    )
+
+    for_date = filters.get("for_date")
+    customer_filter = filters.get("customer")
+    tax_status_filter = filters.get("tax_status")
+
+    if not for_date:
+        return []
+
+    # Get invoices for the date
+    daily_row = frappe.db.sql(
+        """
+        SELECT sales_invoices
+        FROM daily_sales
+        WHERE for_date = date_to_int(%s)
+    """,
+        for_date,
+        as_dict=True,
+    )
+
+    if not daily_row or not daily_row[0].get("sales_invoices"):
+        return []
+
+    invoices_json = daily_row[0]["sales_invoices"]
+    invoices = json.loads(invoices_json)
+
+    # Apply filters
+    filtered_invoices = []
+    for inv in invoices:
+        # Customer filter
+        if customer_filter and inv.get("customer") != customer_filter:
+            continue
+
+        # Tax status filter
+        if tax_status_filter:
+            is_correct = inv.get("is_tax_correct") and inv.get("is_pi_total_correct")
+            if tax_status_filter == "Correct" and not is_correct:
+                continue
+            if tax_status_filter == "Issues" and is_correct:
+                continue
+
+        filtered_invoices.append(
+            {
+                "invoice_name": inv.get("invoice_name"),
+                "customer": inv.get("customer"),
+                "total_net": inv.get("total_net", 0),
+                "total_gross": inv.get("total_gross", 0),
+                "total_tax": inv.get("total_tax", 0),
+                "tax_difference": inv.get("tax_difference", 0),
+                "pi_total": inv.get("pi_total", 0),
+                "pi_total_difference": inv.get("pi_total_difference", 0),
+                "pi_count": (
+                    len(inv.get("pi_names", "").split(","))
+                    if inv.get("pi_names")
+                    else 0
+                ),
+                "status": (
+                    "Correct"
+                    if inv.get("is_tax_correct") and inv.get("is_pi_total_correct")
+                    else "Issues"
+                ),
+            }
+        )
+
+    frappe.throw(f"invo{json_dumps}")
+    return filtered_invoices

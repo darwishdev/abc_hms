@@ -1,18 +1,33 @@
 import frappe
+
+
 def execute(filters=None):
     if not filters:
         filters = {}
 
     columns = [
+        {
+            "fieldname": "name",
+            "label": "Reservation",
+            "fieldtype": "Link",
+            "options": "Reservation",
+        },
         {"fieldname": "room", "label": "Room", "fieldtype": "Link", "options": "Room"},
         {"fieldname": "room_status", "label": "Room Status", "fieldtype": "Data"},
-
         {"fieldname": "house_use", "label": "House Use", "fieldtype": "check"},
         {"fieldname": "complementry", "label": "Complementry", "fieldtype": "check"},
-        {"fieldname": "rate_code", "label": "Rate Code", "fieldtype": "Link" , "options" : "Rate Code"},
+        {
+            "fieldname": "rate_code",
+            "label": "Rate Code",
+            "fieldtype": "Link",
+            "options": "Rate Code",
+        },
         {"fieldname": "base_rate", "label": "Base Rate", "fieldtype": "Currency"},
-        {"fieldname": "service_charge", "label": "Service Charge (12% of BR)", "fieldtype": "Currency"},
-        {"fieldname": "municipality", "label": "Municipality (1% of SC)", "fieldtype": "Currency"},
+        {
+            "fieldname": "service_charge",
+            "label": "Service Charge (12% of BR)",
+            "fieldtype": "Currency",
+        },
         {"fieldname": "vat", "label": "VAT (14% of SC)", "fieldtype": "Currency"},
         {"fieldname": "total_tax", "label": "Total Tax", "fieldtype": "Currency"},
         {"fieldname": "net", "label": "Net Revenue", "fieldtype": "Currency"},
@@ -22,32 +37,68 @@ def execute(filters=None):
         {"fieldname": "children", "label": "Children", "fieldtype": "Int"},
         {"fieldname": "infants", "label": "Infants", "fieldtype": "Int"},
         {"fieldname": "persons", "label": "Persons", "fieldtype": "Int"},
-        {"fieldname": "guest", "label": "Guest", "fieldtype": "Link", "options": "Customer"},
-        {"fieldname": "name", "label": "Reservation", "fieldtype": "Link", "options": "Reservation"},
+        {
+            "fieldname": "guest",
+            "label": "Guest",
+            "fieldtype": "Link",
+            "options": "Customer",
+        },
         {"fieldname": "arrival", "label": "Arrival", "fieldtype": "Date"},
         {"fieldname": "departure", "label": "departure", "fieldtype": "Date"},
-        {"fieldname": "folio", "label": "Folio", "fieldtype": "Link", "options": "Folio"},
-        {"fieldname": "room_type", "label": "Room Type", "fieldtype": "Link", "options": "Room Type"},
+        {
+            "fieldname": "folio",
+            "label": "Folio",
+            "fieldtype": "Link",
+            "options": "Folio",
+        },
+        {
+            "fieldname": "room_type",
+            "label": "Room Type",
+            "fieldtype": "Link",
+            "options": "Room Type",
+        },
         {"fieldname": "guest_comment", "label": "Guest Comments", "fieldtype": "Data"},
-        {"fieldname": "reservation_comment", "label": "Reservation Comments", "fieldtype": "Data"},
-        {"fieldname": "out_of_order_status", "label": "OOO Status", "fieldtype": "Data"},
-        {"fieldname": "company_profile", "label": "Company Profile", "fieldtype": "Link", "options": "Customer"},
-        {"fieldname": "travel_agent", "label": "Travel Agent", "fieldtype": "Link", "options": "Sales Partner"},
-        {"fieldname": "out_of_order_reason", "label": "OOO Reason", "fieldtype": "Data"},
-        {"fieldname": "creation", "label": "Created At", "fieldtype": "Datetime"}
+        {
+            "fieldname": "reservation_comment",
+            "label": "Reservation Comments",
+            "fieldtype": "Data",
+        },
+        {
+            "fieldname": "out_of_order_status",
+            "label": "OOO Status",
+            "fieldtype": "Data",
+        },
+        {
+            "fieldname": "company_profile",
+            "label": "Company Profile",
+            "fieldtype": "Link",
+            "options": "Customer",
+        },
+        {
+            "fieldname": "travel_agent",
+            "label": "Travel Agent",
+            "fieldtype": "Link",
+            "options": "Sales Partner",
+        },
+        {
+            "fieldname": "out_of_order_reason",
+            "label": "OOO Reason",
+            "fieldtype": "Data",
+        },
+        {"fieldname": "creation", "label": "Created At", "fieldtype": "Datetime"},
     ]
 
     # Build dynamic conditions properly
-    date_condition = filters.get('date_filter')
-    property_value = filters.get('property', 'CHNA')
-    is_arrival = filters.get('is_arrival', False)
-    is_departure = filters.get('is_departure', False)
-    reservation_status = filters.get('reservation_status')
-    complementry = filters.get('complementry')
-    house_use = filters.get('house_use')
-    room_status = filters.get('room_status')
-    reservation= filters.get('reservation')
-    guest = filters.get('guest')
+    date_condition = filters.get("date_filter")
+    property_value = filters.get("property", "CHNA")
+    is_arrival = filters.get("is_arrival", False)
+    is_departure = filters.get("is_departure", False)
+    reservation_status = filters.get("reservation_status")
+    complementry = filters.get("complementry")
+    house_use = filters.get("house_use")
+    room_status = filters.get("room_status")
+    reservation = filters.get("reservation")
+    guest = filters.get("guest")
     # Construct date condition for the CTE
     if date_condition:
         date_join_condition = f"AND d.date_actual = '{date_condition}'"
@@ -77,8 +128,8 @@ def execute(filters=None):
         guest_condition = f"AND r.guest = '{guest}'"
     else:
         guest_condition = ""
-    complementry_condition=""
-    house_use_condition=""
+    complementry_condition = ""
+    house_use_condition = ""
     # Complementary filter
     if filters.get("complementry") == "Yes":
         complementry_condition += " AND rc.complementry = 1 "
@@ -100,14 +151,13 @@ def execute(filters=None):
     SELECT
         r.room,
         COALESCE(rd.room_status, 'Dirty') AS room_status,
-        r.base_rate,
+        (r.base_rate * r.exchange_rate) base_rate,
         r.nights,
-        (r.base_rate * r.nights) total_stay,
-        (r.base_rate / 1.288) AS net,
-        (r.base_rate / 1.288) * 0.12 AS service_charge,
-        ((r.base_rate / 1.288) * 1.12) * 0.01 AS municipality,
-        ((r.base_rate /  1.288) * 1.12) * 0.14 AS vat,
-        r.base_rate * .288 AS total_tax,
+        ((r.base_rate * r.exchange_rate) * r.nights) total_stay,
+        ((r.base_rate * r.exchange_rate) / 1.2768) AS net,
+        (((r.base_rate * r.exchange_rate) / 1.2768) * 0.12) AS service_charge,
+        ((((r.base_rate * r.exchange_rate) /  1.2768) * 1.12) * 0.14) AS vat,
+        (r.base_rate * r.exchange_rate) * .2768 AS total_tax,
         r.adults,
         COALESCE(r.children, 0) children,
         COALESCE(r.infants, 0) infants,
@@ -132,7 +182,8 @@ def execute(filters=None):
         date_filter d
     JOIN
         `tabReservation` r ON r.arrival <= d.date_actual
-            AND r.departure > d.date_actual
+            AND r.departure > d.date_actual AND
+            r.docstatus < 2
             {arrival_condition}
             {reservation_condition}
             {guest_condition}

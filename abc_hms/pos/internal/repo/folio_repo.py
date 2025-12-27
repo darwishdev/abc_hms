@@ -44,6 +44,10 @@ class FolioRepo:
                         request["reservation"] if "reservation" in request else None
                     ),
                     "restaurant_table": request["restaurant_table"],
+                    "folio_type": (
+                        request["folio_type"] if "folio_type" in request else None
+                    ),
+                    "address": (request["address"] if "address" in request else None),
                 }
             )
 
