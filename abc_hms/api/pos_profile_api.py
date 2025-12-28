@@ -27,6 +27,7 @@ WITH items AS (
                         JSON_OBJECT(
                             'name', modifier.name,
                             'item_code', modifier.item_code,
+                            'print_class', i.print_class,
                             'item_price', coalesce(modprice.price_list_rate , 0.0)
                         )
                 END

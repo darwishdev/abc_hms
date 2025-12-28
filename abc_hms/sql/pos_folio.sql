@@ -264,7 +264,7 @@ DELIMITER ;
 
 
 DELIMITER ;;
-CREATE  PROCEDURE folio_transfer_submitted_items(
+CREATE  OR REPLACE PROCEDURE folio_transfer_submitted_items(
   IN p_destination_window varchar(140),
     IN p_source_window varchar(140),
     IN p_item_names TEXT

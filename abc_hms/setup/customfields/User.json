@@ -1,5 +1,15 @@
 [
   {
+    "fieldname": "default_property",
+    "label": "Default Property",
+    "fieldtype": "Link",
+    "options": "Property",
+    "length": 6,
+    "unique": 1,
+    "reqd": 0,
+    "read_only_onload": 0
+  },
+  {
     "fieldname": "cashier_abbriviation",
     "label": "Cashier Abbriviation",
     "fieldtype": "Data",

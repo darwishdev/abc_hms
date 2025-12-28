@@ -19,6 +19,18 @@ def property_setting_upsert() -> PropertySettingUpsertResponse:
 
     result = app_container.property_setting_usecase.property_setting_upsert(payload)
     return result
+
+@frappe.whitelist(methods=["GET"])
+def default_property_setting_find() -> PropertySettingFindResponse:
+    try:
+        default = frappe.db.sql("""SELECT default_property from tabUser where name = %s""" ,
+                                frappe.session.user , pluck=True)
+        if not default or len(default) == 0 :
+            return {"success": False, "error" : "user don't have default property"}
+        result = app_container.property_setting_usecase.property_setting_find(default[0])
+        return result
+    except Exception as e:
+        return {"success": False, "error": f"{str(e)}"}
 @frappe.whitelist(methods=["GET"])
 def property_setting_find(property_name: str) -> PropertySettingFindResponse:
     try:
