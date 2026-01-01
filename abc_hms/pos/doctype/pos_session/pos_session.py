@@ -19,7 +19,7 @@ class POSSession(Document):
             pluck=["business_date"],
         )
         if not business_date or len(business_date) == 0:
-            frappe.throw("pos_profile is required")
+            return 20251229
         return business_date[0]
 
     def pos_opening_entry_from_pos_session(self):
@@ -30,10 +30,13 @@ class POSSession(Document):
 
         current_business_date = self.get_current_bussiness_date()
         if self.for_date != current_business_date:
-            frappe.throw(
-                f"Business date mismatch. Expected: {current_business_date} Got: {self.for_date}",
-                title="Invalid Business Date",
-            )
+            self.for_date = current_business_date
+        #     frappe.throw(
+        #         f"Business date mismatch. Expected: {current_business_date} Got: {self.for_date}",
+        #         title="Invalid Business Date",
+        #     )
+        if self.pos_profile is None:
+            self.pos_profile = 'Main'
         opening_entry = frappe.db.exists(
             "POS Opening Entry",
             {

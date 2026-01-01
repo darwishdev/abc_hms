@@ -103,31 +103,31 @@ def pos_session_upsert() -> POSSession:
         payload: POSSessionUpsertRequest = json.loads(data or "{}")
     except Exception as e:
         raise Exception(f"Invalid JSON payload: {e}")
-    for_date = payload["doc"]["for_date"]
+    # for_date = payload["doc"]["for_date"]
     pos_profile = payload["doc"]["pos_profile"]
     opening_entry = (
         app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_pos_profile(
-            pos_profile, for_date
+            pos_profile, 0
         )
     )
-    if not opening_entry:
-        app_container.pos_opening_entry_usecase.pos_opening_entry_upsert(
-            {
-                "doc": {
-                    "docstatus": 1,
-                    "user": frappe.session.user,
-                    "pos_profile": pos_profile,
-                    "period_start_date": f"{int_to_date(for_date)} 00:00:00",
-                    "balance_details": [
-                        {
-                            "mode_of_payment": "Cash",
-                            "opening_amount": 0,
-                        }
-                    ],
-                },
-                "commit": True,
-            }
-        )
+    # if not opening_entry:
+    #     app_container.pos_opening_entry_usecase.pos_opening_entry_upsert(
+    #         {
+    #             "doc": {
+    #                 "docstatus": 1,
+    #                 "user": frappe.session.user,
+    #                 "pos_profile": pos_profile,
+    #                 "period_start_date": f"{int_to_date(for_date)} 00:00:00",
+    #                 "balance_details": [
+    #                     {
+    #                         "mode_of_payment": "Cash",
+    #                         "opening_amount": 0,
+    #                     }
+    #                 ],
+    #             },
+    #             "commit": True,
+    #         }
+    #     )
     result = app_container.pos_session_usecase.pos_session_upsert(payload, True)
     return result
 

@@ -84,7 +84,6 @@ GROUP BY ig.name;
             row["items"] = json.loads(row["items"])
         else:
             row["items"] = []
-    for row in rows:
         if row.get("children"):
             row["children"] = json.loads(row["children"])
         else:

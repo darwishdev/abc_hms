@@ -245,8 +245,7 @@ FROM
   JOIN items i ON i.folio = f.folio
   LEFT JOIN `tabSales Invoice Payment` p ON p.folio_window = f.folio_window
 WHERE
-  f.pay_master = IF(p_include_paymaster, f.pay_master, 0)
-  and (f.arrival is null or f.arrival <= f.business_date)
+  (f.arrival is null or f.arrival <= f.business_date)
   and (f.departure is null or f.departure <= f.business_date)
 GROUP BY
   f.folio,

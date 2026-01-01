@@ -72,7 +72,7 @@ class FolioRepo:
             for item in request["items"]:
                 item["folio_window"] = f"{folio_doc.name}-w-001"
             new_invoce = {
-                "customer": request["guest"] if "guest" in request else None,
+                "customer": request["guest"] if "guest" in request else 'Direct Customer',
                 "number_of_guests": (
                     request["number_of_guests"]
                     if "number_of_guests" in request
