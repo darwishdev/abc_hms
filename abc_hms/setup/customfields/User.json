@@ -5,7 +5,7 @@
     "fieldtype": "Link",
     "options": "Property",
     "length": 6,
-    "unique": 1,
+    "unique": 0,
     "reqd": 0,
     "read_only_onload": 0
   },
