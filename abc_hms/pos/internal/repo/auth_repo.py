@@ -23,7 +23,9 @@ class AuthRepo:
                                   LEFT JOIN  `tabPOS Profile User` pu  on u.name = pu.user
                                   LEFT JOIN  `tabPOS Profile` p  on pu.parent = p.name
                                   LEFT JOIN  `tabProperty Setting` s  on p.property = s.name
-                                  LEFT JOIN `tabPOS Session` ps on ps.for_date = date_to_int(s.business_date) and ps.pos_profile  = p.name and ps.owner = pu.user
+                                  LEFT JOIN `tabPOS Session` ps on ps.for_date =
+                                  date_to_int(s.business_date) and ps.pos_profile  = p.name and
+                                  ps.owner = pu.user and ps.docstatus = 0
                                   WHERE u.name  = %s;
                               """ , (user_name,), as_dict=True)
 
