@@ -1,6 +1,6 @@
 import frappe
 from frappe.model.document import Document
-
+from frappe.database.database import random, string
 from utils.date_utils import int_to_date
 
 
@@ -82,4 +82,7 @@ class POSSession(Document):
         owner_abbr = frappe.get_value("User", owner, "cashier_abbriviation")
         if owner_abbr:
             owner = owner_abbr
-        self.name = f"S-{owner}-{self.pos_profile}-{self.for_date}"
+        rand = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))    
+        if not self.name:    
+            self.name = f"S-{owner}-{self.pos_profile}-{self.for_date}-{rand}"
+        
