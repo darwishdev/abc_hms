@@ -136,6 +136,7 @@ class FolioRepo:
         self,
         pos_profile: str,
         docstatus: Optional[str],
+        for_date: Optional[str],
         reservation: Optional[str],
         guest: Optional[str],
         room: Optional[str],
@@ -148,11 +149,12 @@ class FolioRepo:
         def procedure_call(cur, _):
             cur.execute(
                 """
-            CALL folio_list_filtered(%s, %s, %s, %s, %s, %s, %s, %s, %s,%s);
+            CALL folio_list_filtered(%s,%s, %s, %s, %s, %s, %s, %s, %s, %s,%s);
         """,
                 (
                     pos_profile,
                     docstatus,
+                    for_date,
                     reservation,
                     guest,
                     room,

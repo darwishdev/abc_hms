@@ -11,13 +11,13 @@ from utils.sql_utils import run_sql
 class Folio(Document):
     def autoname(self):
         doc = self.as_dict()
-        reservation = doc["reservation"]
-        restaurant_table = doc["restaurant_table"]
-        if not reservation and restaurant_table:
-            self.name = make_autoname(f"F-{restaurant_table}-.######")
-            return
-        if reservation:
-            self.name = make_autoname(f"F-{reservation}-.######")
+        business_date = frappe.get_value(
+            "Property Setting",
+            "PRTZL",
+            "business_date"
+        )
+        mm_dd = business_date.strftime("%m-%d")
+        self.name = make_autoname(f"f-{mm_dd}-.######")
 
     def folio_active_invoice_doc(self):
         invoice_name = self.folio_active_invoice()

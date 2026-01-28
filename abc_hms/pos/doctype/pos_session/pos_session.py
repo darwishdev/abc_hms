@@ -81,4 +81,6 @@ class POSSession(Document):
         if owner_abbr:
             owner = owner_abbr
         rand = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
-        self.name = f"S-{owner}-{self.pos_profile}-{self.for_date}-{rand}"
+        if not self.name:
+            self.name = f"S-{owner}-{self.pos_profile}-{self.for_date}-{rand}"
+

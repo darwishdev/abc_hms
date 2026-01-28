@@ -53,6 +53,7 @@ class FolioUsecase:
             return self.repo.folio_list_filtered(
                 pos_profile=req['pos_profile'],
                 docstatus=str(req['docstatus']) if req.get('docstatus') is not None else None,
+                for_date="20251227",
                 reservation=req.get('reservation'),
                 guest=req.get('guest'),
                 room=req.get('room'),
