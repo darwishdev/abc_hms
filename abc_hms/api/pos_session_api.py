@@ -103,8 +103,13 @@ def pos_session_upsert() -> POSSession:
         payload: POSSessionUpsertRequest = json.loads(data or "{}")
     except Exception as e:
         raise Exception(f"Invalid JSON payload: {e}")
-    for_date = payload["doc"]["for_date"]
     pos_profile = payload["doc"]["pos_profile"]
+    for_date_list = frappe.db.sql(
+        """SELECT date_to_int(business_date) from `tabProperty Setting` where default_pos_profile = %s LIMIT 1""",
+        pos_profile,
+        pluck=True,
+    )
+    for_date = for_date_list[0]
     opening_entry = (
         app_container.pos_opening_entry_usecase.pos_opening_entry_find_by_pos_profile(
             pos_profile, for_date

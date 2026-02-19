@@ -30,10 +30,12 @@ class POSSession(Document):
 
         current_business_date = self.get_current_bussiness_date()
         if self.for_date != current_business_date:
-            frappe.throw(
-                f"Business date mismatch. Expected: {current_business_date} Got: {self.for_date}",
-                title="Invalid Business Date",
-            )
+            if self.for_date is not None:
+                frappe.throw(
+                    f"Business date mismatch. Expected: {current_business_date} Got: {self.for_date}",
+                    title="Invalid Business Date",
+                )
+            self.for_date = current_business_date
         opening_entry = frappe.db.exists(
             "POS Opening Entry",
             {

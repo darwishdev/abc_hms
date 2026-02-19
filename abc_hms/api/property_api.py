@@ -22,6 +22,7 @@ from abc_hms.dto.property_dto import (
 )
 from abc_hms.dto.property_setting_dto import PropertySettingData
 from abc_hms.exceptions.exceptions import EndOfDayValidationError
+from utils.date_utils import int_to_date
 
 
 class ValidateResponse(TypedDict):
@@ -126,15 +127,15 @@ def enqueue_property_end_of_day(
     property: str, auto_mark_no_show: bool = False, auto_session_close: bool = False
 ):
 
-    _publish_step(property, "validation", "in-progress")
-    validation_result = property_end_of_day_validate(
-        property, auto_mark_no_show, auto_session_close
-    )
-    if not validation_result["valid"]:
-        raise EndOfDayValidationError(_("EOD Validation failed"), validation_result)
-
-    _publish_step(property, "validation", "completed")
-
+    # _publish_step(property, "validation", "in-progress")
+    # validation_result = property_end_of_day_validate(
+    #     property, auto_mark_no_show, auto_session_close
+    # )
+    # if not validation_result["valid"]:
+    #     raise EndOfDayValidationError(_("EOD Validation failed"), validation_result)
+    #
+    # _publish_step(property, "validation", "completed")
+    #
     enqueue(
         "abc_hms.property_eod",
         property=property,
@@ -143,6 +144,7 @@ def enqueue_property_end_of_day(
         now="true",
         queue="long",
     )
+    return {"status": "queed"}
     # return {"status": "queued"}
 
 
@@ -216,7 +218,7 @@ def enqueue_property_end_of_day(
 #
 #
 @frappe.whitelist()
-def property_eod(
+def property_eod_original(
     property: str, auto_mark_no_show: bool = False, auto_session_close: bool = False
 ):
     frappe.set_user("eod_bot@conchahotel.com")
@@ -584,3 +586,122 @@ def get_invoice_data(filters):
 
     frappe.throw(f"invo{json_dumps}")
     return filtered_invoices
+
+
+import time
+from datetime import timedelta
+
+
+@frappe.whitelist()
+def property_eod(
+    property: str,
+    auto_mark_no_show: bool = False,
+    auto_session_close: bool = False,
+):
+    frappe.set_user("eod_bot@conchahotel.com")
+
+    start_date_int = 20251229
+    end_date_int = 20251231
+
+    current_date_int = start_date_int
+    processed_days = 0
+
+    while current_date_int <= end_date_int:
+        frappe.db.begin()
+        try:
+            for_date = int_to_date(current_date_int)
+
+            # ---------------------------
+            # POS OPENING
+            # ---------------------------
+            # opening = app_container.pos_opening_entry_usecase.pos_opening_entry_upsert(
+            #     {
+            #         "doc": {
+            #             "company": "Concha Hotel",
+            #             "property": "CHNA",
+            #             "docstatus": 1,
+            #             "user": "eod_bot@conchahotel.com",
+            #             "pos_profile": "Main",
+            #             "for_date": current_date_int,
+            #             "period_start_date": f"{for_date} 00:00:00",
+            #             "balance_details": [
+            #                 {
+            #                     "mode_of_payment": "Cash",
+            #                     "opening_amount": 0,
+            #                 }
+            #             ],
+            #             "posting_date": for_date,
+            #         },
+            #         "commit": False,
+            #     }
+            # )
+            #
+            # ---------------------------
+            # INHOUSE INVOICES
+            # ---------------------------
+            invoices = (
+                app_container.reservation_usecase.get_inhouse_reservations_invoices(
+                    current_date_int
+                )
+            )
+
+            for inv in invoices:
+                payment = {
+                    "mode_of_payment": "Credit Card",
+                    "amount": inv["total_amount"],
+                    "folio_window": f"{inv['folio']}-w-001",
+                }
+
+                items = json.loads(inv.pop("items", "[]"))
+
+                doc = frappe.get_doc(
+                    {
+                        "doctype": "POS Invoice",
+                        **inv,
+                    }
+                )
+
+                for item in items:
+                    doc.append("items", item)
+
+                doc.set("taxes_and_charges", "Egypt Tax - CH")
+                doc.set("posting_date", for_date)
+                doc.append("payments", payment)
+
+                doc.insert()
+                doc.submit()
+
+            # ---------------------------
+            # POS CLOSING
+            # ---------------------------
+            closing_entry = app_container.pos_opening_entry_usecase.pos_closing_entry_from_opening_name(
+                {"opening_entry": f"POE-CHNA-{current_date_int}-0001"}
+            )
+
+            closing_entry.set("posting_date", for_date)
+            closing_entry.submit()
+
+            frappe.db.commit()
+            processed_days += 1
+
+        except Exception:
+            frappe.db.rollback()
+            raise
+
+        finally:
+            frappe.flags.in_install = False
+            _publish_step(property, "day", f"completed {current_date_int}")
+
+        # ---------------------------
+        # SLEEP 1 SECOND
+        # ---------------------------
+        time.sleep(0.5)
+
+        # ---------------------------
+        # MOVE TO NEXT DAY SAFELY
+        # ---------------------------
+        next_date = int_to_date(current_date_int) + timedelta(days=1)
+        current_date_int = int(next_date.strftime("%Y%m%d"))
+
+    _publish_step(property, "end", "completed")
+    return processed_days
